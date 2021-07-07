@@ -34,13 +34,15 @@ Everything to support testing.
 
 * [Skeleton](#skeleton)
 * [Installation](#installation)
-* [`instanceof`](#instanceof)
+* [instanceof](#instanceof)
 * [Testing](#testing)
 * [Constants](#constants)
 * [Git](#git)
   * [Commit](#commit)
   * [Versioning](#versioning)
 * [License](#license)
+
+<br>
 
 ## How angular-package understands
 
@@ -59,6 +61,8 @@ Sets
 Defines
 > Returns defined value from the method, instead of storing it in the `object`.
 
+<br>
+
 ## Skeleton
 
 This package was built by the [library skeleton][skeleton] which was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.1.
@@ -73,6 +77,8 @@ Run `ng build testing` to build the package. The build artifacts will be stored 
 
 Run `ng test testing` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+<br>
+
 ## Installation
 
 Install `@angular-package/testing` package with command:
@@ -80,6 +86,8 @@ Install `@angular-package/testing` package with command:
 ```bash
 npm i --save @angular-package/testing
 ```
+
+<br>
 
 ## `instanceof`
 
@@ -131,50 +139,50 @@ Simple object to support the testing.
 
 **Static methods:**
 
-| Methods                                              | Description |
+| Testing.                                              | Description |
 | :--------------------------------------------------- | :---------- |
-| [`Testing.defineDescribe()`](#testingdefinedescribe) | Defines the wrapper function of the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution |
-| [`Testing.defineIt()`](#testingdefineit)             | Defines the wrapper function of the [`it()`][jasmine-it] function of jasmine with the ability to decide its execution |
+| [`defineDescribe()`](#testingdefinedescribe) | Defines the wrapper function of the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution |
+| [`defineIt()`](#testingdefineit)             | Defines the wrapper function of the [`it()`][jasmine-it] function of jasmine with the ability to decide its execution |
 
 **Constructor:**
 
-| Constructor                                   | Description                                                                              |
-| :-------------------------------------------- | :--------------------------------------------------------------------------------------- |
-| [`Testing` constructor](#testing-constructor) | Initialize testing object with providing allows for executing `describe()` and `it()` methods of an instance of `Testing`, and optionally providing the storage of unique numbers of executable tests |
+| Testing                             | Description |
+| :---------------------------------- | :---------- |
+| [constructor](#testing-constructor) | Initialize testing object with providing allows for executing `describe()` and `it()` methods of an instance of `Testing`, and optionally providing the storage of unique numbers of executable tests |
 
 **Instance methods:**
 
-| Methods                                                                                             | Description                                                                                                   |
+| Testing.prototype.                                                                                  | Description                                                                                                   |
 | :-------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| [`Testing.prototype.describe()`](#testingprototypedescribe)                                         | Executes defined `describe()` function of jasmine on state `true` from the `execute` |
-| [`Testing.prototype.it()`](#testingprototypeit)                                                     | Executes defined `it()` function of jasmine on state `true` from the `execute` |
-| [`Testing.prototype.toBe()`](#testingprototypetobe)                                                 | Executes the spec on state `true` from the `execute` expecting the provided `value` to be the given `expected` value |
-| [`Testing.prototype.toBeBigInt()`](#testingprototypetobebigint)                                     | Executes the spec on state `true` from the `execute` expecting the provided `value` to be a `bigint` type on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeBooleanType()`](#testingprototypetobebooleantype)                           | Executes the spec on state `true` from the `execute` expecting the provided `value` to be of a `boolean` type on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeClass()`](#testingprototypetobeclass)                                       | Executes the spec on state `true` from the `execute` expecting the provided `value` to be a `class` on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfArray()`](#testingprototypetobeinstanceofarray)                   | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of an [`Array`][js-array] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfBoolean()`](#testingprototypetobeinstanceofboolean)               | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`Boolean`][js-boolean] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfDate()`](#testingprototypetobeinstanceofdate)                     | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`Date`][js-date] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfError()`](#testingprototypetobeinstanceoferror)                   | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of an [`Error`][js-error] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfFunction()`](#testingprototypetobeinstanceoffunction)             | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of a [`Function`][js-function] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfMap()`](#testingprototypetobeinstanceofmap)                       | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of a [`Map`][js-map] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfNumber()`](#testingprototypetobeinstanceofnumber)                 | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of a [`Number`][js-number] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfObject()`](#testingprototypetobeinstanceofobject)                 | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of an [`Object`][js-object] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfPromise()`](#testingprototypetobeinstanceofpromise)               | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`Promise`][js-promise] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfRangeError()`](#testingprototypetobeinstanceofrangeerror)         | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`RangeError`][js-rangeerror] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfReferenceError()`](#testingprototypetobeinstanceofreferenceerror) | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`ReferenceError`][js-referenceerror] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfRegExp()`](#testingprototypetobeinstanceofregexp)                 | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`RegExp`][js-regexp] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfSet()`](#testingprototypetobeinstanceofset)                       | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`Set`][js-set] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfStorage()`](#testingprototypetobeinstanceofstorage)               | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`Storage`][js-storage] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfString()`](#testingprototypetobeinstanceofstring)                 | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of a [`String`][js-string] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfSyntaxError()`](#testingprototypetobeinstanceofsyntaxerror)       | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`SyntaxError`][js-syntaxerror] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfTypeError()`](#testingprototypetobeinstanceoftypeerror)           | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`TypeError`][js-typeerror] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfURIError()`](#testingprototypetobeinstanceofurlerror)             | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`URIError`][js-urlerror] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeInstanceOfWeakSet()`](#testingprototypetobeinstanceofweakset)               | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of a [`WeakSet`][js-weakset] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeNull()`](#testingprototypetobenull)                                         | Executes the spec on state `true` from the `execute` expecting the provided `value` to be [`null`][js-null] on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeNumberType()`](#testingprototypetobenumbertype)                             | Executes the spec on state `true` from the `execute` expecting the provided `value` to be of a [`number`][js-number] type on the given `toBe` state of `true` |
-| [`Testing.prototype.toBeStringType()`](#testingprototypetobestringtype)                             | Executes the spec on state `true` from the `execute` expecting the provided `value` to be of a [`string`][js-string] type on the given `toBe` state of `true` |
-| [`Testing.prototype.toEqual()`](#testingprototypetoequal)                                           | Executes the spec on state `true` from the `execute` expecting the provided `value` to equal to the given `expected` |
+| [`describe()`](#testingprototypedescribe)                                         | Executes defined `describe()` function of jasmine on state `true` from the `execute` |
+| [`it()`](#testingprototypeit)                                                     | Executes defined `it()` function of jasmine on state `true` from the `execute` |
+| [`toBe()`](#testingprototypetobe)                                                 | Executes the spec on state `true` from the `execute` expecting the provided `value` to be the given `expected` value |
+| [`toBeBigInt()`](#testingprototypetobebigint)                                     | Executes the spec on state `true` from the `execute` expecting the provided `value` to be a `bigint` type on the given `toBe` state of `true` |
+| [`toBeBooleanType()`](#testingprototypetobebooleantype)                           | Executes the spec on state `true` from the `execute` expecting the provided `value` to be of a `boolean` type on the given `toBe` state of `true` |
+| [`toBeClass()`](#testingprototypetobeclass)                                       | Executes the spec on state `true` from the `execute` expecting the provided `value` to be a `class` on the given `toBe` state of `true` |
+| [`toBeInstanceOfArray()`](#testingprototypetobeinstanceofarray)                   | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of an [`Array`][js-array] on the given `toBe` state of `true` |
+| [`toBeInstanceOfBoolean()`](#testingprototypetobeinstanceofboolean)               | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`Boolean`][js-boolean] on the given `toBe` state of `true` |
+| [`toBeInstanceOfDate()`](#testingprototypetobeinstanceofdate)                     | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`Date`][js-date] on the given `toBe` state of `true` |
+| [`toBeInstanceOfError()`](#testingprototypetobeinstanceoferror)                   | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of an [`Error`][js-error] on the given `toBe` state of `true` |
+| [`toBeInstanceOfFunction()`](#testingprototypetobeinstanceoffunction)             | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of a [`Function`][js-function] on the given `toBe` state of `true` |
+| [`toBeInstanceOfMap()`](#testingprototypetobeinstanceofmap)                       | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of a [`Map`][js-map] on the given `toBe` state of `true` |
+| [`toBeInstanceOfNumber()`](#testingprototypetobeinstanceofnumber)                 | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of a [`Number`][js-number] on the given `toBe` state of `true` |
+| [`toBeInstanceOfObject()`](#testingprototypetobeinstanceofobject)                 | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of an [`Object`][js-object] on the given `toBe` state of `true` |
+| [`toBeInstanceOfPromise()`](#testingprototypetobeinstanceofpromise)               | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`Promise`][js-promise] on the given `toBe` state of `true` |
+| [`toBeInstanceOfRangeError()`](#testingprototypetobeinstanceofrangeerror)         | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`RangeError`][js-rangeerror] on the given `toBe` state of `true` |
+| [`toBeInstanceOfReferenceError()`](#testingprototypetobeinstanceofreferenceerror) | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`ReferenceError`][js-referenceerror] on the given `toBe` state of `true` |
+| [`toBeInstanceOfRegExp()`](#testingprototypetobeinstanceofregexp)                 | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`RegExp`][js-regexp] on the given `toBe` state of `true` |
+| [`toBeInstanceOfSet()`](#testingprototypetobeinstanceofset)                       | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`Set`][js-set] on the given `toBe` state of `true` |
+| [`toBeInstanceOfStorage()`](#testingprototypetobeinstanceofstorage)               | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`Storage`][js-storage] on the given `toBe` state of `true` |
+| [`toBeInstanceOfString()`](#testingprototypetobeinstanceofstring)                 | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of a [`String`][js-string] on the given `toBe` state of `true` |
+| [`toBeInstanceOfSyntaxError()`](#testingprototypetobeinstanceofsyntaxerror)       | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`SyntaxError`][js-syntaxerror] on the given `toBe` state of `true` |
+| [`toBeInstanceOfTypeError()`](#testingprototypetobeinstanceoftypeerror)           | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`TypeError`][js-typeerror] on the given `toBe` state of `true` |
+| [`toBeInstanceOfURIError()`](#testingprototypetobeinstanceofurlerror)             | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of [`URIError`][js-urlerror] on the given `toBe` state of `true` |
+| [`toBeInstanceOfWeakSet()`](#testingprototypetobeinstanceofweakset)               | Executes the spec on state `true` from the `execute` expecting the provided `value` to be an instance of a [`WeakSet`][js-weakset] on the given `toBe` state of `true` |
+| [`toBeNull()`](#testingprototypetobenull)                                         | Executes the spec on state `true` from the `execute` expecting the provided `value` to be [`null`][js-null] on the given `toBe` state of `true` |
+| [`toBeNumberType()`](#testingprototypetobenumbertype)                             | Executes the spec on state `true` from the `execute` expecting the provided `value` to be of a [`number`][js-number] type on the given `toBe` state of `true` |
+| [`toBeStringType()`](#testingprototypetobestringtype)                             | Executes the spec on state `true` from the `execute` expecting the provided `value` to be of a [`string`][js-string] type on the given `toBe` state of `true` |
+| [`toEqual()`](#testingprototypetoequal)                                           | Executes the spec on state `true` from the `execute` expecting the provided `value` to equal to the given `expected` |
 
 <br>
 
