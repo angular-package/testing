@@ -1,11 +1,46 @@
 {
   "name": "@angular-package/testing",
-  "version": "1.0.0",
+  "version": "0.0.1",
+  "description": "Support for testing other packages.",
+  "author": "Angular Package <angular-package@wvvw.dev> (https://wvvw.dev)",
+  "homepage": "https://github.com/angular-package/testing#readme",
   "peerDependencies": {
     "@angular-package/type": "^4.2.0",
     "jasmine": "^3.8.0"
   },
   "dependencies": {
     "tslib": "^2.2.0"
-  }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "keywords": [
+    "@angular",
+    "@angular-package",
+    "@angular-package/testing",
+    "angular-package",
+    "constants for testing",
+    "describe",
+    "expect",
+    "it",
+    "jasmine",
+    "karma",
+    "spec",
+    "suite",
+    "support for testing",
+    "testing instanceof",
+    "testing typeof",
+    "toBe",
+    "toEqual",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular-package/testing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/angular-package/testing/issues"
+  },
+  "license": "MIT"
 }
