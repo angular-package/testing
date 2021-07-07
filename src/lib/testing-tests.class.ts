@@ -55,7 +55,7 @@ export class TestingTests extends TestingCore {
    * @param value Any kind of value to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be a bigint type`.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeBigInt<Value>(
@@ -74,7 +74,7 @@ export class TestingTests extends TestingCore {
    * @param value Any kind of value to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be of a boolean type`.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeBooleanType<Value>(
@@ -93,7 +93,7 @@ export class TestingTests extends TestingCore {
    * @param value Any kind of value to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be a class`.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeClass<Value>(
@@ -115,7 +115,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of an Array`.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfArray<Value>(
@@ -135,7 +135,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of Boolean`.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfBoolean<Value>(
@@ -155,7 +155,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of Date`.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfDate<Value>(
@@ -175,7 +175,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of an Error`.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfError<Value>(
@@ -195,7 +195,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of a Function`.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfFunction<Value>(
@@ -215,7 +215,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of a Map.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfMap<Value>(
@@ -235,7 +235,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of a Number.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfNumber<Value>(
@@ -255,7 +255,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of an Object.
-   * @param toBe Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param toBe Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfObject<Value>(
@@ -275,7 +275,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of Promise`.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfPromise<Value>(
@@ -296,7 +296,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of RangeError.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfRangeError<Value>(
@@ -316,7 +316,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of ReferenceError.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfReferenceError<Value>(
@@ -336,7 +336,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of RegExp.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfRegExp<Value>(
@@ -356,7 +356,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of Set.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfSet<Value>(
@@ -376,7 +376,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of Storage.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfStorage<Value>(
@@ -395,7 +395,7 @@ export class TestingTests extends TestingCore {
    * @param value Any kind of value to check.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of a String.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @param execute Whether or not to execute the spec.
    * @returns The return value is an instance of a `TestingTests`.
    */
@@ -417,7 +417,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of SyntaxError.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfSyntaxError<Value>(
@@ -437,7 +437,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of TypeError.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfTypeError<Value>(
@@ -457,7 +457,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of URIError.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfURIError<Value>(
@@ -477,7 +477,7 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of a WeakSet.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeInstanceOfWeakSet<Value>(
@@ -496,7 +496,7 @@ export class TestingTests extends TestingCore {
    * @param value Any kind of value to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be \`null\``.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeNull<Value>(
@@ -515,7 +515,7 @@ export class TestingTests extends TestingCore {
    * @param value Any kind of value to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be of a \`number\` type`.
-   * @param expected Expects the result of the expectation must be of a `true` or `false` state, by default it's `true`.
+   * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
    * @returns The return value is an instance of a `TestingTests`.
    */
   public toBeNumberType<Value>(
