@@ -148,7 +148,7 @@ Simple object to support the testing.
 
 | Testing                             | Description |
 | :---------------------------------- | :---------- |
-| [constructor](#testing-constructor) | Initialize testing object with providing allows for executing `describe()` and `it()` methods of an instance of `Testing`, and optionally providing the storage of unique numbers of executable tests |
+| [constructor](#testing-constructor) | Initialize testing object with providing allows for executing `describe()` and `it()` methods of an instance of [`Testing`](#testing), and optionally providing the storage of unique numbers of executable tests |
 
 **Instance methods:**
 
@@ -231,6 +231,8 @@ const testing = new Testing(
 );
 ```
 
+<br>
+
 ### `Testing` static methods
 
 ### `Testing.defineDescribe()`
@@ -284,6 +286,8 @@ testingDescribe(false); // Do not execute.
 testingDescribe(true); // Execute.
 ```
 
+<br>
+
 ### `Testing.defineIt()`
 
 Defines the wrapper function of the [`it()`][jasmine-it] function of jasmine with the ability to decide its execution.
@@ -332,6 +336,8 @@ testing.describe('defineIt()', () => {
   numberSpec(true); // Execute.
 });
 ```
+
+<br>
 
 ### `Testing` instance methods
 
@@ -425,7 +431,7 @@ public toBeBigInt<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a [`Testing`][#testing].
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -474,7 +480,7 @@ public toBeBooleanType<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -521,7 +527,7 @@ public toBeClass<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -571,7 +577,7 @@ public toBeInstanceOfArray<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -618,7 +624,7 @@ public toBeInstanceOfBoolean<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -665,7 +671,7 @@ public toBeInstanceOfDate<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -712,7 +718,7 @@ public toBeInstanceOfError<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -765,7 +771,7 @@ public toBeInstanceOfFunction<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -812,7 +818,7 @@ public toBeInstanceOfMap<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -859,7 +865,7 @@ public toBeInstanceOfNumber<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -908,7 +914,7 @@ public toBeInstanceOfObject<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -959,7 +965,7 @@ public toBeInstanceOfPromise<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1012,7 +1018,7 @@ public toBeInstanceOfRangeError<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1065,7 +1071,7 @@ public toBeInstanceOfReferenceError<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1118,7 +1124,7 @@ public toBeInstanceOfRegExp<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1167,7 +1173,7 @@ public toBeInstanceOfSet<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1214,7 +1220,7 @@ public toBeInstanceOfStorage<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1261,7 +1267,7 @@ public toBeInstanceOfString<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1308,7 +1314,7 @@ public toBeInstanceOfSyntaxError<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1361,7 +1367,7 @@ public toBeInstanceOfSyntaxError<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1414,7 +1420,7 @@ public toBeInstanceOfURIError<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1467,7 +1473,7 @@ public toBeInstanceOfWeakSet<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1514,7 +1520,7 @@ public toBeNull<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1561,7 +1567,7 @@ public toBeNumberType<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
@@ -1608,7 +1614,7 @@ public toBeStringType<Value>(
 
 **Returns:**
 
-The **return value** is an instance of a `Testing`.
+The **return value** is an instance of a [`Testing`](#testing).
 
 **Usage:**
 
