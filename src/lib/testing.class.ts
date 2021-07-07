@@ -10,8 +10,8 @@ import { ExecutableTests } from '../interface/executable-tests.interface';
 export class Testing extends TestingTests {
   /**
    * Simple `class` to support testing.
-   * Creates an instance, sets allow globally for executing of the `describe()` and `it()` methods,
-   * and optionally sets the list of executable tests (those that executes even on disallowed state).
+   * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
+   * and optionally sets the list of allowed executable tests (those that execute even on the disallowed state).
    * @param allowDescribe Allow executing `describe()` methods.
    * @param allowIt Allow executing `it()` methods.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.

@@ -150,7 +150,7 @@ Simple `class` to support testing.
 
 | Testing                             | Description |
 | :---------------------------------- | :---------- |
-| [constructor](#testing-constructor) | Creates an instance with setting allow globally for executing of the [`describe()`](#testingprototypedescribe) and [`it()`](#testingprototypeit) methods, and optionally sets the list of allowed executable tests (those that execute even on disallowed state) |
+| [constructor](#testing-constructor) | Creates an instance with setting for global allow executing of the [`describe()`](#testingprototypedescribe) and [`it()`](#testingprototypeit) methods, and optionally sets the list of allowed executable tests (those that execute even on the disallowed state) |
 
 **Instance methods:**
 
@@ -190,7 +190,7 @@ Simple `class` to support testing.
 
 ### `Testing` constructor
 
-Creates an instance with setting allow globally for executing of the [`describe()`](#testingprototypedescribe) and [`it()`](#testingprototypeit) methods, and optionally sets the list of allowed executable tests (those that execute even on disallowed state)
+Creates an instance with setting for global allow executing of the [`describe()`](#testingprototypedescribe) and [`it()`](#testingprototypeit) methods, and optionally sets the list of allowed executable tests (those that execute even on the disallowed state).
 
 ```typescript
 const testing = new Testing(
