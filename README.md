@@ -2028,13 +2028,7 @@ const TESTING_ARRAY_UNDEFINED: Array<undefined | unknown> = [
  * typeOf(): "bigint"
  * typeof: "bigint"
  */
-const TESTING_BIGINT = 9007199254740991n;
-
-/**
- * typeOf(): "bigint"
- * typeof: "bigint"
- */
-const TESTING_BIGINT_CONSTRUCTOR = BigInt('9007199254740991'); // typeof === 'bigint'
+const TESTING_BIGINT = BigInt('9007199254740991');
 ```
 
 ### `Boolean`
