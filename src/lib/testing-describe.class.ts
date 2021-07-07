@@ -75,7 +75,7 @@ export class TestingDescribe extends TestingExecutable {
     this.count();
     TestingDescribe.define(
       this.defineDescription(description),
-      specDefinitions as () => void
+      specDefinitions
     )(execute);
     return this;
   }
