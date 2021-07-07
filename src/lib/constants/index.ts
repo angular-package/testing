@@ -12,7 +12,7 @@ export {
   TESTING_ARRAY_UNDEFINED,
 } from './array.const';
 
-export { TESTING_BIGINT, TESTING_BIGINT_CONSTRUCTOR } from './big-int.const';
+export { TESTING_BIGINT } from './big-int.const';
 
 export {
   TESTING_FALSE,

@@ -1,8 +1,5 @@
 // Constant.
-import {
-  TESTING_BIGINT,
-  TESTING_BIGINT_CONSTRUCTOR,
-} from './big-int.const';
+import { TESTING_BIGINT } from './big-int.const';
 import { TestingClass } from './class.const';
 import {
   TESTING_FALSE,
@@ -24,8 +21,12 @@ import {
 import { TESTING_UNDEFINED } from './undefined.const';
 import { TESTING_NOT_DEFINED } from '../variable/not-defined.variable';
 // Interface.
-import { TestingObjectOne } from '../../interface';
-import { TESTING_FUNCTION, TESTING_FUNCTION_CONSTRUCTOR, TESTING_FUNCTION_CONSTRUCTOR_PERSON } from './function.const';
+import { TestingObject } from '../../interface/object.interface';
+import {
+  TESTING_FUNCTION,
+  TESTING_FUNCTION_CONSTRUCTOR,
+  TESTING_FUNCTION_CONSTRUCTOR_PERSON,
+} from './function.const';
 import { TESTING_SYMBOL_NUMBER, TESTING_SYMBOL_STRING } from './symbol.const';
 /**
  * An `Array` of `bigint`.
@@ -36,7 +37,7 @@ import { TESTING_SYMBOL_NUMBER, TESTING_SYMBOL_STRING } from './symbol.const';
  */
 export const TESTING_ARRAY_BIGINT = [
   TESTING_BIGINT,
-  TESTING_BIGINT_CONSTRUCTOR,
+  TESTING_BIGINT,
   9007199254740991n,
 ];
 
@@ -64,10 +65,7 @@ export const TESTING_ARRAY_BOOLEAN = [
  * typeOf(): "array"
  * typeof: "object"
  */
-export const TESTING_ARRAY_CLASS = [
-  new TestingClass(),
-  new TestingClass(),
-];
+export const TESTING_ARRAY_CLASS = [new TestingClass(), new TestingClass()];
 
 /**
  * An `Array` of `function`.
@@ -127,7 +125,7 @@ export const TESTING_ARRAY_NUMBER = [
  * typeOf(): "array"
  * typeof: "object"
  */
-export const TESTING_ARRAY_OBJECT_ONE: Array<TestingObjectOne> = [
+export const TESTING_ARRAY_OBJECT_ONE: Array<TestingObject> = [
   { [TESTING_NUMBER]: 'my number', x: 3000 },
   { [TESTING_NUMBER]: 'my number', x: 1 },
 ];
