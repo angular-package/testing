@@ -279,3 +279,9 @@ testing.describe(`number`, () => testing.toBeNumberType(5));
  * toBeStringType()
  */
 testing.describe(`string`, () => testing.toBeStringType('my name'));
+
+/**
+ * toEqual()
+ */
+const firstName = 'My name';
+testing.describe(`toEqual`, () => testing.toEqual('Expects `firstName` to equal to `My name`', firstName, 'My name'), true);
