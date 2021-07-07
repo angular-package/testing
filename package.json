@@ -5,7 +5,7 @@
   "author": "Angular Package <angular-package@wvvw.dev> (https://wvvw.dev)",
   "homepage": "https://github.com/angular-package/testing#readme",
   "peerDependencies": {
-    "@angular-package/type": "^4.2.0",
+    "@angular-package/type": ">= 4.2.0",
     "jasmine": "^3.8.0"
   },
   "dependencies": {
