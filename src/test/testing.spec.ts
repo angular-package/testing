@@ -9,8 +9,8 @@ const testing = new Testing(
   false, // Disallows executing the `describe()` method globally.
   false, // Disallows executing the `it()` method globally.
   {
-    describe: [1, 2, 3, 5], // Executable unique numbers of `describe()` methods to execute when globally is disallowed.
-    it: [1], // Executable unique numbers of `it()` methods inside the `describe()` to execute when globally is disallowed.
+    describe: [1, 2, 3, 5], // Executable unique numbers of `describe()` methods to execute when global executing is disallowed.
+    it: [1], // Executable unique numbers of `it()` methods inside the `describe()` to execute when global executing is disallowed.
   }
 );
 
