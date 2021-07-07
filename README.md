@@ -34,7 +34,7 @@ Everything to support testing.
 
 * [Skeleton](#skeleton)
 * [Installation](#installation)
-* [instanceof](#instanceof)
+* [Instance of](#instanceof)
 * [Testing](#testing)
 * [Constants](#constants)
 * [Git](#git)
@@ -177,7 +177,7 @@ Simple object to support the testing.
 | [`toBeInstanceOfString()`](#testingprototypetobeinstanceofstring)                 | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`String`][js-string] on the given `expected` state of `true` |
 | [`toBeInstanceOfSyntaxError()`](#testingprototypetobeinstanceofsyntaxerror)       | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`SyntaxError`][js-syntaxerror] on the given `expected` state of `true` |
 | [`toBeInstanceOfTypeError()`](#testingprototypetobeinstanceoftypeerror)           | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`TypeError`][js-typeerror] on the given `expected` state of `true` |
-| [`toBeInstanceOfURIError()`](#testingprototypetobeinstanceofurlerror)             | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`URIError`][js-urlerror] on the given `expected` state of `true` |
+| [`toBeInstanceOfURIError()`](#testingprototypetobeinstanceofurierror)             | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`URIError`][js-urlerror] on the given `expected` state of `true` |
 | [`toBeInstanceOfWeakSet()`](#testingprototypetobeinstanceofweakset)               | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`WeakSet`][js-weakset] on the given `expected` state of `true` |
 | [`toBeNull()`](#testingprototypetobenull)                                         | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be [`null`][js-null] on the given `expected` state of `true` |
 | [`toBeNumberType()`](#testingprototypetobenumbertype)                             | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`number`][js-number] type on the given `expected` state of `true` |
@@ -281,6 +281,17 @@ testing.describe('[counter] Fifth describe', () =>
     expect(false).toBeFalse()
   )
 );
+/*
+  Karma returns
+  1 First describe
+      1 First it() in first describe 1-1
+    3 Third describe()
+      1 First it() in third describe() 3-1
+    2 Second describe()
+      1 First it() in second describe() 2-1
+  5 Fifth describe
+    1 First it() in fifth describe 5-1 
+*/
 ```
 
 <br>
@@ -1783,7 +1794,59 @@ const testing = new Testing(true, true);
 testing.describe(`string`, () => testing.toBeStringType('my name'));
 ```
 
+### `Testing.prototype.toEqual()`
+
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to equal to the given `expected`.
+
+> "Expect the actual `value` to be equal to the `expected`, using deep equality comparison."
+
+```typescript
+public toEqual(
+  expectation: string,
+  value: any,
+  expected: any,
+  execute?: boolean
+): this {
+  this.it(expectation, () => expect(value).toEqual(expected), execute);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type            | Description |
+| :-------------------- | :---------- |
+| `expectation: string` | "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]` |
+| `value: Value`        | The value of any type passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`   | The value of any type passed to the `toEqual()` method of jasmine. "The expected value to compare against." |
+| `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
+
+**Returns:**
+
+The **return value** is an instance of a [`Testing`](#testing).
+
+**Usage:**
+
+```typescript
+// Example usage.
+// Class.
+import { Testing } from '@angular-package/testing';
+/**
+ * Initialize testing.
+ */
+const testing = new Testing(true, true);
+/**
+ * toEqual()
+ */
+const firstName = 'My name';
+testing.describe(`toEqual`, () => testing.toEqual('Expects `firstName` to equal to `My name`', firstName, 'My name'));
+```
+
+<br>
+
 ## Constants
+
+Constants prepared for testing purposes.
 
 ### `Array`
 
@@ -2422,6 +2485,7 @@ MIT © angular-package ([license][testing-license])
 
 <!-- Jasmine -->
 [jasmine-describe]: https://jasmine.github.io/api/3.8/global.html#describe
+[jasmine-expect]: https://jasmine.github.io/api/3.8/global.html#expect
 [jasmine-it]: https://jasmine.github.io/api/3.8/global.html#it
 
 <!-- Javascript  -->
