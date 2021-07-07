@@ -6,13 +6,93 @@ import { Testing } from '../lib/testing.class';
  * Initialize testing.
  */
 const testing = new Testing(
-  true, // Allows executing the `describe()` method globally.
-  true, // Allows executing the `it()` method globally.
+  false, // Disallows executing the `describe()` method globally.
+  false, // Disallows executing the `it()` method globally.
   {
-    describe: [], // Executable unique numbers of `describe()` methods to execute when globally is disallowed.
-    it: [], // Executable unique numbers of `it()` methods to execute when globally is disallowed.
+    describe: [1, 2, 3, 5], // Executable unique numbers of `describe()` methods to execute when globally is disallowed.
+    it: [1], // Executable unique numbers of `it()` methods inside the `describe()` to execute when globally is disallowed.
   }
 );
+
+testing.describe('[counter] First describe', () => {
+  testing
+    .it('[counter] First it() in first describe 1-1', () =>
+      expect(false).toBeFalse()
+    )
+    .it('[counter] Second it() in first describe 1-2', () =>
+      expect(true).toBeTrue()
+    )
+    .it('[counter] Second it() in first describe 1-3', () =>
+      expect(true).toBeTrue()
+    )
+    .it('[counter] Fourth it() in first describe() 1-4', () =>
+      expect(true).toBeTrue()
+    )
+    .describe('[counter] Second describe()', () => {
+      testing.it('[counter] First it() in second describe() 2-1', () =>
+        expect(true).toBeTrue()
+      );
+    })
+    .describe('[counter] Third describe()', () => {
+      testing.it('[counter] First it() in third describe() 3-1', () =>
+        expect(true).toBeTrue()
+      );
+    })
+    .describe('[counter] Fourth describe()', () => {
+      testing.it('[counter] First it() in fourth describe() 3-1', () =>
+        expect(true).toBeTrue()
+      );
+    });
+});
+testing.describe('[counter] Fifth describe', () =>
+  testing.it('[counter] First it() in fifth describe 5-1', () =>
+    expect(false).toBeFalse()
+  )
+);
+
+/**
+ * Testing.defineDescribe()
+ */
+const testingDescribe = Testing.defineDescribe('defineDescribe()', () => {
+  const numberSpec = Testing.defineIt(
+    'The value must be a number type',
+    () => {
+      expect(is.number(5)).toBeTruthy();
+    },
+    3000
+  );
+  numberSpec(false); // Do not execute.
+  numberSpec(false); // Execute.
+});
+
+testingDescribe(false); // Do not execute.
+testingDescribe(false); // Execute.
+
+/**
+ * describe().
+ */
+testing.describe(
+  '[counter] describe()',
+  () => {},
+  false // Whether or not execute suite
+);
+
+/**
+ * it().
+ */
+testing.describe(
+  '[counter] describe()',
+  () =>
+    testing.it(
+      '[counter] it()',
+      () => {
+        expect(true).toBeTruthy();
+      },
+      false // Whether or not execute spec
+    ),
+  false // Whether or not execute suite
+);
+
 /**
  * toBe()
  */
@@ -20,7 +100,7 @@ testing.describe('string', () => {
   testing.toBe(
     `Checks the value against the string`,
     is.stringType('my name'),
-    true
+    false
   );
 });
 
