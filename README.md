@@ -11,13 +11,13 @@ Useful and simple to use packages based on the [angular.io][angulario].
 | [reactive][reactive-github-readme]   | Automatize process of creating some rxjs features. | [![npm version][reactive-npm-badge-svg]][reactive-npm-badge] |
 | [ui][ui-github-readme]               | User interface.                                    | *In Progress*                                                |
 | [type][type-github-readme]           | Common types, type guards and type checkers.       | [![npm version][type-npm-badge-svg]][type-npm-badge]         |
-| [testing][testing-github-readme]     | Supports testing other packages.                   | [![npm version][testing-npm-badge-svg]][testing-npm-badge]   |
+| [testing][testing-github-readme]     | Support for testing other packages.                | [![npm version][testing-npm-badge-svg]][testing-npm-badge]   |
 
 > Click on the package name to visit the package GitHub README.md
 
 ## angular-package/testing
 
-Everything to support testing.
+Support for testing other packages.
 
 <!-- npm badge -->
 [![npm version][testing-npm-badge-svg]][testing-npm-badge]
