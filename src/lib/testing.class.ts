@@ -4,6 +4,8 @@ import { TestingIt } from './testing-it.class';
 import { TestingTests } from './testing-tests.class';
 // Interface.
 import { ExecutableTests } from '../interface/executable-tests.interface';
+// Jasmine.
+import {} from 'jasmine';
 /**
  * Simple `class` to support testing.
  */
