@@ -1,5 +1,3 @@
-// @angular-package/type.
-import { is, typeOf } from '@angular-package/type';
 // Class.
 import { TestingDescribe } from './testing-describe.class';
 import { TestingIt } from './testing-it.class';
@@ -7,13 +5,13 @@ import { TestingTests } from './testing-tests.class';
 // Interface.
 import { ExecutableTests } from '../interface/executable-tests.interface';
 /**
- * Simple object to support the testing.
+ * Simple `class` to support testing.
  */
 export class Testing extends TestingTests {
   /**
-   * Simple object to support the testing.
-   * Initialize testing object with providing allows for executing `describe()` and `it()` methods of an instance of `Testing`,
-   * and optionally providing the storage of unique numbers of executable tests.
+   * Simple `class` to support testing.
+   * Creates an instance, sets allow globally for executing of the `describe()` and `it()` methods,
+   * and optionally sets the list of executable tests (those that executes even on disallowed state).
    * @param allowDescribe Allow executing `describe()` methods.
    * @param allowIt Allow executing `it()` methods.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
