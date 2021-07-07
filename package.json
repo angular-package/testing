@@ -2,8 +2,8 @@
   "name": "@angular-package/testing",
   "version": "1.0.0",
   "peerDependencies": {
-    "@angular-package/property": "^0.0.1-alpha.0",
-    "@angular-package/type": "^4.2.0"
+    "@angular-package/type": "^4.2.0",
+    "jasmine": "^3.8.0"
   },
   "dependencies": {
     "tslib": "^2.2.0"
