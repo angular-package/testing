@@ -17,9 +17,9 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec.
    * @returns The return value is an instance of a `TestingTests`.
    */
-  public toBe(
+  public toBe<Value>(
     expectation: string,
-    value: any,
+    value: Value,
     expected: any,
     execute?: boolean
   ): this {
@@ -52,7 +52,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `bigint` type
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be a bigint type`.
    * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
@@ -71,7 +71,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `boolean` type
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be of a boolean type`.
    * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
@@ -90,7 +90,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `class`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be a class`.
    * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
@@ -111,7 +111,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Array`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of an Array`.
@@ -131,7 +131,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Boolean`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of Boolean`.
@@ -151,7 +151,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Date`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of Date`.
@@ -171,7 +171,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Error`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of an Error`.
@@ -191,7 +191,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Function`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of a Function`.
@@ -211,7 +211,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Map`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of a Map.
@@ -231,7 +231,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Number`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of a Number.
@@ -251,7 +251,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Object`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of an Object.
@@ -271,7 +271,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Promise`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of Promise`.
@@ -292,7 +292,7 @@ export class TestingTests extends TestingCore {
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `RangeError`
    * on the `expected` state.
    * by default  of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of RangeError.
@@ -312,7 +312,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `ReferenceError`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of ReferenceError.
@@ -332,7 +332,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `RegExp`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of RegExp.
@@ -352,7 +352,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Set`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of Set.
@@ -372,7 +372,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Storage`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of Storage.
@@ -392,7 +392,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `String`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of a String.
    * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
@@ -413,7 +413,7 @@ export class TestingTests extends TestingCore {
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `SyntaxError`
    * on the `expected` of `true`.
    * by default  of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of SyntaxError.
@@ -433,7 +433,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `TypeError`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of TypeError.
@@ -453,7 +453,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `URIError`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of URIError.
@@ -473,7 +473,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `WeakSet`
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to
    * `The value must be an instance of a WeakSet.
@@ -493,7 +493,7 @@ export class TestingTests extends TestingCore {
 
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `null` on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be \`null\``.
    * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
@@ -512,7 +512,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `number` type
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be of a \`number\` type`.
    * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
@@ -531,7 +531,7 @@ export class TestingTests extends TestingCore {
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `string` type
    * on the `expected` of `true`.
-   * @param value Any kind of value to check.
+   * @param value The value of any type to check.
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @param expectation The message for the karma, which by default is set to `The value must be of a \`string\` type`.
    * @param expected The value can be `true` or `false`, by default it's `true`.
@@ -558,9 +558,9 @@ export class TestingTests extends TestingCore {
    * @param execute Whether or not to execute the spec.
    * @returns The return value is an instance of a `TestingTests`.
    */
-  public toEqual(
+  public toEqual<Value>(
     expectation: string,
-    value: any,
+    value: Value,
     expected: any,
     execute?: boolean
   ): this {
