@@ -91,7 +91,7 @@ npm i --save @angular-package/testing
 
 ## Instance of
 
-Possible names of javascript objects that can be checked by the [`instanceof`](js-instanceof) operator.
+Possible names of javascript objects that can be checked by the [`instanceof`][js-instanceof] operator.
 
 ```typescript
 const value: any = new Object({});
@@ -138,6 +138,8 @@ value instanceof WeakSet;
 ### `Testing`
 
 Simple `class` to support testing.
+
+> Methods prefixed with the `toBe` aren't working with the `beforeEach()` function of jasmine.
 
 **Static methods:**
 
@@ -426,7 +428,7 @@ public describe(
 
 | Name: type                    | Description |
 | :---------------------------- | :---------- |
-| `description: string`         | "Textual description of the group" with an optional defined prefix indicating its unique number inside the describe |
+| `description: string`         | "Textual description of the group" with an optional its unique number inside the describe when adding `[counter]`  |
 | `specDefinitions: () => void` | "Function for Jasmine to invoke that will define inner suites a specs" |
 | `execute: boolean`            | A [`boolean`][js-boolean] type value to decide whether or not execute defined [`describe()`][jasmine-describe] of jasmine function |
 
@@ -518,9 +520,9 @@ testing.describe(
 Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value.
 
 ```typescript
-public toBe(
+public toBe<Value>(
   expectation: string,
-  value: any,
+  value: Value,
   expected: any,
   execute?: boolean
 ): this {
@@ -534,8 +536,8 @@ public toBe(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `expectation: string` | "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]` |
-| `value: any`          | The value of any type passed to the `expect()` function of jasmine |
-| `expected: any`       | The value of any type passed to the `toBe()` method of jasmine |
+| `value: Value`        | The value of any type passed to the `expect()` function of jasmine |
+| `expected: any`       | The value of any type passed to the `toBe()` method of `jasmine.Matchers` |
 | `execute?: boolean`   | Whether or not to execute the spec |
 
 **Returns:**
@@ -588,7 +590,7 @@ public toBeBigInt<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be a bigint type` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -637,7 +639,7 @@ public toBeBooleanType<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be of a boolean type` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -684,7 +686,7 @@ public toBeClass<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be a class` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -734,7 +736,7 @@ public toBeInstanceOfArray<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of an Array` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -781,7 +783,7 @@ public toBeInstanceOfBoolean<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of an Boolean` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -828,7 +830,7 @@ public toBeInstanceOfDate<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of Date` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -875,7 +877,7 @@ public toBeInstanceOfError<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of an Error` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -928,7 +930,7 @@ public toBeInstanceOfFunction<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of a Function` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -975,7 +977,7 @@ public toBeInstanceOfMap<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of a Map` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1022,7 +1024,7 @@ public toBeInstanceOfNumber<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of a Number` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1071,7 +1073,7 @@ public toBeInstanceOfObject<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of an Object` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1122,7 +1124,7 @@ public toBeInstanceOfPromise<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of Promise` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1175,7 +1177,7 @@ public toBeInstanceOfRangeError<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of RangeError` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1228,7 +1230,7 @@ public toBeInstanceOfReferenceError<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of ReferenceError` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1281,7 +1283,7 @@ public toBeInstanceOfRegExp<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of RegExp` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1330,7 +1332,7 @@ public toBeInstanceOfSet<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of Set` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1377,7 +1379,7 @@ public toBeInstanceOfStorage<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of Storage` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1424,7 +1426,7 @@ public toBeInstanceOfString<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of a String` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1471,7 +1473,7 @@ public toBeInstanceOfSyntaxError<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of SyntaxError` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1524,7 +1526,7 @@ public toBeInstanceOfSyntaxError<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of SyntaxError` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1577,7 +1579,7 @@ public toBeInstanceOfURIError<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of URIError` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1630,7 +1632,7 @@ public toBeInstanceOfWeakSet<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be an instance of WeakSet` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1677,7 +1679,7 @@ public toBeNull<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be null` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1724,7 +1726,7 @@ public toBeNumberType<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be of a number type` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1771,7 +1773,7 @@ public toBeStringType<Value>(
 
 | Name: type            | Description |
 | :-------------------- | :---------- |
-| `value: Value`        | Any kind of value to check |
+| `value: Value`        | The value of any type to check |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `The value must be of a string type` |
 | `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true` |
@@ -1805,9 +1807,9 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 > "Expect the actual `value` to be equal to the `expected`, using deep equality comparison."
 
 ```typescript
-public toEqual(
+public toEqual<Value>(
   expectation: string,
-  value: any,
+  value: Value,
   expected: any,
   execute?: boolean
 ): this {
@@ -1822,7 +1824,7 @@ public toEqual(
 | :-------------------- | :---------- |
 | `expectation: string` | "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]` |
 | `value: Value`        | The value of any type passed to the [`expect()`][jasmine-expect] function of jasmine |
-| `expected: boolean`   | The value of any type passed to the `toEqual()` method of jasmine. "The expected value to compare against." |
+| `expected: boolean`   | The value of any type passed to the `toEqual()` method of `jasmine.Matchers`. "The expected value to compare against." |
 | `execute: boolean`    | Whether or not to execute the spec, by default it's set to `true` |
 
 **Returns:**
