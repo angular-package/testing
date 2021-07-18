@@ -1,7 +1,7 @@
 //
 import { is } from '@angular-package/type';
 /**
- * Manages the `expect()` function of jasmine.
+ * Manages `expect()` function of jasmine.
  */
 export abstract class TestingExpect {
   /**
