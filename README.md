@@ -1874,9 +1874,9 @@ Matchers that use the `toBe()` method of `jasmine.Matchers`.
 | [`number()`](#testingtobematchersprototypenumber)                 | Expects provided `value` to be a `number` |
 | [`numberBetween()`](#testingtobematchersprototypenumberbetween)   | Expects provided `value` to be a `number` between minimum and maximum |
 | [`object()`](#testingtobematchersprototypeobject)                 | Expects provided `value` to be an `object` |
-| [`objectKey()`](#testingtobematchersprototypeobjectkey)           | Expects provided `value` to be an `object` with the given key or keys by using the [`hasOwnProperty`][js-hasownproperty] method of [`Object`][js-object] |
-| [`objectKeyIn()`](#testingtobematchersprototypeobjectkeyin)       | Expects provided `value` to be an `object` with the given key or keys by using the [`in`][js-in-operator] operator |
-| [`objectKeys()`](#testingtobematchersprototypeobjectkeys)         | Expects provided `value` to be an `object` with some of the given keys by using the [`hasOwnProperty`][js-hasownproperty] method of [`Object`][js-object] |
+| [`objectKey()`](#testingtobematchersprototypeobjectkey)           | Expects provided `value` to be an `object` with the given keys by using the [`hasOwnProperty`][js-hasownproperty] method of [`Object`][js-object] |
+| [`objectKeyIn()`](#testingtobematchersprototypeobjectkeyin)       | Expects provided `value` to be an `object` with the given keys by using the [`in`][js-in-operator] operator |
+| [`objectKeys()`](#testingtobematchersprototypeobjectkeys)         | Expects provided `value` to be an `object` with some given keys by using the [`hasOwnProperty`][js-hasownproperty] method of [`Object`][js-object] |
 | [`regexp()`](#testingtobematchersprototyperegexp)                 | Expects provided `value` to be [`RegExp`][js-regexp] |
 | [`string()`](#testingtobematchersprototypestring)                 | Expects provided `value` to be a [`string`][js-string] |
 | [`stringOfLength()`](#testingtobematchersprototypestringoflength) | Expects provided `value` to be a [`string`][js-string] of the specified minimum and maximum length |
