@@ -35,7 +35,9 @@ Support for testing other packages.
 * [Skeleton](#skeleton)
 * [Installation](#installation)
 * [Instance of](#instance-of)
-* [Testing](#testing)
+* Testing
+  * [`Testing`](#testing)
+  * [`TestingToBeMatchers`](#testingtobematchers)
 * [Constants](#constants)
 * [Git](#git)
   * [Commit](#commit)
@@ -1846,6 +1848,1300 @@ const testing = new Testing(true, true);
  */
 const firstName = 'My name';
 testing.describe(`toEqual`, () => testing.toEqual('Expects `firstName` to equal to `My name`', firstName, 'My name'));
+```
+
+<br>
+
+### `TestingToBeMatchers`
+
+Matchers that use the `toBe()` method of `jasmine.Matchers`.
+
+**Instance methods:**
+
+| TestingToBeMatchers.prototype.                                    | Description |
+| :---------------------------------------------------------------- | :---------- |
+| [`array()`](#testingtobematchersprototypearray)                   | Expects provided `value` to be an [`array`][js-array] |
+| [`bigint()`](#testingtobematchersprototypebigint)                 | Expects provided `value` to be a [`bigint`][js-bigint] |
+| [`boolean()`](#testingtobematchersprototypeboolean)               | Expects provided `value` to be a [`boolean`][js-boolean] type |
+| [`class()`](#testingtobematchersprototypeclass)                   | Expects provided `value` to be a [`class`][js-classes] |
+| [`date()`](#testingtobematchersprototypedate)                     | Expects provided `value` to be a [`Date`][js-date] |
+| [`defined()`](#testingtobematchersprototypdefined)                | Expects provided `value` to be defined |
+| [`false()`](#testingtobematchersprototypefalse)                   | Expects provided `value` to be [`false`][js-boolean] |
+| [`function()`](#testingtobematchersprototypefunction)             | Expects provided `value` to be [`function`][js-function] |
+| [`instance()`](#testingtobematchersprototypeinstance)             | Expects provided `value` to be an instance of the given class from the `constructor` |
+| [`key()`](#testingtobematchersprototypekey)                       | Expects provided `value` to be a property key |
+| [`null()`](#testingtobematchersprototypenull)                     | Expects provided `value` to be [`null`][js-null] |
+| [`number()`](#testingtobematchersprototypenumber)                 | Expects provided `value` to be a `number` |
+| [`numberBetween()`](#testingtobematchersprototypenumberbetween)   | Expects provided `value` to be a `number` between minimum and maximum |
+| [`object()`](#testingtobematchersprototypeobject)                 | Expects provided `value` to be an `object` |
+| [`objectKey()`](#testingtobematchersprototypeobjectkey)           | Expects provided `value` to be an `object` with the given key or keys by using the [`hasOwnProperty`][js-hasownproperty] method of [`Object`][js-object] |
+| [`objectKeyIn()`](#testingtobematchersprototypeobjectkeyin)       | Expects provided `value` to be an `object` with the given key or keys by using the [`in`][js-in-operator] operator |
+| [`objectKeys()`](#testingtobematchersprototypeobjectkeys)         | Expects provided `value` to be an `object` with some of the given keys by using the [`hasOwnProperty`][js-hasownproperty] method of [`Object`][js-object] |
+| [`regexp()`](#testingtobematchersprototyperegexp)                 | Expects provided `value` to be [`RegExp`][js-regexp] |
+| [`string()`](#testingtobematchersprototypestring)                 | Expects provided `value` to be a [`string`][js-string] |
+| [`stringOfLength()`](#testingtobematchersprototypestringoflength) | Expects provided `value` to be a [`string`][js-string] of the specified minimum and maximum length |
+| [`symbol()`](#testingtobematchersprototypesymbol)                 | Expects provided `value` to be a [`symbol`][js-symbol] |
+| [`true()`](#testingtobematchersprototypetrue)                     | Expects provided `value` to be `true` |
+| [`undefined()`](#testingtobematchersprototypeundefined)           | Expects provided `value` to be [`undefined`][js-undefined] |
+
+<br>
+
+### `TestingToBeMatchers.prototype.array()`
+
+Expects provided `value` to be an [`array`][js-array]. The method uses [`isArray()`](https://github.com/angular-package/type#isarray) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public array(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be an \`array\``
+): this {
+  this.toBe(is.array(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against the [`array`][js-array] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the value should be (or not) an [`array`][js-array] |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let testArray: any;
+  beforeEach(() => (testArray = [1, 'two', 3]));
+
+  testing.describe('to be or not', () => {
+    testing.it('an array', () => toBe.array(testArray).not.array(2));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.bigint()`
+
+Expects provided `value` to be [`bigint`][js-bigint] type. The method uses [`isBigInt()`](https://github.com/angular-package/type#isbigint) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public bigint(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be \`bigint\``
+): this {
+  this.toBe(is.bigint(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: Value`               | The `value` of any type that is checked against the [`bigint`][js-bigint], and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) [`bigint`][js-bigint]  |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isBigint: any;
+  beforeEach(() => (isBigint = 12n));
+
+  testing.describe('to be or not', () => {
+    testing.it('bigint', () => toBe.bigint(isBigint).not.bigint(2));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.boolean()`
+
+Expects provided `value` to be [`boolean`][js-boolean]. The method uses [`isBoolean()`](https://github.com/angular-package/type#isboolean) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public boolean(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be \`boolean\``
+): this {
+  this.toBe(is.boolean(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against the [`boolean`][js-boolean], and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) [`boolean`][js-boolean]  |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isBoolean: any;
+  beforeEach(() => (isBoolean = false));
+
+  testing.describe('to be or not to be the type of', () => {
+    testing.it('boolean', () => toBe.boolean(isBoolean).not.boolean(3));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.class()`
+
+Expects provided `value` to be [`class`][js-classes]. The method uses [`isClass()`](https://github.com/angular-package/type#isclass) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public class(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be \`class\``
+): this {
+  this.toBe(is.class(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against the [`class`][js-classes], and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) [`class`][js-classes]  |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isClass: any;
+  beforeEach(() => (isClass = class TestingClass {}));
+  testing.describe('to be or not to be', () => {
+    testing.it('class', () => toBe.class(isClass).not.class('TestingClass'));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.date()`
+
+Expects provided `value` to be a [`date`][js-date]. The method uses [`isDate()`](https://github.com/angular-package/type#isdate) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public date(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be a \`date\``
+): this {
+  this.toBe(is.date(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against [`date`][js-date], and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`date`][js-date]  |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isDate: any;
+  beforeEach(() => (isDate = new Date()));
+  testing.describe('to be or not to be the type of', () => {
+    testing.it('date', () => toBe.date(isDate).not.date(false));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.defined()`
+
+Expects provided `value` to be defined. The method uses [`isDefined()`](https://github.com/angular-package/type#isdefined) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public defined(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be defined`
+): this {
+  this.toBe(is.defined(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked to the defined and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) defined  |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isDefined: any;
+  testing.describe('to be or not to be', () => {
+    testing.it('defined', () => toBe.defined('Defined').not.defined(isDefined));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.false()`
+
+Expects provided `value` to be `false`. The method uses [`isFalse()`](https://github.com/angular-package/type#isfalse) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public false(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be \`false\``
+): this {
+  this.toBe(is.false(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against `false` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) `false` |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isFalse: any;
+  beforeEach(() => (isFalse = false));
+  testing.describe('to be or not to be', () => {
+    testing.it('`false`', () => toBe.false(isFalse).not.false(true));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.function()`
+
+Expects provided `value` to be [`function`][js-function]. The method uses [`isFunction()`](https://github.com/angular-package/type#isfunction) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public function(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be a function`
+): this {
+  this.toBe(is.function(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against [`function`][js-function] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) [`function`][js-function] |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isFunction: any;
+  beforeEach(() => (isFunction = () => {}));
+  testing.describe('to be or not to be', () => {
+    testing.it('`function`', () => toBe.function(isFunction).not.function(true));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.instance()`
+
+Expects provided `value` to be [`function`][js-function]. The method uses [`isFunction()`](https://github.com/angular-package/type#isfunction) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public instance<Type>(
+  value: any,
+  constructor: Constructor<Type>,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be an instance of ${constructor.name}`
+): this {
+  this.toBe(is.instance(value, constructor), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Generic type variables:**
+
+**Parameters:**
+
+| Name: type                       | Description |
+| :------------------------------- | :---------- |
+| `value: any`                     | The `value` of any type that is checked against [`function`][js-function] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `constructor: Constructor<Type>` | A [`class`][js-classes] or [`function`][js-function] that specifies the type of the `constructor` |
+| `expected: boolean`              | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any`     | An additional message when the matcher fails, by default, states the `value` should be (or not) an instance of the given [`class`][js-classes] |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers, TestingClass } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isInstance: any;
+  beforeEach(() => isInstance = new TestingClass());
+  testing.describe('to be or not to be', () => {
+    testing.it(`an instance of \`TestingClass\``, () => toBe.instance(isInstance, TestingClass).not.instance(isInstance, class Person {}));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.key()`
+
+Expects provided `value` to be property key. The method uses [`isKey()`](https://github.com/angular-package/type#iskey) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public key(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be the property key`
+): this {
+  this.toBe(is.key(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against the property key and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) the property key |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isKey: any;
+  beforeEach(() => (isKey = 'firstName'));
+  testing.describe('to be or not to be', () => {
+    testing.it('`key`', () => toBe.key(isKey).not.key(true));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.null()`
+
+Expects provided `value` to be property key. The method uses [`isNull()`](https://github.com/angular-package/type#isnull) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public null(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be \`null\``
+): this {
+  this.toBe(is.null(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against `null` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) `null` |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isNull: any;
+  beforeEach(() => (isNull = null));
+  testing.describe('to be or not to be', () => {
+    testing.it('`null`', () => toBe.null(isNull).not.null(undefined));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.number()`
+
+Expects provided `value` to be [`number`][js-number]. The method uses [`isNumber()`](https://github.com/angular-package/type#isnumber) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public number(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be \`number\``
+): this {
+  this.toBe(is.number(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against `number` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) a `number` |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isNumber: any;
+  beforeEach(() => (isNumber = 27));
+  testing.describe('to be or not to be', () => {
+    testing.it('`number`', () => toBe.number(isNumber).not.number(undefined));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.numberBetween()`
+
+Expects provided `value` to be [`number`][js-number] between a range. The method uses [`isNumberBetween()`](https://github.com/angular-package/type#isnumberbetween) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public numberBetween<Min extends number, Max extends number>(
+  value: any,
+  min: Min,
+  max: Max,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be a number between ${min} to ${max}`
+): this {
+  this.toBe(
+    is.numberBetween(value, min, max),
+    expected,
+    expectationFailOutput
+  );
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against `number` of the specified range and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `min: Min`                   | A `number` of the minimum range of the given `value` |
+| `max: Max`                   | A `number` of the maximum range of the given `value` |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) a `number` between minimum to maximum |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isNumberBetween: any;
+  let min: any;
+  let max: any;
+  beforeEach(() => {
+    isNumberBetween = 27;
+    min = 26;
+    max = 28;
+  });
+
+  testing.describe('to be or not to be', () => {
+    testing.it(`\`number\` between 26 to 28`, () => toBe.numberBetween(isNumber, min, max).not.number(37, min, max));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.object()`
+
+Expects provided `value` to be an [`object`][js-object]. The method uses [`isObject()`](https://github.com/angular-package/type#isobject) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public object(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be an \`object\``
+): this {
+  this.toBe(is.object(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against the [`object`][js-object] of the specified range and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isObject: any;
+  beforeEach(() => isObject = {});
+  testing.describe('to be or not to be', () => {
+    testing.it(`an \`object\``, () => toBe.object(isObject).not.object(undefined));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.objectKey()`
+
+Expects provided `value` to be an [`object`][js-object] with given keys. The method uses [`isObjectKey()`](https://github.com/angular-package/type#isobjectkey) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public objectKey(
+  value: any,
+  key: Key | Key[],
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be an \`object\` with all given keys`
+): this {
+  this.toBe(is.objectKey(value, key), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against the `object` that contains given keys and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `key: Key | Key[]`           | Property name of `Key` type or an [`array`][js-array] of property names of `Key` type of [`object`][js-object] from the provided `value` |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with all given keys |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isObjectKey: any;
+  beforeEach(() => isObjectKey = { firstName: '', lastName: ''});
+  testing.describe('to be or not to be', () => {
+    testing.it(`an \`object\` with all given keys`, () =>
+      toBe.objectKey(isObjectKey, ['firstName', 'lastName']).not.objectKey(isObjectKey, ['noFirstName']));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.objectKeyIn()`
+
+Expects provided `value` to be an [`object`][js-object] with given keys. The method uses [`isObjectKeyIn()`](https://github.com/angular-package/type#isobjectkeyin) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public objectKeyIn(
+  value: any,
+  key: Key | Key[],
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be an \`object\` with all given keys`
+): this {
+  this.toBe(is.objectKeyIn(value, key), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against the [`object`][js-object] that contains given keys and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `key: Key | Key[]`           | Property name of `Key` type or an [`array`][js-array] of property names of `Key` type of [`object`][js-object] from the provided `value` |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with  all given keys |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isObjectKeyIn: any;
+  beforeEach(() => isObjectKeyIn = { get firstName(): string { return 'x '; }, lastName: ''});
+  testing.describe('to be or not to be', () =>
+    testing.it(`an \`object\` with all given keys`, () =>
+      toBe.objectKeyIn(isObjectKeyIn, ['firstName', 'lastName']).not.objectKeyIn(isObjectKeyIn, ['noFirstName'])));
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.objectKeys()`
+
+Expects provided `value` to be an [`object`][js-object] with some of the given keys.  The method uses [`isObjectKeyIn()`](https://github.com/angular-package/type#isobjectkeys) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public objectKeys(
+  value: any,
+  keys: Key[],
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be an \`object\` with some of the given keys`
+): this {
+  this.toBe(is.objectKeys(value, ...keys), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against the [`object`][js-object] that contains some of the given keys and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `key: Key[]`                 | An [`array`][js-array] of property names of the `Key` type of [`object`][js-object] from the provided `value` |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with some given keys |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isObjectKeys: any;
+  beforeEach(() => isObjectKeys = { get firstName(): string { return 'x '; }, lastName: ''});
+  testing.describe('to be or not to be', () =>
+    testing.it(`an \`object\` with some of the given keys`, () =>
+      toBe.objectKeys(isObjectKeys, ['firstName', 'lastName', 'noFirstName']).not.objectKeys(isObjectKeys, ['noFirstName'])));
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.regexp()`
+
+Expects provided `value` to be [`RegExp`][js-regexp]. The method uses [`isRegExp()`](https://github.com/angular-package/type#isregexp) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public regexp(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be \`regexp\``
+): this {
+  this.toBe(is.regexp(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against [`RegExp`][js-regexp] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) [`RegExp`][js-regexp] |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isRegExp: any;
+  beforeEach(() => isRegExp = /[]/g);
+
+  testing.describe('to be or not to be', () =>
+    testing.it(`\`RegExp\``, () =>
+      toBe.regexp(isRegExp).not.regexp(undefined)));
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.string()`
+
+Expects provided `value` to be [`string`][js-string]. The method uses [`isString()`](https://github.com/angular-package/type#isstring) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public string(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be a \`string\``
+): this {
+  this.toBe(is.string(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against a [`string`][js-string] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`string`][js-string] |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isString: any;
+  beforeEach(() => isString = 'My new string');
+  testing.describe('to be or not to be', () => {
+    testing.it(`\`string\``, () => toBe.string(isString).not.string(undefined));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.stringOfLength()`
+
+Expects provided `value` to be [`string`][js-string] of the length between the given minimum to maximum. The method uses [`isStringLength()`](https://github.com/angular-package/type#isstringlength) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public stringOfLength<Min extends number, Max extends number>(
+  value: any,
+  min: Min,
+  max: Max,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be a \`string\` of the length between the given ${min} to ${max}`
+): this {
+  this.toBe(
+    is.stringLength(value, min, max),
+    expected,
+    expectationFailOutput
+  );
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against a [`string`][js-string] of the specified length and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `min: Min`                   | Minimum length of the given `value` of a [`number`][js-number] type |
+| `max: Max`                   | The maximum length of the given `value` of a [`number`][js-number] type |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`string`][js-string] of the length between the given minimum to maximum |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isStringOfLength: any;
+  let min: any;
+  let max: any;
+  beforeEach(() => {
+    isStringOfLength = 'My new string, My new string';
+    min = 26;
+    max = 28;
+  });
+  testing.describe('to be or not to be', () => {
+    testing.it(`a \`string\` between the given length`, () =>
+      toBe.stringOfLength(isStringOfLength, min, max).not.stringOfLength(undefined, min, max));
+  });
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.symbol()`
+
+Expects provided `value` to be [`symbol`][js-symbol]. The method uses [`isSymbol()`](https://github.com/angular-package/type#issymbol) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public symbol(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be a \`symbol\``
+): this {
+  this.toBe(is.symbol(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against a [`symbol`][js-symbol] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`symbol`][js-symbol] |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isSymbol: any;
+  beforeEach(() => isSymbol = Symbol('firstName'));
+  testing.describe('to be or not to be', () => 
+    testing.it(`a \`symbol\``, () => toBe.symbol(isSymbol).not.symbol(undefined)));
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.true()`
+
+Expects provided `value` to be `true`. The method uses [`isTrue()`](https://github.com/angular-package/type#istrue) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public true(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be \`true\``
+): this {
+  this.toBe(is.true(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against `true` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) `true` |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isTrue: any;
+  beforeEach(() => isTrue = true);
+  testing.describe('to be or not to be', () =>
+    testing.it(`\`true\``, () => toBe.true(isTrue).not.true(false)));
+});
+```
+
+<br>
+
+### `TestingToBeMatchers.prototype.undefined()`
+
+Expects provided `value` to be `undefined`. The method uses [`isUndefined()`](https://github.com/angular-package/type#isundefined) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public undefined(
+  value: any,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be \`undefined\``
+): this {
+  this.toBe(is.undefined(value), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                   | Description |
+| :--------------------------- | :---------- |
+| `value: any`                 | The `value` of any type that is checked against `undefined` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
+| `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) `undefined` |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let isUndefined: any;
+  beforeEach(() => isUndefined = undefined);
+  testing.describe('to be or not to be', () => 
+    testing.it(`\`undefined\``, () => toBe.undefined(isUndefined).not.undefined(null)));
+});
 ```
 
 <br>
