@@ -2350,6 +2350,10 @@ public instance<Type>(
 
 **Generic type variables:**
 
+| Name   | Description  |
+| :----- | :----------- |
+| `Type` | A generic variable by default of value captured from a given `constructor` |
+
 **Parameters:**
 
 | Name: type                       | Description |
@@ -2796,7 +2800,7 @@ testing.describe('Expects provided value', () => {
 
 ![new][new]
 
-Expects provided `value` to be an [`object`][js-object] with some of the given keys.  The method uses [`isObjectKeyIn()`](https://github.com/angular-package/type#isobjectkeys) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object] with some of the given keys.  The method uses [`isObjectKeys()`](https://github.com/angular-package/type#isobjectkeys) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public objectKeys(
