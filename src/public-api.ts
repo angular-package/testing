@@ -2,7 +2,13 @@
  * Public API Surface of testing
  */
 // Class.
-export { Testing } from './lib';
+export { Testing, TestingToBeMatchers } from './lib';
+
+export {
+  // Example class for testing.
+  TestingClass,
+  TestingPerson,
+} from './lib/constants';
 
 // Constants.
 export {
@@ -23,8 +29,6 @@ export {
   // Class.
   TESTING_CLASS,
   TESTING_PERSON,
-  TestingClass,
-  TestingPerson,
   // Date.
   TESTING_DATE,
   // Boolean.
