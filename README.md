@@ -1865,7 +1865,7 @@ Matchers that use the `toBe()` method of `jasmine.Matchers`.
 | [`boolean()`](#testingtobematchersprototypeboolean)               | Expects provided `value` to be a [`boolean`][js-boolean] type |
 | [`class()`](#testingtobematchersprototypeclass)                   | Expects provided `value` to be a [`class`][js-classes] |
 | [`date()`](#testingtobematchersprototypedate)                     | Expects provided `value` to be a [`Date`][js-date] |
-| [`defined()`](#testingtobematchersprototypdefined)                | Expects provided `value` to be defined |
+| [`defined()`](#testingtobematchersprototypedefined)               | Expects provided `value` to be defined |
 | [`false()`](#testingtobematchersprototypefalse)                   | Expects provided `value` to be [`false`][js-boolean] |
 | [`function()`](#testingtobematchersprototypefunction)             | Expects provided `value` to be [`function`][js-function] |
 | [`instance()`](#testingtobematchersprototypeinstance)             | Expects provided `value` to be an instance of the given class from the `constructor` |
@@ -1887,6 +1887,8 @@ Matchers that use the `toBe()` method of `jasmine.Matchers`.
 <br>
 
 ### `TestingToBeMatchers.prototype.array()`
+
+![new][new]
 
 Expects provided `value` to be an [`array`][js-array]. The method uses [`isArray()`](https://github.com/angular-package/type#isarray) function from the [`@angular-package/type`][type-github-readme].
 
@@ -1942,6 +1944,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.bigint()`
 
+![new][new]
+
 Expects provided `value` to be [`bigint`][js-bigint] type. The method uses [`isBigInt()`](https://github.com/angular-package/type#isbigint) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -1961,7 +1965,7 @@ public bigint(
 
 | Name: type                   | Description |
 | :--------------------------- | :---------- |
-| `value: Value`               | The `value` of any type that is checked against the [`bigint`][js-bigint], and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `value: any`                 | The `value` of any type that is checked against the [`bigint`][js-bigint] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
 | `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
 | `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) [`bigint`][js-bigint]  |
 
@@ -1996,6 +2000,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.boolean()`
 
+![new][new]
+
 Expects provided `value` to be [`boolean`][js-boolean]. The method uses [`isBoolean()`](https://github.com/angular-package/type#isboolean) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2015,7 +2021,7 @@ public boolean(
 
 | Name: type                   | Description |
 | :--------------------------- | :---------- |
-| `value: any`                 | The `value` of any type that is checked against the [`boolean`][js-boolean], and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `value: any`                 | The `value` of any type that is checked against the [`boolean`][js-boolean] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
 | `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
 | `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) [`boolean`][js-boolean]  |
 
@@ -2050,6 +2056,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.class()`
 
+![new][new]
+
 Expects provided `value` to be [`class`][js-classes]. The method uses [`isClass()`](https://github.com/angular-package/type#isclass) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2069,7 +2077,7 @@ public class(
 
 | Name: type                   | Description |
 | :--------------------------- | :---------- |
-| `value: any`                 | The `value` of any type that is checked against the [`class`][js-classes], and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `value: any`                 | The `value` of any type that is checked against the [`class`][js-classes] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
 | `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
 | `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) [`class`][js-classes]  |
 
@@ -2103,6 +2111,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.date()`
 
+![new][new]
+
 Expects provided `value` to be a [`date`][js-date]. The method uses [`isDate()`](https://github.com/angular-package/type#isdate) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2122,7 +2132,7 @@ public date(
 
 | Name: type                   | Description |
 | :--------------------------- | :---------- |
-| `value: any`                 | The `value` of any type that is checked against [`date`][js-date], and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `value: any`                 | The `value` of any type that is checked against [`date`][js-date] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
 | `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
 | `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`date`][js-date]  |
 
@@ -2156,6 +2166,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.defined()`
 
+![new][new]
+
 Expects provided `value` to be defined. The method uses [`isDefined()`](https://github.com/angular-package/type#isdefined) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2175,7 +2187,7 @@ public defined(
 
 | Name: type                   | Description |
 | :--------------------------- | :---------- |
-| `value: any`                 | The `value` of any type that is checked to the defined and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
+| `value: any`                 | The `value` of any type that is checked against defined and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
 | `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
 | `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) defined  |
 
@@ -2207,6 +2219,8 @@ testing.describe('Expects provided value', () => {
 <br>
 
 ### `TestingToBeMatchers.prototype.false()`
+
+![new][new]
 
 Expects provided `value` to be `false`. The method uses [`isFalse()`](https://github.com/angular-package/type#isfalse) function from the [`@angular-package/type`][type-github-readme].
 
@@ -2261,6 +2275,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.function()`
 
+![new][new]
+
 Expects provided `value` to be [`function`][js-function]. The method uses [`isFunction()`](https://github.com/angular-package/type#isfunction) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2313,6 +2329,8 @@ testing.describe('Expects provided value', () => {
 <br>
 
 ### `TestingToBeMatchers.prototype.instance()`
+
+![new][new]
 
 Expects provided `value` to be [`function`][js-function]. The method uses [`isFunction()`](https://github.com/angular-package/type#isfunction) function from the [`@angular-package/type`][type-github-readme].
 
@@ -2371,6 +2389,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.key()`
 
+![new][new]
+
 Expects provided `value` to be property key. The method uses [`isKey()`](https://github.com/angular-package/type#iskey) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2423,6 +2443,8 @@ testing.describe('Expects provided value', () => {
 <br>
 
 ### `TestingToBeMatchers.prototype.null()`
+
+![new][new]
 
 Expects provided `value` to be property key. The method uses [`isNull()`](https://github.com/angular-package/type#isnull) function from the [`@angular-package/type`][type-github-readme].
 
@@ -2477,6 +2499,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.number()`
 
+![new][new]
+
 Expects provided `value` to be [`number`][js-number]. The method uses [`isNumber()`](https://github.com/angular-package/type#isnumber) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2529,6 +2553,8 @@ testing.describe('Expects provided value', () => {
 <br>
 
 ### `TestingToBeMatchers.prototype.numberBetween()`
+
+![new][new]
 
 Expects provided `value` to be [`number`][js-number] between a range. The method uses [`isNumberBetween()`](https://github.com/angular-package/type#isnumberbetween) function from the [`@angular-package/type`][type-github-readme].
 
@@ -2598,6 +2624,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.object()`
 
+![new][new]
+
 Expects provided `value` to be an [`object`][js-object]. The method uses [`isObject()`](https://github.com/angular-package/type#isobject) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2651,6 +2679,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.objectKey()`
 
+![new][new]
+
 Expects provided `value` to be an [`object`][js-object] with given keys. The method uses [`isObjectKey()`](https://github.com/angular-package/type#isobjectkey) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2672,7 +2702,7 @@ public objectKey(
 | Name: type                   | Description |
 | :--------------------------- | :---------- |
 | `value: any`                 | The `value` of any type that is checked against the `object` that contains given keys and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
-| `key: Key | Key[]`           | Property name of `Key` type or an [`array`][js-array] of property names of `Key` type of [`object`][js-object] from the provided `value` |
+| `key: Key \| Key[]`          | Property name of [`Key`](https://github.com/angular-package/type#key) type or an [`array`][js-array] of property names of [`Key`](https://github.com/angular-package/type#key) type of [`object`][js-object] from the provided `value` |
 | `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
 | `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with all given keys |
 
@@ -2707,6 +2737,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.objectKeyIn()`
 
+![new][new]
+
 Expects provided `value` to be an [`object`][js-object] with given keys. The method uses [`isObjectKeyIn()`](https://github.com/angular-package/type#isobjectkeyin) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2728,7 +2760,7 @@ public objectKeyIn(
 | Name: type                   | Description |
 | :--------------------------- | :---------- |
 | `value: any`                 | The `value` of any type that is checked against the [`object`][js-object] that contains given keys and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
-| `key: Key | Key[]`           | Property name of `Key` type or an [`array`][js-array] of property names of `Key` type of [`object`][js-object] from the provided `value` |
+| `key: Key \| Key[]`          | Property name of [`Key`](https://github.com/angular-package/type#key) type or an [`array`][js-array] of property names of [`Key`](https://github.com/angular-package/type#key) type of [`object`][js-object] from the provided `value` |
 | `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
 | `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with  all given keys |
 
@@ -2762,6 +2794,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.objectKeys()`
 
+![new][new]
+
 Expects provided `value` to be an [`object`][js-object] with some of the given keys.  The method uses [`isObjectKeyIn()`](https://github.com/angular-package/type#isobjectkeys) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2783,7 +2817,7 @@ public objectKeys(
 | Name: type                   | Description |
 | :--------------------------- | :---------- |
 | `value: any`                 | The `value` of any type that is checked against the [`object`][js-object] that contains some of the given keys and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine |
-| `key: Key[]`                 | An [`array`][js-array] of property names of the `Key` type of [`object`][js-object] from the provided `value` |
+| `key: Key[]`                 | An [`array`][js-array] of property names of the [`Key`](https://github.com/angular-package/type#key) type of [`object`][js-object] from the provided `value` |
 | `expected: boolean`          | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of `jasmine.Matchers` |
 | `expectationFailOutput: any` | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with some given keys |
 
@@ -2816,6 +2850,8 @@ testing.describe('Expects provided value', () => {
 <br>
 
 ### `TestingToBeMatchers.prototype.regexp()`
+
+![new][new]
 
 Expects provided `value` to be [`RegExp`][js-regexp]. The method uses [`isRegExp()`](https://github.com/angular-package/type#isregexp) function from the [`@angular-package/type`][type-github-readme].
 
@@ -2871,6 +2907,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.string()`
 
+![new][new]
+
 Expects provided `value` to be [`string`][js-string]. The method uses [`isString()`](https://github.com/angular-package/type#isstring) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -2923,6 +2961,8 @@ testing.describe('Expects provided value', () => {
 <br>
 
 ### `TestingToBeMatchers.prototype.stringOfLength()`
+
+![new][new]
 
 Expects provided `value` to be [`string`][js-string] of the length between the given minimum to maximum. The method uses [`isStringLength()`](https://github.com/angular-package/type#isstringlength) function from the [`@angular-package/type`][type-github-readme].
 
@@ -2992,6 +3032,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.symbol()`
 
+![new][new]
+
 Expects provided `value` to be [`symbol`][js-symbol]. The method uses [`isSymbol()`](https://github.com/angular-package/type#issymbol) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -3044,6 +3086,8 @@ testing.describe('Expects provided value', () => {
 
 ### `TestingToBeMatchers.prototype.true()`
 
+![new][new]
+
 Expects provided `value` to be `true`. The method uses [`isTrue()`](https://github.com/angular-package/type#istrue) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
@@ -3095,6 +3139,8 @@ testing.describe('Expects provided value', () => {
 <br>
 
 ### `TestingToBeMatchers.prototype.undefined()`
+
+![new][new]
 
 Expects provided `value` to be `undefined`. The method uses [`isUndefined()`](https://github.com/angular-package/type#isundefined) function from the [`@angular-package/type`][type-github-readme].
 
