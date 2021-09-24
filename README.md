@@ -2,18 +2,21 @@
 
 Useful and simple to use packages based on the [angular.io][angulario].
 
-| Package                              | Description                                        | Status                                                       |
-| :----------------------------------- | :------------------------------------------------- | -----------------------------------------------------------: |
-| [change-detection][cd-github-readme] | Improve application performance.                   | [![npm version][cd-npm-badge-svg]][cd-npm-badge]             |
-| [core][core-github-readme]           | Core features.                                     | [![npm version][core-npm-badge-svg]][core-npm-badge]         |
-| [prism][prism-github-readme]         | `Prism` highlighter module.                        | [![npm version][prism-npm-badge-svg]][prism-npm-badge]       |
-| [property][property-github-readme]   | Features to handle object properties.              | [![npm version][property-npm-badge-svg]][property-npm-badge] |
-| [reactive][reactive-github-readme]   | Automatize process of creating some rxjs features. | [![npm version][reactive-npm-badge-svg]][reactive-npm-badge] |
-| [ui][ui-github-readme]               | User interface.                                    | *In Progress*                                                |
-| [type][type-github-readme]           | Common types, type guards and type checkers.       | [![npm version][type-npm-badge-svg]][type-npm-badge]         |
-| [testing][testing-github-readme]     | Support for testing other packages.                | [![npm version][testing-npm-badge-svg]][testing-npm-badge]   |
+| Package                              | Description                                            | Status |
+| :----------------------------------- | :----------------------------------------------------- | -----: |
+| [callback][callback-github-readme]   | Manages the callback [function][js-function].          | [![npm version][callback-npm-badge-png]][callback-npm-badge] |
+| [change-detection][cd-github-readme] | Improves application performance.                      | [![npm version][cd-npm-badge-png]][cd-npm-badge] |
+| [component-loader][cl-github-readme] | Handles dynamic loading components.                    | [![npm version][cl-npm-badge-png]][cl-npm-badge] |
+| [core][core-github-readme]           | Core features.                                         | [![npm version][core-npm-badge-png]][core-npm-badge] |
+| [error][error-github-readme]         | Manages an [Error][js-error].                          | [![npm version][error-npm-badge-png]][error-npm-badge] |
+| [prism][prism-github-readme]         | [Prism][prism-js] highlighter module.                  | [![npm version][prism-npm-badge-png]][prism-npm-badge] |
+| [property][property-github-readme]   | Handles object properties.                             | [![npm version][property-npm-badge-png]][property-npm-badge] |
+| [reactive][reactive-github-readme]   | Automatize the process of creating some rxjs features. | [![npm version][reactive-npm-badge-png]][reactive-npm-badge] |
+| [testing][testing-github-readme]     | Support for testing other packages.                    | [![npm version][testing-npm-badge-png]][testing-npm-badge] |
+| [type][type-github-readme]           | Common types, type guards, and type checkers.          | [![npm version][type-npm-badge-png]][type-npm-badge] |
+| [ui][ui-github-readme]               | User interface.                                        | *In Progress* |
 
-> Click on the package name to visit the package
+> Click on the package name to visit its [GitHub](https://github.com/) page.
 
 ## angular-package/testing
 
@@ -26,8 +29,7 @@ Support for testing other packages.
 [![GitHub forks][testing-badge-forks]][testing-forks]
 [![GitHub stars][testing-badge-stars]][testing-stars]
 [![GitHub license][testing-badge-license]][testing-license]
-<!-- Sponsors badges -->
-[![GitHub sponsors][github-badge-sponsor]][github-sponsor-link]
+<!-- Patreon badge -->
 [![Support me on Patreon][patreon-badge]][patreon-link]
 
 ----
@@ -223,56 +225,59 @@ value instanceof WeakSet;
 
 ### `Testing`
 
-Simple `class` to support testing.
+Simple [`class`][js-class] to support testing.
 
-> Methods prefixed with the `toBe` aren't working with the `beforeEach()` function of jasmine.
+> Methods prefixed with the `toBe` **aren't working** with the `beforeEach()` function of jasmine.
 
 **Static methods:**
 
 | Testing.                                     | Description |
 | :------------------------------------------- | :---------- |
-| [`defineDescribe()`](#testingdefinedescribe) | Defines the wrapper function of the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution |
-| [`defineIt()`](#testingdefineit)             | Defines the wrapper function of the [`it()`][jasmine-it] function of jasmine with the ability to decide its execution |
+| [`defineDescribe()`](#testingdefinedescribe) | Defines the wrapper function of the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution. |
+| [`defineIt()`](#testingdefineit)             | Defines the wrapper function of the [`it()`][jasmine-it] function of jasmine with the ability to decide its execution. |
 
 **Constructor:**
 
 | Testing                             | Description |
 | :---------------------------------- | :---------- |
-| [constructor](#testing-constructor) | Creates an instance with setting for global allow executing of the [`describe()`](#testingprototypedescribe) and [`it()`](#testingprototypeit) methods, and optionally sets the list of allowed executable tests (those that execute even on the disallowed state) |
+| [constructor](#testing-constructor) | Creates an instance with setting for global allow executing of the [`describe()`](#testingprototypedescribe) and [`it()`](#testingprototypeit) methods, and optionally sets the list of allowed executable tests (those that execute even on the disallowed state). |
 
-**Instance methods:**
+**Instance public methods:**
 
-| Testing.prototype.                                                                | Description                                                                                                   |
-| :-------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| [`describe()`](#testingprototypedescribe)                                         | Executes defined [`describe()`][jasmine-describe] function of jasmine on a state `true` from the `execute` |
-| [`it()`](#testingprototypeit)                                                     | Executes defined [`it()`][jasmine-it] function of jasmine on a state `true` from the `execute` |
-| [`toBe()`](#testingprototypetobe)                                                 | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value |
-| [`toBeBigInt()`](#testingprototypetobebigint)                                     | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `bigint` type on the given `expected` state of `true` |
-| [`toBeBooleanType()`](#testingprototypetobebooleantype)                           | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `boolean` type on the given `expected` state of `true` |
-| [`toBeClass()`](#testingprototypetobeclass)                                       | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `class` on the given `expected` state of `true` |
-| [`toBeInstanceOfArray()`](#testingprototypetobeinstanceofarray)                   | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Array`][js-array] on the given `expected` state of `true` |
-| [`toBeInstanceOfBoolean()`](#testingprototypetobeinstanceofboolean)               | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Boolean`][js-boolean] on the given `expected` state of `true` |
-| [`toBeInstanceOfDate()`](#testingprototypetobeinstanceofdate)                     | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Date`][js-date] on the given `expected` state of `true` |
-| [`toBeInstanceOfError()`](#testingprototypetobeinstanceoferror)                   | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Error`][js-error] on the given `expected` state of `true` |
-| [`toBeInstanceOfFunction()`](#testingprototypetobeinstanceoffunction)             | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`Function`][js-function] on the given `expected` state of `true` |
-| [`toBeInstanceOfMap()`](#testingprototypetobeinstanceofmap)                       | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`Map`][js-map] on the given `expected` state of `true` |
-| [`toBeInstanceOfNumber()`](#testingprototypetobeinstanceofnumber)                 | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`Number`][js-number] on the given `expected` state of `true` |
-| [`toBeInstanceOfObject()`](#testingprototypetobeinstanceofobject)                 | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Object`][js-object] on the given `expected` state of `true` |
-| [`toBeInstanceOfPromise()`](#testingprototypetobeinstanceofpromise)               | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Promise`][js-promise] on the given `expected` state of `true` |
-| [`toBeInstanceOfRangeError()`](#testingprototypetobeinstanceofrangeerror)         | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`RangeError`][js-rangeerror] on the given `expected` state of `true` |
-| [`toBeInstanceOfReferenceError()`](#testingprototypetobeinstanceofreferenceerror) | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`ReferenceError`][js-referenceerror] on the given `expected` state of `true` |
-| [`toBeInstanceOfRegExp()`](#testingprototypetobeinstanceofregexp)                 | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`RegExp`][js-regexp] on the given `expected` state of `true` |
-| [`toBeInstanceOfSet()`](#testingprototypetobeinstanceofset)                       | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Set`][js-set] on the given `expected` state of `true` |
-| [`toBeInstanceOfStorage()`](#testingprototypetobeinstanceofstorage)               | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Storage`][js-storage] on the given `expected` state of `true` |
-| [`toBeInstanceOfString()`](#testingprototypetobeinstanceofstring)                 | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`String`][js-string] on the given `expected` state of `true` |
-| [`toBeInstanceOfSyntaxError()`](#testingprototypetobeinstanceofsyntaxerror)       | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`SyntaxError`][js-syntaxerror] on the given `expected` state of `true` |
-| [`toBeInstanceOfTypeError()`](#testingprototypetobeinstanceoftypeerror)           | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`TypeError`][js-typeerror] on the given `expected` state of `true` |
-| [`toBeInstanceOfURIError()`](#testingprototypetobeinstanceofurierror)             | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`URIError`][js-urlerror] on the given `expected` state of `true` |
-| [`toBeInstanceOfWeakSet()`](#testingprototypetobeinstanceofweakset)               | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`WeakSet`][js-weakset] on the given `expected` state of `true` |
-| [`toBeNull()`](#testingprototypetobenull)                                         | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be [`null`][js-null] on the given `expected` state of `true` |
-| [`toBeNumberType()`](#testingprototypetobenumbertype)                             | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`number`][js-number] type on the given `expected` state of `true` |
-| [`toBeStringType()`](#testingprototypetobestringtype)                             | Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`string`][js-string] type on the given `expected` state of `true` |
-| [`toEqual()`](#testingprototypetoequal)                                           | Executes the spec on a state `true` from the `execute` expecting the provided `value` to equal to the given `expected` |
+| Testing.prototype.                                                                | Description |
+| :-------------------------------------------------------------------------------- | :---------- |
+| [`describe()`](#testingprototypedescribe)                                         | Executes defined [`describe()`][jasmine-describe] function of jasmine on a state `true` from the `execute`. |
+| [`it()`](#testingprototypeit)                                                     | Executes defined [`it()`][jasmine-it] function of jasmine on a state `true` from the `execute`. |
+
+| Testing.prototype.                                                                | Executes the spec on a state `true` from the `execute` expecting the provided `value` to |
+| :-------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- |
+| [`toBe()`](#testingprototypetobe)                                                 | be the given `expected` value. |
+| [`toBeBigInt()`](#testingprototypetobebigint)                                     | be a [`bigint`][js-bigint] type on the given `expected` state of `true`. |
+| [`toBeBooleanType()`](#testingprototypetobebooleantype)                           | be of a [`boolean`][js-boolean] type on the given `expected` state of `true`. |
+| [`toBeClass()`](#testingprototypetobeclass)                                       | be a `class` on the given `expected` state of `true`. |
+| [`toBeInstanceOfArray()`](#testingprototypetobeinstanceofarray)                   | be an instance of an [`Array`][js-array] on the given `expected` state of `true`. |
+| [`toBeInstanceOfBoolean()`](#testingprototypetobeinstanceofboolean)               | be an instance of [`Boolean`][js-boolean] on the given `expected` state of `true`. |
+| [`toBeInstanceOfDate()`](#testingprototypetobeinstanceofdate)                     | be an instance of [`Date`][js-date] on the given `expected` state of `true`. |
+| [`toBeInstanceOfError()`](#testingprototypetobeinstanceoferror)                   | be an instance of an [`Error`][js-error] on the given `expected` state of `true`. |
+| [`toBeInstanceOfFunction()`](#testingprototypetobeinstanceoffunction)             | be an instance of a [`Function`][js-function] on the given `expected` state of `true`. |
+| [`toBeInstanceOfMap()`](#testingprototypetobeinstanceofmap)                       | be an instance of a [`Map`][js-map] on the given `expected` state of `true`. |
+| [`toBeInstanceOfNumber()`](#testingprototypetobeinstanceofnumber)                 | be an instance of a [`Number`][js-number] on the given `expected` state of `true`. |
+| [`toBeInstanceOfObject()`](#testingprototypetobeinstanceofobject)                 | be an instance of an [`Object`][js-object] on the given `expected` state of `true`. |
+| [`toBeInstanceOfPromise()`](#testingprototypetobeinstanceofpromise)               | be an instance of [`Promise`][js-promise] on the given `expected` state of `true`. |
+| [`toBeInstanceOfRangeError()`](#testingprototypetobeinstanceofrangeerror)         | be an instance of [`RangeError`][js-rangeerror] on the given `expected` state of `true`. |
+| [`toBeInstanceOfReferenceError()`](#testingprototypetobeinstanceofreferenceerror) | be an instance of [`ReferenceError`][js-referenceerror] on the given `expected` state of `true`. |
+| [`toBeInstanceOfRegExp()`](#testingprototypetobeinstanceofregexp)                 | be an instance of [`RegExp`][js-regexp] on the given `expected` state of `true`. |
+| [`toBeInstanceOfSet()`](#testingprototypetobeinstanceofset)                       | be an instance of [`Set`][js-set] on the given `expected` state of `true`. |
+| [`toBeInstanceOfStorage()`](#testingprototypetobeinstanceofstorage)               | be an instance of [`Storage`][js-storage] on the given `expected` state of `true`. |
+| [`toBeInstanceOfString()`](#testingprototypetobeinstanceofstring)                 | be an instance of a [`String`][js-string] on the given `expected` state of `true`. |
+| [`toBeInstanceOfSyntaxError()`](#testingprototypetobeinstanceofsyntaxerror)       | be an instance of [`SyntaxError`][js-syntaxerror] on the given `expected` state of `true`. |
+| [`toBeInstanceOfTypeError()`](#testingprototypetobeinstanceoftypeerror)           | be an instance of [`TypeError`][js-typeerror] on the given `expected` state of `true`. |
+| [`toBeInstanceOfURIError()`](#testingprototypetobeinstanceofurierror)             | be an instance of [`URIError`][js-urlerror] on the given `expected` state of `true`. |
+| [`toBeInstanceOfWeakSet()`](#testingprototypetobeinstanceofweakset)               | be an instance of a [`WeakSet`][js-weakset] on the given `expected` state of `true`. |
+| [`toBeNull()`](#testingprototypetobenull)                                         | be [`null`][js-null] on the given `expected` state of `true`. |
+| [`toBeNumberType()`](#testingprototypetobenumbertype)                             | be of a [`number`][js-number] type on the given `expected` state of `true`. |
+| [`toBeStringType()`](#testingprototypetobestringtype)                             | be of a [`string`][js-string] type on the given `expected` state of `true`. |
+| [`toEqual()`](#testingprototypetoequal)                                           | be equal to the given `expected`. |
 
 <br>
 
@@ -281,23 +286,22 @@ Simple `class` to support testing.
 Creates an instance with setting for global allow executing of the [`describe()`](#testingprototypedescribe) and [`it()`](#testingprototypeit) methods, and optionally sets the list of allowed executable tests (those that execute even on the disallowed state).
 
 ```typescript
-const testing = new Testing(
-  true, // Allows executing the `describe()` method globally.
-  true, // Allows executing the `it()` method globally.
-  {
-    describe: [], // Executable unique numbers from the `[counter]` of `describe()` methods to execute when global executing is disallowed.
-    it: []        // Executable unique numbers from the `[counter]` of `it()` methods to execute when global executing is disallowed.
-  }
-);
+constructor(
+  allowDescribe: boolean,
+  allowIt: boolean,
+  executable?: ExecutableTests
+) {
+  super(allowDescribe, allowIt, executable);
+}
 ```
 
 **Parameters:**
 
-| Name: type                    | Description |
-| :---------------------------- | :---------- |
-| `allowDescribe: boolean`      | Allow executing [`describe()`](#testingprototypedescribe) methods |
-| `allowIt: boolean`            | Allow executing [`it()`](testingprototypeit) methods |
-| `executable: ExecutableTests` | An optional `object` with unique numbers of executable tests for [`describe()`](#testingprototypedescribe) and [`it()`](testingprototypeit) method |
+| Name: type                     | Description |
+| :----------------------------- | :---------- |
+| `allowDescribe: boolean`       | Allow executing [`describe()`](#testingprototypedescribe) methods. |
+| `allowIt: boolean`             | Allow executing [`it()`](testingprototypeit) methods. |
+| `executable?: ExecutableTests` | An optional [`object`][js-object] with **unique numbers** of executable tests for [`describe()`](#testingprototypedescribe) and [`it()`](testingprototypeit) method. |
 
 **Returns:**
 
@@ -390,7 +394,7 @@ testing.describe('[counter] Fifth describe', () =>
 
 #### `Testing.defineDescribe()`
 
-Defines the wrapper function of the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution.
+Defines the wrapper [`function`][js-function] of the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution.
 
 ```typescript
 static defineDescribe(
@@ -410,7 +414,7 @@ static defineDescribe(
 
 **Returns:**
 
-The **return value** is a `function` that contains the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution.
+The **return value** is a [`function`][js-function] that contains the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution.
 
 **Usage:**
 
@@ -1936,37 +1940,37 @@ testing.describe(`toEqual`, () => testing.toEqual('Expects `firstName` to equal 
 
 <br>
 
-#### `TestingToBeMatchers`
+### `TestingToBeMatchers`
 
 Matchers that use the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers].
 
-**Instance methods:**
+**Instance public methods:**
 
 | TestingToBeMatchers.prototype.                                            | Expects provided `value` to be |
 | :------------------------------------------------------------------------ | :----------------------------- |
 | [`array()`](#testingtobematchersprototypearray)                           | an [`array`][js-array]. |
-| [`bigint()`](#testingtobematchersprototypebigint)                         | a [`bigint`][js-bigint]. |
+| [`bigint()`](#testingtobematchersprototypebigint)                         | a [`bigint`][js-bigint] type. |
 | [`boolean()`](#testingtobematchersprototypeboolean)                       | a [`boolean`][js-boolean] type. |
 | [`class()`](#testingtobematchersprototypeclass)                           | a [`class`][js-classes]. |
 | [`date()`](#testingtobematchersprototypedate)                             | a [`Date`][js-date]. |
-| [`defined()`](#testingtobematchersprototypedefined)                       | defined. |
+| [`defined()`](#testingtobematchersprototypedefined)                       | **defined**. |
 | [`false()`](#testingtobematchersprototypefalse)                           | [`false`][js-boolean]. |
 | [`function()`](#testingtobematchersprototypefunction)                     | [`function`][js-function]. |
-| [`instance()`](#testingtobematchersprototypeinstance)                     | an instance of the given [`class`][js-classes] from the `constructor`. |
+| [`instance()`](#testingtobematchersprototypeinstance)                     | an instance of a [`class`][js-classes] from the given `constructor`. |
 | [`key()`](#testingtobematchersprototypekey)                               | a property key. |
 | [`null()`](#testingtobematchersprototypenull)                             | [`null`][js-null]. |
-| [`number()`](#testingtobematchersprototypenumber)                         | a [`number`][js-number]. |
-| [`numberBetween()`](#testingtobematchersprototypenumberbetween)           | a [`number`][js-number] type or an instance of [`Number`][js-number] between the range of **minimum** and **maximum**. |
+| [`number()`](#testingtobematchersprototypenumber)                         | a [`number`][js-number] type or an instance of [`Number`][js-number]. |
+| [`numberBetween()`](#testingtobematchersprototypenumberbetween)           | a [`number`][js-number] type or an instance of [`Number`][js-number] between the **range** of **minimum** and **maximum**. |
 | [`object()`](#testingtobematchersprototypeobject)                         | an [`object`][js-object]. |
-| [`objectKey()`](#testingtobematchersprototypeobjectkey)                   | an [`object`][js-object] with a given key by using the [`hasOwnProperty`][js-hasownproperty] method of the [`Object`][js-object]. |
-| [`objectKeyIn()`](#testingtobematchersprototypeobjectkeyin)               | an [`object`][js-object] with a given key in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
-| [`objectKeys()`](#testingtobematchersprototypeobjectkeys)                 | an [`object`][js-object] with given keys by using the [`hasOwnProperty`][js-hasownproperty] method of the [`Object`][js-object]. |
-| [`objectKeysIn()`](#testingtobematchersprototypeobjectkeysin)             | an [`object`][js-object] with given keys in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
-| [`objectSomeKeys()`](#testingtobematchersprototypeobjectkeysin)           | an [`object`][js-object] with some of its keys or some groups of its keys of the `PropertyKey` type. |
+| [`objectKey()`](#testingtobematchersprototypeobjectkey)                   | an [`object`][js-object] with a given `key` by using the [`hasOwnProperty`][js-hasownproperty] method of the [`Object`][js-object]. |
+| [`objectKeyIn()`](#testingtobematchersprototypeobjectkeyin)               | an [`object`][js-object] with a given `key` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
+| [`objectKeys()`](#testingtobematchersprototypeobjectkeys)                 | an [`object`][js-object] with given `keys` by using the [`hasOwnProperty`][js-hasownproperty] method of the [`Object`][js-object]. |
+| [`objectKeysIn()`](#testingtobematchersprototypeobjectkeysin)             | an [`object`][js-object] with given `keys` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
+| [`objectSomeKeys()`](#testingtobematchersprototypeobjectkeysin)           | an [`object`][js-object] with **some** of its keys or **some groups** of its keys of the `PropertyKey` type. |
 | [`regexp()`](#testingtobematchersprototyperegexp)                         | [`RegExp`][js-regexp]. |
 | [`string()`](#testingtobematchersprototypestring)                         | a [`string`][js-string] type. |
-| [`stringIncludes()`](#testingtobematchersprototypestringincludes)         | a [`string`][js-string] type or an instance of [`String`][js-string] that includes the specified **words/sentences**. |
-| [`stringIncludesSome()`](#testingtobematchersprototypestringincludessome) | a [`string`][js-string] type or an instance of [`String`][js-string] that includes **some** of the specified **words/sentences**. |
+| [`stringIncludes()`](#testingtobematchersprototypestringincludes)         | a [`string`][js-string] type or an instance of [`String`][js-string] that **includes** the specified **words/sentences**. |
+| [`stringIncludesSome()`](#testingtobematchersprototypestringincludessome) | a [`string`][js-string] type or an instance of [`String`][js-string] that **includes some** of the specified **words/sentences**. |
 | [`stringOfLength()`](#testingtobematchersprototypestringoflength)         | a [`string`][js-string] of the specified **minimum** and **maximum** length. |
 | [`symbol()`](#testingtobematchersprototypesymbol)                         | a [`symbol`][js-symbol]. |
 | [`true()`](#testingtobematchersprototypetrue)                             | [`true`][js-boolean]. |
@@ -2427,7 +2431,7 @@ testing.describe('Expects provided value', () => {
 
 DONE
 
-Expects provided `value` to be an instance of a class from the given `constructor`. The method uses [`isInstance()`](https://github.com/angular-package/type#isinstance) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an instance of a `class` from the given `constructor`. The method uses [`isInstance()`](https://github.com/angular-package/type#isinstance) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public instance<Type>(
@@ -2453,10 +2457,10 @@ public instance<Type>(
 
 | Name: type                            | Description |
 | :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against an instance of a class from the given `constructor` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
+| `value: any`                          | The `value` of any type that is checked against an instance of a `class` from the given `constructor` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
 | `constructor: Constructor<Type>`      | A [`class`][js-classes] or [`function`][js-function] that specifies the type of the `constructor`. |
 | `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) an instance of the given [`class`][js-classes]. |
+| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) an instance of the given `constructor`. |
 
 **Returns:**
 
@@ -2802,7 +2806,7 @@ DONE
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be an [`object`][js-object] with a given `key`. The method uses [`isObjectKey()`](https://github.com/angular-package/type#isobjectkey) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object] with a given `key` by using the [`hasOwnProperty`][js-hasownproperty] method of the [`Object`][js-object]. The method uses [`isObjectKey()`](https://github.com/angular-package/type#isobjectkey) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public objectKey(
@@ -2863,7 +2867,7 @@ DONE
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be an [`object`][js-object] with a given `key` in it(or its prototype chain). The method uses [`isObjectKeyIn()`](https://github.com/angular-package/type#isobjectkeyin) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object] with a given `key` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. The method uses [`isObjectKeyIn()`](https://github.com/angular-package/type#isobjectkeyin) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public objectKeyIn(
@@ -2923,7 +2927,7 @@ DONE
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be an [`object`][js-object] with given `keys`. The method uses [`isObjectKeys()`](https://github.com/angular-package/type#isobjectkeys) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object] with given `keys` by using the [`hasOwnProperty`][js-hasownproperty] method of the [`Object`][js-object]. The method uses [`isObjectKeys()`](https://github.com/angular-package/type#isobjectkeys) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public objectKeys(
@@ -2983,7 +2987,7 @@ DONE
 
 [![new]][testing-github-changelog]
 
-Expects provided `value` to be an [`object`][js-object] with some given keys in it(or its prototype chain). The method uses [`isObjectKeys()`](https://github.com/angular-package/type#isobjectkeys) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object] with given `keys` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. The method uses [`isObjectKeysIn()`](https://github.com/angular-package/type#isobjectkeysin) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public objectKeysIn(
@@ -4113,6 +4117,7 @@ MIT © angular-package ([license][testing-license])
 [skeleton]: https://github.com/angular-package/skeleton
 
 <!-- Update status -->
+[experimental]: https://img.shields.io/badge/-experimental-orange
 [fix]: https://img.shields.io/badge/-fix-red
 [new]: https://img.shields.io/badge/-new-green
 [update]: https://img.shields.io/badge/-update-red
@@ -4125,7 +4130,7 @@ MIT © angular-package ([license][testing-license])
 [git-commit-karma]: http://karma-runner.github.io/0.10/dev/git-commit-msg.html
 [git-commit-conventional]: https://www.conventionalcommits.org/en/v1.0.0/
 
-<!-- Package: testing  -->
+<!-- This package: testing  -->
   <!-- GitHub: badges -->
   [testing-badge-issues]: https://img.shields.io/github/issues/angular-package/testing
   [testing-badge-forks]: https://img.shields.io/github/forks/angular-package/testing
@@ -4136,28 +4141,65 @@ MIT © angular-package ([license][testing-license])
   [testing-forks]: https://github.com/angular-package/testing/network
   [testing-license]: https://github.com/angular-package/testing/blob/master/LICENSE
   [testing-stars]: https://github.com/angular-package/testing/stargazers
+<!-- This package -->
 
-<!-- Package: core -->
+<!-- Package: callback -->
   <!-- npm -->
-  [core-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fcore.svg
-  [core-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fcore
-  [core-npm-readme]: https://www.npmjs.com/package/@angular-package/core#readme
+  [callback-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fcallback.svg
+  [callback-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fcallback.png
+  [callback-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fcallback
+  [callback-npm-readme]: https://www.npmjs.com/package/@angular-package/callback#readme
 
   <!-- GitHub -->
-  [core-github-readme]: https://github.com/angular-package/core#readme
+  [callback-github-readme]: https://github.com/angular-package/callback#readme
+
+  [package-callback-callbackpayload]: https://github.com/angular-package/callback#callbackpayload
+  [package-callback-resultcallback]: https://github.com/angular-package/callback#resultcallback
 
 <!-- Package: change-detection -->
   <!-- npm -->
   [cd-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fchange-detection.svg
+  [cd-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fchange-detection.png
   [cd-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fchange-detection
   [cd-npm-readme]: https://www.npmjs.com/package/@angular-package/change-detection#readme
 
   <!-- GitHub -->
   [cd-github-readme]: https://github.com/angular-package/change-detection#readme
 
+<!-- Package: component-loader -->
+  <!-- npm -->
+  [cl-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fcomponent-loader.svg
+  [cl-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fcomponent-loader.png
+  [cl-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fcomponent-loader
+  [cl-npm-readme]: https://www.npmjs.com/package/@angular-package/component-loader#readme
+
+  <!-- GitHub -->
+  [cl-github-readme]: https://github.com/angular-package/component-loader#readme
+
+<!-- Package: core -->
+  <!-- npm -->
+  [core-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fcore.svg
+  [core-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fcore.png
+  [core-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fcore
+  [core-npm-readme]: https://www.npmjs.com/package/@angular-package/core#readme
+
+  <!-- GitHub -->
+  [core-github-readme]: https://github.com/angular-package/core#readme
+
+<!-- Package: error -->
+  <!-- npm -->
+  [error-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Ferror.svg
+  [error-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Ferror.png
+  [error-npm-badge]: https://badge.fury.io/js/%40angular-package%2Ferror
+  [error-npm-readme]: https://www.npmjs.com/package/@angular-package/error#readme
+
+  <!-- GitHub -->
+  [error-github-readme]: https://github.com/angular-package/error#readme
+
 <!-- Package: prism -->
   <!-- npm -->
   [prism-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fprism.svg
+  [prism-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fprism.png
   [prism-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fprism
   [prism-npm-readme]: https://www.npmjs.com/package/@angular-package/prism#readme
 
@@ -4167,6 +4209,7 @@ MIT © angular-package ([license][testing-license])
 <!-- Package: property -->
   <!-- npm -->
   [property-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fproperty.svg
+  [property-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fproperty.png
   [property-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fproperty
   [property-npm-readme]: https://www.npmjs.com/package/@angular-package/property#readme
 
@@ -4176,6 +4219,7 @@ MIT © angular-package ([license][testing-license])
 <!-- Package: reactive -->
   <!-- npm -->
   [reactive-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Freactive.svg
+  [reactive-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Freactive.png
   [reactive-npm-badge]: https://badge.fury.io/js/%40angular-package%2Freactive
   [reactive-npm-readme]: https://www.npmjs.com/package/@angular-package/reactive#readme
 
@@ -4185,16 +4229,17 @@ MIT © angular-package ([license][testing-license])
 <!-- Package: testing -->
   <!-- npm -->
   [testing-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Ftesting.svg
+  [testing-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Ftesting.png
   [testing-npm-badge]: https://badge.fury.io/js/%40angular-package%2Ftesting
   [testing-npm-readme]: https://www.npmjs.com/package/@angular-package/testing#readme
 
   <!-- GitHub -->
   [testing-github-readme]: https://github.com/angular-package/testing#readme
-  [testing-github-changelog]: https://github.com/angular-package/testing/blob/main/CHANGELOG.md
 
 <!-- Package: type -->
   <!-- npm -->
   [type-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Ftype.svg
+  [type-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Ftype.png
   [type-npm-badge]: https://badge.fury.io/js/%40angular-package%2Ftype
   [type-npm-readme]: https://www.npmjs.com/package/@angular-package/type#readme
 
@@ -4204,6 +4249,7 @@ MIT © angular-package ([license][testing-license])
 
 <!-- Package: ui -->
   <!-- npm -->
+  [ui-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fui.svg
   [ui-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fui.svg
   [ui-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fui
   [ui-npm-readme]: https://www.npmjs.com/package/@angular-package/ui#readme
@@ -4282,6 +4328,9 @@ MIT © angular-package ([license][testing-license])
 
 <!-- Karma -->
 [karma]: http://karma-runner.github.io/0.10/index.html
+
+<!-- Prism -->
+[prism-js]: https://prismjs.com/
 
 <!-- Typescript -->
 [ts-any]: https://www.typescriptlang.org/docs/handbook/basic-types.html#any
