@@ -1950,30 +1950,30 @@ Matchers that use the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers].
 | :------------------------------------------------------------------------ | :----------------------------- |
 | [`array()`](#testingtobematchersprototypearray)                           | an [`array`][js-array]. |
 | [`bigint()`](#testingtobematchersprototypebigint)                         | a [`bigint`][js-bigint] type. |
-| [`boolean()`](#testingtobematchersprototypeboolean)                       | a [`boolean`][js-boolean] type. |
+| [`boolean()`](#testingtobematchersprototypeboolean)                       | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean]. |
 | [`class()`](#testingtobematchersprototypeclass)                           | a [`class`][js-classes]. |
 | [`date()`](#testingtobematchersprototypedate)                             | a [`Date`][js-date]. |
 | [`defined()`](#testingtobematchersprototypedefined)                       | **defined**. |
-| [`false()`](#testingtobematchersprototypefalse)                           | [`false`][js-boolean]. |
+| [`false()`](#testingtobematchersprototypefalse)                           | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `false`. |
 | [`function()`](#testingtobematchersprototypefunction)                     | [`function`][js-function]. |
 | [`instance()`](#testingtobematchersprototypeinstance)                     | an instance of a [`class`][js-classes] from the given `constructor`. |
 | [`key()`](#testingtobematchersprototypekey)                               | a property key. |
 | [`null()`](#testingtobematchersprototypenull)                             | [`null`][js-null]. |
-| [`number()`](#testingtobematchersprototypenumber)                         | a [`number`][js-number] type or an instance of [`Number`][js-number]. |
-| [`numberBetween()`](#testingtobematchersprototypenumberbetween)           | a [`number`][js-number] type or an instance of [`Number`][js-number] between the **range** of **minimum** and **maximum**. |
+| [`number()`](#testingtobematchersprototypenumber)                         | a [`number`][js-number] type or an instance of a [`Number`][js-number]. |
+| [`numberBetween()`](#testingtobematchersprototypenumberbetween)           | a [`number`][js-number] type or an instance of a [`Number`][js-number] between the **range** of **minimum** and **maximum**. |
 | [`object()`](#testingtobematchersprototypeobject)                         | an [`object`][js-object]. |
 | [`objectKey()`](#testingtobematchersprototypeobjectkey)                   | an [`object`][js-object] with a given `key` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. |
 | [`objectKeyIn()`](#testingtobematchersprototypeobjectkeyin)               | an [`object`][js-object] with a given `key` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
 | [`objectKeys()`](#testingtobematchersprototypeobjectkeys)                 | an [`object`][js-object] with given `keys` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. |
 | [`objectKeysIn()`](#testingtobematchersprototypeobjectkeysin)             | an [`object`][js-object] with given `keys` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
-| [`objectSomeKeys()`](#testingtobematchersprototypeobjectkeysin)           | an [`object`][js-object] with **some** of its keys or **some groups** of its keys of the `PropertyKey` type. |
+| [`objectSomeKeys()`](#testingtobematchersprototypeobjectsomekeys)         | an [`object`][js-object] with **some** of its keys or **some groups** of its keys of the `PropertyKey` type. |
 | [`regexp()`](#testingtobematchersprototyperegexp)                         | [`RegExp`][js-regexp]. |
-| [`string()`](#testingtobematchersprototypestring)                         | a [`string`][js-string] type. |
-| [`stringIncludes()`](#testingtobematchersprototypestringincludes)         | a [`string`][js-string] type or an instance of [`String`][js-string] that **includes** the specified **words/sentences**. |
-| [`stringIncludesSome()`](#testingtobematchersprototypestringincludessome) | a [`string`][js-string] type or an instance of [`String`][js-string] that **includes some** of the specified **words/sentences**. |
-| [`stringOfLength()`](#testingtobematchersprototypestringoflength)         | a [`string`][js-string] of the specified **minimum** and **maximum** length. |
+| [`string()`](#testingtobematchersprototypestring)                         | a [`string`][js-string] type or an instance of a [`String`][js-string]. |
+| [`stringIncludes()`](#testingtobematchersprototypestringincludes)         | a [`string`][js-string] type or an instance of a [`String`][js-string] that **includes** the specified **words/sentences**. |
+| [`stringIncludesSome()`](#testingtobematchersprototypestringincludessome) | a [`string`][js-string] type or an instance of a [`String`][js-string] that **includes some** of the specified **words/sentences**. |
+| [`stringOfLength()`](#testingtobematchersprototypestringoflength)         | a [`string`][js-string] type or an instance of a [`String`][js-string] of the **length** between the given **minimum** and **maximum**. |
 | [`symbol()`](#testingtobematchersprototypesymbol)                         | a [`symbol`][js-symbol]. |
-| [`true()`](#testingtobematchersprototypetrue)                             | [`true`][js-boolean]. |
+| [`true()`](#testingtobematchersprototypetrue)                             | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `true`. |
 | [`undefined()`](#testingtobematchersprototypeundefined)                   | [`undefined`][js-undefined]. |
 
 <br>
@@ -2114,7 +2114,7 @@ public boolean(
 | :------------------------------------- | :---------- |
 | `value: any`                           | The `value` of any type that is checked against a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
 | `expected: jasmine.Expected<boolean>`  | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`           | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`boolean`][js-boolean] type or an instance of [`Boolean`]. |
+| `expectationFailOutput: any`           | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean]. |
 
 **Returns:**
 
@@ -2591,7 +2591,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be a [`number`][js-number] type or an instance of [`Number`][js-number]. The method uses [`isNumber()`](https://github.com/angular-package/type#isnumber) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`number`][js-number] type or an instance of a [`Number`][js-number]. The method uses [`isNumber()`](https://github.com/angular-package/type#isnumber) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public number(
@@ -2599,7 +2599,7 @@ public number(
   expected: jasmine.Expected<boolean> = true,
   expectationFailOutput: any = `${this.expectationFailOutput} ${
     this.getNot() === true ? `not` : ``
-  } be a \`number\` type or an instance of \`Number\``
+  } be a \`number\` type or an instance of a \`Number\``
 ): this {
   this.toBe(is.number(value), expected, expectationFailOutput);
   return this;
@@ -2610,9 +2610,9 @@ public number(
 
 | Name: type                            | Description |
 | :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`number`][js-number] type or an instance of [`Number`][js-number] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
+| `value: any`                          | The `value` of any type that is checked against a [`number`][js-number] type or an instance of a [`Number`][js-number] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
 | `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`number`][js-number] type or an instance of [`Number`][js-number]. |
+| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`number`][js-number] type or an instance of a [`Number`][js-number]. |
 
 **Returns:**
 
@@ -2661,7 +2661,9 @@ public numberBetween<Min extends number, Max extends number>(
   expected: jasmine.Expected<boolean> = true,
   expectationFailOutput: any = `${this.expectationFailOutput} ${
     this.getNot() === true ? `not` : ``
-  } be a \`number\` type or an instance of a \`Number\` between the range of ${range?.min} and ${range?.max}`
+  } be a \`number\` type or an instance of a \`Number\` between the range of ${
+    range?.min
+  } and ${range?.max}`
 ): this {
   this.toBe(is.numberBetween(value, range), expected, expectationFailOutput);
   return this;
