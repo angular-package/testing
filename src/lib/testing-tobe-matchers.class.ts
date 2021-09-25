@@ -243,14 +243,14 @@ export class TestingToBeMatchers extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be a `number` type or an instance of `Number`. The method uses `isNumber()` function from the
+   * Expects provided value to be a `number` type or an instance of a `Number`. The method uses `isNumber()` function from the
    * `@angular-package/type`.
-   * @param value The value of any type that is checked against a `number` type or an instance of `Number` and the result of its check is
+   * @param value The value of any type that is checked against a `number` type or an instance of a `Number` and the result of its check is
    * passed to the `expect()` function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) a
-   * `number` type or an instance of `Number`.
+   * `number` type or an instance of a `Number`.
    * @returns The return value is an instance of `TestingToBeMatchers`.
    */
   public number(
@@ -258,7 +258,7 @@ export class TestingToBeMatchers extends TestingExpect {
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = `${this.expectationFailOutput} ${
       this.getNot() === true ? `not` : ``
-    } be a \`number\` type or an instance of \`Number\``
+    } be a \`number\` type or an instance of a \`Number\``
   ): this {
     this.toBe(is.number(value), expected, expectationFailOutput);
     return this;
