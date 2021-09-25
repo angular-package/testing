@@ -18,7 +18,11 @@ export class Testing extends TestingTests {
    * @param allowIt Allow executing `it()` methods.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    */
-  constructor(allowDescribe: boolean, allowIt: boolean, executable?: ExecutableTests) {
+  constructor(
+    allowDescribe: boolean,
+    allowIt: boolean,
+    executable?: ExecutableTests
+  ) {
     super(allowDescribe, allowIt, executable);
   }
 
@@ -45,7 +49,7 @@ export class Testing extends TestingTests {
   static defineIt(
     expectation: string,
     assertion: jasmine.ImplementationCallback,
-    timeout?: number | undefined,
+    timeout?: number | undefined
   ): (execute: boolean) => void {
     return TestingIt.define(expectation, assertion, timeout);
   }
