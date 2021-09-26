@@ -237,8 +237,8 @@ Simple [`class`][js-classes] to support testing.
 
 | Testing.                                     | Description |
 | :------------------------------------------- | :---------- |
-| [`defineDescribe()`](#testingdefinedescribe) | Defines the wrapper function of the [`describe()`][jasmine-describe] function of jasmine with the ability to **decide** its execution. |
-| [`defineIt()`](#testingdefineit)             | Defines the wrapper function of the [`it()`][jasmine-it] function of jasmine with the ability to **decide** its execution. |
+| [`defineDescribe()`](#testingdefinedescribe) | Defines the wrapper [`function`][js-function] of the [`describe()`][jasmine-describe] function of jasmine with the ability to **decide** its execution. |
+| [`defineIt()`](#testingdefineit)             | Defines the wrapper [`function`][js-function] of the [`it()`][jasmine-it] function of jasmine with the ability to **decide** its execution. |
 
 **Constructor:**
 
@@ -282,6 +282,114 @@ Simple [`class`][js-classes] to support testing.
 | [`toBeNumberType()`](#testingprototypetobenumbertype)                             | be of a [`number`][js-number] type on the given `expected` state of `true`. |
 | [`toBeStringType()`](#testingprototypetobestringtype)                             | be of a [`string`][js-string] type on the given `expected` state of `true`. |
 | [`toEqual()`](#testingprototypetoequal)                                           | be equal to the given `expected`. |
+
+<br>
+
+### `Testing` static methods
+
+#### `Testing.defineDescribe()`
+
+Defines the wrapper [`function`][js-function] of the [`describe()`][jasmine-describe] function of jasmine with the ability to **decide** its execution.
+
+```typescript
+static defineDescribe(
+  description: string,
+  specDefinitions: () => void
+): (execute: boolean) => void {
+  return TestingDescribe.define(description, specDefinitions);
+}
+```
+
+**Parameters:**
+
+| Name: type                    | Description |
+| :---------------------------- | :---------- |
+| `description: string`         | *"Textual description of the group"* - jasmine. |
+| `specDefinitions: () => void` | *"Function for Jasmine to invoke that will define"* - jasmine. |
+
+**Returns:**
+
+The **return value** is a [`function`][js-function] that contains the [`describe()`][jasmine-describe] function of jasmine with the ability to **decide** its execution.
+
+**Usage:**
+
+```typescript
+// Example usage.
+// Object.
+import { is } from '@angular-package/type';
+// Class.
+import { Testing } from '@angular-package/testing';
+/**
+ * Initialize testing.
+ */
+const testing = new Testing(true, true);
+/**
+ * Tests.
+ */
+const testingDescribe = Testing.defineDescribe('Primitives values', () => {
+  const numberSpec = Testing.defineIt('The value must be a number type', () => {
+    expect(is.number(5)).toBeTruthy();
+  }, 3000);
+  numberSpec(false); // Do not execute.
+  numberSpec(true); // Execute.
+});
+
+testingDescribe(false); // Do not execute.
+testingDescribe(true); // Execute.
+```
+
+<br>
+
+#### `Testing.defineIt()`
+
+Defines the wrapper [`function`][js-function] of the [`it()`][jasmine-it] function of jasmine with the ability to **decide** its execution.
+
+```typescript
+static defineIt(
+  expectation: string,
+  assertion: jasmine.ImplementationCallback,
+  timeout?: number | undefined,
+): (execute: boolean) => void {
+  return TestingIt.define(expectation, assertion, timeout);
+}
+```
+
+**Parameters:**
+
+| Name: type                    | Description |
+| :---------------------------- | :---------- |
+| `description: string`         | *"Textual description of the group"* - jasmine. |
+| `specDefinitions: () => void` | "Function for Jasmine to invoke that will define" - jasmine. |
+
+**Returns:**
+
+The **return value** is a `function` that contains the [`describe()`][jasmine-describe] function of jasmine with the ability to **decide** its execution.
+
+**Usage:**
+
+```typescript
+// Example usage.
+// Object.
+import { is } from '@angular-package/type';
+// Class.
+import { Testing } from '@angular-package/testing';
+/**
+ * Initialize testing.
+ */
+const testing = new Testing(true, true);
+/**
+ * defineIt().
+ */
+testing.describe('defineIt()', () => {
+  const numberSpec = Testing.defineIt('The value must be a number type', () => {
+    expect(is.number(5)).toBeTruthy();
+  }, 3000);
+  numberSpec(false); // Do not execute.
+  numberSpec(true); // Execute.
+});
+```
+
+<br>
 
 <br>
 
@@ -394,112 +502,6 @@ testing.describe('[counter] Fifth describe', () =>
 
 <br>
 
-### `Testing` static methods
-
-#### `Testing.defineDescribe()`
-
-Defines the wrapper [`function`][js-function] of the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution.
-
-```typescript
-static defineDescribe(
-  description: string,
-  specDefinitions: () => void
-): (execute: boolean) => void {
-  return TestingDescribe.define(description, specDefinitions);
-}
-```
-
-**Parameters:**
-
-| Name: type                    | Description |
-| :---------------------------- | :---------- |
-| `description: string`         | *"Textual description of the group"* - jasmine. |
-| `specDefinitions: () => void` | *"Function for Jasmine to invoke that will define"* - jasmine. |
-
-**Returns:**
-
-The **return value** is a [`function`][js-function] that contains the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution.
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Object.
-import { is } from '@angular-package/type';
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * Tests.
- */
-const testingDescribe = Testing.defineDescribe('Primitives values', () => {
-  const numberSpec = Testing.defineIt('The value must be a number type', () => {
-    expect(is.number(5)).toBeTruthy();
-  }, 3000);
-  numberSpec(false); // Do not execute.
-  numberSpec(true); // Execute.
-});
-
-testingDescribe(false); // Do not execute.
-testingDescribe(true); // Execute.
-```
-
-<br>
-
-#### `Testing.defineIt()`
-
-Defines the wrapper function of the [`it()`][jasmine-it] function of jasmine with the ability to decide its execution.
-
-```typescript
-static defineIt(
-  expectation: string,
-  assertion: jasmine.ImplementationCallback,
-  timeout?: number | undefined,
-): (execute: boolean) => void {
-  return TestingIt.define(expectation, assertion, timeout);
-}
-```
-
-**Parameters:**
-
-| Name: type                    | Description |
-| :---------------------------- | :---------- |
-| `description: string`         | *"Textual description of the group"* - jasmine. |
-| `specDefinitions: () => void` | "Function for Jasmine to invoke that will define" - jasmine. |
-
-**Returns:**
-
-The **return value** is a `function` that contains the [`describe()`][jasmine-describe] function of jasmine with the ability to decide its execution.
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Object.
-import { is } from '@angular-package/type';
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * defineIt().
- */
-testing.describe('defineIt()', () => {
-  const numberSpec = Testing.defineIt('The value must be a number type', () => {
-    expect(is.number(5)).toBeTruthy();
-  }, 3000);
-  numberSpec(false); // Do not execute.
-  numberSpec(true); // Execute.
-});
-```
-
-<br>
-
 ### `Testing` instance methods
 
 #### `Testing.prototype.describe()`
@@ -601,9 +603,9 @@ testing.describe(
   () => testing.it('[counter] it()', () => {
       expect(true).toBeTruthy();
     },
-    true // Whether or not execute spec
+    true // Whether or not execute spec.
   ),
-  true // Whether or not execute suite
+  true // Whether or not execute suite.
 );
 ```
 
@@ -611,7 +613,9 @@ testing.describe(
 
 #### `Testing.prototype.toBe()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value.
+[![update]][testing-github-changelog]
+
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value. The `execute` parameter is **optional** because, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor).
 
 ```typescript
 public toBe<Value>(
@@ -632,7 +636,7 @@ public toBe<Value>(
 | `expectation: string` | *"Textual description of what this spec is checking"* with an optional its unique [`number`][js-number] when adding `[counter]`. |
 | `value: Value`        | The value of any type passed to the [`expect()`][jasmine-expect] function of jasmine. |
 | `expected: any`       | The value of any type passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `execute?: boolean`   | Whether or not to **execute** the spec. |
+| `execute?: boolean`   | An optional parameter that specifies Whether the spec is to be **executed**. By default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 
 **Returns:**
 
@@ -649,7 +653,10 @@ import { Testing } from '@angular-package/testing';
 /**
  * Initialize testing.
  */
-const testing = new Testing(true, true);
+const testing = new Testing(
+  true,
+  false // Execute `it()` method globally is off.
+);
 /**
  * toBe().
  */
@@ -657,7 +664,8 @@ testing.describe('string', () => {
   testing.toBe(
     `Checks the value against the string`,
     is.stringType('my name'),
-    true
+    true,
+    true  // Even if globally executing the method `it()` is off, `execute` parameter as `true` executes this spec.
   );
 });
 ```
@@ -666,12 +674,14 @@ testing.describe('string', () => {
 
 #### `Testing.prototype.toBeBigInt()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a [`bigint`][js-bigint] type on the `expected` of `true`.
+[![update]][testing-github-changelog]
+
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a [`bigint`][js-bigint] type on the `expected` of `true`. The method uses [`isBigInt()`](https://github.com/angular-package/type#isbigint) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeBigInt<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be a \`bigint\` type`,
   expected: boolean = true
 ): this {
@@ -685,9 +695,9 @@ public toBeBigInt<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be a bigint type'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -715,12 +725,14 @@ testing.describe('bigint', () => testing.toBeBigInt(1n));
 
 #### `Testing.prototype.toBeBooleanType()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`boolean`][js-boolean] type on the `expected` of `true`.
+[![update]][testing-github-changelog]
+
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`boolean`][js-boolean] type on the `expected` of `true`. The method uses [`isBooleanType()`](https://github.com/angular-package/type#isbooleantype) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeBooleanType<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be of a \`boolean\` type`,
   expected: boolean = true
 ): this {
@@ -734,9 +746,9 @@ public toBeBooleanType<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be of a boolean type'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -762,12 +774,12 @@ testing.describe('boolean', () => testing.toBeBooleanType(false));
 
 #### `Testing.prototype.toBeClass()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a [`class`][js-classes] on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a [`class`][js-classes] on the `expected` of `true`. The method uses [`isClass()`](https://github.com/angular-package/type#isclass) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeClass<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be a \`class\``,
   expected: boolean = true
 ): this {
@@ -781,9 +793,9 @@ public toBeClass<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be a class'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -812,12 +824,12 @@ testing.describe('class Person', () => {
 
 #### `Testing.prototype.toBeInstanceOfArray()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Array`][js-array] on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Array`][js-array] on the `expected` of `true`. The method uses [`isArray()`](https://github.com/angular-package/type#isarray) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfArray<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of an \`${Array.name}\``,
   expected: boolean = true
 ): this {
@@ -831,9 +843,9 @@ public toBeInstanceOfArray<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of an Array'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -859,12 +871,12 @@ testing.describe('Array', () => testing.toBeInstanceOfArray(['1']));
 
 #### `Testing.prototype.toBeInstanceOfBoolean()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Boolean`][js-boolean] on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Boolean`][js-boolean] on the `expected` of `true`. The method uses [`isBooleanObject()`](https://github.com/angular-package/type#isbooleanobject) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfBoolean<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of \`${Boolean.name}\``,
   expected: boolean = true
 ): this {
@@ -878,9 +890,9 @@ public toBeInstanceOfBoolean<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of an Boolean'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -906,12 +918,12 @@ testing.describe('Boolean', () => testing.toBeInstanceOfBoolean(new Boolean()));
 
 #### `Testing.prototype.toBeInstanceOfDate()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Date`][js-date] on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Date`][js-date] on the `expected` of `true`. The method uses [`isDate()`](https://github.com/angular-package/type#isdate) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfDate<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of \`${Date.name}\``,
   expected: boolean = true
 ): this {
@@ -925,9 +937,9 @@ public toBeInstanceOfDate<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of Date'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -958,7 +970,7 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfError<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of an \`${Error.name}\``,
   expected: boolean = true
 ): this {
@@ -972,9 +984,9 @@ public toBeInstanceOfError<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of an Error'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1011,11 +1023,11 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfFunction<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of a \`${Function.name}\``,
   expected: boolean = true
 ): this {
-  this.toBe(expectation, is.function(value), expected, execute);
+  this.toBe(expectation, value instanceof Function, expected, execute);
   return this;
 }
 ```
@@ -1025,9 +1037,9 @@ public toBeInstanceOfFunction<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of a Function'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1058,9 +1070,9 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfMap<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of a \`${Map.name}\``,
-  expected: boolean = true,
+  expected: boolean = true
 ): this {
   this.toBe(expectation, value instanceof Map, expected, execute);
   return this;
@@ -1072,9 +1084,9 @@ public toBeInstanceOfMap<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of a Map'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1100,12 +1112,12 @@ testing.describe(`Map`, () => testing.toBeInstanceOfMap(new Map()));
 
 #### `Testing.prototype.toBeInstanceOfNumber()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`Number`][js-number] on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`Number`][js-number] on the `expected` of `true`. The method uses [`isNumberObject()`](https://github.com/angular-package/type#isnumberobject) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfNumber<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of a \`${Number.name}\``,
   expected: boolean = true,
 ): this {
@@ -1119,9 +1131,9 @@ public toBeInstanceOfNumber<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of a Number'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1149,14 +1161,14 @@ testing.describe(`Number`, () =>
 
 #### `Testing.prototype.toBeInstanceOfObject()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Object`][js-object] on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Object`][js-object] on the `expected` of `true`. The method uses [`isObject()`](https://github.com/angular-package/type#isobject) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfObject<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of an \`${Object.name}\``,
-  expected: boolean = true,
+  expected: boolean = true
 ): this {
   this.toBe(expectation, is.object(value), expected, execute);
   return this;
@@ -1168,9 +1180,9 @@ public toBeInstanceOfObject<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of an Object'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1205,7 +1217,7 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfPromise<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of \`${Promise.name}\``,
   expected: boolean = true,
 ): this {
@@ -1219,9 +1231,9 @@ public toBeInstanceOfPromise<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of Promise'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1258,9 +1270,9 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfRangeError<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of \`${RangeError.name}\``,
-  expected: boolean = true,
+  expected: boolean = true
 ): this {
   this.toBe(expectation, value instanceof RangeError, expected, execute);
   return this;
@@ -1272,9 +1284,9 @@ public toBeInstanceOfRangeError<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of RangeError'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1311,9 +1323,9 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfReferenceError<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of \`${ReferenceError.name}\``,
-  expected: boolean = true,
+  expected: boolean = true
 ): this {
   this.toBe(expectation, value instanceof ReferenceError, expected, execute);
   return this;
@@ -1325,9 +1337,9 @@ public toBeInstanceOfReferenceError<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of ReferenceError'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1359,12 +1371,12 @@ testing.describe('RangeError', () => {
 
 #### `Testing.prototype.toBeInstanceOfRegExp()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`RegExp`][js-regexp] on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`RegExp`][js-regexp] on the `expected` of `true`. The method uses [`isRegExp()`](https://github.com/angular-package/type#isregexp) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfRegExp<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of \`${RegExp.name}\``,
   expected: boolean = true
 ): this {
@@ -1378,9 +1390,9 @@ public toBeInstanceOfRegExp<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of RegExp'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1413,7 +1425,7 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfSet<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of \`${Set.name}\``,
   expected: boolean = true
 ): this {
@@ -1427,9 +1439,9 @@ public toBeInstanceOfSet<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of Set'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1460,11 +1472,11 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfStorage<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of \`${Storage.name}\``,
   expected: boolean = true
 ): this {
-  this.toBe(expectation, value instanceof SyntaxError, expected, execute);
+  this.toBe(expectation, value instanceof Storage, expected, execute);
   return this;
 }
 ```
@@ -1474,9 +1486,9 @@ public toBeInstanceOfStorage<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of Storage'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1502,12 +1514,12 @@ testing.describe(`Storage`, () => testing.toBeInstanceOfStorage(window.sessionSt
 
 #### `Testing.prototype.toBeInstanceOfString()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`String`][js-string] on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`String`][js-string] on the `expected` of `true`. The method uses [`isStringObject()`](https://github.com/angular-package/type#isstringobject) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfString<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of a \`${String.name}\``,
   expected: boolean = true
 ): this {
@@ -1521,9 +1533,9 @@ public toBeInstanceOfString<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of a String'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1554,7 +1566,7 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfSyntaxError<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of \`${SyntaxError.name}\``,
   expected: boolean = true
 ): this {
@@ -1568,9 +1580,9 @@ public toBeInstanceOfSyntaxError<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of SyntaxError'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1602,16 +1614,16 @@ testing.describe('SyntaxError', () => {
 
 #### `Testing.prototype.toBeInstanceOfTypeError()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`SyntaxError`][js-syntaxerror] on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`TypeError`][js-typeerror] on the `expected` of `true`.
 
 ```typescript
-public toBeInstanceOfSyntaxError<Value>(
+public toBeInstanceOfTypeError<Value>(
   value: Value,
-  execute: boolean = true,
-  expectation: string = `The value must be an instance of \`${SyntaxError.name}\``,
+  execute?: boolean,
+  expectation: string = `The value must be an instance of \`${TypeError.name}\``,
   expected: boolean = true
 ): this {
-  this.toBe(expectation, value instanceof SyntaxError, expected, execute);
+  this.toBe(expectation, value instanceof TypeError, expected, execute);
   return this;
 }
 ```
@@ -1621,9 +1633,9 @@ public toBeInstanceOfSyntaxError<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of SyntaxError'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1660,7 +1672,7 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfURIError<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of \`${URIError.name}\``,
   expected: boolean = true
 ): this {
@@ -1674,9 +1686,9 @@ public toBeInstanceOfURIError<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of URIError'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1713,7 +1725,7 @@ Executes the spec on a state `true` from the `execute` expecting the provided `v
 ```typescript
 public toBeInstanceOfWeakSet<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be an instance of a \`${WeakSet.name}\``,
   expected: boolean = true
 ): this {
@@ -1727,9 +1739,9 @@ public toBeInstanceOfWeakSet<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of WeakSet'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1755,12 +1767,12 @@ testing.describe(`WeakSet`, () => testing.toBeInstanceOfWeakSet(new WeakSet()));
 
 #### `Testing.prototype.toBeNull()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be [`null`][js-null] on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be [`null`][js-null] on the `expected` of `true`. The method uses [`isNull()`](https://github.com/angular-package/type#isnull) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeNull<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be \`null\``,
   expected: boolean = true
 ): this {
@@ -1774,9 +1786,9 @@ public toBeNull<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be null'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1802,16 +1814,16 @@ testing.describe(`null`, () => testing.toBeNull(null));
 
 #### `Testing.prototype.toBeNumberType()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`number`][js-number] type on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`number`][js-number] type on the `expected` of `true`. The method uses [`isNumberType()`](https://github.com/angular-package/type#isnumbertype) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
-public toBeNumberType<Value>(
+public toBeNull<Value>(
   value: Value,
-  execute: boolean = true,
-  expectation: string = `The value must be of a \`number\` type`,
+  execute?: boolean,
+  expectation: string = `The value must be \`null\``,
   expected: boolean = true
 ): this {
-  this.toBe(expectation, is.numberType(value), expected, execute);
+  this.toBe(expectation, is.null(value), expected, execute);
   return this;
 }
 ```
@@ -1821,9 +1833,9 @@ public toBeNumberType<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be of a number type'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1849,12 +1861,12 @@ testing.describe(`number`, () => testing.toBeNumberType(5));
 
 #### `Testing.prototype.toBeStringType()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`string`][js-string] type on the `expected` of `true`.
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`string`][js-string] type on the `expected` of `true`. The method uses [`isStringType()`](https://github.com/angular-package/type#isstringtype) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeStringType<Value>(
   value: Value,
-  execute: boolean = true,
+  execute?: boolean,
   expectation: string = `The value must be of a \`string\` type`,
   expected: boolean = true
 ): this {
@@ -1868,9 +1880,9 @@ public toBeStringType<Value>(
 | Name: type            | Description |
 | :-------------------- | :---------- |
 | `value: Value`        | The value of any type to check. |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 | `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be of a string type'`. |
-| `expected: boolean`   | Expects the result of the expectation must be `true` or `false`, by default it's `true`. |
+| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
 
 **Returns:**
 
@@ -1898,7 +1910,7 @@ testing.describe(`string`, () => testing.toBeStringType('my name'));
 
 Executes the spec on a state `true` from the `execute` expecting the provided `value` to equal to the given `expected`.
 
-> "Expect the actual `value` to be equal to the `expected`, using deep equality comparison."
+> *"Expect the actual `value` to be equal to the `expected`, using deep equality comparison."*
 
 ```typescript
 public toEqual<Value>(
@@ -1918,8 +1930,8 @@ public toEqual<Value>(
 | :-------------------- | :---------- |
 | `expectation: string` | *"Textual description of what this spec is checking"* with an optional its unique number when adding `[counter]`. |
 | `value: Value`        | The value of any type passed to the [`expect()`][jasmine-expect] function of [jasmine][jasmine]. |
-| `expected: boolean`   | The value of any type passed to the `toEqual()` method of [`jasmine.Matchers`][jasmine-matchers]. *"The expected value to compare against."* |
-| `execute: boolean`    | Whether or not to **execute** the spec, by default it's set to `true`. |
+| `expected: any`       | The value of any type passed to the `toEqual()` method of [`jasmine.Matchers`][jasmine-matchers]. *"The expected value to compare against."* |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 
 **Returns:**
 
