@@ -636,7 +636,7 @@ public toBe<Value>(
 | `expectation: string` | *"Textual description of what this spec is checking"* with an optional its unique [`number`][js-number] when adding `[counter]`. |
 | `value: Value`        | The value of any type passed to the [`expect()`][jasmine-expect] function of jasmine. |
 | `expected: any`       | The value of any type passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `execute?: boolean`   | An optional parameter that specifies Whether the spec is to be **executed**. By default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
+| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**. By default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
 
 **Returns:**
 
