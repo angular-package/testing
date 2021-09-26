@@ -1,17 +1,24 @@
 /*
  * Public API Surface of testing
  */
-// Class.
-export { Testing, TestingToBeMatchers } from './lib';
+/**
+ * Main.
+ */
+export {
+  // Class.
+  Testing,
+  TestingToBeMatchers
+} from './lib';
 
+
+/**
+ * Constant.
+ */
 export {
   // Example class for testing.
   TestingClass,
   TestingPerson,
-} from './lib/constants';
 
-// Constants.
-export {
   // Array.
   TESTING_ARRAY_BIGINT,
   TESTING_ARRAY_BOOLEAN,
@@ -61,5 +68,10 @@ export {
   TESTING_UNDEFINED,
 } from './lib/constants';
 
-// Interface.
-export { TestingObject, TestingPersonShape } from './interface';
+/**
+ * Interface.
+ */
+export {
+  TestingObject,
+  TestingPersonShape
+} from './interface';
