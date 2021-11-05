@@ -1,5 +1,5 @@
 // @angular-package/type.
-import { is, Constructor } from '@angular-package/type';
+import { is, Constructor, MinMax } from '@angular-package/type';
 // TestingExpect.
 import { TestingExpect } from './testing-expect.class';
 /**
@@ -278,10 +278,7 @@ export class TestingToBeMatchers extends TestingExpect {
    */
   public numberBetween<Min extends number, Max extends number>(
     value: any,
-    range: {
-      min?: Min;
-      max?: Max;
-    },
+    range: MinMax<Min, Max>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = `${this.expectationFailOutput} ${
       this.getNot() === true ? `not` : ``
@@ -548,10 +545,7 @@ export class TestingToBeMatchers extends TestingExpect {
    */
   public stringOfLength<Min extends number, Max extends number>(
     value: any,
-    length: {
-      min: Min;
-      max: Max;
-    },
+    length: MinMax<Min, Max>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = `${this.expectationFailOutput} ${
       this.getNot() === true ? `not` : ``
