@@ -20,6 +20,8 @@ Useful and simple to use packages based on the [angular.io][angulario].
 | [type][type-github-readme]                   | Common types, type guards, and type checkers.                     | [![npm version][type-npm-badge-png]][type-npm-badge] |
 | [ui][ui-github-readme]                       | User interface.                                                   | *In Progress* |
 
+<br>
+
 ## angular-package/testing
 
 Support for testing other packages.
@@ -32,12 +34,15 @@ Support for testing other packages.
 [![GitHub forks][testing-badge-forks]][testing-forks]
 [![GitHub stars][testing-badge-stars]][testing-stars]
 [![GitHub license][testing-badge-license]][testing-license]
-<!-- Patreon badge -->
+<!-- Sponsors badges -->
+[![GitHub sponsors][github-badge-sponsor]][github-sponsor-link]
 [![Support me on Patreon][patreon-badge]][patreon-link]
 
-----
+<br>
 
-## Table of contents
+---
+
+### Table of contents
 
 * [Basic concepts](#basic-concepts)
 * [Skeleton](#skeleton)
@@ -58,7 +63,7 @@ Support for testing other packages.
   * [Versioning](#versioning)
 * [License](#license)
 
-----
+---
 
 <br>
 
@@ -4402,9 +4407,12 @@ MIT © angular-package ([license][testing-license])
 [angular-view-container-ref]: https://angular.io/api/core/ViewContainerRef
 
 <!-- Jasmine -->
+[jasmine]: https://jasmine.github.io/api/3.9
+[jasmine-beforeeach]: https://jasmine.github.io/api/3.9/global.html#beforeEach
 [jasmine-describe]: https://jasmine.github.io/api/3.8/global.html#describe
 [jasmine-expect]: https://jasmine.github.io/api/3.8/global.html#expect
 [jasmine-it]: https://jasmine.github.io/api/3.8/global.html#it
+[jasmine-matchers]: https://jasmine.github.io/api/3.9/matchers.html
 
 <!-- Javascript  -->
 [js-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
