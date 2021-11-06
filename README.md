@@ -2,21 +2,23 @@
 
 Useful and simple to use packages based on the [angular.io][angulario].
 
-| Package                              | Description                                            | Status |
-| :----------------------------------- | :----------------------------------------------------- | -----: |
-| [callback][callback-github-readme]   | Manages the callback [function][js-function].          | [![npm version][callback-npm-badge-png]][callback-npm-badge] |
-| [change-detection][cd-github-readme] | Improves application performance.                      | [![npm version][cd-npm-badge-png]][cd-npm-badge] |
-| [component-loader][cl-github-readme] | Handles dynamic loading components.                    | [![npm version][cl-npm-badge-png]][cl-npm-badge] |
-| [core][core-github-readme]           | Core features.                                         | [![npm version][core-npm-badge-png]][core-npm-badge] |
-| [error][error-github-readme]         | Manages an [Error][js-error].                          | [![npm version][error-npm-badge-png]][error-npm-badge] |
-| [prism][prism-github-readme]         | [Prism][prism-js] highlighter module.                  | [![npm version][prism-npm-badge-png]][prism-npm-badge] |
-| [property][property-github-readme]   | Handles object properties.                             | [![npm version][property-npm-badge-png]][property-npm-badge] |
-| [reactive][reactive-github-readme]   | Automatize the process of creating some rxjs features. | [![npm version][reactive-npm-badge-png]][reactive-npm-badge] |
-| [testing][testing-github-readme]     | Support for testing other packages.                    | [![npm version][testing-npm-badge-png]][testing-npm-badge] |
-| [type][type-github-readme]           | Common types, type guards, and type checkers.          | [![npm version][type-npm-badge-png]][type-npm-badge] |
-| [ui][ui-github-readme]               | User interface.                                        | *In Progress* |
-
-> Click on the package name to visit its [GitHub](https://github.com/) page.
+| Package                                      | Description                                                       | Status |
+| :------------------------------------------- | :---------------------------------------------------------------- | -----: |
+| [callback][callback-github-readme]           | Manages the callback [`function`][js-function].                   | [![npm version][callback-npm-badge-png]][callback-npm-badge] |
+| [change-detection][cd-github-readme]         | Improves application performance.                                 | [![npm version][cd-npm-badge-png]][cd-npm-badge] |
+| [component-loader][cl-github-readme]         | Handles dynamic loading components.                               | [![npm version][cl-npm-badge-png]][cl-npm-badge] |
+| [core][core-github-readme]                   | Core features.                                                    | [![npm version][core-npm-badge-png]][core-npm-badge] |
+| [error][error-github-readme]                 | Manages an [`Error`][js-error].                                   | [![npm version][error-npm-badge-png]][error-npm-badge] |
+| [name][name-github-readme]                   | The name with prefix and suffix.                                  | [![npm version][name-npm-badge-png]][name-npm-badge] |
+| [preferences][preferences-github-readme]     | Preferences, settings, options, configuration and setup in steps. | [![npm version][preferences-npm-badge-png]][preferences-npm-badge] |
+| [prism][prism-github-readme]                 | [`Prism`][prism-js] highlighter module.                           | [![npm version][prism-npm-badge-png]][prism-npm-badge] |
+| [property][property-github-readme]           | Handles object properties.                                        | [![npm version][property-npm-badge-png]][property-npm-badge] |
+| [range][range-github-readme]                 | The range between a minimum and maximum.                          | [![npm version][range-npm-badge-png]][range-npm-badge] |
+| [reactive][reactive-github-readme]           | Automatize the process of creating some rxjs features.            | [![npm version][reactive-npm-badge-png]][reactive-npm-badge] |
+| [storage][storage-github-readme]             | The storage of data under allowed names.                          | [![npm version][storage-npm-badge-png]][storage-npm-badge] |
+| **[testing][testing-github-readme]**         | **Support for testing other packages.**                           | [![npm version][testing-npm-badge-png]][testing-npm-badge] |
+| [type][type-github-readme]                   | Common types, type guards, and type checkers.                     | [![npm version][type-npm-badge-png]][type-npm-badge] |
+| [ui][ui-github-readme]                       | User interface.                                                   | *In Progress* |
 
 ## angular-package/testing
 
@@ -44,7 +46,11 @@ Support for testing other packages.
 * Testing
   * [`Testing`](#testing)
   * [`TestingToBeMatchers`](#testingtobematchers)
-* [Constants](#constants)
+* Helpers
+  * [`randomNumber()`](#randomnumber)
+  * [`randomString()`](#randomstring)
+  * [Constants](#constants)
+* [Changelog](#changelog)
 * [Git](#git)
   * [Commit](#commit)
   * [Versioning](#versioning)
@@ -3566,7 +3572,96 @@ testing.describe('Expects provided value', () => {
 
 <br>
 
-## Constants
+## Helpers
+
+### Functions
+
+#### `randomNumber()`
+
+The [`function`][js-function] generates a random [`number`][js-number] between 0 and declared `max`.
+
+```typescript
+const randomNumber = <Max extends number>(
+  max: Max
+): NumberBetween<0, Max> => Math.floor(Math.random() * max);
+```
+
+**Generic type variables:**
+
+| Name  | Default value           | Description |
+| :-----| :---------------------: | :---------- |
+| `Max` | Captured from the `max` | A generic type variable `Max` indicates the maximum value of generic type `NumberBetween` via the return type `NumberBetween<0, Max>`. |
+
+**Parameters:**
+
+| Name: type   | Description |
+| :----------- | :---------- |
+| `max: Max`   | The **maximum** value of a generated [`number`][js-number]. |
+
+**Returns:**
+
+The **return value** is a random [`number`][js-number].
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { randomNumber } from '@angular-package/testing';
+
+// Returns a randomly generated maximum number equal to 27 of type `NumberBetween<0, 27, number>`.
+randomNumber(27);
+```
+
+<br>
+
+### `randomString()`
+
+The [`function`][js-function] generates a random [`string`][js-string] of declared length.
+
+```typescript
+const randomString = <Length extends number>(
+  length: Length,
+  chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+): StringOfLength<0, Length>  => {
+  let randomStringOfLength = '';
+  for (let i = 0; i <= length; i++) {
+    const randomNumber = Math.floor(Math.random() * chars.length);
+    randomStringOfLength += chars.substring(randomNumber, randomNumber + 1);
+  }
+  return randomStringOfLength.slice(0, -1);
+};
+```
+
+**Generic type variables:**
+
+| Name     | Default value              | Description |
+| :------- | :------------------------: | :---------- |
+| `Length` | Captured from the `length` | A generic type variable `Length` indicates the maximum length of generic type `StringOfLength` via the return type `StringOfLength<0, Length>`. |
+
+**Parameters:**
+
+| Name: type       | Description |
+| :--------------- | :---------- |
+| `length: Length` | The **maximum** `length` of the generated random [`string`][js-string]. |
+| `chars: string`  | The chars to generate a random string. |
+
+**Returns:**
+
+The **return value** is a random [`string`][js-string] of declared `length`.
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { randomString } from '@angular-package/testing';
+
+// Returns a randomly generated string of maximum length equal to 27 of type `StringOfLength<0, 27, string>`.
+randomString(27);
+```
+
+<br>
+
+### Constants
 
 Constants prepared for testing purposes.
 
@@ -4057,6 +4152,16 @@ const TESTING_SYMBOL_STRING: unique symbol = Symbol(
 const TESTING_UNDEFINED = undefined;
 ```
 
+<br>
+
+## Changelog
+
+The **changelog** of this package is based on [*keep a changelog*](https://keepachangelog.com/en/1.0.0/). To read it, click on the [CHANGELOG.md](https://github.com/angular-package/testing/blob/main/CHANGELOG.md) link.
+
+> A changelog is a file which contains a curated, chronologically ordered list of notable changes for each version of a project. - [*keep a changelog*](https://keepachangelog.com/en/1.0.0/)
+
+<br>
+
 ## GIT
 
 ### Commit
@@ -4136,7 +4241,6 @@ MIT © angular-package ([license][testing-license])
   <!-- GitHub -->
   [callback-github-readme]: https://github.com/angular-package/callback#readme
 
-  [package-callback-callbackpayload]: https://github.com/angular-package/callback#callbackpayload
   [package-callback-resultcallback]: https://github.com/angular-package/callback#resultcallback
 
 <!-- Package: change-detection -->
@@ -4179,6 +4283,26 @@ MIT © angular-package ([license][testing-license])
   <!-- GitHub -->
   [error-github-readme]: https://github.com/angular-package/error#readme
 
+<!-- Package: name -->
+  <!-- npm -->
+  [name-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fname.svg
+  [name-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fname.png
+  [name-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fname
+  [name-npm-readme]: https://www.npmjs.com/package/@angular-package/name#readme
+
+  <!-- GitHub -->
+  [name-github-readme]: https://github.com/angular-package/name#readme
+
+<!-- Package: preferences -->
+  <!-- npm -->
+  [preferences-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fpreferences.svg
+  [preferences-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fpreferences.png
+  [preferences-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fpreferences
+  [preferences-npm-readme]: https://www.npmjs.com/package/@angular-package/preferences#readme
+
+  <!-- GitHub -->
+  [preferences-github-readme]: https://github.com/angular-package/preferences#readme
+
 <!-- Package: prism -->
   <!-- npm -->
   [prism-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fprism.svg
@@ -4199,6 +4323,16 @@ MIT © angular-package ([license][testing-license])
   <!-- GitHub -->
   [property-github-readme]: https://github.com/angular-package/property#readme
 
+<!-- Package: range -->
+  <!-- npm -->
+  [range-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Frange.svg
+  [range-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Frange.png
+  [range-npm-badge]: https://badge.fury.io/js/%40angular-package%2Frange
+  [range-npm-readme]: https://www.npmjs.com/package/@angular-package/range#readme
+
+  <!-- GitHub -->
+  [range-github-readme]: https://github.com/angular-package/range#readme
+
 <!-- Package: reactive -->
   <!-- npm -->
   [reactive-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Freactive.svg
@@ -4208,6 +4342,16 @@ MIT © angular-package ([license][testing-license])
 
   <!-- GitHub -->
   [reactive-github-readme]: https://github.com/angular-package/reactive#readme
+
+<!-- Package: storage -->
+  <!-- npm -->
+  [storage-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fstorage.svg
+  [storage-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fstorage.png
+  [storage-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fstorage
+  [storage-npm-readme]: https://www.npmjs.com/package/@angular-package/storage#readme
+
+  <!-- GitHub -->
+  [storage-github-readme]: https://github.com/angular-package/storage#readme
 
 <!-- Package: testing -->
   <!-- npm -->
@@ -4220,7 +4364,6 @@ MIT © angular-package ([license][testing-license])
   [testing-github-readme]: https://github.com/angular-package/testing#readme
   [testing-github-changelog]: https://github.com/angular-package/testing/blob/main/CHANGELOG.md
 
-
 <!-- Package: type -->
   <!-- npm -->
   [type-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Ftype.svg
@@ -4230,7 +4373,13 @@ MIT © angular-package ([license][testing-license])
 
   <!-- GitHub -->
   [type-github-readme]: https://github.com/angular-package/type#readme
-  [type-github-changelog]: https://github.com/angular-package/type/blob/main/CHANGELOG.md
+
+  [package-type-key]: https://github.com/angular-package/type#key
+  [package-type-minmax]: https://github.com/angular-package/type#minmax
+  [package-type-resultcallback]: https://github.com/angular-package/type#resultcallback
+  [package-type-type]: https://github.com/angular-package/type#type
+  [package-type-types]: https://github.com/angular-package/type#types
+  [package-type-valueparser]: https://github.com/angular-package/type#valueparser
 
 <!-- Package: ui -->
   <!-- npm -->
@@ -4242,13 +4391,14 @@ MIT © angular-package ([license][testing-license])
   <!-- GitHub -->
   [ui-github-readme]: https://github.com/angular-package/ui#readme
 
+<!-- Angular -->
+[angular-component-factory-resolver]: https://angular.io/api/core/ComponentFactoryResolver
+[angular-view-container-ref]: https://angular.io/api/core/ViewContainerRef
+
 <!-- Jasmine -->
-[jasmine]: https://jasmine.github.io/api/3.9
-[jasmine-beforeeach]: https://jasmine.github.io/api/3.9/global.html#beforeEach
 [jasmine-describe]: https://jasmine.github.io/api/3.8/global.html#describe
 [jasmine-expect]: https://jasmine.github.io/api/3.8/global.html#expect
 [jasmine-it]: https://jasmine.github.io/api/3.8/global.html#it
-[jasmine-matchers]: https://jasmine.github.io/api/3.9/matchers.html
 
 <!-- Javascript  -->
 [js-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
@@ -4268,7 +4418,7 @@ MIT © angular-package ([license][testing-license])
 [js-error]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 
 [js-function]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions
-[js-function-rest-parameter]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
+[js-rest-parameter]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
 
 [js-getter]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
 [js-object-getownpropertydescriptor]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor
@@ -4298,6 +4448,7 @@ MIT © angular-package ([license][testing-license])
 [js-regexp]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
 
 [js-set]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+[js-static]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static
 [js-storage]: https://developer.mozilla.org/en-US/docs/Web/API/Storage
 [js-string]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
 [js-stringconstructor]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String
@@ -4321,11 +4472,15 @@ MIT © angular-package ([license][testing-license])
 
 <!-- Typescript -->
 [ts-any]: https://www.typescriptlang.org/docs/handbook/basic-types.html#any
+[ts-boolean]: https://www.typescriptlang.org/docs/handbook/basic-types.html#boolean
 [ts-classes]: https://www.typescriptlang.org/docs/handbook/2/classes.html
+[ts-enums]: https://www.typescriptlang.org/docs/handbook/enums.html
 [ts-function]: https://www.typescriptlang.org/docs/handbook/2/functions.html
 [ts-interface]: https://www.typescriptlang.org/docs/handbook/interfaces.html#our-first-interface
 [ts-never]: https://www.typescriptlang.org/docs/handbook/basic-types.html#never
+[ts-null]: https://www.typescriptlang.org/docs/handbook/basic-types.html#null-and-undefined
 [ts-number]: https://www.typescriptlang.org/docs/handbook/basic-types.html#number
 [ts-object]: https://www.typescriptlang.org/docs/handbook/basic-types.html#object
 [ts-string]: https://www.typescriptlang.org/docs/handbook/basic-types.html#string
+[ts-undefined]: https://www.typescriptlang.org/docs/handbook/basic-types.html#null-and-undefined
 [ts-unknown]: https://www.typescriptlang.org/docs/handbook/basic-types.html#unknown
