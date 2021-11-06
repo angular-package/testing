@@ -24,6 +24,7 @@ Useful and simple to use packages based on the [angular.io][angulario].
 
 Support for testing other packages.
 
+[![Gitter][gitter-badge]][gitter-chat]
 <!-- npm badge -->
 [![npm version][testing-npm-badge-svg]][testing-npm-badge]
 <!-- GitHub badges -->
