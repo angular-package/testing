@@ -6,14 +6,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.0] - 2021-10-19
+## [2.0.0] - 2021-11-06
 
 ### [2.0.0] Added
+
+* [cbe05f5]
+  Added `randomNumber()` and `randomString()` helper functions.
 
 * [9af6d2f]  
   Added `objectSomeKeys()`, `stringIncludes()` and `stringIncludesSome()` methods.
 
+[cbe05f5]: https://github.com/angular-package/testing/commit/cbe05f5f21881878aa11f3ef7938c599a5e36ed3
+
 ### [2.0.0] Updated
+
+* [6af0073]  
+  Updated `numberBetween()` and `stringOfLength()` methods of `TestingToBeMatchers` to use `MinMax` interface from `@angular-package/type`.  
 
 * [9af6d2f]  
   Updated to a new **`@angular-package/type`**.  
@@ -22,8 +30,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * [dd18b84]  
   Updated the `execute` parameter to be optional by setting the default value to `true` for all methods.  
-  `toBeInstanceOfFunction()` method uses `instanceof` operator to validate.  
+  `Testing.prototype.toBeInstanceOfFunction()` method uses `instanceof` operator to validate.  
 
+[6af0073]: https://github.com/angular-package/testing/commit/6af007350f267ee054a34d33ddf3b671d879b632
 [9af6d2f]: https://github.com/angular-package/testing/commit/9af6d2f2c482a903a2a55303e7fc05725741e9c0
 
 ### [2.0.0] Removed
