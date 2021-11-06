@@ -20,6 +20,8 @@ Useful and simple to use packages based on the [angular.io][angulario].
 | [type][type-github-readme]                   | Common types, type guards, and type checkers.                     | [![npm version][type-npm-badge-png]][type-npm-badge] |
 | [ui][ui-github-readme]                       | User interface.                                                   | *In Progress* |
 
+Click on the package name to visit its [GitHub](https://github.com/) page.
+
 <br>
 
 ## angular-package/testing
@@ -40,9 +42,7 @@ Support for testing other packages.
 
 <br>
 
----
-
-### Table of contents
+## Table of contents
 
 * [Basic concepts](#basic-concepts)
 * [Skeleton](#skeleton)
@@ -62,8 +62,6 @@ Support for testing other packages.
   * [Commit](#commit)
   * [Versioning](#versioning)
 * [License](#license)
-
----
 
 <br>
 
