@@ -4212,6 +4212,10 @@ MIT © angular-package ([license][testing-license])
 [new]: https://img.shields.io/badge/-new-green
 [update]: https://img.shields.io/badge/-update-red
 
+<!-- Gitter -->
+[gitter-badge]: https://badges.gitter.im/angularpackage/Lobby.svg
+[gitter-chat]: https://gitter.im/angularpackage/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+
 <!-- GIT -->
 [git-semver]: http://semver.org/
 
