@@ -47,8 +47,9 @@ Support for testing other packages.
   * [`Testing`](#testing)
   * [`TestingToBeMatchers`](#testingtobematchers)
 * Helpers
-  * [`randomNumber()`](#randomnumber)
-  * [`randomString()`](#randomstring)
+  * Functions
+    * [`randomNumber()`](#randomnumber)
+    * [`randomString()`](#randomstring)
   * [Constants](#constants)
 * [Changelog](#changelog)
 * [Git](#git)
