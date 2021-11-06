@@ -1,10 +1,10 @@
 // @angular-package/type.
 import { StringOfLength } from '@angular-package/type';
 /**
- * The function `randomString()` generates a random string of declared length.
- * @param length The max `length` of the generated random string.
- * @param chars The chars to generate a random string.
- * @returns The return value is a random string of declared length.
+ * The function `randomString()` generates a random `string` of declared length.
+ * @param length The max `length` of the generated random `string`.
+ * @param chars The chars to generate a random `string`.
+ * @returns The return value is a random `string` of declared length.
  */
 export const randomString = <Length extends number>(
   length: Length,
