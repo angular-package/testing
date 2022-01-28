@@ -2691,35 +2691,29 @@ Expects provided `value` to be a [`number`][js-number] type or an instance of a 
 ```typescript
 public numberBetween<Min extends number, Max extends number>(
   value: any,
-  range: {
-    min?: Min;
-    max?: Max;
-  },
+  min: Min,
+  max: Max,
   expected: jasmine.Expected<boolean> = true,
   expectationFailOutput: any = `${this.expectationFailOutput} ${
     this.getNot() === true ? `not` : ``
-  } be a \`number\` type or an instance of a \`Number\` between the range of ${
-    range?.min
-  } and ${range?.max}`
+  } be a \`number\` type or an instance of a \`Number\` between the range of ${min} and ${max}`
 ): this {
-  this.toBe(is.numberBetween(value, range), expected, expectationFailOutput);
+  this.toBe(
+    is.numberBetween(value, min, max),
+    expected,
+    expectationFailOutput
+  );
   return this;
 }
 ```
-
-**Generic type variables:**
-
-| Name      | Default value             | Description |
-| :-------- | :------------------------ | :---------- |
-| `Min`     | From the `min` of `range` | A generic type variable `Min` constrained by the [`number`][ts-number] type, by default of value captured from optional `min` of the provided `range` that indicates the **minimum** range of the provided `value` via the return type `value is NumberBetween<Min, Max, Type>`. |
-| `Max`     | From the `max` of `range` | A generic type variable `Max` constrained by the [`number`][ts-number] type, by default of value captured from optional `max` of the provided `range` that indicates the **maximum** range of the provided `value` via the return type `value is NumberBetween<Min, Max, Type>`. |
 
 **Parameters:**
 
 | Name: type                            | Description |
 | :------------------------------------ | :---------- |
 | `value: any`                          | The `value` of any type that is checked against a [`number`][js-number] type or an instance of a [`Number`][js-number] within the specified **range** and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `range: { min?: Min, max?: Max }`     | An [`object`][js-object] of optional **minimum** and **maximum** `range` of a given `value`. |
+| `min: Min`                            | The **minimum** range of generic type variable `Min` of the given `value`. |
+| `max: Max`                            | The **maximum** range of generic type variable `Max` of the given `value`. |
 | `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
 | `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`number`][js-number] type or an instance of a [`Number`][js-number] between the range of **minimum** and **maximum**. |
 
@@ -2752,10 +2746,10 @@ testing.describe('Expects provided value', () => {
 
   testing.describe('to be', () =>
     testing.it(`\`number\` between 26 to 28`, () =>
-      toBe.numberBetween(isNumberBetween, {min, max})))
+      toBe.numberBetween(isNumberBetween, min, max)))
   .describe('not to be', () =>
     testing.it(`\`number\` between 26 to 28`, () =>
-      toBe.not.numberBetween(127, {min, max})));
+      toBe.not.numberBetween(127, min, max)));
 });
 ```
 
@@ -3368,18 +3362,18 @@ Expects provided `value` to be a [`string`][js-string] type or an instance of a 
 ```typescript
 public stringOfLength<Min extends number, Max extends number>(
   value: any,
-  length: {
-    min: Min;
-    max: Max;
-  },
+  min: Min,
+  max: Max,
   expected: jasmine.Expected<boolean> = true,
   expectationFailOutput: any = `${this.expectationFailOutput} ${
     this.getNot() === true ? `not` : ``
-  } be a \`string\` type or an instance of a \`String\` of the \`length\` between the given ${
-    length?.min
-  } and ${length?.max}`
+  } be a \`string\` type or an instance of a \`String\` of the \`length\` between the given ${min} and ${max}`
 ): this {
-  this.toBe(is.stringLength(value, length), expected, expectationFailOutput);
+  this.toBe(
+    is.stringLength(value, min, max),
+    expected,
+    expectationFailOutput
+  );
   return this;
 }
 ```
@@ -3389,7 +3383,8 @@ public stringOfLength<Min extends number, Max extends number>(
 | Name: type                            | Description |
 | :------------------------------------ | :---------- |
 | `value: any`                          | The `value` of any type that is checked against a [`string`][js-string] type or an instance of a [`String`][js-string] of the specified **length** and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `length: { min: Min, max: Max }`      | An [`object`][js-object] of optional **minimum** and **maximum** `length` of the given `value`. |
+| `min: Min`                            | The **minimum** length of generic type variable `Min` of a given `value`. |
+| `max: Max`                            | The **maximum** length of generic type variable `Max` of a given `value`. |
 | `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
 | `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`string`][js-string] type or an instance of a [`String`][js-string] of the **length** between the given **minimum** and **maximum**. |
 
@@ -3421,8 +3416,8 @@ testing.describe('Expects provided value', () => {
   });
   testing.describe('to be or not to be', () => {
     testing.it(`a \`string\` between the given length`, () =>
-      toBe.stringOfLength(string, {min, max}).
-      not.stringOfLength(undefined, {min, max}));
+      toBe.stringOfLength(string, min, max).
+      not.stringOfLength(undefined, min, max));
   });
 });
 ```
