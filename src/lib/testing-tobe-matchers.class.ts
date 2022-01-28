@@ -269,7 +269,8 @@ export class TestingToBeMatchers extends TestingExpect {
    * `isNumberBetween()` function from the `@angular-package/type`.
    * @param value The value of any type that is checked against a `number` type or an instance of a `Number` within the specified `range`
    * and the result of its check is passed to the `expect()` function of jasmine.
-   * @param range An `object` of optional minimum and maximum `range` of a given `value`.
+   * @param min The **minimum** range of generic type variable `Min` of the given `value`.
+   * @param max The **maximum** range of generic type variable `Max` of the given `value`.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) a `number`
@@ -278,15 +279,18 @@ export class TestingToBeMatchers extends TestingExpect {
    */
   public numberBetween<Min extends number, Max extends number>(
     value: any,
-    range: MinMax<Min, Max>,
+    min: Min,
+    max: Max,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = `${this.expectationFailOutput} ${
       this.getNot() === true ? `not` : ``
-    } be a \`number\` type or an instance of a \`Number\` between the range of ${
-      range?.min
-    } and ${range?.max}`
+    } be a \`number\` type or an instance of a \`Number\` between the range of ${min} and ${max}`
   ): this {
-    this.toBe(is.numberBetween(value, range), expected, expectationFailOutput);
+    this.toBe(
+      is.numberBetween(value, min, max),
+      expected,
+      expectationFailOutput
+    );
     return this;
   }
 
@@ -536,6 +540,8 @@ export class TestingToBeMatchers extends TestingExpect {
    * method uses `isStringLength()` function from the `@angular-package/type`.
    * @param value The value of any type that is checked against a `string` type or an instance of a `String` of the specified `length` and
    * the result of its check is passed to the `expect()` function of jasmine.
+   * @param min The **minimum** length of generic type variable `Min` of the given `value`.
+   * @param max The **maximum** length of generic type variable `Max` of the given `value`.
    * @param length An `object` of optional minimum and maximum `length` of the given `value`.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
@@ -545,15 +551,18 @@ export class TestingToBeMatchers extends TestingExpect {
    */
   public stringOfLength<Min extends number, Max extends number>(
     value: any,
-    length: MinMax<Min, Max>,
+    min: Min,
+    max: Max,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = `${this.expectationFailOutput} ${
       this.getNot() === true ? `not` : ``
-    } be a \`string\` type or an instance of a \`String\` of the \`length\` between the given ${
-      length?.min
-    } and ${length?.max}`
+    } be a \`string\` type or an instance of a \`String\` of the \`length\` between the given ${min} and ${max}`
   ): this {
-    this.toBe(is.stringLength(value, length), expected, expectationFailOutput);
+    this.toBe(
+      is.stringLength(value, min, max),
+      expected,
+      expectationFailOutput
+    );
     return this;
   }
 
