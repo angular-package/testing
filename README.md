@@ -1,7 +1,5 @@
 # Packages
 
-Useful and simple to use packages based on the [angular.io][angulario].
-
 | Package                                      | Description                                                       | Status |
 | :------------------------------------------- | :---------------------------------------------------------------- | -----: |
 | [callback][callback-github-readme]           | Manages the callback [`function`][js-function].                   | [![npm version][callback-npm-badge-png]][callback-npm-badge] |
@@ -16,9 +14,12 @@ Useful and simple to use packages based on the [angular.io][angulario].
 | [range][range-github-readme]                 | The range between a minimum and maximum.                          | [![npm version][range-npm-badge-png]][range-npm-badge] |
 | [reactive][reactive-github-readme]           | Automatize the process of creating some rxjs features.            | [![npm version][reactive-npm-badge-png]][reactive-npm-badge] |
 | [storage][storage-github-readme]             | The storage of data under allowed names.                          | [![npm version][storage-npm-badge-png]][storage-npm-badge] |
-| **[testing][testing-github-readme]**         | **Support for testing other packages.**                           | [![npm version][testing-npm-badge-png]][testing-npm-badge] |
-| [type][type-github-readme]                   | Common types, type guards, and type checkers.                     | [![npm version][type-npm-badge-png]][type-npm-badge] |
+| [tag][tag-github-readme]                     | Any tag with optional attributes.                                 | [![npm version][tag-npm-badge-png]][tag-npm-badge] |
+| [testing][testing-github-readme]             | Support for testing other packages.                               | [![npm version][testing-npm-badge-png]][testing-npm-badge] |
+| [text][text-github-readme]                   | Text on the template with replaceable tags.                       | [![npm version][text-npm-badge-png]][text-npm-badge] |
+| **[type][type-github-readme]**               | **Common types, type guards, and type checkers.**                 | [![npm version][type-npm-badge-png]][type-npm-badge] |
 | [ui][ui-github-readme]                       | User interface.                                                   | *In Progress* |
+| [wrapper][wrapper-github-readme]             | Wrap the text with the opening and closing chars.                 | [![npm version][wrapper-npm-badge-png]][wrapper-npm-badge] |
 
 Click on the package name to visit its [GitHub](https://github.com/) page.
 
@@ -126,7 +127,16 @@ import {
 ```
 
 ```typescript
-// Constants.
+// Helper functions.
+import {
+  // Function.
+  randomNumber,
+  randomString,
+} from '@angular-package/testing';
+```
+
+```typescript
+// Helper constants.
 import {
   // Example class for testing.
   TestingClass,
@@ -4362,6 +4372,16 @@ MIT © angular-package ([license][testing-license])
   <!-- GitHub -->
   [storage-github-readme]: https://github.com/angular-package/storage#readme
 
+<!-- Package: tag -->
+  <!-- npm -->
+  [tag-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Ftag.svg
+  [tag-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Ftag.png
+  [tag-npm-badge]: https://badge.fury.io/js/%40angular-package%2Ftag
+  [tag-npm-readme]: https://www.npmjs.com/package/@angular-package/tag#readme
+
+  <!-- GitHub -->
+  [tag-github-readme]: https://github.com/angular-package/tag#readme
+
 <!-- Package: testing -->
   <!-- npm -->
   [testing-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Ftesting.svg
@@ -4372,6 +4392,16 @@ MIT © angular-package ([license][testing-license])
   <!-- GitHub -->
   [testing-github-readme]: https://github.com/angular-package/testing#readme
   [testing-github-changelog]: https://github.com/angular-package/testing/blob/main/CHANGELOG.md
+
+<!-- Package: text -->
+  <!-- npm -->
+  [text-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Ftext.svg
+  [text-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Ftext.png
+  [text-npm-badge]: https://badge.fury.io/js/%40angular-package%2Ftext
+  [text-npm-readme]: https://www.npmjs.com/package/@angular-package/text#readme
+
+  <!-- GitHub -->
+  [text-github-readme]: https://github.com/angular-package/text#readme
 
 <!-- Package: type -->
   <!-- npm -->
@@ -4399,6 +4429,16 @@ MIT © angular-package ([license][testing-license])
 
   <!-- GitHub -->
   [ui-github-readme]: https://github.com/angular-package/ui#readme
+
+<!-- Package: wrapper -->
+  <!-- npm -->
+  [wrapper-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fwrapper.svg
+  [wrapper-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fwrapper.png
+  [wrapper-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fwrapper
+  [wrapper-npm-readme]: https://www.npmjs.com/package/@angular-package/wrapper#readme
+
+  <!-- GitHub -->
+  [wrapper-github-readme]: https://github.com/angular-package/wrapper#readme
 
 <!-- Angular -->
 [angular-component-factory-resolver]: https://angular.io/api/core/ComponentFactoryResolver
