@@ -6,7 +6,7 @@ import { TESTING_SYMBOL_NUMBER } from '../lib/constants/symbol.const';
 /**
  * Create `Testing` instance.
  */
-const testing = new Testing(false, false);
+const testing = new Testing(true, true);
 const toBe = new TestingToBeMatchers();
 /**
  * Tests.
@@ -118,7 +118,7 @@ testing.describe('Expects provided value', () => {
       .it('`number`',
         () => toBe.number(isNumber))
       .it(`\`number\` between 26 to 28.`,
-        () => toBe.numberBetween(isNumber, {min, max}))
+        () => toBe.numberBetween(isNumber, min, max))
       .it(`an \`object\`.`,
         () => toBe.object(TESTING_CLASS))
       .it(`an \`object\` with a given key.`,
@@ -140,7 +140,7 @@ testing.describe('Expects provided value', () => {
       .it(`a \`string\` type or an instance of \`String\` that includes some of the specified \`words/sentences\``,
         () => toBe.stringIncludesSome(string, ['Lorem1', 'galley1', 'It was popularised in the 1960s']))
       .it(`a \`string\` between the given length.`,
-        () => toBe.stringOfLength(isStringOfLength, {min, max}))
+        () => toBe.stringOfLengthBetween(isStringOfLength, min, max))
       .it(`a \`symbol\``,
         () => toBe.symbol(isSymbol))
       .it(`\`true\``,
@@ -167,7 +167,7 @@ testing.describe('Expects provided value', () => {
       .it('`number`',
         () => toBe.not.number(undefined))
       .it(`\`number\` between 26 to 28.`,
-        () => toBe.not.numberBetween(127, {min, max}))
+        () => toBe.not.numberBetween(127, min, max))
       .it(`an \`object\`.`,
         () => toBe.not.object(undefined))
       .it(`an \`object\` with a given key.`,
@@ -185,11 +185,11 @@ testing.describe('Expects provided value', () => {
       .it(`a \`string\` type or an instance of \`String\``,
         () => toBe.not.string(undefined))
       .it(`a \`string\` type or an instance of \`String\` that includes the specified \`words/sentences\``,
-        () => toBe.not.stringIncludes(string, ['Lorem1', 'galley1', 'It was popularised in the 1960s1']))
+        () => toBe.not.stringIncludes(string, ['Lorem1', 'galley1', 'It was popularized in the 1960s1']))
       .it(`a \`string\` type or an instance of \`String\` that includes some of the specified \`words/sentences\``,
-        () => toBe.not.stringIncludesSome(string, ['Lorem1', 'galley1', 'It was popularised in the 1960s1']))
+        () => toBe.not.stringIncludesSome(string, ['Lorem1', 'galley1', 'It was popularized in the 1960s1']))
       .it(`a \`string\` between the given length.`,
-        () => toBe.not.stringOfLength(undefined, {min, max}))
+        () => toBe.not.stringOfLengthBetween(undefined, min, max))
       .it(`a \`symbol\``,
         () => toBe.not.symbol(undefined))
       .it(`\`true\``,
@@ -200,3 +200,4 @@ testing.describe('Expects provided value', () => {
         () => toBe.not.instance(TESTING_CLASS, class Person {}));
   });
 });
+
