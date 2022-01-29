@@ -14,7 +14,7 @@ const toBe = new TestingToBeMatchers();
 testing.describe(`randomNumber()`, () => {
   testing
     .it(`to 10`, () => toBe.number(randomNumber(10)))
-    .it(`between 0 and 19500`, () => toBe.numberBetween(randomNumber(19500), { min: 0, max: 19500 }))
+    .it(`between 0 and 19500`, () => toBe.numberBetween(randomNumber(19500), 0, 19500))
     .it(`to be less than 200`, () => expect(randomNumber(200)).toBeLessThan(200));
 });
 
