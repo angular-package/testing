@@ -139,7 +139,9 @@ testing.describe('Expects provided value', () => {
         () => toBe.stringIncludes(string, ['Lorem', 'galley', 'It was popularised in the 1960s']))
       .it(`a \`string\` type or an instance of \`String\` that includes some of the specified \`words/sentences\``,
         () => toBe.stringIncludesSome(string, ['Lorem1', 'galley1', 'It was popularised in the 1960s']))
-      .it(`a \`string\` between the given length.`,
+      .it(`a \`string\` of the given length.`,
+        () => toBe.stringOfLength(isStringOfLength, 28))
+      .it(`a \`string\` between the min and max.`,
         () => toBe.stringOfLengthBetween(isStringOfLength, min, max))
       .it(`a \`symbol\``,
         () => toBe.symbol(isSymbol))
@@ -188,7 +190,9 @@ testing.describe('Expects provided value', () => {
         () => toBe.not.stringIncludes(string, ['Lorem1', 'galley1', 'It was popularized in the 1960s1']))
       .it(`a \`string\` type or an instance of \`String\` that includes some of the specified \`words/sentences\``,
         () => toBe.not.stringIncludesSome(string, ['Lorem1', 'galley1', 'It was popularized in the 1960s1']))
-      .it(`a \`string\` between the given length.`,
+      .it(`a \`string\` of the given length.`,
+        () => toBe.not.stringOfLength(isStringOfLength, 12))
+      .it(`a \`string\` between the given min and max.`,
         () => toBe.not.stringOfLengthBetween(undefined, min, max))
       .it(`a \`symbol\``,
         () => toBe.not.symbol(undefined))
