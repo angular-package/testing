@@ -6,39 +6,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.0] - 2021-11-06
+## [2.0.0] - 2022-01-30
 
 ### [2.0.0] Added
 
-* [cbe05f5]
-  Added `randomNumber()` and `randomString()` helper functions.
+- Added `stringOfLengthBetween()` method of `TestingToBeMatchers`. [2854f54]
+- Added `randomNumber()` and `randomString()` helper functions. [cbe05f5]
+- Added `objectKeysIn()`, `objectSomeKeys()`, `stringIncludes()` and `stringIncludesSome()` methods of `TestingToBeMatchers`. [9af6d2f]
 
-* [9af6d2f]  
-  Added `objectSomeKeys()`, `stringIncludes()` and `stringIncludesSome()` methods.
-
+[2854f54]: https://github.com/angular-package/testing/commit/2854f544873d8c8dade092a73377e1ab26417e83
 [cbe05f5]: https://github.com/angular-package/testing/commit/cbe05f5f21881878aa11f3ef7938c599a5e36ed3
 
-### [2.0.0] Updated
+### [2.0.0] Changed
 
-* [6af0073]  
-  Updated `numberBetween()` and `stringOfLength()` methods of `TestingToBeMatchers` to use `MinMax` interface from `@angular-package/type`.  
+- Updated `stringOfLength()` to the single `length` parameter. [d82f066]
+- ~~Updated `numberBetween()` and `stringOfLength()` methods of `TestingToBeMatchers` to use `MinMax` interface from `@angular-package/type`.~~ [6af0073]
+  - Change the parameters to `min` and `max` of `stringOfLength()` and `numberBetween()` method. [d82f066]
+- Updated default messages of `expectation fail output` and use `withContext()` method to display it. [9af6d2f]
+- Updated the `objectKey()`, `objectKeyIn()`, `objectKeys()` and ~~`numberBetween()`~~ methods cause of updated `@angular-package/type`. [9af6d2f]
+  - Updated to a new **`@angular-package/type`**. [9af6d2f]
+  - Changed the `key` property type from `Key | Key[]` to `PropertyKey` in the `objectKey()` `objectKeyIn()` methods.
+  - Changed the `keys` property type from `Key[]` to `PropertyKey[]` in the `objectKeys()` method.
+- Updated the `execute` parameter to be optional by setting the default value to `true` for all methods. [dd18b84]
+- `Testing.prototype.toBeInstanceOfFunction()` method uses `instanceof` operator to validate. [dd18b84]
 
-* [9af6d2f]  
-  Updated to a new **`@angular-package/type`**.  
-  Updated default messages of `expectation fail output` and use `withContext()` method to display it.  
-  Updated the `objectKey()`, `objectKeyIn()`, `objectKeys()` and `numberBetween()` methods cause of updated `@angular-package/type`.  
-
-* [dd18b84]  
-  Updated the `execute` parameter to be optional by setting the default value to `true` for all methods.  
-  `Testing.prototype.toBeInstanceOfFunction()` method uses `instanceof` operator to validate.  
-
+[d82f066]: https://github.com/angular-package/testing/commit/d82f0665a8befb2b9515ae8dbbd5807f6c96eb5b
+[d82f066]: https://github.com/angular-package/testing/commit/d82f0665a8befb2b9515ae8dbbd5807f6c96eb5b
 [6af0073]: https://github.com/angular-package/testing/commit/6af007350f267ee054a34d33ddf3b671d879b632
 [9af6d2f]: https://github.com/angular-package/testing/commit/9af6d2f2c482a903a2a55303e7fc05725741e9c0
 
 ### [2.0.0] Removed
 
-* [dd18b84]  
-  Removed unused `toBeResolved()` method.  
+- Removed unused `toBeResolved()` method. [dd18b84]
 
 [dd18b84]: https://github.com/angular-package/testing/commit/dd18b8469c6099246f4e9f8a9ac9f9d891c6e1f8
 
@@ -46,19 +45,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added [1.1.0]
 
-* [`77f326a`][77f326a]  
-  Abstract `TestingExpect` class to manage `expect()` function of jasmine.
-
-* [`afb98f5`][afb98f5]  
-  Class `TestingToBeMatchers` with matchers that use the `toBe()` method of `jasmine.Matchers`.
-
-* [`3bf2046`][3bf2046]  
-  Tests for the `TestingToBeMatchers`.
+- Abstract `TestingExpect` class to manage `expect()` function of jasmine. [`77f326a`][77f326a]
+- Class `TestingToBeMatchers` with matchers that use the `toBe()` method of `jasmine.Matchers`. [`afb98f5`][afb98f5]
+- Tests for the `TestingToBeMatchers`. [`3bf2046`][3bf2046]
 
 ### Changed [1.1.0]
 
-* [`4b81d0c`][4b81d0c] [`bdfbfe2`][bdfbfe2] [`8229336`][8229336] [`c17d11e`][c17d11e] [`9e0e368`][9e0e368]  
-  Update README.md with `TestingToBeMatchers`.
+- Update README.md with `TestingToBeMatchers`. [`4b81d0c`][4b81d0c] [`bdfbfe2`][bdfbfe2] [`8229336`][8229336] [`c17d11e`][c17d11e] [`9e0e368`][9e0e368]
 
 [77f326a]: https://github.com/angular-package/testing/commit/77f326a5bc7154b55f6944e60b24cddb5bfe93df
 [afb98f5]: https://github.com/angular-package/testing/commit/afb98f557296239b10227e8f0bde4f8b62fd5049
@@ -73,19 +66,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   
 ### Changed
 
-* [`10be25d`][10be25d]  
-  Change peerDependencies.
-
-* [`58bdbad`][58bdbad]  
-  946803f Change the parameter `value` description.
+- Change peerDependencies. [`10be25d`][10be25d]
+- 946803f Change the parameter `value` description. [`58bdbad`][58bdbad]
 
 ### Fixed
 
-* [`58bdbad`][58bdbad]  
-  Fix `toBe()` and `toEqual()` method by adding a generic `Value` instead of any.
-
-* [`946803f`][946803f]  
-  Fix `instanceof` link in the README.md.
+- Fix `toBe()` and `toEqual()` method by adding a generic `Value` instead of any. [`58bdbad`][58bdbad]
+- Fix `instanceof` link in the README.md. [`946803f`][946803f]
 
 [10be25d]: https://github.com/angular-package/testing/commit/10be25daffacf87f38b469b999cbb2b213fb90a1
 [58bdbad]: https://github.com/angular-package/testing/commit/58bdbadf4fc62aed1fac3680168bb8bb8e35e5dd
