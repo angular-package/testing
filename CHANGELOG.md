@@ -6,9 +6,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [2.0.0] - 2022-01-30
+## [2.0.0-rc] - 2022-01-30
 
-### [2.0.0] Added
+### [2.0.0-rc] Added
 
 - Added `stringOfLengthBetween()` method of `TestingToBeMatchers`. [2854f54]
 - Added `randomNumber()` and `randomString()` helper functions. [cbe05f5]
@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [2854f54]: https://github.com/angular-package/testing/commit/2854f544873d8c8dade092a73377e1ab26417e83
 [cbe05f5]: https://github.com/angular-package/testing/commit/cbe05f5f21881878aa11f3ef7938c599a5e36ed3
 
-### [2.0.0] Changed
+### [2.0.0-rc] Changed
 
 - Updated `stringOfLength()` to the single `length` parameter. [d82f066]
 - ~~Updated `numberBetween()` and `stringOfLength()` methods of `TestingToBeMatchers` to use `MinMax` interface from `@angular-package/type`.~~ [6af0073]
@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [6af0073]: https://github.com/angular-package/testing/commit/6af007350f267ee054a34d33ddf3b671d879b632
 [9af6d2f]: https://github.com/angular-package/testing/commit/9af6d2f2c482a903a2a55303e7fc05725741e9c0
 
-### [2.0.0] Removed
+### [2.0.0-rc] Removed
 
 - Removed unused `toBeResolved()` method. [dd18b84]
 
