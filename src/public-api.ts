@@ -1,17 +1,28 @@
+import { randomString } from './lib/function/random-string.func';
 /*
  * Public API Surface of testing
  */
-// Class.
-export { Testing, TestingToBeMatchers } from './lib';
+/**
+ * Main.
+ */
+export {
+  // Class.
+  Testing,
+  TestingToBeMatchers,
+} from './lib';
 
+/**
+ * Function.
+ */
+export { randomNumber, randomString } from './lib/function/';
+
+/**
+ * Constant.
+ */
 export {
   // Example class for testing.
   TestingClass,
   TestingPerson,
-} from './lib/constants';
-
-// Constants.
-export {
   // Array.
   TESTING_ARRAY_BIGINT,
   TESTING_ARRAY_BOOLEAN,
@@ -61,5 +72,7 @@ export {
   TESTING_UNDEFINED,
 } from './lib/constants';
 
-// Interface.
+/**
+ * Interface.
+ */
 export { TestingObject, TestingPersonShape } from './interface';

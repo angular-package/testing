@@ -1,7 +1,6 @@
 // @angular-package/type.
 import { guard, is } from '@angular-package/type';
 // Class.
-import { TestingCore } from './testing-core.class';
 import { TestingExecutable } from './testing-executable.class';
 /**
  * Manages `describe()` function of jasmine.

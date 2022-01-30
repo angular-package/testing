@@ -1,6 +1,8 @@
 // Example usage.
 import { Testing, TestingToBeMatchers } from '../lib';
+// Constant.
 import { TestingClass } from '../lib/constants/class.const';
+import { TESTING_SYMBOL_NUMBER } from '../lib/constants/symbol.const';
 /**
  * Create `Testing` instance.
  */
@@ -10,6 +12,7 @@ const toBe = new TestingToBeMatchers();
  * Tests.
  */
 testing.describe('Expects provided value', () => {
+
   let testArray: any;
   beforeEach(() => (testArray = [1, 'two', 3]));
 
@@ -22,11 +25,20 @@ testing.describe('Expects provided value', () => {
   let isDate: any;
   beforeEach(() => (isDate = new Date()));
 
-  testing.describe('to be or not to be the type of', () => {
-    testing.it('an `array`', () => toBe.array(testArray).not.array(2));
-    testing.it('`bigint`', () => toBe.bigint(isBigint).not.bigint(2));
-    testing.it('`boolean`', () => toBe.boolean(isBoolean).not.boolean(3));
-    testing.it('`Date`', () => toBe.date(isDate).not.date(false));
+  testing
+  .describe('to be the type of', () => {
+    testing
+      .it('an `array`', () => toBe.array(testArray))
+      .it('`bigint`', () => toBe.bigint(isBigint))
+      .it('`boolean`', () => toBe.boolean(isBoolean))
+      .it('`Date`', () => toBe.date(isDate));
+  })
+  .describe('not to be the type of', () => {
+    testing
+      .it('an `array`', () => toBe.not.array(2))
+      .it('`bigint`', () => toBe.not.bigint(2))
+      .it('`boolean`', () => toBe.not.boolean(3))
+      .it('`Date`', () => toBe.not.date(false));
   });
 
   let isClass: any;
@@ -58,18 +70,6 @@ testing.describe('Expects provided value', () => {
     max = 28;
   });
 
-  let isObject: any;
-  beforeEach(() => isObject = {});
-
-  let isObjectKey: any;
-  beforeEach(() => isObjectKey = { firstName: '', lastName: ''});
-
-  let isObjectKeyIn: any;
-  beforeEach(() => isObjectKeyIn = { get firstName(): string { return 'x '; }, lastName: ''});
-
-  let isObjectKeys: any;
-  beforeEach(() => isObjectKeys = { get firstName(): string { return 'x '; }, lastName: ''});
-
   let isRegExp: any;
   beforeEach(() => isRegExp = /[]/g);
 
@@ -88,32 +88,120 @@ testing.describe('Expects provided value', () => {
   let isUndefined: any;
   beforeEach(() => isUndefined = undefined);
 
-  let isInstance: any;
-  beforeEach(() => isInstance = new TestingClass());
+  let string: any;
+  beforeEach(() => string = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+  when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+  It has survived not only five centuries, but also the leap into electronic typesetting,
+  remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+  sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+  like Aldus PageMaker including versions of Lorem Ipsum.` as string);
 
-  testing.describe('to be or not to be', () => {
-    testing.it('`class`', () => toBe.class(isClass).not.class('TestingClass'));
-    testing.it('defined', () => toBe.defined('Defined').not.defined(isDefined));
-    testing.it('`false`', () => toBe.false(isFalse).not.false(true));
-    testing.it('`function`', () => toBe.function(isFunction).not.function(true));
-    testing.it('`key`', () => toBe.key(isKey).not.key(true));
-    testing.it('`null`', () => toBe.null(isNull).not.null(undefined));
-    testing.it('`number`', () => toBe.number(isNumber).not.number(undefined));
-    testing.it(`\`number\` between 26 to 28`, () => toBe.numberBetween(isNumber, min, max).not.number(127, min, max));
-    testing.it(`an \`object\``, () => toBe.object(isObject).not.object(undefined));
-    testing.it(`an \`object\` with all given keys`, () =>
-      toBe.objectKey(isObjectKey, ['firstName', 'lastName']).not.objectKey(isObjectKey, ['noFirstName']));
-    testing.it(`an \`object\` with all given keys`, () =>
-      toBe.objectKeyIn(isObjectKeyIn, ['firstName', 'lastName']).not.objectKeyIn(isObjectKeyIn, ['noFirstName']));
-    testing.it(`an \`object\` with some of the given keys`, () =>
-      toBe.objectKeys(isObjectKeys, ['firstName', 'lastName', 'noFirstName']).not.objectKeys(isObjectKeys, ['noFirstName']));
-    testing.it(`\`RegExp\``, () => toBe.regexp(isRegExp).not.regexp(undefined));
-    testing.it(`a \`string\``, () => toBe.string(isString).not.string(undefined));
-    testing.it(`a \`string\` between the given length`, () =>
-      toBe.stringOfLength(isStringOfLength, min, max).not.stringOfLength(undefined, min, max));
-    testing.it(`a \`symbol\``, () => toBe.symbol(isSymbol).not.symbol(undefined));
-    testing.it(`\`true\``, () => toBe.true(isTrue).not.true(false));
-    testing.it(`\`undefined\``, () => toBe.undefined(isUndefined).not.undefined(null));
-    testing.it(`an instance of \`TestingClass\``, () => toBe.instance(isInstance, TestingClass).not.instance(isInstance, class Person {}));
+  let TESTING_CLASS: any;
+  beforeEach(() => TESTING_CLASS = new TestingClass());
+
+  testing
+  .describe('to be', () => {
+    testing
+      .it('`class`',
+        () => toBe.class(isClass))
+      .it('defined',
+        () => toBe.defined('Defined'))
+      .it('`false`',
+        () => toBe.false(isFalse))
+      .it('`function`',
+        () => toBe.function(isFunction))
+      .it('`key`',
+        () => toBe.key(isKey))
+      .it('`null`',
+        () => toBe.null(isNull))
+      .it('`number`',
+        () => toBe.number(isNumber))
+      .it(`\`number\` between 26 to 28.`,
+        () => toBe.numberBetween(isNumber, min, max))
+      .it(`an \`object\`.`,
+        () => toBe.object(TESTING_CLASS))
+      .it(`an \`object\` with a given key.`,
+        () => toBe.objectKey(TESTING_CLASS, 'firstName'))
+      .it(`an \`object\` with a given key in it(or it's prototype chain).`,
+        () => toBe.objectKeyIn(TESTING_CLASS, 10304050))
+      .it(`an \`object\` with given keys.`,
+        () => toBe.objectKeys(TESTING_CLASS, ['firstName', 'surname']))
+      .it(`an \`object\` with given keys in it(or it's prototype chain).`,
+        () => toBe.objectKeysIn(TESTING_CLASS, ['firstName', 'surname', TESTING_SYMBOL_NUMBER]))
+      .it(`an \`object\` with some of its keys or some groups of its keys.`,
+        () => toBe.objectSomeKeys(TESTING_CLASS, ['firstName', 'surname', 'noFirstName']))
+      .it(`\`RegExp\``,
+        () => toBe.regexp(isRegExp))
+      .it(`a \`string\` type or an instance of \`String\``,
+        () => toBe.string(string))
+      .it(`a \`string\` type or an instance of \`String\` that includes the specified \`words/sentences\``,
+        () => toBe.stringIncludes(string, ['Lorem', 'galley', 'It was popularised in the 1960s']))
+      .it(`a \`string\` type or an instance of \`String\` that includes some of the specified \`words/sentences\``,
+        () => toBe.stringIncludesSome(string, ['Lorem1', 'galley1', 'It was popularised in the 1960s']))
+      .it(`a \`string\` of the given length.`,
+        () => toBe.stringOfLength(isStringOfLength, 28))
+      .it(`a \`string\` between the min and max.`,
+        () => toBe.stringOfLengthBetween(isStringOfLength, min, max))
+      .it(`a \`symbol\``,
+        () => toBe.symbol(isSymbol))
+      .it(`\`true\``,
+        () => toBe.true(isTrue))
+      .it(`\`undefined\``,
+        () => toBe.undefined(isUndefined))
+      .it(`an instance of \`TestingClass\`.`,
+        () => toBe.instance(TESTING_CLASS, TestingClass));
+  })
+  .describe('not to be', () => {
+    testing
+      .it('`class`',
+        () => toBe.not.class('TestingClass'))
+      .it('defined',
+        () => toBe.not.defined(isDefined))
+      .it('`false`',
+        () => toBe.not.false(true))
+      .it('`function`',
+        () => toBe.not.function(true))
+      .it('`key`',
+        () => toBe.not.key(true))
+      .it('`null`',
+        () => toBe.not.null(undefined))
+      .it('`number`',
+        () => toBe.not.number(undefined))
+      .it(`\`number\` between 26 to 28.`,
+        () => toBe.not.numberBetween(127, min, max))
+      .it(`an \`object\`.`,
+        () => toBe.not.object(undefined))
+      .it(`an \`object\` with a given key.`,
+        () => toBe.not.objectKey(TESTING_CLASS, 'noFirstName'))
+      .it(`an \`object\` with a given key in it(or it's prototype chain).`,
+        () => toBe.not.objectKeyIn(TESTING_CLASS, 'noFirstName'))
+      .it(`an \`object\` with given keys.`,
+        () => toBe.not.objectKeys(TESTING_CLASS, [103040501, 'noFirstName', TESTING_SYMBOL_NUMBER]))
+      .it(`an \`object\` with given keys in it(or it's prototype chain).`,
+        () => toBe.not.objectKeysIn(TESTING_CLASS, [103040501, 'noFirstName']))
+      .it(`an \`object\` with some of its keys or some groups of its keys.`,
+        () => toBe.not.objectSomeKeys(TESTING_CLASS, [10304050, 'noFirstName', 'bla']))
+      .it(`\`RegExp\``,
+        () => toBe.not.regexp(undefined))
+      .it(`a \`string\` type or an instance of \`String\``,
+        () => toBe.not.string(undefined))
+      .it(`a \`string\` type or an instance of \`String\` that includes the specified \`words/sentences\``,
+        () => toBe.not.stringIncludes(string, ['Lorem1', 'galley1', 'It was popularized in the 1960s1']))
+      .it(`a \`string\` type or an instance of \`String\` that includes some of the specified \`words/sentences\``,
+        () => toBe.not.stringIncludesSome(string, ['Lorem1', 'galley1', 'It was popularized in the 1960s1']))
+      .it(`a \`string\` of the given length.`,
+        () => toBe.not.stringOfLength(isStringOfLength, 12))
+      .it(`a \`string\` between the given min and max.`,
+        () => toBe.not.stringOfLengthBetween(undefined, min, max))
+      .it(`a \`symbol\``,
+        () => toBe.not.symbol(undefined))
+      .it(`\`true\``,
+        () => toBe.not.true(false))
+      .it(`\`undefined\``,
+        () => toBe.not.undefined(null))
+      .it(`an instance of \`TestingClass\`.`,
+        () => toBe.not.instance(TESTING_CLASS, class Person {}));
   });
 });
+

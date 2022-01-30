@@ -1,4 +1,4 @@
-//
+// @angular-package/type.
 import { is } from '@angular-package/type';
 /**
  * Manages `expect()` function of jasmine.
