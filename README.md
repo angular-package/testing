@@ -30,6 +30,8 @@ Click on the package name to visit its [GitHub](https://github.com/) page.
 Support for testing other packages.
 
 [![Gitter][gitter-badge]][gitter-chat]
+[![Discord][discord-badge]][discord-channel]
+[![Twitter][twitter-badge]][twitter-follow]
 <!-- npm badge -->
 [![npm version][testing-npm-badge-svg]][testing-npm-badge]
 <!-- GitHub badges -->
@@ -4284,9 +4286,17 @@ MIT © angular-package ([license][testing-license])
 [new]: https://img.shields.io/badge/-new-green
 [update]: https://img.shields.io/badge/-update-red
 
+<!-- Discord -->
+[discord-badge]: https://img.shields.io/discord/925168966098386944
+[discord-channel]: https://discord.com/channels/925168966098386944/925168966098386948
+
 <!-- Gitter -->
 [gitter-badge]: https://badges.gitter.im/angularpackage/Lobby.svg
 [gitter-chat]: https://gitter.im/angularpackage/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+
+<!-- Twitter -->
+[twitter-badge]: https://img.shields.io/twitter/url?style=social&label=Follow%20%40angularpackage&url=https%3A%2F%2Ftwitter.com%2Fangularpackage
+[twitter-follow]: https://twitter.com/angularpackage
 
 <!-- GIT -->
 [git-semver]: http://semver.org/
