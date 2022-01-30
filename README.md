@@ -15,9 +15,9 @@
 | [reactive][reactive-github-readme]           | Automatize the process of creating some rxjs features.            | [![npm version][reactive-npm-badge-png]][reactive-npm-badge] |
 | [storage][storage-github-readme]             | The storage of data under allowed names.                          | [![npm version][storage-npm-badge-png]][storage-npm-badge] |
 | [tag][tag-github-readme]                     | Any tag with optional attributes.                                 | [![npm version][tag-npm-badge-png]][tag-npm-badge] |
-| [testing][testing-github-readme]             | Support for testing other packages.                               | [![npm version][testing-npm-badge-png]][testing-npm-badge] |
+| **[testing][testing-github-readme]**         | **Support for testing other packages.**                           | [![npm version][testing-npm-badge-png]][testing-npm-badge] |
 | [text][text-github-readme]                   | Text on the template with replaceable tags.                       | [![npm version][text-npm-badge-png]][text-npm-badge] |
-| **[type][type-github-readme]**               | **Common types, type guards, and type checkers.**                 | [![npm version][type-npm-badge-png]][type-npm-badge] |
+| [type][type-github-readme]                   | Common types, type guards, and type checkers.                     | [![npm version][type-npm-badge-png]][type-npm-badge] |
 | [ui][ui-github-readme]                       | User interface.                                                   | *In Progress* |
 | [wrapper][wrapper-github-readme]             | Wrap the text with the opening and closing chars.                 | [![npm version][wrapper-npm-badge-png]][wrapper-npm-badge] |
 
@@ -1983,35 +1983,36 @@ Matchers that use the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers].
 
 **Instance public methods:**
 
-| TestingToBeMatchers.prototype.                                            | Expects provided `value` to be |
-| :------------------------------------------------------------------------ | :----------------------------- |
-| [`array()`](#testingtobematchersprototypearray)                           | an [`array`][js-array]. |
-| [`bigint()`](#testingtobematchersprototypebigint)                         | a [`bigint`][js-bigint] type. |
-| [`boolean()`](#testingtobematchersprototypeboolean)                       | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean]. |
-| [`class()`](#testingtobematchersprototypeclass)                           | a [`class`][js-classes]. |
-| [`date()`](#testingtobematchersprototypedate)                             | a [`Date`][js-date]. |
-| [`defined()`](#testingtobematchersprototypedefined)                       | **defined**. |
-| [`false()`](#testingtobematchersprototypefalse)                           | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `false`. |
-| [`function()`](#testingtobematchersprototypefunction)                     | [`function`][js-function]. |
-| [`instance()`](#testingtobematchersprototypeinstance)                     | an instance of a [`class`][js-classes] from the given `constructor`. |
-| [`key()`](#testingtobematchersprototypekey)                               | a property key. |
-| [`null()`](#testingtobematchersprototypenull)                             | [`null`][js-null]. |
-| [`number()`](#testingtobematchersprototypenumber)                         | a [`number`][js-number] type or an instance of a [`Number`][js-number]. |
-| [`numberBetween()`](#testingtobematchersprototypenumberbetween)           | a [`number`][js-number] type or an instance of a [`Number`][js-number] between the **range** of **minimum** and **maximum**. |
-| [`object()`](#testingtobematchersprototypeobject)                         | an [`object`][js-object]. |
-| [`objectKey()`](#testingtobematchersprototypeobjectkey)                   | an [`object`][js-object] with a given `key` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. |
-| [`objectKeyIn()`](#testingtobematchersprototypeobjectkeyin)               | an [`object`][js-object] with a given `key` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
-| [`objectKeys()`](#testingtobematchersprototypeobjectkeys)                 | an [`object`][js-object] with given `keys` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. |
-| [`objectKeysIn()`](#testingtobematchersprototypeobjectkeysin)             | an [`object`][js-object] with given `keys` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
-| [`objectSomeKeys()`](#testingtobematchersprototypeobjectsomekeys)         | an [`object`][js-object] with **some** of its keys or **some groups** of its keys of the `PropertyKey` type. |
-| [`regexp()`](#testingtobematchersprototyperegexp)                         | [`RegExp`][js-regexp]. |
-| [`string()`](#testingtobematchersprototypestring)                         | a [`string`][js-string] type or an instance of a [`String`][js-string]. |
-| [`stringIncludes()`](#testingtobematchersprototypestringincludes)         | a [`string`][js-string] type or an instance of a [`String`][js-string] that **includes** the specified **words/sentences**. |
-| [`stringIncludesSome()`](#testingtobematchersprototypestringincludessome) | a [`string`][js-string] type or an instance of a [`String`][js-string] that **includes some** of the specified **words/sentences**. |
-| [`stringOfLength()`](#testingtobematchersprototypestringoflength)         | a [`string`][js-string] type or an instance of a [`String`][js-string] of the **length** between the given **minimum** and **maximum**. |
-| [`symbol()`](#testingtobematchersprototypesymbol)                         | a [`symbol`][js-symbol]. |
-| [`true()`](#testingtobematchersprototypetrue)                             | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `true`. |
-| [`undefined()`](#testingtobematchersprototypeundefined)                   | [`undefined`][js-undefined]. |
+| TestingToBeMatchers.prototype.                                                  | Expects provided `value` to be |
+| :------------------------------------------------------------------------------ | :----------------------------- |
+| [`array()`](#testingtobematchersprototypearray)                                 | an [`array`][js-array]. |
+| [`bigint()`](#testingtobematchersprototypebigint)                               | a [`bigint`][js-bigint] type. |
+| [`boolean()`](#testingtobematchersprototypeboolean)                             | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean]. |
+| [`class()`](#testingtobematchersprototypeclass)                                 | a [`class`][js-classes]. |
+| [`date()`](#testingtobematchersprototypedate)                                   | a [`Date`][js-date]. |
+| [`defined()`](#testingtobematchersprototypedefined)                             | **defined**. |
+| [`false()`](#testingtobematchersprototypefalse)                                 | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `false`. |
+| [`function()`](#testingtobematchersprototypefunction)                           | [`function`][js-function]. |
+| [`instance()`](#testingtobematchersprototypeinstance)                           | an instance of a [`class`][js-classes] from the given `constructor`. |
+| [`key()`](#testingtobematchersprototypekey)                                     | a property key. |
+| [`null()`](#testingtobematchersprototypenull)                                   | [`null`][js-null]. |
+| [`number()`](#testingtobematchersprototypenumber)                               | a [`number`][js-number] type or an instance of a [`Number`][js-number]. |
+| [`numberBetween()`](#testingtobematchersprototypenumberbetween)                 | a [`number`][js-number] type or an instance of a [`Number`][js-number] between the **range** of **minimum** and **maximum**. |
+| [`object()`](#testingtobematchersprototypeobject)                               | an [`object`][js-object]. |
+| [`objectKey()`](#testingtobematchersprototypeobjectkey)                         | an [`object`][js-object] with a given `key` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. |
+| [`objectKeyIn()`](#testingtobematchersprototypeobjectkeyin)                     | an [`object`][js-object] with a given `key` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
+| [`objectKeys()`](#testingtobematchersprototypeobjectkeys)                       | an [`object`][js-object] with given `keys` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. |
+| [`objectKeysIn()`](#testingtobematchersprototypeobjectkeysin)                   | an [`object`][js-object] with given `keys` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
+| [`objectSomeKeys()`](#testingtobematchersprototypeobjectsomekeys)               | an [`object`][js-object] with **some** of its keys or **some groups** of its keys of the `PropertyKey` type. |
+| [`regexp()`](#testingtobematchersprototyperegexp)                               | [`RegExp`][js-regexp]. |
+| [`string()`](#testingtobematchersprototypestring)                               | a [`string`][js-string] type or an instance of a [`String`][js-string]. |
+| [`stringIncludes()`](#testingtobematchersprototypestringincludes)               | a [`string`][js-string] type or an instance of a [`String`][js-string] that **includes** the specified **words/sentences**. |
+| [`stringIncludesSome()`](#testingtobematchersprototypestringincludessome)       | a [`string`][js-string] type or an instance of a [`String`][js-string] that **includes some** of the specified **words/sentences**. |
+| [`stringOfLength()`](#testingtobematchersprototypestringoflength)               | a [`string`][js-string] type or an instance of a [`String`][js-string] of the specified **length**. |
+| [`stringOfLengthBetween()`](#testingtobematchersprototypestringoflengthbetween) | a [`string`][js-string] type or an instance of a [`String`][js-string] of the **length** between the given **minimum** and **maximum**. |
+| [`symbol()`](#testingtobematchersprototypesymbol)                               | a [`symbol`][js-symbol]. |
+| [`true()`](#testingtobematchersprototypetrue)                                   | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `true`. |
+| [`undefined()`](#testingtobematchersprototypeundefined)                         | [`undefined`][js-undefined]. |
 
 <br>
 
@@ -3357,10 +3358,73 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string] of the **length** between the given **minimum** and **maximum**. The method uses [`isStringLength()`](https://github.com/angular-package/type#isstringlength) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string] of the given **length**. The method uses [`isStringLength()`](https://docs.angular-package.dev/v/type/is/isstringlength) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
-public stringOfLength<Min extends number, Max extends number>(
+public stringOfLength<Length extends number>(
+  value: any,
+  length: Length,
+  expected: jasmine.Expected<boolean> = true,
+  expectationFailOutput: any = `${this.expectationFailOutput} ${
+    this.getNot() === true ? `not` : ``
+  } be a \`string\` type or an instance of a \`String\` of the specified \`length\` equal to ${length}`
+): this {
+  this.toBe(is.stringLength(value, length), expected, expectationFailOutput);
+  return this;
+}
+```
+
+**Parameters:**
+
+| Name: type                            | Description |
+| :------------------------------------ | :---------- |
+| `value: any`                          | The `value` of any type that is checked against a [`string`][js-string] type or an instance of a [`String`][js-string] of the given **length** and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
+| `length: Length`                      | The **length** of generic type variable `Length` for the given `value`, |
+| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
+| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`string`][js-string] type or an instance of a [`String`][js-string] of the specified **length**. |
+
+**Returns:**
+
+The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
+
+**Usage:**
+
+```typescript
+// Example usage.
+import { Testing, TestingToBeMatchers } from '@angular-package/testing';
+/**
+ * Create `Testing` instance.
+ */
+const testing = new Testing(true, true);
+const toBe = new TestingToBeMatchers();
+/**
+ * Tests.
+ */
+testing.describe('Expects provided value', () => {
+  let string: any;
+  let length: any;
+  beforeEach(() => {
+    string = 'My new string, My new string';
+    length = 28;
+  });
+  testing.describe('to be or not to be', () => {
+    testing.it(`a \`string\` of the given length`, () =>
+      toBe.stringOfLength(string, length).
+      not.stringOfLength(undefined, length-10));
+  });
+});
+```
+
+<br>
+
+#### `TestingToBeMatchers.prototype.stringOfLengthBetween()`
+
+[![new]][testing-github-changelog]
+
+Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string] of the **length** between the given **minimum** and **maximum**. The method uses [`isStringLengthBetween()`](https://docs.angular-package.dev/v/type/is/isstringlengthbetween) function from the [`@angular-package/type`][type-github-readme].
+
+```typescript
+public stringOfLengthBetween<Min extends number, Max extends number>(
   value: any,
   min: Min,
   max: Max,
@@ -3370,7 +3434,7 @@ public stringOfLength<Min extends number, Max extends number>(
   } be a \`string\` type or an instance of a \`String\` of the \`length\` between the given ${min} and ${max}`
 ): this {
   this.toBe(
-    is.stringLength(value, min, max),
+    is.stringLengthBetween(value, min, max),
     expected,
     expectationFailOutput
   );
@@ -3382,7 +3446,7 @@ public stringOfLength<Min extends number, Max extends number>(
 
 | Name: type                            | Description |
 | :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`string`][js-string] type or an instance of a [`String`][js-string] of the specified **length** and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
+| `value: any`                          | The `value` of any type that is checked against a [`string`][js-string] type or an instance of a [`String`][js-string] of the specified **min** and **max** and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
 | `min: Min`                            | The **minimum** length of generic type variable `Min` of a given `value`. |
 | `max: Max`                            | The **maximum** length of generic type variable `Max` of a given `value`. |
 | `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
@@ -3415,9 +3479,9 @@ testing.describe('Expects provided value', () => {
     max = 28;
   });
   testing.describe('to be or not to be', () => {
-    testing.it(`a \`string\` between the given length`, () =>
-      toBe.stringOfLength(string, min, max).
-      not.stringOfLength(undefined, min, max));
+    testing.it(`a \`string\` between the given min and max.`, () =>
+      toBe.stringOfLengthBetween(string, min, max).
+      not.stringOfLengthBetween(undefined, min, max));
   });
 });
 ```
