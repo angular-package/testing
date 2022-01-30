@@ -699,7 +699,7 @@ testing.describe('string', () => {
 
 [![update]][testing-github-changelog]
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a [`bigint`][js-bigint] type on the `expected` of `true`. The method uses [`isBigInt()`](https://github.com/angular-package/type#isbigint) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a [`bigint`][js-bigint] type on the `expected` of `true`. The method uses [`isBigInt()`](https://docs.angular-package.dev/v/type/is/isbigint) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeBigInt<Value>(
@@ -750,7 +750,7 @@ testing.describe('bigint', () => testing.toBeBigInt(1n));
 
 [![update]][testing-github-changelog]
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`boolean`][js-boolean] type on the `expected` of `true`. The method uses [`isBooleanType()`](https://github.com/angular-package/type#isbooleantype) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`boolean`][js-boolean] type on the `expected` of `true`. The method uses [`isBooleanType()`](https://docs.angular-package.dev/v/type/is/isbooleantype) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeBooleanType<Value>(
@@ -797,7 +797,7 @@ testing.describe('boolean', () => testing.toBeBooleanType(false));
 
 #### `Testing.prototype.toBeClass()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a [`class`][js-classes] on the `expected` of `true`. The method uses [`isClass()`](https://github.com/angular-package/type#isclass) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a [`class`][js-classes] on the `expected` of `true`. The method uses [`isClass()`](https://docs.angular-package.dev/v/type/is/isclass) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeClass<Value>(
@@ -847,7 +847,7 @@ testing.describe('class Person', () => {
 
 #### `Testing.prototype.toBeInstanceOfArray()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Array`][js-array] on the `expected` of `true`. The method uses [`isArray()`](https://github.com/angular-package/type#isarray) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Array`][js-array] on the `expected` of `true`. The method uses [`isArray()`](https://docs.angular-package.dev/v/type/is/isarray) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfArray<Value>(
@@ -894,7 +894,7 @@ testing.describe('Array', () => testing.toBeInstanceOfArray(['1']));
 
 #### `Testing.prototype.toBeInstanceOfBoolean()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Boolean`][js-boolean] on the `expected` of `true`. The method uses [`isBooleanObject()`](https://github.com/angular-package/type#isbooleanobject) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Boolean`][js-boolean] on the `expected` of `true`. The method uses [`isBooleanObject()`](https://docs.angular-package.dev/v/type/is/isbooleanobject) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfBoolean<Value>(
@@ -941,7 +941,7 @@ testing.describe('Boolean', () => testing.toBeInstanceOfBoolean(new Boolean()));
 
 #### `Testing.prototype.toBeInstanceOfDate()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Date`][js-date] on the `expected` of `true`. The method uses [`isDate()`](https://github.com/angular-package/type#isdate) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Date`][js-date] on the `expected` of `true`. The method uses [`isDate()`](https://docs.angular-package.dev/v/type/is/isdate) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfDate<Value>(
@@ -1135,7 +1135,7 @@ testing.describe(`Map`, () => testing.toBeInstanceOfMap(new Map()));
 
 #### `Testing.prototype.toBeInstanceOfNumber()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`Number`][js-number] on the `expected` of `true`. The method uses [`isNumberObject()`](https://github.com/angular-package/type#isnumberobject) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`Number`][js-number] on the `expected` of `true`. The method uses [`isNumberObject()`](https://docs.angular-package.dev/v/type/is/isnumberobject) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfNumber<Value>(
@@ -1184,7 +1184,7 @@ testing.describe(`Number`, () =>
 
 #### `Testing.prototype.toBeInstanceOfObject()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Object`][js-object] on the `expected` of `true`. The method uses [`isObject()`](https://github.com/angular-package/type#isobject) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Object`][js-object] on the `expected` of `true`. The method uses [`isObject()`](https://docs.angular-package.dev/v/type/is/isobject) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfObject<Value>(
@@ -1394,7 +1394,7 @@ testing.describe('RangeError', () => {
 
 #### `Testing.prototype.toBeInstanceOfRegExp()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`RegExp`][js-regexp] on the `expected` of `true`. The method uses [`isRegExp()`](https://github.com/angular-package/type#isregexp) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`RegExp`][js-regexp] on the `expected` of `true`. The method uses [`isRegExp()`](https://docs.angular-package.dev/v/type/is/isregexp) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfRegExp<Value>(
@@ -1537,7 +1537,7 @@ testing.describe(`Storage`, () => testing.toBeInstanceOfStorage(window.sessionSt
 
 #### `Testing.prototype.toBeInstanceOfString()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`String`][js-string] on the `expected` of `true`. The method uses [`isStringObject()`](https://github.com/angular-package/type#isstringobject) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`String`][js-string] on the `expected` of `true`. The method uses [`isStringObject()`](https://docs.angular-package.dev/v/type/is/isstringobject) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeInstanceOfString<Value>(
@@ -1790,7 +1790,7 @@ testing.describe(`WeakSet`, () => testing.toBeInstanceOfWeakSet(new WeakSet()));
 
 #### `Testing.prototype.toBeNull()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be [`null`][js-null] on the `expected` of `true`. The method uses [`isNull()`](https://github.com/angular-package/type#isnull) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be [`null`][js-null] on the `expected` of `true`. The method uses [`isNull()`](https://docs.angular-package.dev/v/type/is/isnull) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeNull<Value>(
@@ -1837,7 +1837,7 @@ testing.describe(`null`, () => testing.toBeNull(null));
 
 #### `Testing.prototype.toBeNumberType()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`number`][js-number] type on the `expected` of `true`. The method uses [`isNumberType()`](https://github.com/angular-package/type#isnumbertype) function of [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`number`][js-number] type on the `expected` of `true`. The method uses [`isNumberType()`](https://docs.angular-package.dev/v/type/is/isnumbertype) function of [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeNull<Value>(
@@ -1884,7 +1884,7 @@ testing.describe(`number`, () => testing.toBeNumberType(5));
 
 #### `Testing.prototype.toBeStringType()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`string`][js-string] type on the `expected` of `true`. The method uses [`isStringType()`](https://github.com/angular-package/type#isstringtype) function from the [`@angular-package/type`][type-github-readme].
+Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`string`][js-string] type on the `expected` of `true`. The method uses [`isStringType()`](https://docs.angular-package.dev/v/type/is/isstringtype) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public toBeStringType<Value>(
@@ -2020,7 +2020,7 @@ Matchers that use the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers].
 
 #### `TestingToBeMatchers.prototype.array()`
 
-Expects provided `value` to be an [`array`][js-array]. The method uses [`isArray()`](https://github.com/angular-package/type#isarray) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`array`][js-array]. The method uses [`isArray()`](https://docs.angular-package.dev/v/type/is/isarray) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public array(
@@ -2076,7 +2076,7 @@ testing.describe('Expects provided value', () => {
 
 #### `TestingToBeMatchers.prototype.bigint()`
 
-Expects provided `value` to be a [`bigint`][js-bigint] type. The method uses [`isBigInt()`](https://github.com/angular-package/type#isbigint) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`bigint`][js-bigint] type. The method uses [`isBigInt()`](https://docs.angular-package.dev/v/type/is/isbigint) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public bigint(
@@ -2133,7 +2133,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean]. The method uses [`isBoolean()`](https://github.com/angular-package/type#isboolean) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean]. The method uses [`isBoolean()`](https://docs.angular-package.dev/v/type/is/isboolean) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public boolean(
@@ -2187,7 +2187,7 @@ testing.describe('Expects provided value', () => {
 
 #### `TestingToBeMatchers.prototype.class()`
 
-Expects provided `value` to be [`class`][js-classes]. The method uses [`isClass()`](https://github.com/angular-package/type#isclass) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be [`class`][js-classes]. The method uses [`isClass()`](https://docs.angular-package.dev/v/type/is/isclass) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public class(
@@ -2242,7 +2242,7 @@ testing.describe('Expects provided value', () => {
 
 #### `TestingToBeMatchers.prototype.date()`
 
-Expects provided `value` to be a [`date`][js-date]. The method uses [`isDate()`](https://github.com/angular-package/type#isdate) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`date`][js-date]. The method uses [`isDate()`](https://docs.angular-package.dev/v/type/is/isdate) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public date(
@@ -2299,7 +2299,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be **defined**. The method uses [`isDefined()`](https://github.com/angular-package/type#isdefined) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be **defined**. The method uses [`isDefined()`](https://docs.angular-package.dev/v/type/is/isdefined) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public defined(
@@ -2353,7 +2353,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `false`. The method uses [`isFalse()`](https://github.com/angular-package/type#isfalse) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `false`. The method uses [`isFalse()`](https://docs.angular-package.dev/v/type/is/isfalse) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public false(
@@ -2407,7 +2407,7 @@ testing.describe('Expects provided value', () => {
 
 #### `TestingToBeMatchers.prototype.function()`
 
-Expects provided `value` to be [`function`][js-function]. The method uses [`isFunction()`](https://github.com/angular-package/type#isfunction) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be [`function`][js-function]. The method uses [`isFunction()`](https://docs.angular-package.dev/v/type/is/isfunction) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public function(
@@ -2460,7 +2460,7 @@ testing.describe('Expects provided value', () => {
 
 #### `TestingToBeMatchers.prototype.instance()`
 
-Expects provided `value` to be an instance of a `class` from the given `constructor`. The method uses [`isInstance()`](https://github.com/angular-package/type#isinstance) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an instance of a `class` from the given `constructor`. The method uses [`isInstance()`](https://docs.angular-package.dev/v/type/is/isinstance) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public instance<Type>(
@@ -2523,7 +2523,7 @@ testing.describe('Expects provided value', () => {
 
 #### `TestingToBeMatchers.prototype.key()`
 
-Expects provided `value` to be property key. The method uses [`isKey()`](https://github.com/angular-package/type#iskey) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be property key. The method uses [`isKey()`](https://docs.angular-package.dev/v/type/is/iskey) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public key(
@@ -2576,7 +2576,7 @@ testing.describe('Expects provided value', () => {
 
 #### `TestingToBeMatchers.prototype.null()`
 
-Expects provided `value` to be [`null`][js-null]. The method uses [`isNull()`](https://github.com/angular-package/type#isnull) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be [`null`][js-null]. The method uses [`isNull()`](https://docs.angular-package.dev/v/type/is/isnull) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public null(
@@ -2631,7 +2631,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be a [`number`][js-number] type or an instance of a [`Number`][js-number]. The method uses [`isNumber()`](https://github.com/angular-package/type#isnumber) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`number`][js-number] type or an instance of a [`Number`][js-number]. The method uses [`isNumber()`](https://docs.angular-package.dev/v/type/is/isnumber) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public number(
@@ -2689,7 +2689,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be a [`number`][js-number] type or an instance of a [`Number`][js-number] between the `range` of **minimum** and **maximum**. The method uses [`isNumberBetween()`](https://github.com/angular-package/type#isnumberbetween) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`number`][js-number] type or an instance of a [`Number`][js-number] between the `range` of **minimum** and **maximum**. The method uses [`isNumberBetween()`](https://docs.angular-package.dev/v/type/is/isnumberbetween) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public numberBetween<Min extends number, Max extends number>(
@@ -2760,7 +2760,7 @@ testing.describe('Expects provided value', () => {
 
 #### `TestingToBeMatchers.prototype.object()`
 
-Expects provided `value` to be an [`object`][js-object]. The method uses [`isObject()`](https://github.com/angular-package/type#isobject) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object]. The method uses [`isObject()`](https://docs.angular-package.dev/v/type/is/isobject) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public object(
@@ -2817,7 +2817,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be an [`object`][js-object] with a given `key` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. The method uses [`isObjectKey()`](https://github.com/angular-package/type#isobjectkey) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object] with a given `key` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. The method uses [`isObjectKey()`](https://docs.angular-package.dev/v/type/is/isobjectkey) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public objectKey(
@@ -2826,7 +2826,7 @@ public objectKey(
   expected: jasmine.Expected<boolean> = true,
   expectationFailOutput: any = `${this.expectationFailOutput} ${
     this.getNot() === true ? `not` : ``
-  } be an \`object\` with a given \`key\`.`
+  } be an \`object\` with a given \`key\``
 ): this {
   this.toBe(is.objectKey(value, key), expected, expectationFailOutput);
   return this;
@@ -2876,7 +2876,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be an [`object`][js-object] with a given `key` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. The method uses [`isObjectKeyIn()`](https://github.com/angular-package/type#isobjectkeyin) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object] with a given `key` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. The method uses [`isObjectKeyIn()`](https://docs.angular-package.dev/v/type/is/isobjectkeyin) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public objectKeyIn(
@@ -2934,7 +2934,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be an [`object`][js-object] with given `keys` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. The method uses [`isObjectKeys()`](https://github.com/angular-package/type#isobjectkeys) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object] with given `keys` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. The method uses [`isObjectKeys()`](https://docs.angular-package.dev/v/type/is/isobjectkeys) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public objectKeys(
@@ -2992,7 +2992,7 @@ testing.describe('Expects provided value', () => {
 
 [![new]][testing-github-changelog]
 
-Expects provided `value` to be an [`object`][js-object] with given `keys` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. The method uses [`isObjectKeysIn()`](https://github.com/angular-package/type#isobjectkeysin) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object] with given `keys` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. The method uses [`isObjectKeysIn()`](https://docs.angular-package.dev/v/type/is/isobjectkeysin) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public objectKeysIn(
@@ -3050,7 +3050,7 @@ testing.describe('Expects provided value', () => {
 
 [![new]][testing-github-changelog]
 
-Expects provided `value` to be an [`object`][js-object] with **some** of its keys or **some groups** of its keys of the `PropertyKey` type. The method uses [`isObjectSomeKeys()`](https://github.com/angular-package/type#isobjectsomekeys) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be an [`object`][js-object] with **some** of its keys or **some groups** of its keys of the `PropertyKey` type. The method uses [`isObjectSomeKeys()`](https://docs.angular-package.dev/v/type/is/isobjectsomekeys) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public objectSomeKeys(
@@ -3108,7 +3108,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be [`RegExp`][js-regexp]. The method uses [`isRegExp()`](https://github.com/angular-package/type#isregexp) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be [`RegExp`][js-regexp]. The method uses [`isRegExp()`](https://docs.angular-package.dev/v/type/is/isregexp) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public regexp(
@@ -3163,7 +3163,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string]. The method uses [`isString()`](https://github.com/angular-package/type#isstring) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string]. The method uses [`isString()`](https://docs.angular-package.dev/v/type/is/isstring) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public string(
@@ -3218,7 +3218,7 @@ testing.describe('Expects provided value', () => {
 
 [![new]][testing-github-changelog]
 
-Expects provided value to be a [`string`][js-string] type or an instance of a [`String`][js-string] that includes the specified **words/sentences**. The method uses [`isStringIncludes()`](https://github.com/angular-package/type#isstringincludes) function from the [`@angular-package/type`][type-github-readme].
+Expects provided value to be a [`string`][js-string] type or an instance of a [`String`][js-string] that includes the specified **words/sentences**. The method uses [`isStringIncludes()`](https://docs.angular-package.dev/v/type/is/isstringincludes) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public stringIncludes(
@@ -3227,7 +3227,7 @@ public stringIncludes(
   expected: jasmine.Expected<boolean> = true,
   expectationFailOutput: any = `${this.expectationFailOutput} ${
     this.getNot() === true ? `not` : ``
-  } be a \`string\` type or an instance of a \`String\` that includes the specified words/sentences from a given \`includes\``
+  } be a \`string\` type or an instance of \`String\` that includes the specified words/sentences from a given \`includes\``
 ): this {
   this.toBe(
     is.stringIncludes(value, includes),
@@ -3289,7 +3289,7 @@ testing.describe('Expects provided value', () => {
 
 [![new]][testing-github-changelog]
 
-Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string] that includes **some** of the specified **words/sentences**.  The method uses [`isStringIncludesSome()`](https://github.com/angular-package/type#isstringincludessome) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string] that includes **some** of the specified **words/sentences**.  The method uses [`isStringIncludesSome()`](https://docs.angular-package.dev/v/type/is/isstringincludessome) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public stringIncludesSome(
@@ -3448,7 +3448,7 @@ public stringOfLengthBetween<Min extends number, Max extends number>(
 
 | Name: type                            | Description |
 | :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`string`][js-string] type or an instance of a [`String`][js-string] of the specified **min** and **max** and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
+| `value: any`                          | The `value` of any type that is checked against a [`string`][js-string] type or an instance of a [`String`][js-string] of the given **min** and **max** and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
 | `min: Min`                            | The **minimum** length of generic type variable `Min` of a given `value`. |
 | `max: Max`                            | The **maximum** length of generic type variable `Max` of a given `value`. |
 | `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
@@ -3492,7 +3492,7 @@ testing.describe('Expects provided value', () => {
 
 #### `TestingToBeMatchers.prototype.symbol()`
 
-Expects provided `value` to be [`symbol`][js-symbol]. The method uses [`isSymbol()`](https://github.com/angular-package/type#issymbol) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be [`symbol`][js-symbol]. The method uses [`isSymbol()`](https://docs.angular-package.dev/v/type/is/issymbol) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public symbol(
@@ -3546,7 +3546,7 @@ testing.describe('Expects provided value', () => {
 
 [![update]][testing-github-changelog]
 
-Expects provided `value` to be a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `true`. The method uses [`isTrue()`](https://github.com/angular-package/type#istrue) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `true`. The method uses [`isTrue()`](https://docs.angular-package.dev/v/type/is/istrue) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public true(
@@ -3598,7 +3598,7 @@ testing.describe('Expects provided value', () => {
 
 #### `TestingToBeMatchers.prototype.undefined()`
 
-Expects provided `value` to be [`undefined`][js-undefined]. The method uses [`isUndefined()`](https://github.com/angular-package/type#isundefined) function from the [`@angular-package/type`][type-github-readme].
+Expects provided `value` to be [`undefined`][js-undefined]. The method uses [`isUndefined()`](https://docs.angular-package.dev/v/type/is/isundefined) function from the [`@angular-package/type`][type-github-readme].
 
 ```typescript
 public undefined(
