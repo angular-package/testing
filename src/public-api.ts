@@ -1,4 +1,3 @@
-import { randomString } from './lib/function/random-string.func';
 /*
  * Public API Surface of testing
  */
