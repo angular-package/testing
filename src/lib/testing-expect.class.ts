@@ -1,5 +1,9 @@
 // @angular-package/type.
 import { is } from '@angular-package/type';
+
+// Type.
+import { ExpectType } from '../type';
+
 /**
  * Manages `expect()` function of jasmine.
  */
@@ -42,7 +46,12 @@ export abstract class TestingExpect {
    * @param actual The value of a type captured from the `actual` that is passed to the `expect()` function of jasmine.
    * @returns The return value is an `object` of jasmine matchers to use.
    */
-  protected expect<Actual>(actual: Actual): jasmine.Matchers<Actual> {
-    return is.true(this.#not) ? expect(actual).not : expect(actual);
+  protected expect<Actual>(
+    actual: ExpectType<Actual>,
+    expectationFailOutput?: any
+  ): jasmine.Matchers<typeof actual> {
+    return is.true(this.#not)
+      ? expect(actual).withContext(expectationFailOutput).not
+      : expect(actual).withContext(expectationFailOutput);
   }
 }
