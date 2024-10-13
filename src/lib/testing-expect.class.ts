@@ -11,15 +11,10 @@ export abstract class TestingExpect {
   /**
    * Invert the matcher.
    */
-  get not(): this {
+  public get not(): this {
     this.#not = true;
     return this;
   }
-
-  /**
-   * Privately stored state of invert the matcher.
-   */
-  #not = false;
 
   /**
    * Sets a state of a `boolean` type to invert the matcher .
@@ -40,6 +35,11 @@ export abstract class TestingExpect {
   protected getNot(): boolean {
     return this.#not;
   }
+
+  /**
+   * Privately stored state of invert the matcher.
+   */
+  #not = false;
 
   /**
    * Wrapper method for the `expect()` function of jasmine.
