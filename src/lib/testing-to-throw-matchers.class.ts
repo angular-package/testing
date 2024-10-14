@@ -6,16 +6,6 @@ import { ExpectType } from '../type/expect-type.type';
  * Testing `throw` matchers.
  */
 export class TestingToThrowMatchers extends TestingExpect {
-  public throw<Value>(
-    actual: ExpectType<Value>,
-    expected?: any,
-    expectationFailOutput?: any
-  ): this {
-    this.expect(actual, expectationFailOutput).toThrow(expected);
-    this.setNot(false);
-    return this;
-  }
-
   public error<Value extends jasmine.Func>(
     actual: ExpectType<Value>,
     message?: string | RegExp,
@@ -32,6 +22,16 @@ export class TestingToThrowMatchers extends TestingExpect {
     expectationFailOutput?: any
   ): this {
     this.expect(actual, expectationFailOutput).toThrowMatching(predicate);
+    this.setNot(false);
+    return this;
+  }
+
+  public throw<Value>(
+    actual: ExpectType<Value>,
+    expected?: any,
+    expectationFailOutput?: any
+  ): this {
+    this.expect(actual, expectationFailOutput).toThrow(expected);
     this.setNot(false);
     return this;
   }
