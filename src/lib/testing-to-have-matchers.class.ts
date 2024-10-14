@@ -1,7 +1,7 @@
 // Class.
 import { TestingExpect } from './testing-expect.abstract';
-import { TestingToHaveBeenCalledMatchers } from './testing-to-have-been-called-matchers.class';
-import { TestingToHaveBeenMatchers } from './testing-to-have-been-matchers.class';
+import { TestingToHaveBeenCalled } from './testing-to-have-been-called-matchers.class';
+import { TestingToHaveBeen } from './testing-to-have-been-matchers.class';
 
 // Type.
 import { ExpectType } from '../type/expect-type.type';
@@ -9,30 +9,30 @@ import { ExpectType } from '../type/expect-type.type';
 /**
  * Testing matchers.
  */
-export class TestingToHaveMatchers extends TestingExpect {
+export class TestingToHave extends TestingExpect {
   /**
    *
    */
-  public get been(): TestingToHaveBeenMatchers {
+  public get been(): TestingToHaveBeen {
     return this.#been;
   }
 
   /**
    * 
    */
-  #been = new TestingToHaveBeenMatchers();
+  #been = new TestingToHaveBeen();
 
   /**
    * 
    */
-  public get beenCalled(): TestingToHaveBeenCalledMatchers {
+  public get beenCalled(): TestingToHaveBeenCalled {
     return this.#beenCalled;
   }
 
   /**
    * 
    */
-  #beenCalled = new TestingToHaveBeenCalledMatchers();
+  #beenCalled = new TestingToHaveBeenCalled();
 
   public class<Value>(
     value: ExpectType<Value>,

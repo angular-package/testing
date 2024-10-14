@@ -6,7 +6,7 @@ import { ExpectType } from '../type/expect-type.type';
 /**
  * Testing `ToHaveBeen` matchers.
  */
-export class TestingToHaveBeenMatchers extends TestingExpect {
+export class TestingToHaveBeen extends TestingExpect {
   public called<Value>(
     value: ExpectType<Value>,
     expectationFailOutput?: any

@@ -5,7 +5,7 @@ import { ExpectType } from '../type/expect-type.type';
 /**
  * Testing `throw` matchers.
  */
-export class TestingToThrowMatchers extends TestingExpect {
+export class TestingToThrow extends TestingExpect {
   public error<Value extends jasmine.Func>(
     actual: ExpectType<Value>,
     message?: string | RegExp,

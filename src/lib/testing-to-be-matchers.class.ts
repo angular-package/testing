@@ -2,13 +2,13 @@
 import { is, Constructor } from '@angular-package/type';
 // Class.
 import { TestingExpect } from './testing-expect.abstract';
-import { TestingToBeInstanceOfMatchers } from './testing-to-be-instanceof-matchers.class';
+import { TestingToBeInstanceOf } from './testing-to-be-instanceof-matchers.class';
 // Type.
 import { ExpectType } from '../type';
 /**
  * Matchers that use the `toBe()` method of jasmine.
  */
-export class TestingToBeMatchers extends TestingExpect {
+export class TestingToBe extends TestingExpect {
   /**
    * 
    */
@@ -19,7 +19,7 @@ export class TestingToBeMatchers extends TestingExpect {
   /**
    * 
    */
-  #instanceOf = new TestingToBeInstanceOfMatchers();
+  #instanceOf = new TestingToBeInstanceOf();
 
   /**
    * The Default message for the expectation fails.
@@ -202,7 +202,7 @@ export class TestingToBeMatchers extends TestingExpect {
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = `${this.expectationFailOutput} ${
       this.getNot() === true ? `not` : ``
-    } be \`falsy\``
+    } be falsy`
   ): this {
     expected === false && (this.not);
     this.expect(value, expectationFailOutput).toBeFalsy();
@@ -323,8 +323,10 @@ export class TestingToBeMatchers extends TestingExpect {
   // TODO: Description.
   public naN<Value extends number>(
     value: ExpectType<Value>,
+    expected: jasmine.Expected<boolean> = true,
     expectationFailOutput?: any
   ): this {
+    expected === false && (this.not);
     this.expect(value, expectationFailOutput).toBeNaN();
     this.setNot(false);
     return this;
@@ -333,8 +335,10 @@ export class TestingToBeMatchers extends TestingExpect {
   // TODO: Description.
   public negativeInfinity<Value extends number>(
     value: ExpectType<Value>,
+    expected: jasmine.Expected<boolean> = true,
     expectationFailOutput?: any
   ): this {
+    expected === false && (this.not);
     this.expect(value, expectationFailOutput).toBeNegativeInfinity();
     this.setNot(false);
     return this;
@@ -571,6 +575,18 @@ export class TestingToBeMatchers extends TestingExpect {
     return this;
   }
 
+  // TODO: Description.
+  public positiveInfinity<Value extends number>(
+    value: ExpectType<Value>,
+    expected: jasmine.Expected<boolean> = true,
+    expectationFailOutput?: any
+  ): this {
+    expected === false && (this.not);
+    this.expect(value, expectationFailOutput).toBePositiveInfinity();
+    this.setNot(false);
+    return this;
+  }
+
   /**
    * Expects provided value to be `RegExp`. The method uses `isRegExp()` function from the `@angular-package/type`.
    * @param value The value of any type that is checked against `RegExp` and the result of its check is passed to the `expect()`
@@ -799,6 +815,19 @@ export class TestingToBeMatchers extends TestingExpect {
   ): this {
     expected === false && (this.not);
     this.expect(value, expectationFailOutput).toBeTrue();
+    this.setNot(false);
+    return this;
+  }
+
+  public truthy(
+    value: any,
+    expected: jasmine.Expected<boolean> = true,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be truthy`
+  ): this {
+    expected === false && (this.not);
+    this.expect(value, expectationFailOutput).toBeTruthy();
     this.setNot(false);
     return this;
   }

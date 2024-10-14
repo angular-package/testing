@@ -1,13 +1,13 @@
 // Class.
 import { TestingExpect } from './testing-expect.abstract';
-import { TestingToHaveBeenMatchers } from './testing-to-have-been-matchers.class';
+import { TestingToHaveBeen } from './testing-to-have-been-matchers.class';
 // Type.
 import { ExpectType } from '../type/expect-type.type';
 
 /**
  * Testing `ToHaveBeenCalled` matchers.
  */
-export class TestingToHaveBeenCalledMatchers extends TestingExpect {
+export class TestingToHaveBeenCalled extends TestingExpect {
   public before<Value>(
     value: ExpectType<Value>,
     expected: any,
@@ -24,7 +24,7 @@ export class TestingToHaveBeenCalledMatchers extends TestingExpect {
     value: ExpectType<Value>,
     expectationFailOutput?: any
   ): this {
-    new TestingToHaveBeenMatchers().called(value, expectationFailOutput);
+    new TestingToHaveBeen().called(value, expectationFailOutput);
     return this;
   }
 
