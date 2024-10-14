@@ -1,15 +1,25 @@
 // @angular-package/type.
 import { is, Constructor } from '@angular-package/type';
-// TestingExpect.
-import { TestingExpect } from './testing-expect.class';
+// Class.
+import { TestingExpect } from './testing-expect.abstract';
+import { TestingToBeInstanceOfMatchers } from './testing-to-be-instanceof-matchers.class';
 // Type.
 import { ExpectType } from '../type';
 /**
  * Matchers that use the `toBe()` method of jasmine.
  */
 export class TestingToBeMatchers extends TestingExpect {
+  /**
+   * 
+   */
+  public get instanceOf() {
+    return this.#instanceOf;
+  }
 
-  // public static
+  /**
+   * 
+   */
+  #instanceOf = new TestingToBeInstanceOfMatchers();
 
   /**
    * The Default message for the expectation fails.
@@ -33,7 +43,6 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`array\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Array);
     this.toBe(is.instance(value, Array) &&  is.array(value), expected, expectationFailOutput);
     return this;
   }
@@ -74,8 +83,18 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`boolean\` type or an instance of \`Boolean\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Boolean);
     this.toBe(is.instance(value, Boolean) && is.boolean(value), expected, expectationFailOutput);
+    return this;
+  }
+
+  public booleanType<Value>(
+    value: ExpectType<Value>,
+    expected: jasmine.Expected<boolean> = true,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be a \`boolean\` type`
+  ): this {
+    this.toBe(is.booleanType(value), expected, expectationFailOutput);
     return this;
   }
 
@@ -100,7 +119,7 @@ export class TestingToBeMatchers extends TestingExpect {
   }
 
   // TODO: Description.
-  public close<Value extends number>(
+  public closeTo<Value extends number>(
     value: ExpectType<Value>,
     expected: number,
     precision?: any,
@@ -147,8 +166,9 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be defined`
   ): this {
+    expected === false && (this.not);
     this.expect(value, expectationFailOutput).toBeDefined();
-    this.toBe(is.defined(value), expected, expectationFailOutput);
+    this.setNot(false);
     return this;
   }
 
@@ -168,22 +188,25 @@ export class TestingToBeMatchers extends TestingExpect {
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = `${this.expectationFailOutput} ${
       this.getNot() === true ? `not` : ``
-    } be a \`boolean\` type or an instance of \`Boolean\` equal to \`false\``
+    } be equal to \`false\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Boolean);
+    expected === false && (this.not);
     this.expect(value, expectationFailOutput).toBeFalse();
-    this.toBe(is.instance(value, Boolean) && is.false(value), expected, expectationFailOutput);
+    this.setNot(false);
     return this;
   }
 
   // TODO: Description.
   public falsy<Value>(
     value: ExpectType<Value>,
+    expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = `${this.expectationFailOutput} ${
       this.getNot() === true ? `not` : ``
     } be \`falsy\``
   ): this {
+    expected === false && (this.not);
     this.expect(value, expectationFailOutput).toBeFalsy();
+    this.setNot(false);
     return this;
   }
 
@@ -204,13 +227,12 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be \`function\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Function);
     this.toBe(is.function(value), expected, expectationFailOutput);
     return this;
   }
 
   // TODO: Description.
-  public greater<Value extends number>(
+  public greaterThan<Value extends number>(
     value: ExpectType<Value>,
     expected: number,
     expectationFailOutput?: any
@@ -221,12 +243,11 @@ export class TestingToBeMatchers extends TestingExpect {
   }
 
   // TODO: Description.
-  public greaterOrEqual<Value extends number>(
+  public greaterThanOrEqual<Value extends number>(
     value: ExpectType<Value>,
     expected: number,
     expectationFailOutput?: any
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Number);
     this.expect(value, expectationFailOutput).toBeGreaterThanOrEqual(expected);
     this.setNot(false);
     return this;
@@ -252,7 +273,6 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an instance of ${constructor.name}`
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(constructor);
     this.toBe(is.instance(value, constructor), expected, expectationFailOutput);    
     return this;
   }
@@ -279,31 +299,29 @@ export class TestingToBeMatchers extends TestingExpect {
   }
 
   // TODO: Description.
-  public less<Value extends number>(
+  public lessThan<Value extends number>(
     value: ExpectType<Value>,
     expected: number,
     expectationFailOutput?: any
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Number);
     this.expect(value, expectationFailOutput).toBeLessThan(expected);
     this.setNot(false);
     return this;
   }
 
   // TODO: Description.
-  public lessOrEqual<Value extends number>(
+  public lessThanOrEqual<Value extends number>(
     value: ExpectType<Value>,
     expected: number,
     expectationFailOutput?: any
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Number);
     this.expect(value, expectationFailOutput).toBeLessThanOrEqual(expected);
     this.setNot(false);
     return this;
   }
 
   // TODO: Description.
-  public nan<Value extends number>(
+  public naN<Value extends number>(
     value: ExpectType<Value>,
     expectationFailOutput?: any
   ): this {
@@ -338,8 +356,9 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be \`null\``
   ): this {
+    expected === false && (this.not);
     this.expect(value, expectationFailOutput).toBeNull();
-    this.toBe(is.null(value), expected, expectationFailOutput);
+    this.setNot(false);
     return this;
   }
 
@@ -361,7 +380,7 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`number\` type or an instance of a \`Number\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Number);
+    // REVIEW: instance
     this.toBe(is.instance(value, Number) && is.number(value), expected, expectationFailOutput);
     return this;
   }
@@ -388,7 +407,6 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`number\` type or an instance of a \`Number\` between the range of ${min} and ${max}`
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Number);
     this.toBe(
       is.numberBetween(value, min, max),
       expected,
@@ -397,6 +415,16 @@ export class TestingToBeMatchers extends TestingExpect {
     return this;
   }
 
+  public numberType<Value>(
+    value: ExpectType<Value>,
+    expected: jasmine.Expected<boolean> = true,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be a \`number\` type`
+  ): this {
+    this.toBe(is.numberType(value), expected, expectationFailOutput);
+    return this;
+  }
   /**
    * Expects provided value to be an `object`. The method uses `isObject()` function from the `@angular-package/type`.
    * @param value The value of any type that is checked against an `object` and the result of its check is passed to the `expect()`
@@ -414,7 +442,6 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
     this.toBe(is.object(value), expected, expectationFailOutput);
     return this;
   }
@@ -438,8 +465,6 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\` with a given \`key\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
-    this.expect(value, expectationFailOutput).toContain(key);
     this.toBe(is.objectKey(value, key), expected, expectationFailOutput);
     return this;
   }
@@ -464,8 +489,6 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\` with a given \`key\` in it(or its prototype chain)`
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
-    this.expect(value, expectationFailOutput).toContain(key);
     this.toBe(is.objectKeyIn(value, key), expected, expectationFailOutput);
     return this;
   }
@@ -489,8 +512,8 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\` with given \`keys\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
-    keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
+    // this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
+    // keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
     this.toBe(is.objectKeys(value, keys), expected, expectationFailOutput);
     return this;
   }
@@ -515,9 +538,8 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\` with given \`keys\` in it(or its prototype chain)`
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
-    // REVIEW: key in
-    keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
+    // this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
+    // keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
     this.toBe(is.objectKeysIn(value, keys), expected, expectationFailOutput);
     return this;
   }
@@ -543,8 +565,7 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\` with some of its keys or some groups of its keys from given \`keys\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
-    // TODO:
+    // this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
     // keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
     this.toBe(is.objectSomeKeys(value, keys), expected, expectationFailOutput);
     return this;
@@ -566,7 +587,6 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be \`RegExp\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(RegExp);
     this.toBe(is.regexp(value), expected, expectationFailOutput);
     return this;
   }
@@ -590,7 +610,7 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of a \`String\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(String);
+    // REVIEW: instance.
     this.toBe(is.instance(value, String) && is.string(value), expected, expectationFailOutput);
     return this;
   }
@@ -616,8 +636,8 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of \`String\` that includes the specified words/sentences from a given \`includes\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(String);
-    includes.forEach(include => this.expect(value, expectationFailOutput).toContain(include));
+    // this.expect(value, expectationFailOutput).toBeInstanceOf(String);
+    // includes.forEach(include => this.expect(value, expectationFailOutput).toContain(include));
     this.toBe(
       is.stringIncludes(value, includes),
       expected,
@@ -647,7 +667,6 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of \`String\` that includes some of the specified words/sentences from a given \`includes\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(String);
     this.toBe(
       is.stringIncludesSome(value, includes),
       expected,
@@ -676,7 +695,6 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of a \`String\` of the specified \`length\` equal to ${length}`
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(String);
     this.toBe(is.stringLength(value, length), expected, expectationFailOutput);
     return this;
   }
@@ -703,12 +721,22 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of a \`String\` of the \`length\` between the given ${min} and ${max}`
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(String);
     this.toBe(
       is.stringLengthBetween(value, min, max),
       expected,
       expectationFailOutput
     );
+    return this;
+  }
+
+  public stringType<Value>(
+    value: ExpectType<Value>,
+    expected: jasmine.Expected<boolean> = true,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be a \`string\` type`
+  ): this {
+    this.toBe(is.stringType(value), expected, expectationFailOutput);
     return this;
   }
 
@@ -733,6 +761,25 @@ export class TestingToBeMatchers extends TestingExpect {
   }
 
   /**
+   * Expects provided value to be the given `expected`.
+   * @param value The value of a generic `Value` type captured from the given `value` and passed to the `expect()` function of
+   * jasmine.
+   * @param expected The expected value to compare against the given `value`, passed to the `toBe()` method of `jasmine.Matchers`.
+   * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) of a
+   * specific from the method type.
+   * @returns The return value is an instance of a `TestingMatchers`.
+   */
+  public toBe<Value>(
+    value: ExpectType<Value>,
+    expected: jasmine.Expected<typeof value>,
+    expectationFailOutput?: any
+  ): this {
+    this.expect(value, expectationFailOutput).toBe(expected);
+    this.setNot(false);
+    return this;
+  }
+
+  /**
    * Expects provided value to be a `boolean` type or an instance of `Boolean` equal to `true`. The method uses `isTrue()` function from
    * the `@angular-package/type`.
    * @param value The value of any type that is checked against a `boolean` type or an instance of `Boolean` equal to `true` and the
@@ -748,11 +795,11 @@ export class TestingToBeMatchers extends TestingExpect {
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = `${this.expectationFailOutput} ${
       this.getNot() === true ? `not` : ``
-    } be a \`boolean\` type or an instance of \`Boolean\` equal to \`true\``
+    } be equal to \`true\``
   ): this {
-    this.expect(value, expectationFailOutput).toBeInstanceOf(Boolean);
+    expected === false && (this.not);
     this.expect(value, expectationFailOutput).toBeTrue();
-    this.toBe(is.true(value), expected, expectationFailOutput);
+    this.setNot(false);
     return this;
   }
 
@@ -772,61 +819,9 @@ export class TestingToBeMatchers extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be \`undefined\``
   ): this {
+    expected === false && (this.not);
     this.expect(value, expectationFailOutput).toBeUndefined();
-    this.toBe(is.undefined(value), expected, expectationFailOutput);
-    return this;
-  }
-
-  /**
-   * Expects provided value to be the given `expected`.
-   * @param value The value of a generic `Value` type captured from the given `value` and passed to the `expect()` function of
-   * jasmine.
-   * @param expected The expected value to compare against the given `value`, passed to the `toBe()` method of `jasmine.Matchers`.
-   * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) of a
-   * specific from the method type.
-   * @returns The return value is an instance of a `TestingMatchers`.
-   */
-  public toBe<Value>(
-    value: ExpectType<Value>,
-    expected: jasmine.Expected<typeof value>,
-    expectationFailOutput?: any
-  ): this {
-    this.expect(value, expectationFailOutput).toBe(expected);
     this.setNot(false);
     return this;
   }
-
-  // public toBeDefined<Value>(
-  //   value: Value,
-  //   expectationFailOutput?: any
-  // ): this {
-  //   this
-  //     .expect(value, expectationFailOutput)
-  //     .toBeDefined();
-  //   this.setNot(false);
-  //   return this;
-  // }
-
-  // public toBeFalse<Value>(
-  //   value: Value,
-  //   expectationFailOutput?: any
-  // ): this {
-  //   this
-  //     .expect(value, expectationFailOutput)
-  //     .toBeFalse();
-  //   this.setNot(false);
-  //   return this;
-  // }
-
-  // public toBeInstanceOf<Value>(
-  //   value: Value,
-  //   expected: jasmine.Constructor,
-  //   expectationFailOutput?: any
-  // ): this {
-  //   this
-  //     .expect(value, expectationFailOutput)
-  //     .toBeInstanceOf(expected);
-  //   this.setNot(false);
-  //   return this;
-  // }
 }
