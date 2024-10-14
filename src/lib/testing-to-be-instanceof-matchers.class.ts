@@ -203,6 +203,18 @@ export class TestingToBeInstanceOfMatchers extends TestingExpect {
     return this;
   }
 
+  public of<Value>(
+    value: ExpectType<Value>,
+    expected: jasmine.Constructor,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be an instance of \`expected\``
+  ): this {
+    this.expect(value, expectationFailOutput).toBeInstanceOf(expected);
+    this.setNot(false);
+    return this;
+  }
+
   // TODO: Description.
   public promise<Value>(
     value: ExpectType<Value>,
@@ -347,6 +359,7 @@ export class TestingToBeInstanceOfMatchers extends TestingExpect {
     this.setNot(false);
     return this;
   }
+  
 
   // TODO: Description.
   public URIError<Value>(
