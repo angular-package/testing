@@ -1,5 +1,6 @@
 // Class.
 import { TestingExpect } from './testing-expect.abstract';
+import { TestingToHaveBeenMatchers } from './testing-to-have-been-matchers.class';
 // Type.
 import { ExpectType } from '../type/expect-type.type';
 
@@ -19,15 +20,11 @@ export class TestingToHaveBeenCalledMatchers extends TestingExpect {
     return this;
   }
 
-  // TODO:
   public called<Value>(
     value: ExpectType<Value>,
     expectationFailOutput?: any
   ): this {
-    this
-      .expect(value, expectationFailOutput)
-      .toHaveBeenCalled();
-    this.setNot(false);
+    new TestingToHaveBeenMatchers().called(value, expectationFailOutput);
     return this;
   }
 
