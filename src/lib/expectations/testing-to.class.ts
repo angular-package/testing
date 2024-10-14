@@ -1,11 +1,11 @@
 // Class.
-import { TestingExpect } from './testing-expect.abstract';
-import { TestingToBe } from './testing-to-be-matchers.class';
-import { TestingToHave } from './testing-to-have-matchers.class';
-import { TestingToThrow } from './testing-to-throw-matchers.class';
+import { TestingExpect } from '../testing-expect.abstract';
+import { TestingToBe } from './testing-to-be.class';
+import { TestingToHave } from './testing-to-have.class';
+import { TestingToThrow } from './testing-to-throw.class';
 
 // Type.
-import { ExpectType } from '../type/expect-type.type';
+import { ExpectType } from '../../type/expect-type.type';
 
 /**
  * Testing `to`, `to.be`, `to.have`, `to.throw` matchers.

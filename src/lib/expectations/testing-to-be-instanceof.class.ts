@@ -1,7 +1,7 @@
 // TestingExpect.
-import { TestingExpect } from './testing-expect.abstract';
+import { TestingExpect } from '../testing-expect.abstract';
 // Type.
-import { ExpectType } from '../type';
+import { ExpectType } from '../../type';
 /**
  * Matchers that use the `toBe()` method of jasmine.
  */

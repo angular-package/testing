@@ -1,10 +1,10 @@
 // @angular-package/type.
 import { is, Constructor } from '@angular-package/type';
 // Class.
-import { TestingExpect } from './testing-expect.abstract';
-import { TestingToBeInstanceOf } from './testing-to-be-instanceof-matchers.class';
+import { TestingExpect } from '../testing-expect.abstract';
+import { TestingToBeInstanceOf } from './testing-to-be-instanceof.class';
 // Type.
-import { ExpectType } from '../type';
+import { ExpectType } from '../../type';
 /**
  * Matchers that use the `toBe()` method of jasmine.
  */

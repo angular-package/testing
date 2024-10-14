@@ -1,10 +1,10 @@
 // Class.
-import { TestingExpect } from './testing-expect.abstract';
-import { TestingToHaveBeenCalled } from './testing-to-have-been-called-matchers.class';
-import { TestingToHaveBeen } from './testing-to-have-been-matchers.class';
+import { TestingExpect } from '../testing-expect.abstract';
+import { TestingToHaveBeenCalled } from './testing-to-have-been-called.class';
+import { TestingToHaveBeen } from './testing-to-have-been.class';
 
 // Type.
-import { ExpectType } from '../type/expect-type.type';
+import { ExpectType } from '../../type/expect-type.type';
 
 /**
  * Testing matchers.
