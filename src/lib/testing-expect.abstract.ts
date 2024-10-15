@@ -46,8 +46,8 @@ export abstract class TestingExpect {
    * @param actual The value of a type captured from the `actual` that is passed to the `expect()` function of jasmine.
    * @returns The return value is an `object` of jasmine matchers to use.
    */
-  protected expect<Actual>(
-    actual: ExpectType<Actual>,
+  protected expect<T>(
+    actual: ExpectType<T>,
     expectationFailOutput?: any
   ): jasmine.Matchers<typeof actual> {
     return is.true(this.#not)
