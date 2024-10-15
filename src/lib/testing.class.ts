@@ -1,7 +1,7 @@
 // Class.
 import { TestingDescribe } from './testing-describe.class';
 import { TestingIt } from './testing-it.class';
-import { TestingTest } from './testing-tests.class';
+import { TestingTest } from './testing-test.class';
 // Interface.
 import { ExecutableTests } from '../interface/executable-tests.interface';
 // Jasmine.
