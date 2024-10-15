@@ -6,8 +6,8 @@ import { ExpectType } from '../../type/expect-type.type';
  * Testing `throw` matchers.
  */
 export class TestingToThrow extends TestingExpect {
-  public error<Value extends jasmine.Func>(
-    actual: ExpectType<Value>,
+  public error<T extends jasmine.Func>(
+    actual: ExpectType<T>,
     message?: string | RegExp,
     expectationFailOutput?: any
   ): this {
@@ -16,8 +16,8 @@ export class TestingToThrow extends TestingExpect {
     return this;
   }
 
-  public matching<Value>(
-    actual: ExpectType<Value>,
+  public matching<T>(
+    actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
     expectationFailOutput?: any
   ): this {
@@ -26,8 +26,8 @@ export class TestingToThrow extends TestingExpect {
     return this;
   }
 
-  public throw<Value>(
-    actual: ExpectType<Value>,
+  public throw<T>(
+    actual: ExpectType<T>,
     expected?: any,
     expectationFailOutput?: any
   ): this {

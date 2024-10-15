@@ -7,12 +7,12 @@ import { ExpectType } from '../../type/expect-type.type';
  * Testing `ToHaveBeen` matchers.
  */
 export class TestingToHaveBeen extends TestingExpect {
-  public called<Value>(
-    value: ExpectType<Value>,
+  public called<T extends jasmine.Func>(
+    spy: ExpectType<T>,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(spy, expectationFailOutput)
       .toHaveBeenCalled();
     this.setNot(false);
     return this;

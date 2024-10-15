@@ -8,56 +8,56 @@ import { ExpectType } from '../../type/expect-type.type';
  * Testing `ToHaveBeenCalled` matchers.
  */
 export class TestingToHaveBeenCalled extends TestingExpect {
-  public before<Value>(
-    value: ExpectType<Value>,
-    expected: any,
+  public before<T extends jasmine.Func>(
+    spy: ExpectType<T>,
+    expected: jasmine.Func,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(spy, expectationFailOutput)
       .toHaveBeenCalledBefore(expected);
     this.setNot(false);
     return this;
   }
 
-  public called<Value>(
-    value: ExpectType<Value>,
+  public called<T extends jasmine.Func>(
+    spy: ExpectType<T>,
     expectationFailOutput?: any
   ): this {
-    new TestingToHaveBeen().called(value, expectationFailOutput);
+    new TestingToHaveBeen().called(spy, expectationFailOutput);
     return this;
   }
 
-  public onceWith<Value>(
-    value: ExpectType<Value>,
+  public onceWith<T extends jasmine.Func>(
+    spy: ExpectType<T>,
     ...params: any[]
   ): this {
     this
-      .expect(value)
+      .expect(spy)
       .toHaveBeenCalledOnceWith(...params);
     this.setNot(false);
     return this;
   }
 
-  public times<Value>(
-    value: ExpectType<Value>,
-    expected: any,
+  public times<T extends jasmine.Func>(
+    spy: ExpectType<T>,
+    expected: number,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(spy, expectationFailOutput)
       .toHaveBeenCalledTimes(expected);
     this.setNot(false);
     return this;
   }
 
-  public with<Value>(
-    value: ExpectType<Value>,
+  public with<T extends jasmine.Func>(
+    spy: ExpectType<T>,
     expected: any,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(spy, expectationFailOutput)
       .toHaveBeenCalledWith(expected);
     this.setNot(false);
     return this;

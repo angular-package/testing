@@ -34,49 +34,49 @@ export class TestingToHave extends TestingExpect {
    */
   #beenCalled = new TestingToHaveBeenCalled();
 
-  public class<Value>(
-    value: ExpectType<Value>,
+  public class<T>(
+    actual: ExpectType<T>,
     expected: string,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(actual, expectationFailOutput)
       .toHaveClass(expected)
     this.setNot(false);
     return this;
   }
 
-  public match<Value>(
-    value: ExpectType<Value>,
+  public match<T>(
+    actual: ExpectType<T>,
     expected: string | RegExp,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(actual, expectationFailOutput)
       .toMatch(expected);
     this.setNot(false);
     return this;
   }
 
-  public size<Value>(
-    value: ExpectType<Value>,
-    expected: jasmine.Expected<typeof value>,
+  public size<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<typeof actual>,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(actual, expectationFailOutput)
       .toEqual(expected);
     this.setNot(false);
     return this;
   }
 
-  public spyInteractions<Value>(
-    value: ExpectType<Value>,
-    expected: jasmine.Expected<typeof value>,
+  public spyInteractions<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<typeof actual>,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(actual, expectationFailOutput)
       .toEqual(expected);
     this.setNot(false);
     return this;

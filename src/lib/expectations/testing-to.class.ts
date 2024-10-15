@@ -27,37 +27,37 @@ export class TestingTo extends TestingExpect {
   #have = new TestingToHave();
   #throw = new TestingToThrow();
 
-  public contain<Value>(
-    value: ExpectType<Value>,
+  public contain<T>(
+    actual: ExpectType<T>,
     expected: any,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(actual, expectationFailOutput)
       .toContain(expected);
     this.setNot(false);
     return this;
   }
 
-  public equal<Value>(
-    value: ExpectType<Value>,
-    expected: jasmine.Expected<typeof value>,
+  public equal<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<typeof actual>,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(actual, expectationFailOutput)
       .toEqual(expected);
     this.setNot(false);
     return this;
   }
 
-  public match<Value>(
-    value: ExpectType<Value>,
+  public match<T>(
+    actual: ExpectType<T>,
     expected: string | RegExp,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(value, expectationFailOutput)
+      .expect(actual, expectationFailOutput)
       .toMatch(expected);
     this.setNot(false);
     return this;
