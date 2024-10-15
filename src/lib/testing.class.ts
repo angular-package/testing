@@ -1,7 +1,7 @@
 // Class.
 import { TestingDescribe } from './testing-describe.class';
 import { TestingIt } from './testing-it.class';
-import { TestingTests } from './testing-tests.class';
+import { TestingTest } from './testing-tests.class';
 // Interface.
 import { ExecutableTests } from '../interface/executable-tests.interface';
 // Jasmine.
@@ -9,7 +9,7 @@ import {} from 'jasmine';
 /**
  * Simple `class` to support testing.
  */
-export class Testing extends TestingTests {
+export class Testing extends TestingTest {
   /**
    * Defines the wrapper function of the `describe()` function of jasmine with the ability to decide its execution.
    * @param description "Textual description of the group"
