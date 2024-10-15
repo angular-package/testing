@@ -7,6 +7,23 @@ import { TestingExecutable } from './testing-executable.class';
  */
 export class TestingDescribe extends TestingExecutable {
   /**
+   * Defines the wrapper function for the `describe()` function of jasmine with the ability to decide its execution.
+   * @param description "Textual description of the group" with a defined prefix indicating its unique number.
+   * @param specDefinitions "Function for Jasmine to invoke that will define"
+   * @returns The return value is a `function` that contains `describe()` of jasmine with the ability to decide of its execution.
+   */
+  public static define(
+    description: string,
+    specDefinitions: () => void
+  ): (execute: boolean) => void {
+    return (execute: boolean = false) => {
+      if (is.true(execute)) {
+        describe(description, specDefinitions);
+      }
+    };
+  }
+
+  /**
    * Privately stored allow state of executing `describe)` method, which by default is set to `false`.
    */
   #allow = false;
@@ -20,23 +37,6 @@ export class TestingDescribe extends TestingExecutable {
   constructor(allow?: boolean, executable?: Array<number>) {
     super(executable);
     this.#allow = is.boolean(allow) ? allow : this.#allow;
-  }
-
-  /**
-   * Defines the wrapper function for the `describe()` function of jasmine with the ability to decide its execution.
-   * @param description "Textual description of the group" with a defined prefix indicating its unique number.
-   * @param specDefinitions "Function for Jasmine to invoke that will define"
-   * @returns The return value is a `function` that contains `describe()` of jasmine with the ability to decide of its execution.
-   */
-  static define(
-    description: string,
-    specDefinitions: () => void
-  ): (execute: boolean) => void {
-    return (execute: boolean = false) => {
-      if (is.true(execute)) {
-        describe(description, specDefinitions);
-      }
-    };
   }
 
   /**
