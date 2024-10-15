@@ -7,6 +7,26 @@ import { TestingExecutable } from './testing-executable.class';
  */
 export class TestingIt extends TestingExecutable {
   /**
+   * Defines the wrapper function for the `it()` function of jasmine with the ability to decide its execution.
+   * @param expectation "Textual description of what this spec is checking"
+   * @param assertion "Function that contains the code of your test. If not provided the test will be pending."
+   * @param timeout "Custom timeout for an async spec."
+   * @returns The return value is a `function` that contains the predefined `it()` function of jasmine with the
+   * ability to decide its execution.
+   */
+  public static define(
+    expectation: string,
+    assertion: jasmine.ImplementationCallback,
+    timeout?: number | undefined
+  ): (execute: boolean) => void {
+    return (execute: boolean = false) => {
+      if (is.true(execute) && is.function(assertion)) {
+        it(expectation, assertion, timeout);
+      }
+    };
+  }
+
+  /**
    * Privately stored allow state of executing `it()` methods, which by default is set to `false`.
    */
   #allow = false;
@@ -20,26 +40,6 @@ export class TestingIt extends TestingExecutable {
   constructor(allow?: boolean, executable?: Array<number>) {
     super(executable);
     this.#allow = is.boolean(allow) ? allow : this.#allow;
-  }
-
-  /**
-   * Defines the wrapper function for the `it()` function of jasmine with the ability to decide its execution.
-   * @param expectation "Textual description of what this spec is checking"
-   * @param assertion "Function that contains the code of your test. If not provided the test will be pending."
-   * @param timeout "Custom timeout for an async spec."
-   * @returns The return value is a `function` that contains the predefined `it()` function of jasmine with the
-   * ability to decide its execution.
-   */
-  static define(
-    expectation: string,
-    assertion: jasmine.ImplementationCallback,
-    timeout?: number | undefined
-  ): (execute: boolean) => void {
-    return (execute: boolean = false) => {
-      if (is.true(execute) && is.function(assertion)) {
-        it(expectation, assertion, timeout);
-      }
-    };
   }
 
   /**
