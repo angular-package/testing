@@ -9,6 +9,14 @@ import { ExpectType } from '../type';
  */
 export abstract class TestingExpect {
   /**
+   * Fail as soon as possible if the actual is pending. Otherwise evaluate the matcher.
+   */
+  public get already(): this {
+    this.#already = true;
+    return this;
+  }
+
+  /**
    * Invert the matcher.
    */
   public get not(): this {
@@ -35,6 +43,11 @@ export abstract class TestingExpect {
   }
 
   /**
+   * 
+   */
+  #already = false;
+ 
+  /**
    * Privately stored state of invert the matcher.
    */
   #not = false;
@@ -56,9 +69,14 @@ export abstract class TestingExpect {
   protected expectAsync<T, U>(
     actual: T | PromiseLike<T>,
     expectationFailOutput?: any,
+    not?: boolean,
+    already?: boolean,
   ): jasmine.AsyncMatchers<T, U> {
+    already && this.already;
+    not && this.not;
+    const e = expectAsync(actual).withContext(expectationFailOutput);
     return is.true(this.#not)
-      ? expectAsync(actual).withContext(expectationFailOutput).not
-      : expectAsync(actual).withContext(expectationFailOutput);
+      ? is.true(this.#already) ? e.not.already : e.not
+      : is.true(this.#already) ? e.already : e;
   }
 }
