@@ -1,0 +1,952 @@
+// Class.
+import { TestingCore } from './testing-core.class';
+import { TestingTestTo } from './tests/testing-test-to.class';
+// Constant.
+import { EXPECTATION } from './constants/expectation.const';
+// Type.
+import { ExpectType } from '../type';
+/**
+ * Prepared simple tests.
+ */
+export class TestingTestActual extends TestingCore {
+  /**
+   * 
+   */
+  #actual: any;
+
+  /**
+   * 
+   */
+  #expectation = EXPECTATION;
+
+  /**
+   * 
+   */
+  #to: TestingTestTo;
+
+  /**
+   * 
+   * @param allowDescribe 
+   * @param allowIt 
+   * @param executable 
+   */
+  constructor(
+    allowDescribe: boolean,
+    allowIt: boolean,
+    executable?: {
+      describe?: Array<number>,
+      it?: Array<number>
+    }
+  ) {
+    super(allowDescribe, allowIt, executable);
+    this.#to = new TestingTestTo(allowDescribe, allowIt, executable);
+  }
+
+  /**
+   * 
+   * @param actual 
+   * @returns 
+   */
+  public actual<T>(actual: ExpectType<T>): this {
+    this.#actual = actual;
+    return this;
+  }
+
+  //#region toBe methods
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value.
+   * "Expect the actual value to be === to the expected value."
+   * @param expected The value of any type passed to the `toBe()` method of jasmine. "The expected value to compare against."
+   * @param expectation "Textual description of what this spec is checking" with an optional its unique `number` when adding `[counter]`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed. By default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type passed to the `expect()` function of jasmine.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBe<T>(
+    expected: jasmine.Expected<typeof actual>,
+    expectation: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.be(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `bigint` type on the `expected` of
+   * `true`. The method uses `isBigInt()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be a bigint type'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeBigInt<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeBigInt,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.bigInt(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `boolean` type
+   * on the `expected` of `true`. The method uses `isBooleanType()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be of a boolean type'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeBooleanType<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeBooleanType,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.booleanType(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `class`
+   * on the `expected` of `true`. The method uses `isClass()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `The value must be a class`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeClass<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeClass,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.class(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBeCloseTo<T extends number>(
+    expected: number,
+    precision?: any,
+    expectation: string = this.#expectation.toBeCloseTo,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.closeTo(actual, expected, precision, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBeDefined<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeDefined,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.defined(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBeFalse<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeFalse,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.false(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBeFalsy<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeFalsy,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.falsy(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  //#region toBeGreaterThan methods
+  public toBeGreaterThan<T extends number>(
+    expected: number,
+    expectation: string = this.#expectation.toBeGreaterThan, 
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.greaterThan(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBeGreaterThanOrEqual<T extends number>(
+    expected: number,
+    expectation: string = this.#expectation.toBeGreaterThanOrEqual,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.greaterThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  //#endregion
+
+  //#region toBeInstanceOf methods
+  public toBeInstanceOf<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Constructor,
+    expectation: string,
+    expectationFailOutput?: any,
+    execute?: boolean
+  ): this {
+    this.#to.be.instanceOf(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Array`
+   * on the `expected` of `true`. The method uses `isArray()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to
+   * `The value must be an instance of an Array`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfArray<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfArray,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.array(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Boolean` on the
+   * `expected` of `true`. The method uses `isBooleanObject()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of Boolean'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfBoolean<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfBoolean,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.boolean(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Date`
+   * on the `expected` of `true`. The method uses `isDate()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of Date'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfDate<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfDate,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.date(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Error` on the
+   * `expected` of `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of an Error'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfError<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfError,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.error(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Function` on the
+   * `expected` of `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of a Function'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfFunction<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfFunction,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.function(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Map` on the `expected`
+   * of `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of a Map'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfMap<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfMap,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.map(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Number` on the `expected`
+   * of `true`. The method uses `isObject()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of a Number'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfNumber<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfNumber,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.number(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Object` on the
+   * `expected` of `true`. The method uses `isObject()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of an Object'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfObject<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfObject,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.object(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Promise` on the `expected`
+   * of `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of Promise'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfPromise<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfPromise,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.promise(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `RangeError` on the
+   * `expected` state.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of RangeError'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfRangeError<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfRangeError,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.rangeError(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `ReferenceError` on
+   * the `expected` of `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of ReferenceError'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfReferenceError<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfReferenceError,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.referenceError(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `RegExp` on the
+   * `expected` of `true`. The method uses `isRegExp()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of RegExp'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfRegExp<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfRegExp,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.regExp(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Set` on the `expected` of
+   * `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of Set'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfSet<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfSet,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.set(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Storage` on the `expected`
+   * of `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of Storage'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfStorage<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfStorage,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.storage(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `String` on the
+   * `expected` of `true`.The method uses `isStringObject()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of a String'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfString<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfString,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.string(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `SyntaxError` on the
+   * `expected` of `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of SyntaxError'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfSyntaxError<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfSyntaxError,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.syntaxError(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `TypeError` on the
+   * `expected` of `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of TypeError'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfTypeError<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfTypeError,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.typeError(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `URIError` on the
+   * `expected` of `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of URIError'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfURIError<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfURIError,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.URIError(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `WeakSet` on the
+   * `expected` of `true`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of a WeakSet'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeInstanceOfWeakSet<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeInstanceOfWeakSet,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.instanceof.weakSet(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  //#endregion
+
+  //#region toBeLessThan methods
+  public toBeLessThan<T extends number>(
+    expected: number,
+    expectation: string = this.#expectation.toBeLessThan,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.lessThan(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBeLessThanOrEqual<T extends number>(
+    expected: number,
+    expectation: string = this.#expectation.toBeLessThanOrEqual,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.lessThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  //#endregion
+
+  public toBeNaN<T extends number>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeNaN,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.naN(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBeNegativeInfinity<T extends number>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeNegativeInfinity,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.negativeInfinity(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `null` on the `expected` of `true`. The
+   * method uses `isNull()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be \`null\`'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeNull<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeNull,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.null(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `number` type on the `expected` of
+   * `true`. The method uses `isNumberType()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be of a \`number\` type'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeNumberType<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeNumberType,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.numberType(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBePositiveInfinity<T extends number>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBePositiveInfinity,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.positiveInfinity(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `string` type on the `expected` of
+   * `true`. The method uses `isStringType()` function of `@angular-package/type`.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to `'The value must be of a \`string\` type'`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type to check.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBeStringType<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeStringType,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.stringType(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBeTrue<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeTrue,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.true(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBeTruthy<T>(
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = this.#expectation.toBeTruthy, 
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.be.truthy(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  //#endregion
+
+  public toContain<T>(
+    expected: any,
+    expectation: string = this.#expectation.toContain,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.contain(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to equal to the given `expected`.
+   * "Expect the actual `value` to be equal to the `expected`, using deep equality comparison."
+   * @param expected The value of any type passed to the `toEqual()` method of jasmine. "The expected value to compare against."
+   * @param expectation "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @param actual The value of any type passed to the `expect()` function of jasmine.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toEqual<T>(
+    expected: jasmine.Expected<typeof actual>,
+    expectation: string = this.#expectation.toEqual,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.equal(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toHaveBeenCalled<T extends jasmine.Func>(
+    spy: ExpectType<T>,
+    expectation: string = this.#expectation.toHaveBeenCalled,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {    
+    this.#to.have.been.called.called(spy, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toHaveBeenCalledBefore<T extends jasmine.Func>(
+    spy: ExpectType<T>,
+    expected: jasmine.Func,
+    expectation: string = this.#expectation.toHaveBeenCalledBefore,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.have.been.called.before(spy, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toHaveBeenCalledOnceWith<Actual extends jasmine.Func>(
+    expectation: string = this.#expectation.toHaveBeenCalledOnceWith,
+    spy: ExpectType<Actual>,
+    ...params: any[]
+  ): this {
+    this.#to.have.been.called.onceWith(expectation, spy, ...params);
+    return this;
+  }
+
+  public toHaveBeenCalledTimes<T extends jasmine.Func>(
+    spy: ExpectType<T>,
+    expected: number,
+    expectation: string = this.#expectation.toHaveBeenCalledTimes,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.have.been.called.times(spy, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toHaveBeenCalledWith<T extends jasmine.Func>(
+    spy: ExpectType<T>,
+    expected: any,
+    expectation: string = this.#expectation.toHaveBeenCalledWith,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.have.been.called.with(spy, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toHaveClass<T>(
+    expected: string,
+    expectation: string = this.#expectation.toHaveClass, 
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.have.class(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toHaveSize<T>(
+    expected: jasmine.Expected<typeof actual>,
+    expectation: string = this.#expectation.toHaveSize, 
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.have.size(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toHaveSpyInteractions<T>(
+    expected: jasmine.Expected<typeof actual>,
+    expectation: string = this.#expectation.toHaveSpyInteractions,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.have.spyInteractions(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toMatch<T>(
+    expected: string | RegExp,
+    expectation: string = this.#expectation.toMatch, 
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.match(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toThrow<T>(
+    expected?: any,
+    expectation: string = this.#expectation.toThrow,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.throw.throw(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toThrowError<T extends jasmine.Func>(
+    message?: string | RegExp,
+    expectation: string = this.#expectation.toThrowError,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.throw.error(actual, message, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toThrowMatching<T>(
+    predicate: (thrown: any) => boolean,
+    expectation: string = this.#expectation.toThrowMatching,
+    expectationFailOutput?: any,
+    execute?: boolean,
+    actual: ExpectType<T> = this.#actual,
+  ): this {
+    this.#to.throw.matching(actual, predicate, expectation, expectationFailOutput, execute);
+    return this;
+  }
+}
