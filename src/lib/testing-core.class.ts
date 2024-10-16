@@ -131,4 +131,14 @@ export abstract class TestingCore {
     this.testingIt.it(expectation, assertion, execute);
     return this;
   }
+
+  public setSpecProperty(key: string, value: unknown) {
+    setSpecProperty(key, value);
+    return this;
+  }
+
+  public setSuiteProperty(key: string, value: unknown) {
+    setSuiteProperty(key, value);
+    return this;
+  }
 }
