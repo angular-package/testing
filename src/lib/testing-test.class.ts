@@ -1,14 +1,16 @@
 // Class.
 import { TestingCore } from './testing-core.class';
+import { TestingTestActual } from './testing-test-actual.class';
+import { TestingTestTo } from './tests/testing-test-to.class';
+// Constant.
+import { EXPECTATION } from './constants/expectation.const';
 // Type.
 import { ExpectType } from '../type';
-import { TestingTestTo } from './tests/testing-test-to.class';
 /**
  * Prepared simple tests.
  */
 export class TestingTest extends TestingCore {
   /**
-   * 
    */
   public get to(): TestingTestTo {
     return this.#to;
@@ -17,71 +19,11 @@ export class TestingTest extends TestingCore {
   /**
    * 
    */
-  #expectation = {
-    toBeBigInt: `The \`actual\` must be a \`bigint\` type.`,
-    toBeBooleanType: `The \`actual\` must be of a \`boolean\` type.`,
-    toBeClass: `The \`actual\` must be a \`class\`.`,
-    toBeCloseTo: `The \`actual\` must be within a specified precision of the \`expected\` actual.`,
-    toBeDefined: `The \`actual\` must be defined.`,
+  #expectation = EXPECTATION;
 
-    toBeFalse: `The \`actual\` must be false.`,
-    toBeFalsy: `The \`actual\` must be falsy.`,
-
-    // GreaterThan
-    toBeGreaterThan: `The \`actual\` to be greater than the expected value.`,
-    toBeGreaterThanOrEqual: `The \`actual\` to be greater than or equal to the expected value.`,
-
-    // InstanceOf
-    toBeInstanceOfArray: `The \`actual\` must be an instance of an \`${Array.name}\``,
-    toBeInstanceOfBoolean: `The \`actual\` must be an instance of \`${Boolean.name}\`.`,
-    toBeInstanceOfDate: `The \`actual\` must be an instance of \`${Date.name}\`.`,
-    toBeInstanceOfError: `The \`actual\` must be an instance of an \`${Error.name}\`.`,
-    toBeInstanceOfFunction: `The \`actual\` must be an instance of a \`${Function.name}\`.`,
-    toBeInstanceOfMap: `The \`actual\` must be an instance of a \`${Map.name}\`.`,
-    toBeInstanceOfNumber: `The \`actual\` must be an instance of a \`${Number.name}\`.`,
-    toBeInstanceOfObject: `The \`actual\` must be an instance of an \`${Object.name}\`.`,
-    toBeInstanceOfPromise: `The \`actual\` must be an instance of \`${Promise.name}\`.`,
-    toBeInstanceOfRangeError: `The \`actual\` must be an instance of \`${RangeError.name}\`.`,
-    toBeInstanceOfReferenceError: `The \`actual\` must be an instance of \`${ReferenceError.name}\`.`,
-    toBeInstanceOfRegExp: `The \`actual\` must be an instance of \`${RegExp.name}\`.`,
-    toBeInstanceOfSet: `The \`actual\` must be an instance of \`${Set.name}\`.`,
-    toBeInstanceOfStorage: `The \`actual\` must be an instance of \`${Storage.name}\`.`,
-    toBeInstanceOfString: `The \`actual\` must be an instance of a \`${String.name}\`.`,
-    toBeInstanceOfSyntaxError: `The \`actual\` must be an instance of \`${SyntaxError.name}\`.`,
-    toBeInstanceOfTypeError: `The \`actual\` must be an instance of \`${TypeError.name}\`.`,
-    toBeInstanceOfURIError: `The \`actual\` must be an instance of \`${URIError.name}\`.`,
-    toBeInstanceOfWeakSet: `The \`actual\` must be an instance of a \`${WeakSet.name}\`.`,
-
-    // LessThan
-    toBeLessThan: `The \`actual\` to be less than the expected value.`,
-    toBeLessThanOrEqual: `The \`actual\` to be less than or equal to the expected value.`,
-
-    toBeNaN: `The \`actual\` to be NaN (Not a Number).`,
-    toBeNegativeInfinity: `The actual \`actual\` to be -Infinity (-infinity).`,
-    toBeNull: `The \`actual\` value must be \`null\`.`,
-    toBeNumberType: `The \`actual\` value must be of a \`number\` type.`,
-    toBePositiveInfinity: `The \`actual\` value to be Infinity (infinity).`,
-    toBeStringType: `The \`actual\` value must be of a \`string\` type.`,
-    toBeTrue: `The \`actual\` value must be \`true\`.`,
-    toBeTruthy: `The \`actual\` value to be truthy.`,
-    toContain: `The \`actual\` value to contain a specific value.`,
-    toEqual: `The \`actual\` value to be equal to the \`expected\`, using deep equality comparison.`,
-
-    // toHaveBeen
-    toHaveBeenCalled: `The \`actual\` value (a Spy) to have been called.`,
-    toHaveBeenCalledBefore: `The \`actual\` value (a Spy) to have been called before another Spy.`,
-    toHaveBeenCalledOnceWith: `The \`actual\` value (a Spy) to have been called exactly once, and exactly with the particular arguments.`,
-    toHaveBeenCalledTimes: `The \`actual\` value (a Spy) to have been called the specified number of times.`,
-    toHaveBeenCalledWith: `The \`actual\` (a Spy) to have been called the specified number of times.`,
-    toHaveClass: `The \`actual\` value to be a DOM element that has the expected class.`,
-    toHaveSize: `The \`actual\` size to be equal to the expected, using array-like length or object keys size.`,
-    toHaveSpyInteractions: `The \`actual\` value (a SpyObj) spies to have been called.`,
-    toMatch: `The \`actual\` value to match a regular expression.`,
-    toThrow: `The \`actual\` value a function to throw something.`,
-    toThrowError: `The \`actual\` \`value \` a function to throw an Error.`,
-    toThrowMatching: `The \`actual\` value a function to throw something matching a predicate.`,
-  }
-
+  /**
+   * 
+   */
   #to: TestingTestTo;
 
   /**
@@ -100,6 +42,20 @@ export class TestingTest extends TestingCore {
   ) {
     super(allowDescribe, allowIt, executable);
     this.#to = new TestingTestTo(allowDescribe, allowIt, executable);
+  }
+
+  /**
+   * 
+   * @param actual 
+   * @param specDefinitions 
+   * @returns 
+   */
+  public actual<T>(
+    actual: ExpectType<T>,
+    specDefinitions: (test: TestingTestActual) => TestingTestActual
+  ): this {
+    specDefinitions(new TestingTestActual(true, true).actual(actual));
+    return this;
   }
 
   //#region toBe methods
@@ -191,6 +147,16 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param precision 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeCloseTo<T extends number>(
     actual: ExpectType<T>,
     expected: number,
@@ -203,6 +169,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeDefined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -214,6 +189,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeFalse<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -225,6 +209,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeFalsy<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -237,6 +230,15 @@ export class TestingTest extends TestingCore {
   }
 
   //#region toBeGreaterThan methods
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeGreaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
@@ -248,6 +250,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeGreaterThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
@@ -261,6 +272,15 @@ export class TestingTest extends TestingCore {
   //#endregion
 
   //#region toBeInstanceOf methods
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeInstanceOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Constructor,
@@ -693,6 +713,15 @@ export class TestingTest extends TestingCore {
   //#endregion
 
   //#region toBeLessThan methods
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeLessThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
@@ -704,6 +733,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeLessThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
@@ -716,6 +754,15 @@ export class TestingTest extends TestingCore {
   }
   //#endregion
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeNaN<T extends number>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -727,6 +774,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeNegativeInfinity<T extends number>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -782,6 +838,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBePositiveInfinity<T extends number>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -792,7 +857,6 @@ export class TestingTest extends TestingCore {
     this.#to.be.positiveInfinity(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
-
   
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `string` type on the `expected` of
@@ -816,6 +880,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeTrue<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -827,6 +900,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toBeTruthy<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -839,6 +921,15 @@ export class TestingTest extends TestingCore {
   }
   //#endregion
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toContain<T>(
     actual: ExpectType<T>,
     expected: any,
@@ -872,6 +963,14 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param spy 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toHaveBeenCalled<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expectation: string = this.#expectation.toHaveBeenCalled,
@@ -882,6 +981,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param spy 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toHaveBeenCalledBefore<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: jasmine.Func,
@@ -893,6 +1001,13 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param expectation 
+   * @param spy 
+   * @param params 
+   * @returns 
+   */
   public toHaveBeenCalledOnceWith<Actual extends jasmine.Func>(
     expectation: string = this.#expectation.toHaveBeenCalledOnceWith,
     spy: ExpectType<Actual>,
@@ -902,6 +1017,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param spy 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toHaveBeenCalledTimes<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: number,
@@ -913,6 +1037,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param spy 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toHaveBeenCalledWith<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: any,
@@ -924,6 +1057,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toHaveClass<T>(
     actual: ExpectType<T>,
     expected: string,
@@ -935,6 +1077,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toHaveSize<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
@@ -946,6 +1097,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toHaveSpyInteractions<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
@@ -957,6 +1117,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toMatch<T>(
     actual: ExpectType<T>,
     expected: string | RegExp,
@@ -968,6 +1137,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toThrow<T>(
     actual: ExpectType<T>,
     expected?: any,
@@ -979,6 +1157,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param message 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toThrowError<T extends jasmine.Func>(
     actual: ExpectType<T>,
     message?: string | RegExp,
@@ -990,6 +1177,15 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param predicate 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public toThrowMatching<T>(
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
