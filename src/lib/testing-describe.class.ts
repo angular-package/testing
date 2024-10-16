@@ -16,11 +16,8 @@ export class TestingDescribe extends TestingExecutable {
     description: string,
     specDefinitions: () => void
   ): (execute: boolean) => void {
-    return (execute: boolean = false) => {
-      if (is.true(execute)) {
-        describe(description, specDefinitions);
-      }
-    };
+    return (execute: boolean = false) => is.true(execute)
+      && describe(description, specDefinitions);
   }
 
   /**
