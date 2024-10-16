@@ -1,20 +1,19 @@
 // Class.
 import { TestingExpect } from '../testing-expect.abstract';
-// Type.
-import { ExpectType } from '../../type/expect-type.type';
-
+import { TestingToHaveBeenCalled } from './testing-to-have-been-called.class';
 /**
  * Testing `ToHaveBeen` matchers.
  */
 export class TestingToHaveBeen extends TestingExpect {
-  public called<T extends jasmine.Func>(
-    spy: ExpectType<T>,
-    expectationFailOutput?: any
-  ): this {
-    this
-      .expect(spy, expectationFailOutput)
-      .toHaveBeenCalled();
-    this.setNot(false);
-    return this;
+  /**
+   * 
+   */
+  public get called(): TestingToHaveBeenCalled {
+    return this.#called;
   }
+
+  /**
+   * 
+   */
+  #called = new TestingToHaveBeenCalled();
 }

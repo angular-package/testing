@@ -12,14 +12,14 @@ export class TestingToBe extends TestingExpect {
   /**
    * 
    */
-  public get instanceOf() {
-    return this.#instanceOf;
+  public get instanceof() {
+    return this.#instanceof;
   }
 
   /**
    * 
    */
-  #instanceOf = new TestingToBeInstanceOf();
+  #instanceof = new TestingToBeInstanceOf();
 
   /**
    * The Default message for the expectation fails.
@@ -43,7 +43,26 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`array\``
   ): this {
-    this.toBe(is.instance(actual, Array) &&  is.array(actual), expected, expectationFailOutput);
+    this.be(is.instance(actual, Array) &&  is.array(actual), expected, expectationFailOutput);
+    return this;
+  }
+
+  /**
+   * Expects provided value to be the given `expected`.
+   * @param actual The value of a generic `Value` type captured from the given `value` and passed to the `expect()` function of
+   * jasmine.
+   * @param expected The expected value to compare against the given `value`, passed to the `toBe()` method of `jasmine.Matchers`.
+   * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) of a
+   * specific from the method type.
+   * @returns The return value is an instance of a `TestingMatchers`.
+   */
+  public be<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<typeof actual>,
+    expectationFailOutput?: any
+  ): this {
+    this.expect(actual, expectationFailOutput).toBe(expected);
+    this.setNot(false);
     return this;
   }
 
@@ -63,7 +82,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be \`bigint\``
   ): this {
-    this.toBe(is.bigint(actual), expected, expectationFailOutput);
+    this.be(is.bigint(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -83,7 +102,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`boolean\` type or an instance of \`Boolean\``
   ): this {
-    this.toBe(is.instance(actual, Boolean) && is.boolean(actual), expected, expectationFailOutput);
+    this.be(is.instance(actual, Boolean) && is.boolean(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -94,7 +113,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`boolean\` type`
   ): this {
-    this.toBe(is.booleanType(actual), expected, expectationFailOutput);
+    this.be(is.booleanType(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -114,7 +133,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be \`class\``
   ): this {
-    this.toBe(is.class(actual), expected, expectationFailOutput);
+    this.be(is.class(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -146,7 +165,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`date\``
   ): this {
-    this.toBe(is.instance(actual, Date) && is.date(actual), expected, expectationFailOutput);
+    this.be(is.instance(actual, Date) && is.date(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -227,7 +246,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be \`function\``
   ): this {
-    this.toBe(is.function(actual), expected, expectationFailOutput);
+    this.be(is.function(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -273,7 +292,19 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an instance of ${constructor.name}`
   ): this {
-    this.toBe(is.instance(actual, constructor), expected, expectationFailOutput);    
+    this.be(is.instance(actual, constructor), expected, expectationFailOutput);    
+    return this;
+  }
+
+  public instanceOf<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Constructor,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be an instance of \`expected\``
+  ): this {
+    this.expect(actual, expectationFailOutput).toBeInstanceOf(expected);
+    this.setNot(false);
     return this;
   }
 
@@ -294,7 +325,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be the property key`
   ): this {
-    this.toBe(is.key(actual), expected, expectationFailOutput);
+    this.be(is.key(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -385,7 +416,7 @@ export class TestingToBe extends TestingExpect {
     } be a \`number\` type or an instance of a \`Number\``
   ): this {
     // REVIEW: instance
-    this.toBe(is.instance(actual, Number) && is.number(actual), expected, expectationFailOutput);
+    this.be(is.instance(actual, Number) && is.number(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -411,7 +442,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`number\` type or an instance of a \`Number\` between the range of ${min} and ${max}`
   ): this {
-    this.toBe(
+    this.be(
       is.numberBetween(actual, min, max),
       expected,
       expectationFailOutput
@@ -426,7 +457,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`number\` type`
   ): this {
-    this.toBe(is.numberType(actual), expected, expectationFailOutput);
+    this.be(is.numberType(actual), expected, expectationFailOutput);
     return this;
   }
   /**
@@ -446,7 +477,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\``
   ): this {
-    this.toBe(is.object(actual), expected, expectationFailOutput);
+    this.be(is.object(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -469,7 +500,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\` with a given \`key\``
   ): this {
-    this.toBe(is.objectKey(actual, key), expected, expectationFailOutput);
+    this.be(is.objectKey(actual, key), expected, expectationFailOutput);
     return this;
   }
 
@@ -493,7 +524,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\` with a given \`key\` in it(or its prototype chain)`
   ): this {
-    this.toBe(is.objectKeyIn(actual, key), expected, expectationFailOutput);
+    this.be(is.objectKeyIn(actual, key), expected, expectationFailOutput);
     return this;
   }
 
@@ -518,7 +549,7 @@ export class TestingToBe extends TestingExpect {
   ): this {
     // this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
     // keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
-    this.toBe(is.objectKeys(actual, keys), expected, expectationFailOutput);
+    this.be(is.objectKeys(actual, keys), expected, expectationFailOutput);
     return this;
   }
 
@@ -544,7 +575,7 @@ export class TestingToBe extends TestingExpect {
   ): this {
     // this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
     // keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
-    this.toBe(is.objectKeysIn(actual, keys), expected, expectationFailOutput);
+    this.be(is.objectKeysIn(actual, keys), expected, expectationFailOutput);
     return this;
   }
 
@@ -571,7 +602,7 @@ export class TestingToBe extends TestingExpect {
   ): this {
     // this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
     // keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
-    this.toBe(is.objectSomeKeys(actual, keys), expected, expectationFailOutput);
+    this.be(is.objectSomeKeys(actual, keys), expected, expectationFailOutput);
     return this;
   }
 
@@ -603,7 +634,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be \`RegExp\``
   ): this {
-    this.toBe(is.regexp(actual), expected, expectationFailOutput);
+    this.be(is.regexp(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -627,7 +658,7 @@ export class TestingToBe extends TestingExpect {
     } be a \`string\` type or an instance of a \`String\``
   ): this {
     // REVIEW: instance.
-    this.toBe(is.instance(actual, String) && is.string(actual), expected, expectationFailOutput);
+    this.be(is.instance(actual, String) && is.string(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -654,7 +685,7 @@ export class TestingToBe extends TestingExpect {
   ): this {
     // this.expect(value, expectationFailOutput).toBeInstanceOf(String);
     // includes.forEach(include => this.expect(value, expectationFailOutput).toContain(include));
-    this.toBe(
+    this.be(
       is.stringIncludes(actual, includes),
       expected,
       expectationFailOutput
@@ -683,7 +714,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of \`String\` that includes some of the specified words/sentences from a given \`includes\``
   ): this {
-    this.toBe(
+    this.be(
       is.stringIncludesSome(actual, includes),
       expected,
       expectationFailOutput
@@ -711,7 +742,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of a \`String\` of the specified \`length\` equal to ${length}`
   ): this {
-    this.toBe(is.stringLength(actual, length), expected, expectationFailOutput);
+    this.be(is.stringLength(actual, length), expected, expectationFailOutput);
     return this;
   }
 
@@ -737,7 +768,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of a \`String\` of the \`length\` between the given ${min} and ${max}`
   ): this {
-    this.toBe(
+    this.be(
       is.stringLengthBetween(actual, min, max),
       expected,
       expectationFailOutput
@@ -752,7 +783,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type`
   ): this {
-    this.toBe(is.stringType(actual), expected, expectationFailOutput);
+    this.be(is.stringType(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -772,26 +803,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`symbol\``
   ): this {
-    this.toBe(is.symbol(actual), expected, expectationFailOutput);
-    return this;
-  }
-
-  /**
-   * Expects provided value to be the given `expected`.
-   * @param actual The value of a generic `Value` type captured from the given `value` and passed to the `expect()` function of
-   * jasmine.
-   * @param expected The expected value to compare against the given `value`, passed to the `toBe()` method of `jasmine.Matchers`.
-   * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) of a
-   * specific from the method type.
-   * @returns The return value is an instance of a `TestingMatchers`.
-   */
-  public toBe<T>(
-    actual: ExpectType<T>,
-    expected: jasmine.Expected<typeof actual>,
-    expectationFailOutput?: any
-  ): this {
-    this.expect(actual, expectationFailOutput).toBe(expected);
-    this.setNot(false);
+    this.be(is.symbol(actual), expected, expectationFailOutput);
     return this;
   }
 

@@ -22,18 +22,6 @@ export class TestingToHave extends TestingExpect {
    */
   #been = new TestingToHaveBeen();
 
-  /**
-   * 
-   */
-  public get beenCalled(): TestingToHaveBeenCalled {
-    return this.#beenCalled;
-  }
-
-  /**
-   * 
-   */
-  #beenCalled = new TestingToHaveBeenCalled();
-
   public class<T>(
     actual: ExpectType<T>,
     expected: string,

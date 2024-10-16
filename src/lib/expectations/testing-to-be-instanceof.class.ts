@@ -203,18 +203,6 @@ export class TestingToBeInstanceOf extends TestingExpect {
     return this;
   }
 
-  public of<T>(
-    actual: ExpectType<T>,
-    expected: jasmine.Constructor,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`expected\``
-  ): this {
-    this.expect(actual, expectationFailOutput).toBeInstanceOf(expected);
-    this.setNot(false);
-    return this;
-  }
-
   // TODO: Description.
   public promise<T>(
     actual: ExpectType<T>,
