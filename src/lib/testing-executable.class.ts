@@ -18,11 +18,9 @@ export class TestingExecutable extends TestingCounter {
    */
   constructor(executable?: Array<number>) {
     super();
-    if (is.defined(executable)) {
-      if (guard.array(executable)) {
-        this.#executable = new Set(executable);
-      }
-    }
+    is.defined(executable)
+      && guard.array(executable)
+      && (this.#executable = new Set(executable));
   }
 
   /**
