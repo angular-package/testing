@@ -19,11 +19,9 @@ export class TestingIt extends TestingExecutable {
     assertion: jasmine.ImplementationCallback,
     timeout?: number | undefined
   ): (execute: boolean) => void {
-    return (execute: boolean = false) => {
-      if (is.true(execute) && is.function(assertion)) {
-        it(expectation, assertion, timeout);
-      }
-    };
+    return (execute: boolean = false) => is.true(execute)
+      && is.function(assertion)
+      && it(expectation, assertion, timeout);
   }
 
   /**
@@ -72,10 +70,11 @@ export class TestingIt extends TestingExecutable {
     assertion: jasmine.ImplementationCallback,
     execute: boolean = is.false(this.#allow)
       ? this.isExecutable(this.getCounter() + 1)
-      : true
+      : true,
+    timeout?: number | undefined
   ): this {
     this.count();
-    TestingIt.define(this.defineExpectation(expectation), assertion)(execute);
+    TestingIt.define(this.defineExpectation(expectation), assertion, timeout)(execute);
     return this;
   }
 
