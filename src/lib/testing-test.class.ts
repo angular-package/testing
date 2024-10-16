@@ -1,8 +1,8 @@
 // Class.
 import { TestingCore } from './testing-core.class';
-import { TestingExpectation } from './testing-expectation.class';
 // Type.
 import { ExpectType } from '../type';
+import { TestingTestTo } from './tests/testing-test-to.class';
 /**
  * Prepared simple tests.
  */
@@ -10,8 +10,8 @@ export class TestingTest extends TestingCore {
   /**
    * 
    */
-  public get expect(): TestingExpectation {
-    return this.#expect;
+  public get to(): TestingTestTo {
+    return this.#to;
   }
 
   /**
@@ -82,51 +82,24 @@ export class TestingTest extends TestingCore {
     toThrowMatching: `The \`actual\` value a function to throw something matching a predicate.`,
   }
 
+  #to: TestingTestTo;
+
   /**
    * 
+   * @param allowDescribe 
+   * @param allowIt 
+   * @param executable 
    */
-  #expect = new TestingExpectation();
-
-  /**
-   * Executes defined `describe()` function of jasmine on provided state `true` from the `execute`, and resets the counter to `0`.
-   * @param description "Textual description of the group" with an optional defined prefix indicating its unique number
-   * inside the describe.
-   * @param specDefinitions "Function for Jasmine to invoke that will define inner suites a specs"
-   * @param execute A `boolean` type value to decide whether or not execute defined `describe()` of jasmine function.
-   * @returns The return value is an instance of a child class.
-   */
-  public describe(
-    description: string,
-    specDefinitions: (
-      // this: TestingTests,
-      tests: TestingTest, matchers: TestingExpectation
-    ) => any,
-    execute?: boolean
-  ): this {
-    // TODO: 
-    super.testingIt.resetCounter();
-    super.testingDescribe.describe(
-      description,
-      specDefinitions.apply(null, [this, new TestingExpectation()]),
-      execute
-    );
-    return this;
-  }
-
-  /**
-   * Executes defined `it()` function of jasmine on provided state `true` from the `execute`.
-   * @param expectation "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]`.
-   * @param assertion "Function that contains the code of your test. If not provided the test will be pending."
-   * @param execute A `boolean` type value to decide whether or not execute defined `it()` of jasmine function.
-   * @returns The return value is an instance of a child class.
-   */
-  public it(
-    expectation: string,
-    assertion: jasmine.ImplementationCallback,
-    execute?: boolean
-  ): this {
-    super.testingIt.it(expectation, assertion, execute);
-    return this;
+  constructor(
+    allowDescribe: boolean,
+    allowIt: boolean,
+    executable?: {
+      describe?: Array<number>,
+      it?: Array<number>
+    }
+  ) {
+    super(allowDescribe, allowIt, executable);
+    this.#to = new TestingTestTo(allowDescribe, allowIt, executable);
   }
 
   //#region toBe methods
@@ -148,11 +121,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.toBe(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.be(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -174,11 +143,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.bigint(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.bigInt(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -200,11 +165,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.booleanType(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.booleanType(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -226,11 +187,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.class(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.class(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -242,11 +199,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.closeTo(actual, expected, precision, expectationFailOutput),
-      execute
-    );
+    this.#to.be.closeTo(actual, expected, precision, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -257,11 +210,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.defined(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.defined(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -272,11 +221,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.false(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.false(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -287,15 +232,11 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.falsy(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.falsy(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
-
+  //#region toBeGreaterThan methods
   public toBeGreaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
@@ -303,11 +244,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.greaterThan(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.greaterThan(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -318,16 +255,12 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.greaterThanOrEqual(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.greaterThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
+  //#endregion
 
   //#region toBeInstanceOf methods
-
   public toBeInstanceOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Constructor,
@@ -335,11 +268,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.of(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceOf(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -362,11 +291,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.array(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.array(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -388,11 +313,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.boolean(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.boolean(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -414,11 +335,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.date(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.date(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -440,11 +357,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.error(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.error(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -466,11 +379,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.function(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.function(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -492,11 +401,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.map(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.map(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -518,11 +423,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.number(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.number(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -544,11 +445,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.object(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.object(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -570,11 +467,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.promise(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.promise(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -596,11 +489,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.rangeError(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.rangeError(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -622,11 +511,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.referenceError(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.referenceError(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -648,11 +533,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.regexp(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.regExp(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -674,11 +555,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.set(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.set(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -700,11 +577,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.storage(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.storage(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -726,11 +599,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.string(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.string(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -752,11 +621,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.syntaxError(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.syntaxError(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -778,11 +643,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.typeError(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.typeError(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -804,11 +665,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.URIError(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.URIError(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -830,15 +687,12 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.instanceOf.weakSet(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.instanceof.weakSet(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
 
+  //#region toBeLessThan methods
   public toBeLessThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
@@ -846,11 +700,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.lessThan(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.lessThan(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -861,13 +711,10 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.lessThanOrEqual(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.lessThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
+  //#endregion
 
   public toBeNaN<T extends number>(
     actual: ExpectType<T>,
@@ -876,14 +723,9 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.naN(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.naN(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
-
 
   public toBeNegativeInfinity<T extends number>(
     actual: ExpectType<T>,
@@ -892,11 +734,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.negativeInfinity(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.negativeInfinity(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -918,11 +756,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.null(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.null(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -944,11 +778,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.numberType(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.numberType(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -959,11 +789,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.positiveInfinity(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.positiveInfinity(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -986,11 +812,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.stringType(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.stringType(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1001,11 +823,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.true(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.true(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1016,11 +834,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.be.truthy(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.be.truthy(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -1032,11 +846,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.contain(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.contain(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1058,11 +868,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.equal(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.equal(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1072,11 +878,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {    
-    this.it(
-      expectation,
-      () => this.#expect.to.have.been.called(spy, expectationFailOutput),
-      execute
-    );
+    this.#to.have.been.called.called(spy, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1087,12 +889,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    // expect(() => {}).toHaveBeenCalled()
-    this.it(
-      expectation,
-      () => this.#expect.to.have.beenCalled.before(spy, expected, expectationFailOutput),
-      execute
-    ); 
+    this.#to.have.been.called.before(spy, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1101,11 +898,7 @@ export class TestingTest extends TestingCore {
     spy: ExpectType<Actual>,
     ...params: any[]
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.have.beenCalled.onceWith(spy, ...params),
-      true
-    );
+    this.#to.have.been.called.onceWith(expectation, spy, ...params);
     return this;
   }
 
@@ -1116,11 +909,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.have.beenCalled.times(spy, expected, expectationFailOutput),
-      execute
-    ); 
+    this.#to.have.been.called.times(spy, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1131,11 +920,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.have.beenCalled.with(spy, expected, expectationFailOutput),
-      execute
-    ); 
+    this.#to.have.been.called.with(spy, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1146,11 +931,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.have.class(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.have.class(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1161,11 +942,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.have.size(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.have.size(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1176,11 +953,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.have.spyInteractions(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.have.spyInteractions(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1191,11 +964,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.match(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.match(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1206,11 +975,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.throw.throw(actual, expected, expectationFailOutput),
-      execute
-    );
+    this.#to.throw.throw(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1221,11 +986,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.throw.error(actual, message, expectationFailOutput),
-      execute
-    );
+    this.#to.throw.error(actual, message, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1236,11 +997,7 @@ export class TestingTest extends TestingCore {
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => this.#expect.to.throw.matching(actual, predicate, expectationFailOutput),
-      execute
-    );
+    this.#to.throw.matching(actual, predicate, expectation, expectationFailOutput, execute);
     return this;
   }
 }
