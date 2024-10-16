@@ -415,7 +415,6 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`number\` type or an instance of a \`Number\``
   ): this {
-    // REVIEW: instance
     this.be(is.instance(actual, Number) && is.number(actual), expected, expectationFailOutput);
     return this;
   }
@@ -547,8 +546,6 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\` with given \`keys\``
   ): this {
-    // this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
-    // keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
     this.be(is.objectKeys(actual, keys), expected, expectationFailOutput);
     return this;
   }
@@ -573,8 +570,6 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\` with given \`keys\` in it(or its prototype chain)`
   ): this {
-    // this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
-    // keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
     this.be(is.objectKeysIn(actual, keys), expected, expectationFailOutput);
     return this;
   }
@@ -600,9 +595,16 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`object\` with some of its keys or some groups of its keys from given \`keys\``
   ): this {
-    // this.expect(value, expectationFailOutput).toBeInstanceOf(Object);
-    // keys.forEach(key => this.expect(value, expectationFailOutput).toContain(key));
     this.be(is.objectSomeKeys(actual, keys), expected, expectationFailOutput);
+    return this;
+  }
+
+  public pending<T>(
+    actual: T | PromiseLike<T>,
+    expectationFailOutput?: any,
+  ): this {
+    this.expectAsync(actual, expectationFailOutput).toBePending();
+    this.setNot(false);
     return this;
   }
 
@@ -638,6 +640,55 @@ export class TestingToBe extends TestingExpect {
     return this;
   }
 
+  public rejected<T>(
+    actual: T | PromiseLike<T>,
+    expectationFailOutput?: any,
+  ): this {
+    this.expectAsync(actual, expectationFailOutput).toBeRejected();
+    this.setNot(false);
+    return this;
+  }
+
+  public rejectedWith<T, U>(
+    actual: T | PromiseLike<T>,
+    expected: jasmine.Expected<U>,
+    expectationFailOutput?: any,
+  ): this {
+    this.expectAsync(actual, expectationFailOutput).toBeRejectedWith(expected);
+    this.setNot(false);
+    return this;
+  }
+
+  public rejectedWithError<T, U>(
+    actual: T | PromiseLike<T>,
+    expected?: new (...args: any[]) => Error,
+    message?: string | RegExp,
+    expectationFailOutput?: any,
+  ): this {
+    this.expectAsync(actual, expectationFailOutput).toBeRejectedWithError(expected, message)
+    this.setNot(false);
+    return this;
+  }
+
+  public resolved<T>(
+    actual: T | PromiseLike<T>,
+    expectationFailOutput?: any,
+  ): this {
+    this.expectAsync(actual, expectationFailOutput).toBeResolved();
+    this.setNot(false);
+    return this;
+  }
+
+  public resolvedTo<T>(
+    actual: T | PromiseLike<T>,
+    expected: jasmine.Expected<T>,
+    expectationFailOutput?: any,
+  ): this {
+    this.expectAsync(actual, expectationFailOutput).toBeResolvedTo(expected);
+    this.setNot(false);
+    return this;
+  }
+
   /**
    * Expects provided value to be a `string` type or an instance of a `String`. The method uses `isString()` function from the
    * `@angular-package/type`.
@@ -657,7 +708,6 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of a \`String\``
   ): this {
-    // REVIEW: instance.
     this.be(is.instance(actual, String) && is.string(actual), expected, expectationFailOutput);
     return this;
   }
@@ -683,8 +733,6 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of \`String\` that includes the specified words/sentences from a given \`includes\``
   ): this {
-    // this.expect(value, expectationFailOutput).toBeInstanceOf(String);
-    // includes.forEach(include => this.expect(value, expectationFailOutput).toContain(include));
     this.be(
       is.stringIncludes(actual, includes),
       expected,
