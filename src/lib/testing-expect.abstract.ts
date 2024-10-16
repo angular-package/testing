@@ -22,9 +22,7 @@ export abstract class TestingExpect {
    * @returns The return value is an instance of a child class.
    */
   protected setNot(not: boolean): this {
-    if (is.boolean(not)) {
-      this.#not = not;
-    }
+    is.boolean(not) && (this.#not = not);
     return this;
   }
 
@@ -53,5 +51,14 @@ export abstract class TestingExpect {
     return is.true(this.#not)
       ? expect(actual).withContext(expectationFailOutput).not
       : expect(actual).withContext(expectationFailOutput);
+  }
+
+  protected expectAsync<T, U>(
+    actual: T | PromiseLike<T>,
+    expectationFailOutput?: any,
+  ): jasmine.AsyncMatchers<T, U> {
+    return is.true(this.#not)
+      ? expectAsync(actual).withContext(expectationFailOutput).not
+      : expectAsync(actual).withContext(expectationFailOutput);
   }
 }
