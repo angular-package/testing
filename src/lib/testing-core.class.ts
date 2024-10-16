@@ -62,6 +62,38 @@ export abstract class TestingCore {
     is.true(allowIt) && this.#testingIt.allow();
   }
 
+  public afterAll(
+    action: jasmine.ImplementationCallback,
+    timeout?: number
+  ): this {
+    afterAll(action, timeout);
+    return this;
+  }
+
+  public afterEach(
+    action: jasmine.ImplementationCallback,
+    timeout?: number
+  ): this {
+    afterEach(action, timeout);
+    return this;
+  }
+
+  public beforeAll(
+    action: jasmine.ImplementationCallback,
+    timeout?: number
+  ): this {
+    beforeAll(action, timeout);
+    return this;
+  }
+
+  public beforeEach(
+    action: jasmine.ImplementationCallback,
+    timeout?: number
+  ): this {
+    beforeEach(action, timeout);
+    return this;
+  }
+
   /**
    * Executes defined `describe()` function of jasmine on provided state `true` from the `execute`, and resets the counter to `0`.
    * @param description "Textual description of the group" with an optional defined prefix indicating its unique number
