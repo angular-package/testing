@@ -6,19 +6,10 @@ import { ExpectType } from '../../type';
  * Prepared `toThrow` tests.
  */
 export class TestingTestToThrow extends TestingCore {
-  /**
-   * 
-   */
-  #expectation = {
-    throw: `The \`actual\` value a function to throw something.`,
-    error: `The \`actual\` value a function to throw an Error.`,
-    matching: `The \`actual\` value a function to throw something matching a predicate.`,
-  }
-
   public error<T extends jasmine.Func>(
     actual: ExpectType<T>,
     message?: string | RegExp,
-    expectation: string = this.#expectation.error,
+    expectation: string = TestingCore.expectation.toThrowError,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -33,7 +24,7 @@ export class TestingTestToThrow extends TestingCore {
   public matching<T>(
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
-    expectation: string = this.#expectation.matching,
+    expectation: string = TestingCore.expectation.toThrowMatching,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -48,7 +39,7 @@ export class TestingTestToThrow extends TestingCore {
   public throw<T>(
     actual: ExpectType<T>,
     expected?: any,
-    expectation: string = this.#expectation.throw,
+    expectation: string = TestingCore.expectation.toThrow,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
