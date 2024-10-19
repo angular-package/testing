@@ -6,21 +6,11 @@ import { ExpectType } from '../../type';
  * Prepared simple tests.
  */
 export class TestingTestToHaveBeenCalled extends TestingCore {
-  /**
-   * 
-   */
-  #expectation = {
-    called: `The \`actual\` value (a Spy) to have been called.`,
-    before: `The \`actual\` value (a Spy) to have been called before another Spy.`,
-    onceWith: `The \`actual\` value (a Spy) to have been called exactly once, and exactly with the particular arguments.`,
-    times: `The \`actual\` value (a Spy) to have been called the specified number of times.`,
-    with: `The \`actual\` (a Spy) to have been called the specified number of times.`,
-  }
 
   public before<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: jasmine.Func,
-    expectation: string = this.#expectation.before,
+    expectation: string = TestingCore.expectation.toHaveBeenCalledBefore,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -34,7 +24,7 @@ export class TestingTestToHaveBeenCalled extends TestingCore {
 
   public called<T extends jasmine.Func>(
     spy: ExpectType<T>,
-    expectation: string = this.#expectation.called,
+    expectation: string = TestingCore.expectation.toHaveBeenCalled,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {    
@@ -47,7 +37,7 @@ export class TestingTestToHaveBeenCalled extends TestingCore {
   }
 
   public onceWith<Actual extends jasmine.Func>(
-    expectation: string = this.#expectation.onceWith,
+    expectation: string = TestingCore.expectation.toHaveBeenCalledOnceWith,
     spy: ExpectType<Actual>,
     ...params: any[]
   ): this {
@@ -62,7 +52,7 @@ export class TestingTestToHaveBeenCalled extends TestingCore {
   public times<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: number,
-    expectation: string = this.#expectation.times,
+    expectation: string = TestingCore.expectation.toHaveBeenCalledTimes,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -77,7 +67,7 @@ export class TestingTestToHaveBeenCalled extends TestingCore {
   public with<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: any,
-    expectation: string = this.#expectation.with,
+    expectation: string = TestingCore.expectation.toHaveBeenCalledWith,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
