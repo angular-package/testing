@@ -9,25 +9,25 @@ import { ExpectType } from '../../type';
  * Prepared tests.
  */
 export class TestingTestTo extends TestingCore {
+  /**
+   * 
+   */
   public get be() {
     return this.#be;
-  }
-
-  public get have() {
-    return this.#have;
-  }
-
-  public get throw() {
-    return this.#throw;
   }
 
   /**
    * 
    */
-  #expectation = {
-    contain: `The \`actual\` value to contain a specific value.`,
-    equal: `The \`actual\` value to be equal to the \`expected\`, using deep equality comparison.`,
-    match: `The \`actual\` value to match a regular expression.`,
+  public get have() {
+    return this.#have;
+  }
+
+  /**
+   * 
+   */
+  public get throw() {
+    return this.#throw;
   }
 
   /**
@@ -65,10 +65,19 @@ export class TestingTestTo extends TestingCore {
     this.#throw = new TestingTestToThrow(allowDescribe, allowIt, executable);
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public contain<T>(
     actual: ExpectType<T>,
     expected: any,
-    expectation: string = this.#expectation.contain,
+    expectation: string = TestingCore.expectation.toContain,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -94,7 +103,7 @@ export class TestingTestTo extends TestingCore {
   public equal<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
-    expectation: string = this.#expectation.equal,
+    expectation: string = TestingCore.expectation.toEqual,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -106,11 +115,19 @@ export class TestingTestTo extends TestingCore {
     return this;
   }
 
-  
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public match<T>(
     actual: ExpectType<T>,
     expected: string | RegExp,
-    expectation: string = this.#expectation.match, 
+    expectation: string = TestingCore.expectation.toMatch, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
