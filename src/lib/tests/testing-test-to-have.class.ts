@@ -17,15 +17,6 @@ export class TestingTestToHave extends TestingCore {
   /**
    * 
    */
-  #expectation = {
-    class: `The \`actual\` value to be a DOM element that has the expected class.`,
-    size: `The \`actual\` size to be equal to the expected, using array-like length or object keys size.`,
-    spyInteractions: `The \`actual\` value (a SpyObj) spies to have been called.`,
-  }
-
-  /**
-   * 
-   */
   #been: TestingTestToHaveBeen;
 
   /**
@@ -49,7 +40,7 @@ export class TestingTestToHave extends TestingCore {
   public class<T>(
     actual: ExpectType<T>,
     expected: string,
-    expectation: string = this.#expectation.class, 
+    expectation: string = TestingCore.expectation.toHaveClass, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -64,7 +55,7 @@ export class TestingTestToHave extends TestingCore {
   public size<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
-    expectation: string = this.#expectation.size, 
+    expectation: string = TestingCore.expectation.toHaveSize, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -79,7 +70,7 @@ export class TestingTestToHave extends TestingCore {
   public spyInteractions<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
-    expectation: string = this.#expectation.spyInteractions,
+    expectation: string = TestingCore.expectation.toHaveSpyInteractions,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
