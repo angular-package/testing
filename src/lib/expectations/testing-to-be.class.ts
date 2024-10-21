@@ -34,7 +34,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) an
    * `array`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public array<T>(
     actual: ExpectType<T>,
@@ -43,7 +43,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be an \`array\``
   ): this {
-    this.be(is.instance(actual, Array) &&  is.array(actual), expected, expectationFailOutput);
+    this.be(is.array(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -61,6 +61,7 @@ export class TestingToBe extends TestingExpect {
     expected: jasmine.Expected<typeof actual>,
     expectationFailOutput?: any
   ): this {
+    console.log(`expect ->`, actual, expected);
     this.expect(actual, expectationFailOutput).toBe(expected);
     this.setNot(false);
     return this;
@@ -73,7 +74,7 @@ export class TestingToBe extends TestingExpect {
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) `bigint`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public bigint<T>(
     actual: ExpectType<T>,
@@ -93,7 +94,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not)
    * `boolean`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public boolean<T>(
     actual: ExpectType<T>,
@@ -102,7 +103,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`boolean\` type or an instance of \`Boolean\``
   ): this {
-    this.be(is.instance(actual, Boolean) && is.boolean(actual), expected, expectationFailOutput);
+    this.be(is.boolean(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -124,7 +125,7 @@ export class TestingToBe extends TestingExpect {
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) `class`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public class<T>(
     actual: ExpectType<T>,
@@ -156,7 +157,7 @@ export class TestingToBe extends TestingExpect {
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) a `Date`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public date<T>(
     actual: ExpectType<T>,
@@ -165,7 +166,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`date\``
   ): this {
-    this.be(is.instance(actual, Date) && is.date(actual), expected, expectationFailOutput);
+    this.be(is.date(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -176,7 +177,7 @@ export class TestingToBe extends TestingExpect {
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) defined.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public defined<T>(
     actual: ExpectType<T>,
@@ -191,6 +192,7 @@ export class TestingToBe extends TestingExpect {
     return this;
   }
 
+  //#region boolean expectations
   /**
    * Expects provided value to be a `boolean` type or an instance of `Boolean` equal to `false`. The method uses `isFalse()` function
    * from the `@angular-package/type`.
@@ -200,7 +202,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) a
    * `boolean` type or an instance of `Boolean` equal to `false`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public false<T>(
     actual: ExpectType<T>,
@@ -228,6 +230,7 @@ export class TestingToBe extends TestingExpect {
     this.setNot(false);
     return this;
   }
+  //#endregion
 
   /**
    * Expects provided value to be `function`. The method uses `isFunction()` function from the `@angular-package/type`.
@@ -237,7 +240,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not)
    * `function`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public function<T>(
     actual: ExpectType<T>,
@@ -250,6 +253,7 @@ export class TestingToBe extends TestingExpect {
     return this;
   }
 
+  //#region greaterThan
   // TODO: Description.
   public greaterThan<T extends number>(
     actual: ExpectType<T>,
@@ -271,7 +275,9 @@ export class TestingToBe extends TestingExpect {
     this.setNot(false);
     return this;
   }
+  //#endregion
 
+  //#region instance
   /**
    * Expects provided value to be an instance of a `class` from the given `constructor`. The method uses `isInstance()` function from the
    * `@angular-package/type`.
@@ -282,7 +288,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) an
    * instance of `class` from the given `constructor`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public instance<T, Type>(
     actual: ExpectType<T>,
@@ -307,6 +313,7 @@ export class TestingToBe extends TestingExpect {
     this.setNot(false);
     return this;
   }
+  //#endregion
 
   /**
    * Expects provided value to be property key. The method uses `isKey()` function from the `@angular-package/type`.
@@ -316,7 +323,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) the
    * property key.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public key<T>(
     actual: ExpectType<T>,
@@ -329,6 +336,7 @@ export class TestingToBe extends TestingExpect {
     return this;
   }
 
+  //#region lessThan
   // TODO: Description.
   public lessThan<T extends number>(
     actual: ExpectType<T>,
@@ -350,6 +358,7 @@ export class TestingToBe extends TestingExpect {
     this.setNot(false);
     return this;
   }
+  //#endregion
 
   // TODO: Description.
   public naN<T extends number>(
@@ -382,7 +391,7 @@ export class TestingToBe extends TestingExpect {
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) `null`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public null<T>(
     actual: ExpectType<T>,
@@ -397,6 +406,7 @@ export class TestingToBe extends TestingExpect {
     return this;
   }
 
+  //#region number
   /**
    * Expects provided value to be a `number` type or an instance of a `Number`. The method uses `isNumber()` function from the
    * `@angular-package/type`.
@@ -406,7 +416,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) a
    * `number` type or an instance of a `Number`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public number<T>(
     actual: ExpectType<T>,
@@ -415,7 +425,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`number\` type or an instance of a \`Number\``
   ): this {
-    this.be(is.instance(actual, Number) && is.number(actual), expected, expectationFailOutput);
+    this.be(is.number(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -430,7 +440,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) a `number`
    * type or an instance of a `Number` between the `range` of minimum and maximum.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public numberBetween<T, Min extends number, Max extends number>(
     actual: ExpectType<T>,
@@ -459,6 +469,9 @@ export class TestingToBe extends TestingExpect {
     this.be(is.numberType(actual), expected, expectationFailOutput);
     return this;
   }
+  //#endregion
+
+  //#region object
   /**
    * Expects provided value to be an `object`. The method uses `isObject()` function from the `@angular-package/type`.
    * @param actual The value of any type that is checked against an `object` and the result of its check is passed to the `expect()`
@@ -467,7 +480,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) an
    * `object`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public object<T>(
     actual: ExpectType<T>,
@@ -489,7 +502,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) an
    * `object` with a given `key`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public objectKey<T>(
     actual: ExpectType<T>,
@@ -513,7 +526,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) an
    * `object` with a given `key` in it(or its prototype chain).
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public objectKeyIn<T>(
     actual: ExpectType<T>,
@@ -536,7 +549,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) an
    * `object` with given `keys`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public objectKeys<T>(
     actual: ExpectType<T>,
@@ -560,7 +573,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) an
    * `object` with given `keys` in it(or its prototype chain).
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public objectKeysIn<T>(
     actual: ExpectType<T>,
@@ -585,7 +598,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) an
    * `object` with some given keys.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public objectSomeKeys<T>(
     actual: ExpectType<T>,
@@ -598,13 +611,14 @@ export class TestingToBe extends TestingExpect {
     this.be(is.objectSomeKeys(actual, keys), expected, expectationFailOutput);
     return this;
   }
+  //#endregion
 
   public pending<T>(
     actual: T | PromiseLike<T>,
     expectationFailOutput?: any,
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBePending();
-    this.setNot(false);
+    this.setAlready(false).setNot(false);
     return this;
   }
 
@@ -627,7 +641,7 @@ export class TestingToBe extends TestingExpect {
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) `RegExp`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public regexp<T>(
     actual: ExpectType<T>,
@@ -640,12 +654,13 @@ export class TestingToBe extends TestingExpect {
     return this;
   }
 
+  //#region rejected
   public rejected<T>(
     actual: T | PromiseLike<T>,
     expectationFailOutput?: any,
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeRejected();
-    this.setNot(false);
+    this.setAlready(false).setNot(false);
     return this;
   }
 
@@ -655,7 +670,7 @@ export class TestingToBe extends TestingExpect {
     expectationFailOutput?: any,
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeRejectedWith(expected);
-    this.setNot(false);
+    this.setAlready(false).setNot(false);
     return this;
   }
 
@@ -665,8 +680,8 @@ export class TestingToBe extends TestingExpect {
     message?: string | RegExp,
     expectationFailOutput?: any,
   ): this {
-    this.expectAsync(actual, expectationFailOutput).toBeRejectedWithError(expected, message)
-    this.setNot(false);
+    this.expectAsync<T, U>(actual, expectationFailOutput).toBeRejectedWithError(expected, message)
+    this.setAlready(false).setNot(false);
     return this;
   }
 
@@ -675,7 +690,7 @@ export class TestingToBe extends TestingExpect {
     expectationFailOutput?: any,
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeResolved();
-    this.setNot(false);
+    this.setAlready(false).setNot(false);
     return this;
   }
 
@@ -685,10 +700,12 @@ export class TestingToBe extends TestingExpect {
     expectationFailOutput?: any,
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeResolvedTo(expected);
-    this.setNot(false);
+    this.setAlready(false).setNot(false);
     return this;
   }
+  //#endregion
 
+  //#region string
   /**
    * Expects provided value to be a `string` type or an instance of a `String`. The method uses `isString()` function from the
    * `@angular-package/type`.
@@ -698,7 +715,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) a `string`
    * type or an instance of a `String`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    * @angularpackage
    */
   public string<T>(
@@ -708,7 +725,7 @@ export class TestingToBe extends TestingExpect {
       this.getNot() === true ? `not` : ``
     } be a \`string\` type or an instance of a \`String\``
   ): this {
-    this.be(is.instance(actual, String) && is.string(actual), expected, expectationFailOutput);
+    this.be(is.string(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -722,7 +739,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) a `string`
    * type or an instance of `String` that includes the specified words/sentences from a given `includes`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    * @angularpackage
    */
   public stringIncludes<T>(
@@ -751,7 +768,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) a `string`
    * type or an instance of `String` that includes some of the specified words/sentences from a given `includes`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    * @angularpackage
    */
   public stringIncludesSome<T>(
@@ -780,7 +797,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) a `string`
    * type or an instance of a `String` of the specified `length`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public stringOfLength<T, Length extends number>(
     actual: ExpectType<T>,
@@ -805,7 +822,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) a `string`
    * type or an instance of a `String` of the `length` between the given minimum and maximum.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public stringOfLengthBetween<T, Min extends number, Max extends number>(
     actual: ExpectType<T>,
@@ -834,6 +851,7 @@ export class TestingToBe extends TestingExpect {
     this.be(is.stringType(actual), expected, expectationFailOutput);
     return this;
   }
+  //#endregion
 
   /**
    * Expects provided value to be a `symbol`. The method uses `isSymbol()` function from the `@angular-package/type`.
@@ -842,7 +860,7 @@ export class TestingToBe extends TestingExpect {
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) a `symbol`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public symbol<T>(
     actual: ExpectType<T>,
@@ -855,6 +873,7 @@ export class TestingToBe extends TestingExpect {
     return this;
   }
 
+  //#region true boolean
   /**
    * Expects provided value to be a `boolean` type or an instance of `Boolean` equal to `true`. The method uses `isTrue()` function from
    * the `@angular-package/type`.
@@ -864,7 +883,7 @@ export class TestingToBe extends TestingExpect {
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) a `boolean`
    * type or an instance of `Boolean` equal to `true`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public true<T>(
     actual: ExpectType<T>,
@@ -891,6 +910,7 @@ export class TestingToBe extends TestingExpect {
     this.setNot(false);
     return this;
   }
+  //#endregion
 
   /**
    * Expects provided value to be `undefined`. The method uses `isUndefined()` function from the `@angular-package/type`.
@@ -899,7 +919,7 @@ export class TestingToBe extends TestingExpect {
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
    * method of `jasmine.Matchers`.
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) `undefined`.
-   * @returns The return value is an instance of `TestingToBeMatchers`.
+   * @returns The return value is an instance of `TestingToBe`.
    */
   public undefined<T>(
     actual: ExpectType<T>,

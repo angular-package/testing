@@ -11,20 +11,40 @@ import { ExpectType } from '../../type/expect-type.type';
  * Testing `to`, `to.be`, `to.have`, `to.throw` matchers.
  */
 export class TestingTo extends TestingExpect {
+  /**
+   * 
+   */
   public get be(): TestingToBe {
     return this.#be;
   }
 
+  /**
+   * 
+   */
   public get have(): TestingToHave {
     return this.#have;
   }
 
+  /**
+   * 
+   */
   public get throw(): TestingToThrow {
     return this.#throw;
   }
 
+  /**
+   * 
+   */
   #be = new TestingToBe();
+
+  /**
+   * 
+   */
   #have = new TestingToHave();
+
+  /**
+   * 
+   */
   #throw = new TestingToThrow();
 
   public contain<T>(
@@ -33,9 +53,8 @@ export class TestingTo extends TestingExpect {
     expectationFailOutput?: any
   ): this {
     this
-      .expect(actual, expectationFailOutput)
-      .toContain(expected);
-    this.setNot(false);
+      .expectation(actual, e => e.toContain(expected), expectationFailOutput)
+      .setNot(false);
     return this;
   }
 
@@ -45,9 +64,8 @@ export class TestingTo extends TestingExpect {
     expectationFailOutput?: any
   ): this {
     this
-      .expect(actual, expectationFailOutput)
-      .toEqual(expected);
-    this.setNot(false);
+      .expectation(actual, e => e.toEqual(expected), expectationFailOutput)
+      .setNot(false);
     return this;
   }
 
@@ -57,10 +75,8 @@ export class TestingTo extends TestingExpect {
     expectationFailOutput?: any
   ): this {
     this
-      .expect(actual, expectationFailOutput)
-      .toMatch(expected);
-    this.setNot(false);
+      .expectation(actual, e => e.toMatch(expected), expectationFailOutput)
+      .setNot(false);
     return this;
   }
 }
-    

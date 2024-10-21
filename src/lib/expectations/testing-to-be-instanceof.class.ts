@@ -390,5 +390,4 @@ export class TestingToBeInstanceOf extends TestingExpect {
     this.setNot(false);
     return this;
   }
-
 }

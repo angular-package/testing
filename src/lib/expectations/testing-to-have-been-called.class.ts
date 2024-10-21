@@ -1,14 +1,18 @@
 // Class.
 import { TestingExpect } from '../testing-expect.abstract';
-import { TestingToHaveBeen } from './testing-to-have-been.class';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
-
 /**
  * Testing `ToHaveBeenCalled` matchers.
  */
 export class TestingToHaveBeenCalled extends TestingExpect {
-
+  /**
+   * 
+   * @param spy 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public before<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: jasmine.Func,
@@ -21,6 +25,12 @@ export class TestingToHaveBeenCalled extends TestingExpect {
     return this;
   }
 
+  /**
+   * 
+   * @param spy 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public called<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expectationFailOutput?: any
@@ -32,6 +42,12 @@ export class TestingToHaveBeenCalled extends TestingExpect {
     return this;
   }
 
+  /**
+   * 
+   * @param spy 
+   * @param params 
+   * @returns 
+   */
   public onceWith<T extends jasmine.Func>(
     spy: ExpectType<T>,
     ...params: any[]
@@ -43,6 +59,13 @@ export class TestingToHaveBeenCalled extends TestingExpect {
     return this;
   }
 
+  /**
+   * 
+   * @param spy 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public times<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: number,
@@ -55,6 +78,13 @@ export class TestingToHaveBeenCalled extends TestingExpect {
     return this;
   }
 
+  /**
+   * 
+   * @param spy 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public with<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: any,
