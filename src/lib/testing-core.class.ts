@@ -4,11 +4,13 @@ import { is } from '@angular-package/type';
 import { TestingDescribe } from './testing-describe.class';
 import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
-import { TestingBefore } from './testing-before.class';
 /**
  * Core object with describe and it instances.
  */
-export abstract class TestingCore {
+export abstract class TestingCore<
+  Descriptions extends string = string,
+  Expectations extends string = string
+> {
   /**
    * 
    */
@@ -160,12 +162,12 @@ export abstract class TestingCore {
   /**
    * Privately stored instance of a `TestingDescribe`.
    */
-  #testingDescribe = new TestingDescribe();
+  #testingDescribe = new TestingDescribe<Descriptions>();
 
   /**
    * Privately stored instance of a `TestingIt`.
    */
-  #testingIt = new TestingIt();
+  #testingIt = new TestingIt<Expectations>();
 
   /**
    * Core object with describe and it instances.
@@ -179,7 +181,7 @@ export abstract class TestingCore {
   }) {
     if (is.defined(executable)) {
       is.array(executable.describe) && (this.#testingDescribe = new TestingDescribe(allowDescribe, executable.describe));
-      is.array(executable.it) && (this.#testingIt = new TestingIt(allowIt, executable.it));
+      is.array(executable.it) && (this.#testingIt = new TestingIt<Expectations>(allowIt, executable.it));
     }
     is.true(allowDescribe) && this.#testingDescribe.allow();
     is.true(allowIt) && this.#testingIt.allow();
@@ -253,8 +255,8 @@ export abstract class TestingCore {
    * @param execute A `boolean` type value to decide whether or not execute defined `describe()` of jasmine function.
    * @returns The return value is an instance of a child class.
    */
-  public describe(
-    description: string,
+  public describe<Description extends string>(
+    description: Descriptions | Description,
     specDefinitions: () => any,
     execute?: boolean
   ): this {
@@ -267,6 +269,18 @@ export abstract class TestingCore {
     return this;
   }
 
+  public fdescribe<Description extends string>(
+    description: Descriptions | Description,
+    specDefinitions: () => any,
+  ): this {
+    this.testingIt.resetCounter();
+    this.testingDescribe.fdescribe(
+      description,
+      specDefinitions,
+    );
+    return this;
+  }
+
   /**
    * Executes defined `it()` function of jasmine on provided state `true` from the `execute`.
    * @param expectation "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]`.
@@ -274,8 +288,8 @@ export abstract class TestingCore {
    * @param execute A `boolean` type value to decide whether or not execute defined `it()` of jasmine function.
    * @returns The return value is an instance of a child class.
    */
-  public it(
-    expectation: string,
+  public it<Expectation extends string>(
+    expectation: Expectations | Expectation,
     assertion: jasmine.ImplementationCallback,
     execute?: boolean
   ): this {
@@ -302,6 +316,18 @@ export abstract class TestingCore {
    */
   public setSuiteProperty(key: string, value: unknown) {
     setSuiteProperty(key, value);
+    return this;
+  }
+
+  public xdescribe<Description extends string>(
+    description: Descriptions | Description,
+    specDefinitions: () => any,
+  ): this {
+    this.testingIt.resetCounter();
+    this.testingDescribe.xdescribe(
+      description,
+      specDefinitions,
+    );
     return this;
   }
 }

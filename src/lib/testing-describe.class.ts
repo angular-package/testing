@@ -5,7 +5,9 @@ import { TestingExecutable } from './testing-executable.class';
 /**
  * Manages `describe()` function of jasmine.
  */
-export class TestingDescribe extends TestingExecutable {
+export class TestingDescribe<
+  Descriptions extends string = string
+> extends TestingExecutable {
   /**
    * Defines the wrapper function for the `describe()` function of jasmine with the ability to decide its execution.
    * @param description "Textual description of the group" with a defined prefix indicating its unique number.
@@ -61,8 +63,8 @@ export class TestingDescribe extends TestingExecutable {
    * @param execute A `boolean` type value to decide whether or not execute defined `describe()` of jasmine function.
    * @returns The return value is an instance of `TestingDescribe`.
    */
-  public describe(
-    description: string,
+  public describe<Description extends string>(
+    description: Descriptions | Description,
     specDefinitions: () => void,
     execute: boolean = is.false(this.#allow)
       ? this.isExecutable(this.getCounter() + 1)
@@ -76,6 +78,15 @@ export class TestingDescribe extends TestingExecutable {
     return this;
   }
 
+  public fdescribe<Description extends string>(
+    description: Descriptions | Description,
+    specDefinitions: () => void,
+  ): this {
+    this.count();
+    fdescribe(description, specDefinitions);
+    return this;
+  }
+
   /**
    * Defines description for `describe()` method with adding counter on demand.
    * @param description A `string` type value.
@@ -86,5 +97,14 @@ export class TestingDescribe extends TestingExecutable {
       return description.replace('[counter]', `${this.getCounter()}`);
     }
     return '';
+  }
+
+  public xdescribe<Description extends string>(
+    description: Descriptions | Description,
+    specDefinitions: () => void,
+  ): this {
+    this.count();
+    xdescribe(description, specDefinitions);
+    return this;
   }
 }
