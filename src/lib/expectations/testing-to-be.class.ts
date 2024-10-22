@@ -1,7 +1,8 @@
 // @angular-package/type.
-import { is, Constructor } from '@angular-package/type';
+import { is, Constructor, typeOf } from '@angular-package/type';
 // Class.
 import { TestingExpect } from '../testing-expect.abstract';
+import { TestingToBeArrayOf } from './testing-to-be-arrayof.class';
 import { TestingToBeInstanceOf } from './testing-to-be-instanceof.class';
 // Type.
 import { ExpectType } from '../../type';
@@ -12,9 +13,18 @@ export class TestingToBe extends TestingExpect {
   /**
    * 
    */
+  public get arrayof() {
+    return this.#arrayof;
+  }
+
+  /**
+   * 
+   */
   public get instanceof() {
     return this.#instanceof;
   }
+
+  #arrayof = new TestingToBeArrayOf();
 
   /**
    * 
@@ -910,6 +920,18 @@ export class TestingToBe extends TestingExpect {
     return this;
   }
   //#endregion
+
+  public typeOf<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<string>,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be typeOf`
+  ): this {
+    this.expect(typeOf(actual) === expected, expectationFailOutput).toBeTrue();
+    this.setNot(false);
+    return this;
+  }
 
   /**
    * Expects provided value to be `undefined`. The method uses `isUndefined()` function from the `@angular-package/type`.

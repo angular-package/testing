@@ -689,6 +689,15 @@ export class TestingExpectation {
   }
   //#endregion
 
+  public toBeTypeOf<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<string>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.typeOf(actual, expected, expectationFailOutput));
+    return this;
+  }
+
   public toBeUndefined<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
