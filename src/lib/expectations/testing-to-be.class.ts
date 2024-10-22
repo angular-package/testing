@@ -61,7 +61,6 @@ export class TestingToBe extends TestingExpect {
     expected: jasmine.Expected<typeof actual>,
     expectationFailOutput?: any
   ): this {
-    console.log(`expect ->`, actual, expected);
     this.expect(actual, expectationFailOutput).toBe(expected);
     this.setNot(false);
     return this;
