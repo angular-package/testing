@@ -18,9 +18,7 @@ export class TestingToHaveBeenCalled extends TestingExpect {
     expected: jasmine.Func,
     expectationFailOutput?: any
   ): this {
-    this
-      .expect(spy, expectationFailOutput)
-      .toHaveBeenCalledBefore(expected);
+    this.expect(spy, expectationFailOutput).toHaveBeenCalledBefore(expected);
     this.setNot(false);
     return this;
   }
@@ -35,9 +33,7 @@ export class TestingToHaveBeenCalled extends TestingExpect {
     spy: ExpectType<T>,
     expectationFailOutput?: any
   ): this {
-    this
-      .expect(spy, expectationFailOutput)
-      .toHaveBeenCalled();
+    this.expect(spy, expectationFailOutput).toHaveBeenCalled();
     this.setNot(false);
     return this;
   }
@@ -52,9 +48,7 @@ export class TestingToHaveBeenCalled extends TestingExpect {
     spy: ExpectType<T>,
     ...params: any[]
   ): this {
-    this
-      .expect(spy)
-      .toHaveBeenCalledOnceWith(...params);
+    this.expect(spy).toHaveBeenCalledOnceWith(...params);
     this.setNot(false);
     return this;
   }
@@ -71,9 +65,7 @@ export class TestingToHaveBeenCalled extends TestingExpect {
     expected: number,
     expectationFailOutput?: any
   ): this {
-    this
-      .expect(spy, expectationFailOutput)
-      .toHaveBeenCalledTimes(expected);
+    this.expect(spy, expectationFailOutput).toHaveBeenCalledTimes(expected);
     this.setNot(false);
     return this;
   }
@@ -81,18 +73,14 @@ export class TestingToHaveBeenCalled extends TestingExpect {
   /**
    * 
    * @param spy 
-   * @param expected 
-   * @param expectationFailOutput 
+   * @param params 
    * @returns 
    */
   public with<T extends jasmine.Func>(
     spy: ExpectType<T>,
-    expected: any,
-    expectationFailOutput?: any
+    ...params: any[]
   ): this {
-    this
-      .expect(spy, expectationFailOutput)
-      .toHaveBeenCalledWith(expected);
+    this.expect(spy).toHaveBeenCalledWith(...params);
     this.setNot(false);
     return this;
   }
