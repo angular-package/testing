@@ -70,7 +70,8 @@ export class TestingTestToBe extends TestingCore {
    * `true`. The method uses `isArray()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be a bigint type'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be `array` type or an instance of `Array`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -96,7 +97,8 @@ export class TestingTestToBe extends TestingCore {
    * `true`. The method uses `isBigInt()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be a bigint type'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be a `bigint` type.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -122,7 +124,8 @@ export class TestingTestToBe extends TestingCore {
    * on the `expected` of `true`. The method uses `isBoolean()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be of a boolean type'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be of a `boolean` type or an instance of `${Boolean.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -148,7 +151,8 @@ export class TestingTestToBe extends TestingCore {
    * on the `expected` of `true`. The method uses `isBooleanType()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be of a boolean type'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be of a `boolean` type.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -174,7 +178,8 @@ export class TestingTestToBe extends TestingCore {
    * on the `expected` of `true`. The method uses `isClass()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `The value must be a class`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be a `class`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -195,6 +200,16 @@ export class TestingTestToBe extends TestingCore {
     return this;
   }
 
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param precision 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public closeTo<T extends number>(
     actual: ExpectType<T>,
     expected: number,
@@ -216,7 +231,8 @@ export class TestingTestToBe extends TestingCore {
    * on the `expected` of `true`. The method uses `isDate()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `The value must be a class`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value to be a `date`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -287,7 +303,8 @@ export class TestingTestToBe extends TestingCore {
    * on the `expected` of `true`. The method uses `isFunction()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `The value must be a class`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be defined.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -348,7 +365,8 @@ export class TestingTestToBe extends TestingCore {
    * @param actual The value of any type to check.
    * @param constructor Expects the result of the expectation to be `true` or `false`, by default it's `true`.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `The value must be a class`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value to be an instance of `constructor`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -371,10 +389,20 @@ export class TestingTestToBe extends TestingCore {
   }
 
   //#region toBeInstanceOf
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * The `actual` value must be an instance of `expected`.
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public instanceOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Constructor,
-    expectation: string,
+    expectation: string = TestingTestToBe.expectation.toBeInstanceOf,
     expectationFailOutput?: any,
     execute?: boolean
   ): this {
@@ -392,7 +420,8 @@ export class TestingTestToBe extends TestingCore {
    * on the `expected` of `true`. The method uses `isKey()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `The value must be a class`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value to be a `PropertyKey`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -480,7 +509,8 @@ export class TestingTestToBe extends TestingCore {
    * method uses `isNull()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be \`null\`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be `null`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -506,7 +536,8 @@ export class TestingTestToBe extends TestingCore {
    * method uses `isNumber()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be \`number\` type or an instance of \`Number\`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value to be a `number` type or an instance of a `${Number.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -534,7 +565,8 @@ export class TestingTestToBe extends TestingCore {
    * @param min The **minimum** range of generic type variable `Min` of the given `value`.
    * @param max The **maximum** range of generic type variable `Max` of the given `value`.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be \`number\` type or an instance of \`Number\` between \`min\` and \`max\`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * `'The value must be `number` type or an instance of `Number` between `min` and `max`'`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -562,7 +594,8 @@ export class TestingTestToBe extends TestingCore {
    * `true`. The method uses `isNumberType()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be of a \`number\` type'`.
+   * @param expectation The message for the karma, which by default is set to
+   *The `actual` value must be of a `number` type.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -588,7 +621,8 @@ export class TestingTestToBe extends TestingCore {
    * `true`. The method uses `isObject()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an \`object\`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be of `object` type or an instance of `Object`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -615,7 +649,8 @@ export class TestingTestToBe extends TestingCore {
    * @param actual The value of any type to check.
    * @param key Property name of `PropertyKey` type of potential `object` from the provided `value`.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an `object` with a given `key`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be of `object` type or an instance of `Object` with a given `key`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -643,7 +678,8 @@ export class TestingTestToBe extends TestingCore {
    * @param actual The value of any type to check.
    * @param key Property name of a `PropertyKey` type of potential `object` from the provided `value`.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an `object` with a given `key`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be of `object` type or an instance of `Object` with given `keys`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -671,7 +707,8 @@ export class TestingTestToBe extends TestingCore {
    * @param actual The value of any type to check.
    * @param keys An `array` of property names of the `PropertyKey` type of potential `object` from the provided `value`.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an `object` with given `keys`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be of `object` type or an instance of `Object` with a given `key` in it(or its prototype chain).
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -701,7 +738,8 @@ export class TestingTestToBe extends TestingCore {
    * them or some groups of them.
    * @param keys An `array` of property names of the `PropertyKey` type of potential `object` from the provided `value`.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an `object` with given `keys`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be of `object` type or an instance of `Object` with given `keys` in it(or its prototype chain).
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -730,7 +768,8 @@ export class TestingTestToBe extends TestingCore {
    * @param keys An `Array` of property names or a two-dimensional `array` of property names to check if the given `value` contains some of
    * them or some groups of them.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an `object` with given `keys`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be of `object` type or an instance of `Object` with some given `keys`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -774,7 +813,8 @@ export class TestingTestToBe extends TestingCore {
    * on the `expected` of `true`.
    * @param actual Any kind of value to check.
    * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `The value must be a RegExp.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be `${RegExp.name}`.
    * @param expectationFailOutput
    * @param execute Whether or not to execute the spec, by default it's set to `true`.
    * @returns The return value is an instance of a `TestingTestToBe`.
@@ -818,7 +858,7 @@ export class TestingTestToBe extends TestingCore {
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.rejected(actual, expectationFailOutput),
+      done => { super.expect.to.be.rejected(actual, expectationFailOutput), done() },
       execute
     );
     return this;
@@ -834,7 +874,7 @@ export class TestingTestToBe extends TestingCore {
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.rejectedWith(actual, expected, expectationFailOutput),
+      done => { super.expect.to.be.rejectedWith(actual, expected, expectationFailOutput), done() },
       execute
     );
     return this;
@@ -851,7 +891,7 @@ export class TestingTestToBe extends TestingCore {
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.rejectedWithError(actual, expected, message, expectationFailOutput),
+      done => { super.expect.to.be.rejectedWithError(actual, expected, message, expectationFailOutput), done() },
       execute
     );
     return this;
@@ -866,7 +906,7 @@ export class TestingTestToBe extends TestingCore {
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.resolved(actual, expectationFailOutput),
+      done => { super.expect.to.be.resolved(actual, expectationFailOutput), done() },
       execute
     );
     return this;
@@ -882,7 +922,7 @@ export class TestingTestToBe extends TestingCore {
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.resolvedTo(actual, expected, expectationFailOutput),
+      done => { super.expect.to.be.resolvedTo(actual, expected, expectationFailOutput), done() },
       execute
     );
     return this;
@@ -893,7 +933,8 @@ export class TestingTestToBe extends TestingCore {
    * `true`. The method uses `isString()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be a `string` type or an instance of a `String`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be a `string` type or an instance of a `String`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -920,7 +961,8 @@ export class TestingTestToBe extends TestingCore {
    * @param actual The value of any type to check.
    * @param includes An `Array` of strings as words/sentences to be case-sensitive searched for within the given `value`.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be a `string` type or an instance of a `String` that includes the specified words/sentences'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be a `string` type or an instance of a `String` that includes the specified words/sentences.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -948,7 +990,8 @@ export class TestingTestToBe extends TestingCore {
    * @param actual The value of any type to check.
    * @param includes An `Array` of strings as words/sentences to be case-sensitive searched for within the given `value`.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be a `string` type or an instance of a `String` that includes some of the specified words/sentences'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be a `string` type or an instance of a `String` that includes some of the specified words/sentences.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -976,7 +1019,8 @@ export class TestingTestToBe extends TestingCore {
    * @param actual The value of any type to check.
    * @param length The **length** of generic type variable `Length` for the given `value`,
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be a `string` type or an instance of a `String` of the given length'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be a `string` type or an instance of a `String` of the given `length`..
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -1003,7 +1047,8 @@ export class TestingTestToBe extends TestingCore {
    * minimum and maximum on the `expected` of `true`. The method uses `isStringLengthBetween()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be a `string` type or an instance of a `String` of the length between the given minimum and maximum.'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be a `string` type or an instance of a `String` of the length between the given `min` and `max`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -1031,7 +1076,8 @@ export class TestingTestToBe extends TestingCore {
    * `true`. The method uses `isStringType()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be of a \`string\` type'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be of a `string` type.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -1057,7 +1103,8 @@ export class TestingTestToBe extends TestingCore {
    * `true`. The method uses `isSymbol()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be a `symbol`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be a `symbol`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -1083,7 +1130,8 @@ export class TestingTestToBe extends TestingCore {
    * `Boolean` equal to`true` on the `expected` of `true`. The method uses `isSymbol()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be a `boolean` type or an instance of `Boolean` equal to `true`'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be a `boolean` type or an instance of `Boolean` equal to `true`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
@@ -1123,7 +1171,8 @@ export class TestingTestToBe extends TestingCore {
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `undefined` on the `expected` of `true`. The method uses `isUndefined()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be a `undefined`.'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be `undefined`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
