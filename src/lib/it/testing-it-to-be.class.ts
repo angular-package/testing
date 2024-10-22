@@ -1,6 +1,6 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
-import { TestingItToBeInstanceOf } from './testing-test-to-be-instanceof.class';
+import { TestingItToBeInstanceOf } from './testing-it-to-be-instanceof.class';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../../type';

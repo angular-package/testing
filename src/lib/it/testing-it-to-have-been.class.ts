@@ -1,6 +1,6 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
-import { TestingItToHaveBeenCalled } from './testing-test-to-have-been-called.class';
+import { TestingItToHaveBeenCalled } from './testing-it-to-have-been-called.class';
 /**
  * Prepared `toHaveBeen` tests.
  */
