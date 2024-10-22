@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 export const EXPECTATION = {
   toBeBigInt: `The \`actual\` value must be a \`bigint\` type.`,
   toBeBooleanType: `The \`actual\` value must be of a \`boolean\` type.`,
@@ -11,6 +14,9 @@ export const EXPECTATION = {
   // GreaterThan
   toBeGreaterThan: `The \`actual\` value to be greater than the expected value.`,
   toBeGreaterThanOrEqual: `The \`actual\` value to be greater than or equal to the expected value.`,
+
+  // 
+  toBeInstanceOf: `The \`actual\` value must be an instance of \`expected\`.`,
 
   // InstanceOf
   toBeInstanceOfArray: `The \`actual\` value must be an instance of an \`${Array.name}\``,
@@ -42,9 +48,19 @@ export const EXPECTATION = {
   toBeNull: `The \`actual\` value must be \`null\`.`,
   toBeNumberType: `The \`actual\` value must be of a \`number\` type.`,
   toBePositiveInfinity: `The \`actual\` value to be Infinity (infinity).`,
+  toBeRegExp: `The \`actual\` value must be \`${RegExp.name}\`.`,
+
+  // async
+  toBeRejected: `Expect the \`actual\` value a promise to be rejected.`,
+  toBeRejectedWith: `Expect the \`actual\` value a promise to be rejected with a value equal to the expected, using deep equality comparison.`,
+  toBeRejectedWithError: `Expect the \`actual\` value a promise to be rejected with a value matched to the expected`,
+  toBeResolved: `Expect the \`actual\` value a promise to be resolved.`,
+  toBeResolvedTo: `Expect the \`actual\` value a promise to be resolved to a value equal to the expected, using deep equality comparison.`,
+
   toBeStringType: `The \`actual\` value must be of a \`string\` type.`,
   toBeTrue: `The \`actual\` value must be \`true\`.`,
   toBeTruthy: `The \`actual\` value to be truthy.`,
+
   toContain: `The \`actual\` value to contain a specific value.`,
   toEqual: `The \`actual\` value to be equal to the \`expected\`, using deep equality comparison.`,
 
