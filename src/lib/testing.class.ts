@@ -4,7 +4,7 @@ import { TestingDescribe } from './testing-describe.class';
 import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
 import { TestingItTo } from './it/testing-it-to.class';
-import { TestingTestActual } from './testing-test-actual.class';
+import { TestingActual } from './testing-test-actual.class';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../type';
@@ -85,9 +85,9 @@ export class Testing<
    */
   public actual<T>(
     actual: ExpectType<T>,
-    specDefinitions: (test: TestingTestActual) => TestingTestActual
+    specDefinitions: (test: TestingActual) => TestingActual
   ): this {
-    specDefinitions(new TestingTestActual(true, true).actual(actual));
+    specDefinitions(new TestingActual(true, true).actual(actual));
     return this;
   }
 
@@ -128,9 +128,9 @@ export class Testing<
    */
   public spy<T extends jasmine.Func>(
     spy: ExpectType<T>,
-    specDefinitions: (test: TestingTestActual) => TestingTestActual
+    specDefinitions: (test: TestingActual) => TestingActual
   ): this {
-    specDefinitions(new TestingTestActual(true, true).spy(spy));
+    specDefinitions(new TestingActual(true, true).spy(spy));
     return this;
   }
 
