@@ -1,10 +1,10 @@
 // Class.
+import { TestingActual } from './testing-actual.class';
 import { TestingCore } from './testing-core.class';
 import { TestingDescribe } from './testing-describe.class';
 import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
 import { TestingItTo } from './it/testing-it-to.class';
-import { TestingActual } from './testing-test-actual.class';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../type';
