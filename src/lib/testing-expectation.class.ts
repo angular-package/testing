@@ -55,6 +55,7 @@ export class TestingExpectation {
     return this;
   }
 
+  //#region toBe
   public toBe<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
@@ -166,6 +167,7 @@ export class TestingExpectation {
     return this;
   }
 
+  //#region toBeGreaterThan
   public toBeGreaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
@@ -183,6 +185,7 @@ export class TestingExpectation {
     this.#toBe(e => e.greaterThanOrEqual(actual, expected, expectationFailOutput));
     return this;
   }
+  //#endregion
 
   public toBeInstance<T, Type>(
     actual: ExpectType<T>,
@@ -750,10 +753,9 @@ export class TestingExpectation {
 
   public toHaveBeenCalledWith<T extends jasmine.Func>(
     spy: ExpectType<T>,
-    expected: any,
-    expectationFailOutput?: any
+    ...params: any[]
   ): this {
-    this.#toHaveBeenCalled(e => e.with(spy, expected, expectationFailOutput));
+    this.#toHaveBeenCalled(e => e.with(spy, ...params));
     return this;
   }
   //#endregion
