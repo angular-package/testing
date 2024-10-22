@@ -74,6 +74,114 @@ export class TestingExpectation {
     return this;
   }
 
+  public toBeArrayOfBigInt<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.bigint(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfBoolean<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.boolean(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfDate<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.date(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfDefined<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.defined(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfFalse<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.false(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfNull<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.null(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfNumber<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.number(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfRegExp<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.regExp(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfString<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.string(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfSymbol<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.symbol(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfTrue<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.true(actual, expected, expectationFailOutput));
+    return this;
+  }
+
+  public toBeArrayOfUndefined<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectationFailOutput?: any
+  ): this {
+    this.#toBe(e => e.arrayof.undefined(actual, expected, expectationFailOutput));
+    return this;
+  }
+
   public toBeBigInt<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
