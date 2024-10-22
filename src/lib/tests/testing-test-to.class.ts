@@ -8,7 +8,13 @@ import { ExpectType } from '../../type';
 /**
  * Prepared tests.
  */
-export class TestingTestTo extends TestingCore {
+export class TestingTestTo<
+  Descriptions extends string = string,
+  Expectations extends string = string
+> extends TestingCore<
+  Descriptions,
+  Expectations
+> {
   /**
    * 
    */

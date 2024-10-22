@@ -5,7 +5,13 @@ import { ExpectType } from '../../type';
 /**
  * Prepared simple tests.
  */
-export class TestingTestToBeInstanceOf extends TestingCore {
+export class TestingTestToBeInstanceOf<
+  Descriptions extends string = string,
+  Expectations extends string = string
+> extends TestingCore<
+  Descriptions,
+  Expectations
+> {
   //#region toBeInstanceOf
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Array`

@@ -5,7 +5,13 @@ import { ExpectType } from '../../type';
 /**
  * Prepared simple tests.
  */
-export class TestingTestToHaveBeenCalled extends TestingCore {
+export class TestingTestToHaveBeenCalled<
+  Descriptions extends string = string,
+  Expectations extends string = string
+> extends TestingCore<
+  Descriptions,
+  Expectations
+> {
 
   public before<T extends jasmine.Func>(
     spy: ExpectType<T>,
