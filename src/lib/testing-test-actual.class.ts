@@ -1,6 +1,6 @@
 // Class.
 import { TestingCore } from './testing-core.class';
-import { TestingTestTo } from './tests/testing-test-to.class';
+import { TestingItTo } from './tests/testing-test-to.class';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../type';
@@ -27,7 +27,7 @@ export class TestingTestActual<
   /**
    * 
    */
-  #to: TestingTestTo;
+  #to: TestingItTo;
 
   /**
    * 
@@ -44,7 +44,7 @@ export class TestingTestActual<
     }
   ) {
     super(allowDescribe, allowIt, executable);
-    this.#to = new TestingTestTo(allowDescribe, allowIt, executable);
+    this.#to = new TestingItTo(allowDescribe, allowIt, executable);
   }
 
   /**

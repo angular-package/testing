@@ -1,13 +1,13 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
-import { TestingTestToBeInstanceOf } from './testing-test-to-be-instanceof.class';
+import { TestingItToBeInstanceOf } from './testing-test-to-be-instanceof.class';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../../type';
 /**
  * Prepared simple tests.
  */
-export class TestingTestToBe<
+export class TestingItToBe<
   Descriptions extends string = string,
   Expectations extends string = string
 > extends TestingCore<
@@ -24,7 +24,7 @@ export class TestingTestToBe<
   /**
    * 
    */
-  #instanceof: TestingTestToBeInstanceOf;
+  #instanceof: TestingItToBeInstanceOf;
 
   /**
    * 
@@ -41,7 +41,7 @@ export class TestingTestToBe<
     }
   ) {
     super(allowDescribe, allowIt, executable);
-    this.#instanceof = new TestingTestToBeInstanceOf(allowDescribe, allowIt, executable);
+    this.#instanceof = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable);
   }
 
   //#region toBe
@@ -86,7 +86,7 @@ export class TestingTestToBe<
   public array<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeArray,
+    expectation: string = TestingItToBe.expectation.toBeArray,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -113,7 +113,7 @@ export class TestingTestToBe<
   public bigInt<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeBigInt,
+    expectation: string = TestingItToBe.expectation.toBeBigInt,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -140,7 +140,7 @@ export class TestingTestToBe<
   public boolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeBoolean,
+    expectation: string = TestingItToBe.expectation.toBeBoolean,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -167,7 +167,7 @@ export class TestingTestToBe<
   public booleanType<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeBooleanType,
+    expectation: string = TestingItToBe.expectation.toBeBooleanType,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -194,7 +194,7 @@ export class TestingTestToBe<
   public class<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeClass,
+    expectation: string = TestingItToBe.expectation.toBeClass,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -220,7 +220,7 @@ export class TestingTestToBe<
     actual: ExpectType<T>,
     expected: number,
     precision?: any,
-    expectation: string = TestingTestToBe.expectation.toBeCloseTo,
+    expectation: string = TestingItToBe.expectation.toBeCloseTo,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -247,7 +247,7 @@ export class TestingTestToBe<
   public date<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeDate,
+    expectation: string = TestingItToBe.expectation.toBeDate,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -262,7 +262,7 @@ export class TestingTestToBe<
   public defined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeDefined,
+    expectation: string = TestingItToBe.expectation.toBeDefined,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -277,7 +277,7 @@ export class TestingTestToBe<
   public false<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeFalse,
+    expectation: string = TestingItToBe.expectation.toBeFalse,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -292,7 +292,7 @@ export class TestingTestToBe<
   public falsy<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeFalsy,
+    expectation: string = TestingItToBe.expectation.toBeFalsy,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -319,7 +319,7 @@ export class TestingTestToBe<
   public function<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeFunction,
+    expectation: string = TestingItToBe.expectation.toBeFunction,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -336,7 +336,7 @@ export class TestingTestToBe<
   public greaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectation: string = TestingTestToBe.expectation.toBeGreaterThan, 
+    expectation: string = TestingItToBe.expectation.toBeGreaterThan, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -352,7 +352,7 @@ export class TestingTestToBe<
   public greaterThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectation: string = TestingTestToBe.expectation.toBeGreaterThanOrEqual,
+    expectation: string = TestingItToBe.expectation.toBeGreaterThanOrEqual,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -382,7 +382,7 @@ export class TestingTestToBe<
     actual: ExpectType<T>,
     constructor: Constructor<Type>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeInstance,
+    expectation: string = TestingItToBe.expectation.toBeInstance,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -408,7 +408,7 @@ export class TestingTestToBe<
   public instanceOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Constructor,
-    expectation: string = TestingTestToBe.expectation.toBeInstanceOf,
+    expectation: string = TestingItToBe.expectation.toBeInstanceOf,
     expectationFailOutput?: any,
     execute?: boolean
   ): this {
@@ -436,7 +436,7 @@ export class TestingTestToBe<
   public key<T, Type>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeKey,
+    expectation: string = TestingItToBe.expectation.toBeKey,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -452,7 +452,7 @@ export class TestingTestToBe<
   public lessThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectation: string = TestingTestToBe.expectation.toBeLessThan,
+    expectation: string = TestingItToBe.expectation.toBeLessThan,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -467,7 +467,7 @@ export class TestingTestToBe<
   public lessThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectation: string = TestingTestToBe.expectation.toBeLessThanOrEqual,
+    expectation: string = TestingItToBe.expectation.toBeLessThanOrEqual,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -483,7 +483,7 @@ export class TestingTestToBe<
   public naN<T extends number>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeNaN,
+    expectation: string = TestingItToBe.expectation.toBeNaN,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -498,7 +498,7 @@ export class TestingTestToBe<
   public negativeInfinity<T extends number>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeNegativeInfinity,
+    expectation: string = TestingItToBe.expectation.toBeNegativeInfinity,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -525,7 +525,7 @@ export class TestingTestToBe<
   public null<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeNull,
+    expectation: string = TestingItToBe.expectation.toBeNull,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -552,7 +552,7 @@ export class TestingTestToBe<
   public number<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeNumber,
+    expectation: string = TestingItToBe.expectation.toBeNumber,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -583,7 +583,7 @@ export class TestingTestToBe<
     min: Min,
     max: Max,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeNumberBetween,
+    expectation: string = TestingItToBe.expectation.toBeNumberBetween,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -610,7 +610,7 @@ export class TestingTestToBe<
   public numberType<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeNumberType,
+    expectation: string = TestingItToBe.expectation.toBeNumberType,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -637,7 +637,7 @@ export class TestingTestToBe<
   public object<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeObject,
+    expectation: string = TestingItToBe.expectation.toBeObject,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -666,7 +666,7 @@ export class TestingTestToBe<
     actual: ExpectType<T>,
     key: PropertyKey,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeObjectKey,
+    expectation: string = TestingItToBe.expectation.toBeObjectKey,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -695,7 +695,7 @@ export class TestingTestToBe<
     actual: ExpectType<T>,
     key: PropertyKey,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeObjectKeyIn,
+    expectation: string = TestingItToBe.expectation.toBeObjectKeyIn,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -724,7 +724,7 @@ export class TestingTestToBe<
     actual: ExpectType<T>,
     keys: PropertyKey[],
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeObjectKeys,
+    expectation: string = TestingItToBe.expectation.toBeObjectKeys,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -755,7 +755,7 @@ export class TestingTestToBe<
     actual: ExpectType<T>,
     keys: PropertyKey[],
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeObjectKeysIn,
+    expectation: string = TestingItToBe.expectation.toBeObjectKeysIn,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -785,7 +785,7 @@ export class TestingTestToBe<
     actual: ExpectType<T>,
     keys: PropertyKey[],
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeObjectSomeKeys,
+    expectation: string = TestingItToBe.expectation.toBeObjectSomeKeys,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -802,7 +802,7 @@ export class TestingTestToBe<
   public positiveInfinity<T extends number>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBePositiveInfinity,
+    expectation: string = TestingItToBe.expectation.toBePositiveInfinity,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -828,7 +828,7 @@ export class TestingTestToBe<
   public regExp<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeRegExp,
+    expectation: string = TestingItToBe.expectation.toBeRegExp,
     expectationFailOutput?: any,
     execute: boolean = true,
   ): this {
@@ -843,7 +843,7 @@ export class TestingTestToBe<
   // Mark a spec as pending, expectation results will be ignored.
   public pending<T>(
     actual: T | PromiseLike<T>,
-    expectation: string = TestingTestToBe.expectation.toBePending,
+    expectation: string = TestingItToBe.expectation.toBePending,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -858,7 +858,7 @@ export class TestingTestToBe<
   // Expect a promise to be rejected.
   public rejected<T>(
     actual: T | PromiseLike<T>,
-    expectation: string = TestingTestToBe.expectation.toBeRejected,
+    expectation: string = TestingItToBe.expectation.toBeRejected,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -874,7 +874,7 @@ export class TestingTestToBe<
   public rejectedWith<T, U>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<U>,
-    expectation: string = TestingTestToBe.expectation.toBeRejectedWith,
+    expectation: string = TestingItToBe.expectation.toBeRejectedWith,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -891,7 +891,7 @@ export class TestingTestToBe<
     actual: T | PromiseLike<T>,
     expected?: new (...args: any[]) => Error,
     message?: string | RegExp,
-    expectation: string = TestingTestToBe.expectation.toBeRejectedWith,
+    expectation: string = TestingItToBe.expectation.toBeRejectedWith,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -906,7 +906,7 @@ export class TestingTestToBe<
   // Expect a promise to be resolved.
   public resolved<T>(
     actual: T | PromiseLike<T>,
-    expectation: string = TestingTestToBe.expectation.toBeResolved,
+    expectation: string = TestingItToBe.expectation.toBeResolved,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -922,7 +922,7 @@ export class TestingTestToBe<
   public resolvedTo<T>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<T>, 
-    expectation: string = TestingTestToBe.expectation.toBeResolvedTo,
+    expectation: string = TestingItToBe.expectation.toBeResolvedTo,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -949,7 +949,7 @@ export class TestingTestToBe<
   public string<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeString,
+    expectation: string = TestingItToBe.expectation.toBeString,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -978,7 +978,7 @@ export class TestingTestToBe<
     actual: ExpectType<T>,
     includes: string[],
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeStringIncludes,
+    expectation: string = TestingItToBe.expectation.toBeStringIncludes,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -1007,7 +1007,7 @@ export class TestingTestToBe<
     actual: ExpectType<T>,
     includes: string[],
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeStringIncludesSome,
+    expectation: string = TestingItToBe.expectation.toBeStringIncludesSome,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -1036,7 +1036,7 @@ export class TestingTestToBe<
     actual: ExpectType<T>,
     length: Length,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeStringOfLength,
+    expectation: string = TestingItToBe.expectation.toBeStringOfLength,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -1065,7 +1065,7 @@ export class TestingTestToBe<
     min: Min,
     max: Max,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeStringOfLengthBetween,
+    expectation: string = TestingItToBe.expectation.toBeStringOfLengthBetween,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -1092,7 +1092,7 @@ export class TestingTestToBe<
   public stringType<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeStringType,
+    expectation: string = TestingItToBe.expectation.toBeStringType,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -1119,7 +1119,7 @@ export class TestingTestToBe<
   public symbol<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeSymbol,
+    expectation: string = TestingItToBe.expectation.toBeSymbol,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -1146,7 +1146,7 @@ export class TestingTestToBe<
   public true<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeTrue,
+    expectation: string = TestingItToBe.expectation.toBeTrue,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -1161,7 +1161,7 @@ export class TestingTestToBe<
   public truthy<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeTruthy, 
+    expectation: string = TestingItToBe.expectation.toBeTruthy, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -1187,7 +1187,7 @@ export class TestingTestToBe<
   public undefined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingTestToBe.expectation.toBeUndefined,
+    expectation: string = TestingItToBe.expectation.toBeUndefined,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {

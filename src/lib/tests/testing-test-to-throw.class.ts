@@ -5,7 +5,7 @@ import { ExpectType } from '../../type';
 /**
  * Prepared `toThrow` tests.
  */
-export class TestingTestToThrow<
+export class TestingItToThrow<
   Descriptions extends string = string,
   Expectations extends string = string
 > extends TestingCore<

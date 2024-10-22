@@ -1,10 +1,10 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
-import { TestingTestToHaveBeenCalled } from './testing-test-to-have-been-called.class';
+import { TestingItToHaveBeenCalled } from './testing-test-to-have-been-called.class';
 /**
  * Prepared `toHaveBeen` tests.
  */
-export class TestingTestToHaveBeen<
+export class TestingItToHaveBeen<
   Descriptions extends string = string,
   Expectations extends string = string
 > extends TestingCore<
@@ -14,14 +14,14 @@ export class TestingTestToHaveBeen<
   /**
    * 
    */
-  public get called(): TestingTestToHaveBeenCalled {
+  public get called(): TestingItToHaveBeenCalled {
     return this.#called;
   }
 
   /**
    * 
    */
-  #called: TestingTestToHaveBeenCalled;
+  #called: TestingItToHaveBeenCalled;
 
   /**
    * 
@@ -38,6 +38,6 @@ export class TestingTestToHaveBeen<
     }
   ) {
     super(allowDescribe, allowIt, executable);
-    this.#called = new TestingTestToHaveBeenCalled(allowDescribe, allowIt, executable);
+    this.#called = new TestingItToHaveBeenCalled(allowDescribe, allowIt, executable);
   }
 }

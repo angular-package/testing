@@ -1,14 +1,14 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
-import { TestingTestToBe } from './testing-test-to-be.class';
-import { TestingTestToHave } from './testing-test-to-have.class';
-import { TestingTestToThrow } from './testing-test-to-throw.class';
+import { TestingItToBe } from './testing-test-to-be.class';
+import { TestingItToHave } from './testing-test-to-have.class';
+import { TestingItToThrow } from './testing-test-to-throw.class';
 // Type.
 import { ExpectType } from '../../type';
 /**
  * Prepared tests.
  */
-export class TestingTestTo<
+export class TestingItTo<
   Descriptions extends string = string,
   Expectations extends string = string
 > extends TestingCore<
@@ -39,17 +39,17 @@ export class TestingTestTo<
   /**
    * 
    */
-  #be: TestingTestToBe;
+  #be: TestingItToBe;
 
   /**
    * 
    */
-  #have: TestingTestToHave;
+  #have: TestingItToHave;
 
   /**
    * 
    */
-  #throw: TestingTestToThrow;
+  #throw: TestingItToThrow;
 
   /**
    * 
@@ -66,9 +66,9 @@ export class TestingTestTo<
     }
   ) {
     super(allowDescribe, allowIt, executable);
-    this.#be = new TestingTestToBe(allowDescribe, allowIt, executable);
-    this.#have = new TestingTestToHave(allowDescribe, allowIt, executable);
-    this.#throw = new TestingTestToThrow(allowDescribe, allowIt, executable);
+    this.#be = new TestingItToBe(allowDescribe, allowIt, executable);
+    this.#have = new TestingItToHave(allowDescribe, allowIt, executable);
+    this.#throw = new TestingItToThrow(allowDescribe, allowIt, executable);
   }
 
   /**

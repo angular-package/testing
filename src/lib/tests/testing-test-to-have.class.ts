@@ -1,12 +1,12 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
-import { TestingTestToHaveBeen } from './testing-test-to-have-been.class';
+import { TestingItToHaveBeen } from './testing-test-to-have-been.class';
 // Type.
 import { ExpectType } from '../../type';
 /**
  * Prepared `toHave` tests.
  */
-export class TestingTestToHave<
+export class TestingItToHave<
   Descriptions extends string = string,
   Expectations extends string = string
 > extends TestingCore<
@@ -23,7 +23,7 @@ export class TestingTestToHave<
   /**
    * 
    */
-  #been: TestingTestToHaveBeen;
+  #been: TestingItToHaveBeen;
 
   /**
    * 
@@ -40,7 +40,7 @@ export class TestingTestToHave<
     }
   ) {
     super(allowDescribe, allowIt, executable);
-    this.#been = new TestingTestToHaveBeen(allowDescribe, allowIt, executable);
+    this.#been = new TestingItToHaveBeen(allowDescribe, allowIt, executable);
   }
 
   public class<T>(
