@@ -1,21 +1,53 @@
 // Class.
 import { TestingCore } from './testing-core.class';
+import { TestingDescribe } from './testing-describe.class';
 import { TestingExpectation } from './testing-expectation.class';
-import { TestingTestActual } from './testing-test-actual.class';
+import { TestingIt } from './testing-it.class';
 import { TestingItTo } from './it/testing-it-to.class';
+import { TestingTestActual } from './testing-test-actual.class';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../type';
+// Interface.
+import { ExecutableTests } from '../interface/executable-tests.interface';
 /**
  * Prepared simple tests.
  */
-export class TestingTest<
+export class Testing<
   Descriptions extends string = string,
   Expectations extends string = string
 > extends TestingCore<
   Descriptions,
   Expectations
 > {
+  /**
+   * Defines the wrapper function of the `describe()` function of jasmine with the ability to decide its execution.
+   * @param description "Textual description of the group"
+   * @param specDefinitions "Function for Jasmine to invoke that will define"
+   * @returns The return value is a `function` that contains the `describe()` function of jasmine with the ability to decide its execution.
+   */
+  public static defineDescribe(
+    description: string,
+    specDefinitions: () => void
+  ): (execute: boolean) => void {
+    return TestingDescribe.define(description, specDefinitions);
+  }
+
+  /**
+   * Defines the wrapper function of the `it()` function of jasmine with the ability to decide its execution.
+   * @param expectation "Textual description of what this spec is checking"
+   * @param assertion "Function that contains the code of your test. If not provided the test will be pending."
+   * @param timeout "Custom timeout for an async spec."
+   * @returns The return value is a `function` that contains the `it()` function of jasmine with the ability to decide its execution.
+   */
+  public static defineIt(
+    expectation: string,
+    assertion: jasmine.ImplementationCallback,
+    timeout?: number | undefined
+  ): (execute: boolean) => void {
+    return TestingIt.define(expectation, assertion, timeout);
+  }
+
   /**
    * 
    */
@@ -29,18 +61,17 @@ export class TestingTest<
   #to: TestingItTo;
 
   /**
-   * 
-   * @param allowDescribe 
-   * @param allowIt 
-   * @param executable 
+   * Simple `class` to support testing.
+   * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
+   * and optionally sets the list of allowed executable tests (those that execute even on the disallowed state).
+   * @param allowDescribe Allow executing `describe()` methods.
+   * @param allowIt Allow executing `it()` methods.
+   * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    */
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: {
-      describe?: Array<number>,
-      it?: Array<number>
-    },
+    executable?: ExecutableTests
   ) {
     super(allowDescribe, allowIt, executable);
     this.#to = new TestingItTo(allowDescribe, allowIt, executable);
@@ -1726,7 +1757,7 @@ export class TestingTest<
    * @returns 
    */
   public toHaveBeenCalledOnceWith<Actual extends jasmine.Func>(
-    expectation: string = TestingTest.expectation.toHaveBeenCalledOnceWith,
+    expectation: string = Testing.expectation.toHaveBeenCalledOnceWith,
     spy: ExpectType<Actual>,
     ...params: any[]
   ): this {
@@ -1766,7 +1797,7 @@ export class TestingTest<
    * @returns 
    */
   public toHaveBeenCalledWith<T extends jasmine.Func>(
-    expectation: string = TestingTest.expectation.toHaveBeenCalledWith,
+    expectation: string = Testing.expectation.toHaveBeenCalledWith,
     spy: ExpectType<T>,
     ...params: any[]
     // expectationFailOutput?: any,
