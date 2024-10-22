@@ -127,7 +127,7 @@ export class Testing<
    * @returns 
    */
   public spy<T extends jasmine.Func>(
-    spy: ExpectType<T>,
+    spy: () => ExpectType<T>,
     specDefinitions: (test: TestingActual) => TestingActual
   ): this {
     specDefinitions(new TestingActual(true, true).spy(spy));
