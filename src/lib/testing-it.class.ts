@@ -5,7 +5,7 @@ import { TestingExecutable } from './testing-executable.class';
 /**
  * Manages `it()` function of jasmine.
  */
-export class TestingIt extends TestingExecutable {
+export class TestingIt<Expectations extends string = string> extends TestingExecutable {
   /**
    * Defines the wrapper function for the `it()` function of jasmine with the ability to decide its execution.
    * @param expectation "Textual description of what this spec is checking"
@@ -18,10 +18,10 @@ export class TestingIt extends TestingExecutable {
     expectation: string,
     assertion: jasmine.ImplementationCallback,
     timeout?: number | undefined
-  ): (execute: boolean) => void {
+  ) {
     return (execute: boolean = false) => is.true(execute)
       && is.function(assertion)
-      && it(expectation, assertion, timeout);
+      && it(expectation, assertion, timeout)
   }
 
   /**
@@ -30,6 +30,7 @@ export class TestingIt extends TestingExecutable {
   #allow = false;
 
   /**
+   * TODO: Add expectation to params.
    * Manages `it()` function of jasmine.
    * Creates an instance with optional allowed executing methods and executable storage.
    * @param allow An optional value of a `boolean` to initially allow executing `it()` methods.
@@ -65,16 +66,26 @@ export class TestingIt extends TestingExecutable {
    * @param execute A `boolean` type value to decide whether or not execute defined `it()` of jasmine function.
    * @returns The return value is an instance of `TestingIt`.
    */
-  public it(
-    expectation: string,
+  public it<Expectation extends string>(
+    expectation: Expectations | Expectation,
     assertion: jasmine.ImplementationCallback,
     execute: boolean = is.false(this.#allow)
       ? this.isExecutable(this.getCounter() + 1)
       : true,
-    timeout?: number | undefined
+    timeout?: number
   ): this {
     this.count();
-    TestingIt.define(this.defineExpectation(expectation), assertion, timeout)(execute);
+    TestingIt.define(this.defineDescription(expectation), assertion, timeout)(execute);
+    return this;
+  }
+
+  public fit<Expectation extends string>(
+    expectation: Expectations | Expectation,
+    assertion: jasmine.ImplementationCallback,
+    timeout?: number
+  ): this {
+    this.count();
+    fit(expectation, assertion, timeout);
     return this;
   }
 
@@ -83,10 +94,20 @@ export class TestingIt extends TestingExecutable {
    * @param expectation A `string` type value.
    * @returns The return value is a `string` type expectation.
    */
-  private defineExpectation(expectation: string): string {
+  private defineDescription(expectation: string): string {
     if (guard.string(expectation)) {
       return expectation.replace('[counter]', `${this.getCounter()}`);
     }
     return '';
+  }
+
+  public xit<Expectation extends string>(
+    expectation: Expectations | Expectation,
+    assertion: jasmine.ImplementationCallback,
+    timeout?: number
+  ): this {
+    this.count();
+    xit(expectation, assertion, timeout);
+    return this;
   }
 }
