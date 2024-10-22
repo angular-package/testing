@@ -6,18 +6,18 @@ import { ExpectType } from '../../type';
  * Prepared simple tests.
  */
 export class TestingTestToBeInstanceOf extends TestingCore {
-  //#region toBeInstanceOf methods
+  //#region toBeInstanceOf
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Array`
    * on the `expected` of `true`. The method uses `isArray()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
    * @param expectation The message for the karma, which by default is set to
-   * `The value must be an instance of an Array`.
+   * The `actual` value must be an instance of an `${Array.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public array<T>(
     actual: ExpectType<T>,
@@ -39,11 +39,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` of `true`. The method uses `isBooleanObject()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of Boolean'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${Boolean.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public boolean<T>(
     actual: ExpectType<T>,
@@ -65,11 +66,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * on the `expected` of `true`. The method uses `isDate()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of Date'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${Date.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public date<T>(
     actual: ExpectType<T>,
@@ -91,11 +93,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of an Error'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of an `${Error.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public error<T>(
     actual: ExpectType<T>,
@@ -117,11 +120,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of a Function'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of a `${Function.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public function<T>(
     actual: ExpectType<T>,
@@ -143,11 +147,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of a Map'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of a `${Map.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public map<T>(
     actual: ExpectType<T>,
@@ -169,11 +174,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * of `true`. The method uses `isObject()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of a Number'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of a `${Number.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public number<T>(
     actual: ExpectType<T>,
@@ -195,11 +201,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` of `true`. The method uses `isObject()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of an Object'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of an `${Object.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public object<T>(
     actual: ExpectType<T>,
@@ -221,11 +228,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of Promise'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${Promise.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public promise<T>(
     actual: ExpectType<T>,
@@ -247,11 +255,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` state.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of RangeError'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${RangeError.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public rangeError<T>(
     actual: ExpectType<T>,
@@ -273,11 +282,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * the `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of ReferenceError'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${ReferenceError.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public referenceError<T>(
     actual: ExpectType<T>,
@@ -299,11 +309,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` of `true`. The method uses `isRegExp()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of RegExp'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${RegExp.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public regExp<T>(
     actual: ExpectType<T>,
@@ -325,11 +336,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of Set'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${Set.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public set<T>(
     actual: ExpectType<T>,
@@ -351,11 +363,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of Storage'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${Storage.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public storage<T>(
     actual: ExpectType<T>,
@@ -377,11 +390,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` of `true`.The method uses `isStringObject()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of a String'`.
+   * @param expectation The message for the karma, which by default is set t
+   * The `actual` value must be an instance of a `${String.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public string<T>(
     actual: ExpectType<T>,
@@ -403,11 +417,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of SyntaxError'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${SyntaxError.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public syntaxError<T>(
     actual: ExpectType<T>,
@@ -429,11 +444,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of TypeError'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${TypeError.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public typeError<T>(
     actual: ExpectType<T>,
@@ -455,11 +471,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of URIError'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of `${URIError.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public URIError<T>(
     actual: ExpectType<T>,
@@ -481,11 +498,12 @@ export class TestingTestToBeInstanceOf extends TestingCore {
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to `'The value must be an instance of a WeakSet'`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be an instance of a `${WeakSet.name}`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
+   * @returns The return value is an instance of a `TestingTestToBeInstanceOf`.
    */
   public weakSet<T>(
     actual: ExpectType<T>,
