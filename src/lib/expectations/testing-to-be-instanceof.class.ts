@@ -135,7 +135,7 @@ export class TestingToBeInstanceOf extends TestingExpect {
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = `${this.expectationFailOutput} ${
       this.getNot() === true ? `not` : ``
-    } be an instance of \`function\``
+    } be an instance of \`Function\``
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Function);
