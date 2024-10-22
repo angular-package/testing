@@ -62,7 +62,7 @@ export class TestingActual<
    * @param spy 
    * @returns 
    */
-  public spy<T extends jasmine.Func>(spy: ExpectType<T>): this {
+  public spy<T extends jasmine.Func>(spy: () => ExpectType<T>): this {
     this.#spy = spy;
     return this;
   }
@@ -1632,12 +1632,16 @@ export class TestingActual<
    * @returns 
    */
   public toHaveBeenCalled<T extends jasmine.Func>(
-    expectation?: string, //toHaveBeenCalled,
+    expectation: string = TestingCore.expectation.toHaveBeenCalled,
     expectationFailOutput?: any,
     execute?: boolean,
-    spy: ExpectType<T> = this.#spy
+    spy: () => ExpectType<T> = this.#spy
   ): this {    
-    this.#to.have.been.called.called(spy, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.to.have.been.called.called(spy(), expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -1653,12 +1657,16 @@ export class TestingActual<
    */
   public toHaveBeenCalledBefore<T extends jasmine.Func>(
     expected: jasmine.Func,
-    expectation?: string, //toHaveBeenCalledBefore,
+    expectation: string = TestingCore.expectation.toHaveBeenCalledBefore,
     expectationFailOutput?: any,
     execute?: boolean,
-    spy: ExpectType<T> = this.#spy
+    spy: () => ExpectType<T> = this.#spy
   ): this {
-    this.#to.have.been.called.before(spy, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.to.have.been.called.before(spy(), expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -1670,12 +1678,14 @@ export class TestingActual<
    * @param params 
    * @returns 
    */
-  public toHaveBeenCalledOnceWith<Actual extends jasmine.Func>(
-    expectation?: string, //toHaveBeenCalledOnceWith,
-    spy: ExpectType<Actual> = this.#spy,
+  public toHaveBeenCalledOnceWith(
     ...params: any[]
   ): this {
-    this.#to.have.been.called.onceWith(expectation, spy, ...params);
+    this.it(
+      TestingCore.expectation.toHaveBeenCalledOnceWith,
+      () => super.expect.to.have.been.called.onceWith(this.#spy(), ...params),
+      true
+    );
     return this;
   }
 
@@ -1691,12 +1701,16 @@ export class TestingActual<
    */
   public toHaveBeenCalledTimes<T extends jasmine.Func>(
     expected: number,
-    expectation?: string, //toHaveBeenCalledTimes,
+    expectation: string = TestingCore.expectation.toHaveBeenCalledTimes,
     expectationFailOutput?: any,
     execute?: boolean,
-    spy: ExpectType<T> = this.#spy
+    spy: () => ExpectType<T> = this.#spy
   ): this {
-    this.#to.have.been.called.times(spy, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.to.have.been.called.times(spy(), expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -1710,13 +1724,14 @@ export class TestingActual<
    * @param spy 
    * @returns 
    */
-  public toHaveBeenCalledWith<T extends jasmine.Func>(
-    expectation?: string, //toHaveBeenCalledWith,
-    spy: ExpectType<T> = this.#spy,
+  public toHaveBeenCalledWith(
     ...params: any[]
   ): this {
-    // TODO:
-    this.#to.have.been.called.with(expectation, spy, ...params);
+    this.it(
+      TestingCore.expectation.toHaveBeenCalledWith,
+      () => super.expect.to.have.been.called.with(this.#spy(), ...params),
+      true
+    );
     return this;
   }
   //#endregion
