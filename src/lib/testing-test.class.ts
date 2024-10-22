@@ -9,7 +9,13 @@ import { ExpectType } from '../type';
 /**
  * Prepared simple tests.
  */
-export class TestingTest extends TestingCore {
+export class TestingTest<
+  Descriptions extends string = string,
+  Expectations extends string = string
+> extends TestingCore<
+  Descriptions,
+  Expectations
+> {
   /**
    * 
    */
@@ -54,22 +60,29 @@ export class TestingTest extends TestingCore {
     return this;
   }
 
-  public assertion<T>(
-    assertion: (expect: TestingExpectation) => any,
-    expectation: string = '',
+  /**
+   * 
+   * @param assertion 
+   * @param description 
+   * @param execute 
+   * @returns 
+   */
+  public spec<T>(
+    assertion: (expectation: TestingExpectation) => any,
+    description: string = '',
     execute?: boolean,
   ): this {
-    if (!expectation) {
+    if (description.length === 0) {
       Object
         .entries(TestingCore.expectation)
         .forEach(([name, message]) => assertion
           .toString()
-          .includes(name) && (expectation += message + " and ")
+          .includes(name) && (description += message + " and ")
         );
-      expectation = expectation.slice(0, -5);
+      description = description.slice(0, -5);
     }
     this.it(
-      expectation,
+      description,
       () => assertion(this.expect),
       execute
     );

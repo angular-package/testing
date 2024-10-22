@@ -9,7 +9,13 @@ import {} from 'jasmine';
 /**
  * Simple `class` to support testing.
  */
-export class Testing extends TestingTest {
+export class Testing<
+  Descriptions extends string = string,
+  Expectations extends string = string
+> extends TestingTest<
+  Descriptions,
+  Expectations
+> {
   /**
    * Defines the wrapper function of the `describe()` function of jasmine with the ability to decide its execution.
    * @param description "Textual description of the group"
