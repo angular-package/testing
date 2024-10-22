@@ -65,16 +65,16 @@ export class TestingTestToHaveBeenCalled extends TestingCore {
   }
 
   public with<T extends jasmine.Func>(
-    spy: ExpectType<T>,
-    expected: any,
     expectation: string = TestingCore.expectation.toHaveBeenCalledWith,
-    expectationFailOutput?: any,
-    execute?: boolean,
+    spy: ExpectType<T>,
+    ...params: any[]
+    // expectationFailOutput?: any,
+    // execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.have.been.called.with(spy, expected, expectationFailOutput),
-      execute
+      () => super.expect.to.have.been.called.with(spy, ...params),
+      true // execute
     ); 
     return this;
   }
