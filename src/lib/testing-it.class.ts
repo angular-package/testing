@@ -5,7 +5,9 @@ import { TestingExecutable } from './testing-executable.class';
 /**
  * Manages `it()` function of jasmine.
  */
-export class TestingIt<Expectations extends string = string> extends TestingExecutable {
+export class TestingIt<
+  Expectations extends string = string
+> extends TestingExecutable {
   /**
    * Defines the wrapper function for the `it()` function of jasmine with the ability to decide its execution.
    * @param expectation "Textual description of what this spec is checking"
