@@ -3,6 +3,8 @@ import { TestingCore } from '../testing-core.class';
 import { TestingItToHaveBeen } from './testing-it-to-have-been.class';
 // Type.
 import { ExpectType } from '../../type';
+// Interface.
+import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared `toHave` tests.
  */
@@ -34,10 +36,7 @@ export class TestingItToHave<
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: {
-      describe?: Array<number>,
-      it?: Array<number>
-    }
+    executable?: ExecutableTests
   ) {
     super(allowDescribe, allowIt, executable);
     this.#been = new TestingItToHaveBeen(allowDescribe, allowIt, executable);

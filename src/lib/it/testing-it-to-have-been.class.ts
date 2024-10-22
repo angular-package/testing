@@ -1,6 +1,8 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
 import { TestingItToHaveBeenCalled } from './testing-it-to-have-been-called.class';
+// Interface.
+import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared `toHaveBeen` tests.
  */
@@ -32,10 +34,7 @@ export class TestingItToHaveBeen<
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: {
-      describe?: Array<number>,
-      it?: Array<number>
-    }
+    executable?: ExecutableTests
   ) {
     super(allowDescribe, allowIt, executable);
     this.#called = new TestingItToHaveBeenCalled(allowDescribe, allowIt, executable);

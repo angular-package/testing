@@ -5,6 +5,8 @@ import { TestingItToHave } from './testing-it-to-have.class';
 import { TestingItToThrow } from './testing-it-to-throw.class';
 // Type.
 import { ExpectType } from '../../type';
+// Interface.
+import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared tests.
  */
@@ -60,10 +62,7 @@ export class TestingItTo<
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: {
-      describe?: Array<number>,
-      it?: Array<number>
-    }
+    executable?: ExecutableTests
   ) {
     super(allowDescribe, allowIt, executable);
     this.#be = new TestingItToBe(allowDescribe, allowIt, executable);

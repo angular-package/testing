@@ -4,6 +4,8 @@ import { TestingItToBeInstanceOf } from './testing-it-to-be-instanceof.class';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../../type';
+// Interface.
+import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared simple tests.
  */
@@ -35,10 +37,7 @@ export class TestingItToBe<
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: {
-      describe?: Array<number>,
-      it?: Array<number>
-    }
+    executable?: ExecutableTests
   ) {
     super(allowDescribe, allowIt, executable);
     this.#instanceof = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable);
