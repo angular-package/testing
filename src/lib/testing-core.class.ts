@@ -4,6 +4,7 @@ import { is } from '@angular-package/type';
 import { TestingDescribe } from './testing-describe.class';
 import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
+import { TestingBefore } from './testing-before.class';
 /**
  * Core object with describe and it instances.
  */
@@ -15,7 +16,7 @@ export abstract class TestingCore {
     toBeArray: `The \`actual\` value must be \`array\` type or an instance of \`Array\`.`,
 
     toBeBigInt: `The \`actual\` value must be a \`bigint\` type.`,
-    toBeBoolean: `The \`actual\` value must be of a \`boolean\` type or an instance of \`${Boolean.name}\``,
+    toBeBoolean: `The \`actual\` value must be of a \`boolean\` type or an instance of \`${Boolean.name}\`.`,
     toBeBooleanType: `The \`actual\` value must be of a \`boolean\` type.`,
 
     toBeClass: `The \`actual\` value must be a \`class\`.`,
@@ -30,18 +31,15 @@ export abstract class TestingCore {
     toBeFunction: `The \`actual\` value must be \`function\`.`,
   
     // GreaterThan
-    toBeGreaterThan: `The \`actual\` value to be greater than the expected value.`,
-    toBeGreaterThanOrEqual: `The \`actual\` value to be greater than or equal to the expected value.`,
+    toBeGreaterThan: `The \`actual\` value to be greater than the \`expected\` value.`,
+    toBeGreaterThanOrEqual: `The \`actual\` value to be greater than or equal to the \`expected\` value.`,
   
     // instance
     toBeInstance: `The \`actual\` value to be an instance of \`constructor\`.`,
     toBeInstanceOf: `The \`actual\` value must be an instance of \`expected\`.`,
-  
-    //
-    toBeKey: `The \`actual\` value to be a \`PropertyKey\`.`,
-  
+    
     // InstanceOf
-    toBeInstanceOfArray: `The \`actual\` value must be an instance of an \`${Array.name}\``,
+    toBeInstanceOfArray: `The \`actual\` value must be an instance of an \`${Array.name}\`.`,
     toBeInstanceOfBoolean: `The \`actual\` value must be an instance of \`${Boolean.name}\`.`,
     toBeInstanceOfDate: `The \`actual\` value must be an instance of \`${Date.name}\`.`,
     toBeInstanceOfError: `The \`actual\` value must be an instance of an \`${Error.name}\`.`,
@@ -61,9 +59,12 @@ export abstract class TestingCore {
     toBeInstanceOfURIError: `The \`actual\` value must be an instance of \`${URIError.name}\`.`,
     toBeInstanceOfWeakSet: `The \`actual\` value must be an instance of a \`${WeakSet.name}\`.`,
   
+    //
+    toBeKey: `The \`actual\` value to be a \`PropertyKey\`.`,
+
     // LessThan
-    toBeLessThan: `The \`actual\` value to be less than the expected value.`,
-    toBeLessThanOrEqual: `The \`actual\` value to be less than or equal to the expected value.`,
+    toBeLessThan: `The \`actual\` value to be less than the \`expected\` value.`,
+    toBeLessThanOrEqual: `The \`actual\` value to be less than or equal to the \`expected\` value.`,
   
     toBeNaN: `The \`actual\` value to be NaN (Not a Number).`,
     toBeNegativeInfinity: `The \`actual\` value to be -Infinity (-infinity).`,
@@ -88,7 +89,7 @@ export abstract class TestingCore {
     // async
     toBeRejected: `Expect the \`actual\` value a promise to be rejected.`,
     toBeRejectedWith: `Expect the \`actual\` value a promise to be rejected with a value equal to the expected, using deep equality comparison.`,
-    toBeRejectedWithError: `Expect the \`actual\` value a promise to be rejected with a value matched to the expected`,
+    toBeRejectedWithError: `Expect the \`actual\` value a promise to be rejected with a value matched to the expected.`,
     toBeResolved: `Expect the \`actual\` value a promise to be resolved.`,
     toBeResolvedTo: `Expect the \`actual\` value a promise to be resolved to a value equal to the expected, using deep equality comparison.`,
   
@@ -104,7 +105,7 @@ export abstract class TestingCore {
     toBeSymbol: `The \`actual\` value must be a \`symbol\`.`,
 
     // true
-    toBeTrue: `The \`actual\` value must be \`true\`.`,
+    toBeTrue: `The \`actual\` value must be a \`boolean\` type or an instance of \`Boolean\` equal to \`true\`.`,
     toBeTruthy: `The \`actual\` value to be truthy.`,
 
     toBeUndefined: `The \`actual\` value must be \`undefined\`.`,
@@ -117,7 +118,7 @@ export abstract class TestingCore {
     toHaveBeenCalledBefore: `The \`actual\` value (a Spy) to have been called before another Spy.`,
     toHaveBeenCalledOnceWith: `The \`actual\` value (a Spy) to have been called exactly once, and exactly with the particular arguments.`,
     toHaveBeenCalledTimes: `The \`actual\` value (a Spy) to have been called the specified number of times.`,
-    toHaveBeenCalledWith: `The \`actual\` (a Spy) to have been called the specified number of times.`,
+    toHaveBeenCalledWith: `The \`actual\` (a Spy) to have been called with particular arguments at least once.`,
 
     toHaveClass: `The \`actual\` value to be a DOM element that has the expected class.`,
     toHaveSize: `The \`actual\` size to be equal to the expected, using array-like length or object keys size.`,
@@ -133,7 +134,7 @@ export abstract class TestingCore {
   /**
    * 
    */
-  protected get expect(): TestingExpectation {
+  public get expect(): TestingExpectation {
     return this.#expect;
   }
 
@@ -192,9 +193,10 @@ export abstract class TestingCore {
    */
   public afterAll(
     action: jasmine.ImplementationCallback,
-    timeout?: number
+    timeout?: number,
+    execute: boolean = true
   ): this {
-    afterAll(action, timeout);
+    (execute => execute && afterAll(action, timeout))(execute);
     return this;
   }
 
@@ -206,9 +208,10 @@ export abstract class TestingCore {
    */
   public afterEach(
     action: jasmine.ImplementationCallback,
-    timeout?: number
+    timeout?: number,
+    execute: boolean = true
   ): this {
-    afterEach(action, timeout);
+    (execute => execute && afterEach(action, timeout))(execute);
     return this;
   }
 
@@ -220,9 +223,10 @@ export abstract class TestingCore {
    */
   public beforeAll(
     action: jasmine.ImplementationCallback,
-    timeout?: number
+    timeout?: number,
+    execute: boolean = true
   ): this {
-    beforeAll(action, timeout);
+    (execute => execute && beforeAll(action, timeout))(execute);
     return this;
   }
 
@@ -234,9 +238,10 @@ export abstract class TestingCore {
    */
   public beforeEach(
     action: jasmine.ImplementationCallback,
-    timeout?: number
+    timeout?: number,
+    execute: boolean = true
   ): this {
-    beforeEach(action, timeout);
+    (execute => execute && beforeEach(action, timeout))(execute);
     return this;
   }
 
