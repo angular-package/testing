@@ -1769,7 +1769,7 @@ export class TestingActual<
    * @returns 
    */
   public toHaveSize<T>(
-    expected: jasmine.Expected<typeof actual>,
+    expected: number,
     expectation?: string, //toHaveSize, 
     expectationFailOutput?: any,
     execute?: boolean,
