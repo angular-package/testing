@@ -889,7 +889,7 @@ export class TestingExpectation {
 
   public toHaveSize<T>(
     actual: ExpectType<T>,
-    expected: jasmine.Expected<typeof actual>,
+    expected: number,
     expectationFailOutput?: any
   ): this {
     this.#toHave(e => e.size(actual, expected, expectationFailOutput));
