@@ -1,5 +1,6 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
+import { TestingItToBeArrayOf } from './testing-it-to-be-arrayof.class';
 import { TestingItToBeInstanceOf } from './testing-it-to-be-instanceof.class';
 // Type.
 import { Constructor } from '@angular-package/type';
@@ -19,9 +20,21 @@ export class TestingItToBe<
   /**
    * 
    */
+  public get arrayof() {
+    return this.#arrayof;
+  }
+
+  /**
+   * 
+   */
   public get instanceof() {
     return this.#instanceof;
   }
+
+  /**
+   * 
+   */
+  #arrayof: TestingItToBeArrayOf;
 
   /**
    * 
@@ -40,6 +53,7 @@ export class TestingItToBe<
     executable?: ExecutableTests
   ) {
     super(allowDescribe, allowIt, executable);
+    this.#arrayof = new TestingItToBeArrayOf(allowDescribe, allowIt, executable);
     this.#instanceof = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable);
   }
 
