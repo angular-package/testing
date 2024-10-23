@@ -59,7 +59,7 @@ export class TestingItToHave<
 
   public size<T>(
     actual: ExpectType<T>,
-    expected: jasmine.Expected<typeof actual>,
+    expected: number,
     expectation: string = TestingCore.expectation.toHaveSize, 
     expectationFailOutput?: any,
     execute?: boolean,
