@@ -16,6 +16,18 @@ export abstract class TestingCore<
    */
   public static expectation = {
     toBeArray: `The \`actual\` value must be \`array\` type or an instance of \`Array\`.`,
+    toBeArrayOfBigInt: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`bigint\`.`,
+    toBeArrayOfBoolean: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`boolean\`.`,
+    toBeArrayOfDate: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`date\`.`,
+    toBeArrayOfDefined: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of defined.`,
+    toBeArrayOfFalse: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`false\`.`,
+    toBeArrayOfNull: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`null\`.`,
+    toBeArrayOfNumber: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`number\`.`,
+    toBeArrayOfRegExp: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`regexp.`,
+    toBeArrayOfString: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`string\`.`,
+    toBeArrayOfSymbol: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`symbol\`.`,
+    toBeArrayOfTrue: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`true\`.`,
+    toBeArrayOfUndefined: `The \`actual\` value must be \`array\` type or an instance of \`Array\` of \`undefined\`.`,
 
     toBeBigInt: `The \`actual\` value must be a \`bigint\` type.`,
     toBeBoolean: `The \`actual\` value must be of a \`boolean\` type or an instance of \`${Boolean.name}\`.`,
@@ -59,6 +71,7 @@ export abstract class TestingCore<
     toBeInstanceOfSyntaxError: `The \`actual\` value must be an instance of \`${SyntaxError.name}\`.`,
     toBeInstanceOfTypeError: `The \`actual\` value must be an instance of \`${TypeError.name}\`.`,
     toBeInstanceOfURIError: `The \`actual\` value must be an instance of \`${URIError.name}\`.`,
+    toBeInstanceOfWeakMap: `The \`actual\` value must be an instance of a \`${WeakMap.name}\`.`,
     toBeInstanceOfWeakSet: `The \`actual\` value must be an instance of a \`${WeakSet.name}\`.`,
   
     //
