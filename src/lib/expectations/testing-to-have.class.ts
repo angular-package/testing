@@ -31,26 +31,14 @@ export class TestingToHave extends TestingExpect {
     return this;
   }
 
-  public match<T>(
-    actual: ExpectType<T>,
-    expected: string | RegExp,
-    expectationFailOutput?: any
-  ): this {
-    this
-      .expect(actual, expectationFailOutput)
-      .toMatch(expected);
-    this.setNot(false);
-    return this;
-  }
-
   public size<T>(
     actual: ExpectType<T>,
-    expected: jasmine.Expected<typeof actual>,
+    expected: number,
     expectationFailOutput?: any
   ): this {
     this
       .expect(actual, expectationFailOutput)
-      .toEqual(expected);
+      .toHaveSize(expected);
     this.setNot(false);
     return this;
   }
