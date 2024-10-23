@@ -499,6 +499,22 @@ export class TestingItToBeInstanceOf<
     return this;
   }
 
+  public weakMap<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<boolean> = true,
+    expectation: string = TestingCore.expectation.toBeInstanceOfWeakMap,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.it(
+      expectation,
+      () => super.expect.to.be.instanceof.weakMap(actual, expected, expectationFailOutput),
+      execute
+    );
+    return this;
+  }
+
+
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `WeakSet` on the
    * `expected` of `true`.
