@@ -180,6 +180,108 @@ export class Testing<
     return this;
   }
 
+  public toBeArrayOfBigInt<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.be.arrayof.bigint(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  public toBeArrayOfDate<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.be.arrayof.date(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  public toBeArrayOfDefined<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.be.arrayof.defined(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  public toBeArrayOfFalse<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.be.arrayof.false(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  public toBeArrayOfNull<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.be.arrayof.null(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  public toBeArrayOfRegExp<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.be.arrayof.regExp(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  public toBeArrayOfString<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.be.arrayof.string(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  public toBeArrayOfSymbol<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.be.arrayof.symbol(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  public toBeArrayOfTrue<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.be.arrayof.true(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+  public toBeArrayOfUndefined<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.#to.be.arrayof.undefined(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `bigint` type on the `expected` of
    * `true`. The method uses `isBigInt()` function of `@angular-package/type`.
@@ -1842,7 +1944,7 @@ export class Testing<
    */
   public toHaveSize<T>(
     actual: ExpectType<T>,
-    expected: jasmine.Expected<typeof actual>,
+    expected: number,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
