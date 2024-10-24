@@ -1,12 +1,12 @@
 export {
-  TestingTo,
-  TestingToBe,
-  TestingToBeArrayOf,
-  TestingToBeInstanceOf,
-  TestingToHave,
-  TestingToHaveBeen,
-  TestingToHaveBeenCalled,
-  TestingToThrow,
+  TestingExpectTo,
+  TestingExpectToBe,
+  TestingExpectToBeArrayOf,
+  TestingExpectToBeInstanceOf,
+  TestingExpectToHave,
+  TestingExpectToHaveBeen,
+  TestingExpectToHaveBeenCalled,
+  TestingExpectToThrow,
 } from './expectations';
 export {
   TestingItTo,
