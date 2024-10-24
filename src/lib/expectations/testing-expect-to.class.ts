@@ -1,8 +1,8 @@
 // Class.
 import { TestingExpect } from '../testing-expect.abstract';
-import { TestingExpectToBe } from './testing-to-be.class';
-import { TestingExpectToHave } from './testing-to-have.class';
-import { TestingExpectToThrow } from './testing-to-throw.class';
+import { TestingExpectToBe } from './testing-expect-to-be.class';
+import { TestingExpectToHave } from './testing-expect-to-have.class';
+import { TestingExpectToThrow } from './testing-expect-to-throw.class';
 
 // Type.
 import { ExpectType } from '../../type/expect-type.type';

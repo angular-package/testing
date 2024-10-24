@@ -1,6 +1,6 @@
 // Class.
 import { TestingExpect } from '../testing-expect.abstract';
-import { TestingExpectToHaveBeenCalled } from './testing-to-have-been-called.class';
+import { TestingExpectToHaveBeenCalled } from './testing-expect-to-have-been-called.class';
 /**
  * Testing `ToHaveBeen` matchers.
  */

@@ -2,8 +2,8 @@
 import { is, Constructor, typeOf } from '@angular-package/type';
 // Class.
 import { TestingExpect } from '../testing-expect.abstract';
-import { TestingExpectToBeArrayOf } from './testing-to-be-arrayof.class';
-import { TestingExpectToBeInstanceOf } from './testing-to-be-instanceof.class';
+import { TestingExpectToBeArrayOf } from './testing-expect-to-be-arrayof.class';
+import { TestingExpectToBeInstanceOf } from './testing-expect-to-be-instanceof.class';
 // Type.
 import { ExpectType } from '../../type';
 /**

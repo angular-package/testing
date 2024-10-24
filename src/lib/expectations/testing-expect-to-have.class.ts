@@ -1,6 +1,6 @@
 // Class.
 import { TestingExpect } from '../testing-expect.abstract';
-import { TestingExpectToHaveBeen } from './testing-to-have-been.class';
+import { TestingExpectToHaveBeen } from './testing-expect-to-have-been.class';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
 /**
