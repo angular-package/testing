@@ -7,13 +7,47 @@
 export {
   // Class.
   Testing,
-  TestingToBeMatchers,
+  TestingActual,
+
+  // Class to handle `describe`, `it`, `expect` of jasmine.
+  TestingCore,
+
+  // Class to handle `describe()` function of jasmine.
+  TestingDescribe,
+
+  // Class to handle `expect()` function of jasmine.
+  TestingExpect,
+
+  // Full named expectations. Methods with `expect()` + jasmine matchers.
+  TestingExpectation,
+
+  // Class to handle `it()` function of jasmine.
+  TestingIt,
 } from './lib';
 
-/**
- * Function.
- */
-export { randomNumber, randomString } from './lib/function/';
+// Specific expectations.
+export {
+  TestingExpectTo,
+  TestingExpectToBe,
+  TestingExpectToBeArrayOf,
+  TestingExpectToBeInstanceOf,
+  TestingExpectToHave,
+  TestingExpectToHaveBeen,
+  TestingExpectToHaveBeenCalled,
+  TestingExpectToThrow,
+} from './lib/expectations';
+
+// Methods with `it()` function of jasmine.
+export {
+  TestingItTo,
+  TestingItToBe,
+  TestingItToBeArrayOf,
+  TestingItToBeInstanceOf,
+  TestingItToHave,
+  TestingItToHaveBeen,
+  TestingItToHaveBeenCalled,
+  TestingItToThrow,
+} from './lib/it';
 
 /**
  * Constant.
