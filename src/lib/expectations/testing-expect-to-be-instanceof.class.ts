@@ -3,7 +3,10 @@ import { TestingExpect } from '../testing-expect.abstract';
 // Type.
 import { ExpectType } from '../../type';
 /**
- * Matchers that use the `toBe()` method of jasmine.
+ * Constructor description.
+ * @class
+ * @classdesc Matchers that use the `toBe()` method of jasmine.
+ * @license MIT
  */
 export class TestingExpectToBeInstanceOf extends TestingExpect {
   /**
@@ -12,7 +15,7 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   private expectationFailOutput = `The expected value should`;
 
   /**
-   * Expects provided value to be an `array`. The method uses `isArray()` function from the `@angular-package/type`.
+   * @description Expects provided value to be an instance of `array`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual The value of any type that is checked against the `array` and the result of its check is passed to the `expect()`
    * function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -35,6 +38,7 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   /**
+   * @description Expects provided value to be an instance of `Boolean`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual The value of any type that is checked against a `boolean` type or an instance of `Boolean` and the result of its check
    * is passed to the `expect()` function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -57,6 +61,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `DataView`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public dataView<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -71,7 +82,7 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be a `Date`. The method uses `isDate()` function from the `@angular-package/type`.
+   * @description Expects provided value to be an instance of `Date`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual The value of any type that is checked against `date` and the result of its check is passed to the `expect()` function
    * of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -93,6 +104,9 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `Error`. Tested by `toBeInstanceOf()` of jasmine.
+   */
   public error<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -107,6 +121,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `EvalError`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public evalError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -121,7 +142,7 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be `function`. The method uses `isFunction()` function from the `@angular-package/type`.
+   * @description Expects provided value to be an instance of `Function`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual The value of any type that is checked against `function` and the result of its check is passed to the `expect()`
    * function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -143,6 +164,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
     return this;
   }
 
+  /**
+   * @description Expects provided value to be an instance of `Map`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public map<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -157,8 +185,7 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be a `number` type or an instance of a `Number`. The method uses `isNumber()` function from the
-   * `@angular-package/type`.
+   * @description Expects provided value to be an instance of `Number`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual The value of any type that is checked against a `number` type or an instance of a `Number` and the result of its check is
    * passed to the `expect()` function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -181,7 +208,7 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be an `object`. The method uses `isObject()` function from the `@angular-package/type`.
+   * @description Expects provided value to be an instance of `Object`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual The value of any type that is checked against an `object` and the result of its check is passed to the `expect()`
    * function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -204,6 +231,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `Promise`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public promise<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -218,6 +252,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `RangeError`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public rangeError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -232,6 +273,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `ReferenceError`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public referenceError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -246,7 +294,7 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be `RegExp`. The method uses `isRegExp()` function from the `@angular-package/type`.
+   * @description Expects provided value to be an instance of `RegExp`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual The value of any type that is checked against `RegExp` and the result of its check is passed to the `expect()`
    * function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -268,6 +316,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `Set`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public set<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -282,6 +337,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `SyntaxError`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public syntaxError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -296,8 +358,7 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be a `string` type or an instance of a `String`. The method uses `isString()` function from the
-   * `@angular-package/type`.
+   * @description Expects provided value to be an instance of `String`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual The value of any type that is checked against a `string` type or an instance of a `String` and the result of its check is
    * passed to the `expect()` function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -321,6 +382,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `Storage`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public storage<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -335,6 +403,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `TypeError`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public typeError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -350,6 +425,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `URIError`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public URIError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -364,6 +446,9 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `WeakMap`. Tested by `toBeInstanceOf()` of jasmine.
+   */
   public weakMap<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -378,6 +463,13 @@ export class TestingExpectToBeInstanceOf extends TestingExpect {
   }
 
   // TODO: Description.
+  /**
+   * @description Expects provided value to be an instance of `WeakSet`. Tested by `toBeInstanceOf()` of jasmine.
+   * @param actual 
+   * @param expected 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public weakSet<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,

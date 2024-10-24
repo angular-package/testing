@@ -3,7 +3,10 @@ import { TestingExpect } from '../testing-expect.abstract';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
 /**
- * Testing `ToHaveBeenCalled` matchers.
+ * Constructor description.
+ * @class
+ * @classdesc Testing `ToHaveBeenCalled` matchers.
+ * @license MIT
  */
 export class TestingExpectToHaveBeenCalled extends TestingExpect {
   /**

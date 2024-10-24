@@ -7,7 +7,10 @@ import { TestingExpectToBeInstanceOf } from './testing-expect-to-be-instanceof.c
 // Type.
 import { ExpectType } from '../../type';
 /**
- * Matchers that use the `toBe()` method of jasmine.
+ * Constructor description.
+ * @class
+ * @classdesc Matchers that use the `toBe()` method of jasmine.
+ * @license MIT
  */
 export class TestingExpectToBe extends TestingExpect {
   /**
@@ -160,7 +163,7 @@ export class TestingExpectToBe extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be a `Date`. The method uses `isDate()` function from the `@angular-package/type`.
+   * @description Expects provided value to be a `Date`. The method uses `isDate()` function from the `@angular-package/type` with `toBe()` of `jasmine`.
    * @param actual The value of any type that is checked against `date` and the result of its check is passed to the `expect()` function
    * of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -180,7 +183,7 @@ export class TestingExpectToBe extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be defined. The method uses `isDefined()` function from the `@angular-package/type`.
+   * @description Expects provided value to be defined. The method uses `toBeDefined()` matcher of `jasmine`.
    * @param actual The value of any type that is checked against defined and the result of its check is passed to the `expect()` function
    * of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -203,8 +206,7 @@ export class TestingExpectToBe extends TestingExpect {
 
   //#region boolean expectations
   /**
-   * Expects provided value to be a `boolean` type or an instance of `Boolean` equal to `false`. The method uses `isFalse()` function
-   * from the `@angular-package/type`.
+   * @description Expects provided value to be `false`. The method uses `toBeFalse()` matcher of `jasmine`.
    * @param actual The value of any type that is checked against a `boolean` type or an instance of `Boolean` equal to `false` and the
    * result of its check is passed to the `expect()` function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`

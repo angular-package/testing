@@ -8,25 +8,28 @@ import { TestingExpectToThrow } from './testing-expect-to-throw.class';
 import { ExpectType } from '../../type/expect-type.type';
 
 /**
- * Testing `to`, `to.be`, `to.have`, `to.throw` matchers.
+ * Constructor description.
+ * @class
+ * @classdesc Testing `to`, `to.be`, `to.have`, `to.throw` matchers.
+ * @license MIT
  */
 export class TestingExpectTo extends TestingExpect {
   /**
-   * 
+   * @public
    */
   public get be(): TestingExpectToBe {
     return this.#be;
   }
 
   /**
-   * 
+   * @public
    */
   public get have(): TestingExpectToHave {
     return this.#have;
   }
 
   /**
-   * 
+   * @public
    */
   public get throw(): TestingExpectToThrow {
     return this.#throw;

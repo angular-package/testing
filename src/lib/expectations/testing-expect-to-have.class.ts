@@ -4,7 +4,10 @@ import { TestingExpectToHaveBeen } from './testing-expect-to-have-been.class';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
 /**
- * Testing matchers.
+ * Constructor description.
+ * @class
+ * @classdesc Testing matchers.
+ * @license MIT
  */
 export class TestingExpectToHave extends TestingExpect {
   /**

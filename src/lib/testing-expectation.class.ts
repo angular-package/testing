@@ -1,5 +1,5 @@
 // Class.
-import { TestingTo } from './expectations/testing-to.class';
+import { TestingExpectTo } from './expectations/testing-expect-to.class';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../type';
@@ -26,7 +26,7 @@ export class TestingExpectation {
   /**
    * 
    */
-  public get to(): TestingTo {
+  public get to(): TestingExpectTo {
     return this.#testingTo;
   }
 
@@ -38,7 +38,7 @@ export class TestingExpectation {
   /**
    * 
    */
-  #testingTo = new TestingTo();
+  #testingTo = new TestingExpectTo();
 
   /**
    * 

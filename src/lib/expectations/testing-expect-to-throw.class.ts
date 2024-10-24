@@ -3,7 +3,10 @@ import { TestingExpect } from '../testing-expect.abstract';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
 /**
- * Testing `throw` matchers.
+ * Constructor description.
+ * @class
+ * @classdesc Testing `throw` matchers.
+ * @license MIT
  */
 export class TestingExpectToThrow extends TestingExpect {
   public error<T extends jasmine.Func>(
