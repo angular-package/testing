@@ -1,6 +1,5 @@
 // Class.
-import { TestingCore } from '../testing-core.class';
-import { TestingItTo } from '../it/testing-it-to.class';
+import { TestingItToBe } from '../it';
 // Type.
 import { ExpectType } from '../../type';
 // Interface.
@@ -11,21 +10,12 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 export class TestingToBeLessThan<
   Descriptions extends string = string,
   Expectations extends string = string
-> extends TestingCore<
-  Descriptions,
-  Expectations
 > {
   /**
    * 
    */
-  public get to(): TestingItTo {
-    return this.#to;
-  }
+  private toBe: TestingItToBe;
 
-  /**
-   * 
-   */
-  #to: TestingItTo;
 
   /**
    * Simple `class` to support testing.
@@ -40,8 +30,7 @@ export class TestingToBeLessThan<
     allowIt: boolean,
     executable?: ExecutableTests
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.#to = new TestingItTo(allowDescribe, allowIt, executable);
+    this.toBe = new TestingItToBe(allowDescribe, allowIt, executable);
   }
 
   //#region toBeLessThan
@@ -62,7 +51,7 @@ export class TestingToBeLessThan<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.lessThan(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.lessThan(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -83,7 +72,7 @@ export class TestingToBeLessThan<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.lessThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.lessThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

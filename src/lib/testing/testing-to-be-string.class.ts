@@ -1,6 +1,5 @@
 // Class.
-import { TestingCore } from '../testing-core.class';
-import { TestingItTo } from '../it/testing-it-to.class';
+import { TestingItToBe } from '../it';
 // Type.
 import { ExpectType } from '../../type';
 // Interface.
@@ -11,21 +10,11 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 export class TestingToBeString<
   Descriptions extends string = string,
   Expectations extends string = string
-> extends TestingCore<
-  Descriptions,
-  Expectations
 > {
   /**
    * 
    */
-  public get to(): TestingItTo {
-    return this.#to;
-  }
-
-  /**
-   * 
-   */
-  #to: TestingItTo;
+  toBe: TestingItToBe;
 
   /**
    * Simple `class` to support testing.
@@ -40,8 +29,7 @@ export class TestingToBeString<
     allowIt: boolean,
     executable?: ExecutableTests
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.#to = new TestingItTo(allowDescribe, allowIt, executable);
+    this.toBe = new TestingItToBe(allowDescribe, allowIt, executable);
   }
 
   //#region toBeString
@@ -64,7 +52,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.string(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.string(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -89,7 +77,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.stringIncludes(actual, includes, expected, expectation, expectationFailOutput, execute);
+    this.toBe.stringIncludes(actual, includes, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -114,7 +102,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.stringIncludesSome(actual, includes, expected, expectation, expectationFailOutput, execute);
+    this.toBe.stringIncludesSome(actual, includes, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -139,7 +127,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.stringOfLength(actual, length, expected, expectation, expectationFailOutput, execute);
+    this.toBe.stringOfLength(actual, length, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -164,7 +152,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.stringOfLengthBetween(actual, min, max, expected, expectation, expectationFailOutput, execute);
+    this.toBe.stringOfLengthBetween(actual, min, max, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -187,7 +175,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.stringType(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.stringType(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

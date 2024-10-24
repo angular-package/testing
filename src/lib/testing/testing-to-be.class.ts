@@ -1,7 +1,7 @@
 // Class.
-import { TestingCore } from '../testing-core.class';
-import { TestingItTo } from '../it/testing-it-to.class';
+import { TestingItToBe } from '../it';
 // Type.
+import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
@@ -11,21 +11,11 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 export class TestingToBe<
   Descriptions extends string = string,
   Expectations extends string = string
-> extends TestingCore<
-  Descriptions,
-  Expectations
 > {
   /**
    * 
    */
-  public get to(): TestingItTo {
-    return this.#to;
-  }
-
-  /**
-   * 
-   */
-  #to: TestingItTo;
+  private toBe: TestingItToBe;
 
   /**
    * Simple `class` to support testing.
@@ -40,35 +30,35 @@ export class TestingToBe<
     allowIt: boolean,
     executable?: ExecutableTests
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.#to = new TestingItTo(allowDescribe, allowIt, executable);
+    this.toBe = new TestingItToBe(allowDescribe, allowIt, executable);
   }
 
   //#region toBe
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value.
-   * "Expect the actual value to be === to the expected value."
-   * @param actual The value of any type passed to the `expect()` function of jasmine.
-   * @param expected The value of any type passed to the `toBe()` method of jasmine. "The expected value to compare against."
-   * @param expectation "Textual description of what this spec is checking" with an optional its unique `number` when adding `[counter]`.
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `array` type or an instance of `Array` on the `expected` of
+   * `true`. The method uses `isArray()` function of `@angular-package/type`.
+   * @param actual The value of any type to check.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to
+   * The `actual` value must be `array` type or an instance of `Array`.
    * @param expectationFailOutput
-   * @param execute An optional parameter that specifies whether the spec is to be executed. By default it takes its value from the global
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
    * `allowIt` parameter specified in the `constructor`.
    * @returns The return value is an instance of a `TestingTests`.
    */
-  public toBe<T>(
+  public toBeArray<T>(
     actual: ExpectType<T>,
-    expected: jasmine.Expected<typeof actual>,
-    expectation: string,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
-    execute?: boolean
+    execute?: boolean,
   ): this {
-    this.#to.be.be(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.array(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `bigint` type on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `bigint` type on the `expected` of
    * `true`. The method uses `isBigInt()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -86,12 +76,12 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.bigInt(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.bigInt(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `class`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `class`
    * on the `expected` of `true`. The method uses `isClass()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -109,12 +99,12 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.class(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.class(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
-   * 
+   * @description
    * @param actual 
    * @param expected 
    * @param precision 
@@ -132,12 +122,12 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.closeTo(actual, expected, precision, expectation, expectationFailOutput, execute);
+    this.toBe.closeTo(actual, expected, precision, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
-   * 
+   * @description
    * @param actual 
    * @param expected 
    * @param expectation 
@@ -153,7 +143,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.date(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.date(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -174,9 +164,97 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.defined(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.defined(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
+
+  //#region false boolean
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * The `actual` value must be `false`.
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
+  public toBeFalse<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.toBe.false(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * The `actual` value must be falsy.
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
+  public toBeFalsy<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.toBe.falsy(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * 
+   * @param actual 
+   * @param constructor 
+   * @param expected 
+   * @param expectation 
+   * The `actual` value to be an instance of `constructor`.
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
+  public toBeInstance<T, Type>(
+    actual: ExpectType<T>,
+    constructor: Constructor<Type>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.toBe.instance(actual, constructor, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * The `actual` value must be an instance of `expected`.
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
+  public toBeInstanceOf<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Constructor,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean
+  ): this {
+    this.toBe.instanceOf(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
 
   /**
    * 
@@ -195,7 +273,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.key(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.key(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -216,7 +294,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.naN(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.naN(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -237,7 +315,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.negativeInfinity(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.negativeInfinity(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -260,7 +338,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.null(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.null(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -271,7 +349,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.pending(actual, expectation, expectationFailOutput, execute);
+    this.toBe.pending(actual, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -292,7 +370,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.positiveInfinity(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.positiveInfinity(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -313,7 +391,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.regExp(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.regExp(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -333,7 +411,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.rejected(actual, expectation, expectationFailOutput, execute);
+    this.toBe.rejected(actual, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -352,7 +430,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.rejectedWith(actual, expectation, expectationFailOutput, execute);
+    this.toBe.rejectedWith(actual, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -375,7 +453,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.rejectedWithError(actual, expected, message, expectation, expectationFailOutput, execute);
+    this.toBe.rejectedWithError(actual, expected, message, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -396,7 +474,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.resolved(actual, expectation, expectationFailOutput, execute);
+    this.toBe.resolved(actual, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -416,7 +494,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.resolvedTo(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.resolvedTo(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -440,7 +518,50 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.symbol(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.symbol(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  //#region true boolean
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * The `actual` value must be a `boolean` type or an instance of `Boolean` equal to `true`.
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
+  public toBeTrue<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.toBe.true(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * The `actual` value to be truthy.
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
+  public toBeTruthy<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string, 
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.toBe.truthy(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -461,7 +582,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.undefined(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.undefined(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 }

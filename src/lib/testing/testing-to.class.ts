@@ -1,6 +1,5 @@
 // Class.
-import { TestingCore } from '../testing-core.class';
-import { TestingItTo } from '../it/testing-it-to.class';
+import { TestingItTo } from '../it';
 // Type.
 import { ExpectType } from '../../type';
 // Interface.
@@ -11,21 +10,11 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 export class TestingTo<
   Descriptions extends string = string,
   Expectations extends string = string
-> extends TestingCore<
-  Descriptions,
-  Expectations
 > {
   /**
    * 
    */
-  public get to(): TestingItTo {
-    return this.#to;
-  }
-
-  /**
-   * 
-   */
-  #to: TestingItTo;
+  private to: TestingItTo;
 
   /**
    * Simple `class` to support testing.
@@ -40,11 +29,32 @@ export class TestingTo<
     allowIt: boolean,
     executable?: ExecutableTests
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.#to = new TestingItTo(allowDescribe, allowIt, executable);
+    this.to = new TestingItTo(allowDescribe, allowIt, executable);
   }
 
   //#region to
+  /**
+   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value.
+   * "Expect the actual value to be === to the expected value."
+   * @param actual The value of any type passed to the `expect()` function of jasmine.
+   * @param expected The value of any type passed to the `toBe()` method of jasmine. "The expected value to compare against."
+   * @param expectation "Textual description of what this spec is checking" with an optional its unique `number` when adding `[counter]`.
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed. By default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @returns The return value is an instance of a `TestingTests`.
+   */
+  public toBe<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<typeof actual>,
+    expectation: string,
+    expectationFailOutput?: any,
+    execute?: boolean
+  ): this {
+    this.to.be.be(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
   /**
    * 
    * @param actual 
@@ -62,7 +72,7 @@ export class TestingTo<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.contain(actual, expected, expectation, expectationFailOutput, execute);
+    this.to.contain(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -85,7 +95,7 @@ export class TestingTo<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.equal(actual, expected, expectation, expectationFailOutput, execute);
+    this.to.equal(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -106,7 +116,28 @@ export class TestingTo<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.match(actual, expected, expectation, expectationFailOutput, execute);
+    this.to.match(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * The `actual` value a function to throw something.
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
+  public toThrow<T>(
+    actual: ExpectType<T>,
+    expected?: any,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.to.throw.throw(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 }

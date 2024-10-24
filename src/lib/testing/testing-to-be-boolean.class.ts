@@ -1,6 +1,5 @@
 // Class.
-import { TestingCore } from '../testing-core.class';
-import { TestingItTo } from '../it/testing-it-to.class';
+import { TestingItToBeBoolean } from '../it/testing-it-to-be-boolean.class';
 // Type.
 import { ExpectType } from '../../type';
 // Interface.
@@ -11,21 +10,11 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 export class TestingToBeBoolean<
   Descriptions extends string = string,
   Expectations extends string = string
-> extends TestingCore<
-  Descriptions,
-  Expectations
 > {
   /**
    * 
    */
-  public get to(): TestingItTo {
-    return this.testingItTo;
-  }
-
-  /**
-   * 
-   */
-  private testingItTo: TestingItTo;
+  private itToBeBoolean: TestingItToBeBoolean;
 
   /**
    * Simple `class` to support testing.
@@ -40,8 +29,7 @@ export class TestingToBeBoolean<
     allowIt: boolean,
     executable?: ExecutableTests
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.testingItTo = new TestingItTo(allowDescribe, allowIt, executable);
+    this.itToBeBoolean = new TestingItToBeBoolean(allowDescribe, allowIt, executable);
   }
 
   /**
@@ -63,7 +51,7 @@ export class TestingToBeBoolean<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.testingItTo.be.boolean(actual, expected, expectation, expectationFailOutput, execute);
+    this.itToBeBoolean.boolean(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -86,94 +74,7 @@ export class TestingToBeBoolean<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.testingItTo.be.booleanType(actual, expected, expectation, expectationFailOutput, execute);
-    return this;
-  }
-
-  //#region false boolean
-  /**
-   * 
-   * @param actual 
-   * @param expected 
-   * @param expectation 
-   * The `actual` value must be `false`.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
-   */
-  public toBeFalse<T>(
-    actual: ExpectType<T>,
-    expected?: jasmine.Expected<boolean>,
-    expectation?: string,
-    expectationFailOutput?: any,
-    execute?: boolean,
-  ): this {
-    this.testingItTo.be.false(actual, expected, expectation, expectationFailOutput, execute);
-    return this;
-  }
-
-  /**
-   * 
-   * @param actual 
-   * @param expected 
-   * @param expectation 
-   * The `actual` value must be falsy.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
-   */
-  public toBeFalsy<T>(
-    actual: ExpectType<T>,
-    expected?: jasmine.Expected<boolean>,
-    expectation?: string,
-    expectationFailOutput?: any,
-    execute?: boolean,
-  ): this {
-    this.testingItTo.be.falsy(actual, expected, expectation, expectationFailOutput, execute);
-    return this;
-  }
-
-  //#region true boolean
-  /**
-   * 
-   * @param actual 
-   * @param expected 
-   * @param expectation 
-   * The `actual` value must be a `boolean` type or an instance of `Boolean` equal to `true`.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
-   */
-  public toBeTrue<T>(
-    actual: ExpectType<T>,
-    expected?: jasmine.Expected<boolean>,
-    expectation?: string,
-    expectationFailOutput?: any,
-    execute?: boolean,
-  ): this {
-    console.log(this.testingItTo.be.true);
-    this.testingItTo.be.true(actual, expected, expectation, expectationFailOutput, execute);
-    return this;
-  }
-
-  /**
-   * 
-   * @param actual 
-   * @param expected 
-   * @param expectation 
-   * The `actual` value to be truthy.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
-   */
-  public toBeTruthy<T>(
-    actual: ExpectType<T>,
-    expected?: jasmine.Expected<boolean>,
-    expectation?: string, 
-    expectationFailOutput?: any,
-    execute?: boolean,
-  ): this {
-    this.testingItTo.be.truthy(actual, expected, expectation, expectationFailOutput, execute);
+    this.itToBeBoolean.type(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

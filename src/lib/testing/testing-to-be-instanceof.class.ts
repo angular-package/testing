@@ -1,32 +1,20 @@
 // Class.
-import { TestingCore } from '../testing-core.class';
-import { TestingItTo } from '../it/testing-it-to.class';
+import { TestingItToBeInstanceOf } from '../it';
 // Type.
-import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared simple tests.
  */
-export class TestingToBeInstance<
+export class TestingToBeInstanceOf<
   Descriptions extends string = string,
   Expectations extends string = string
-> extends TestingCore<
-  Descriptions,
-  Expectations
 > {
   /**
    * 
    */
-  public get to(): TestingItTo {
-    return this.#to;
-  }
-
-  /**
-   * 
-   */
-  #to: TestingItTo;
+  private toBeInstanceOf: TestingItToBeInstanceOf;
 
   /**
    * Simple `class` to support testing.
@@ -41,55 +29,10 @@ export class TestingToBeInstance<
     allowIt: boolean,
     executable?: ExecutableTests
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.#to = new TestingItTo(allowDescribe, allowIt, executable);
+    this.toBeInstanceOf = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable);
   }
 
   //#region toBeInstanceOf
-  /**
-   * 
-   * @param actual 
-   * @param constructor 
-   * @param expected 
-   * @param expectation 
-   * The `actual` value to be an instance of `constructor`.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
-   */
-  public toBeInstance<T, Type>(
-    actual: ExpectType<T>,
-    constructor: Constructor<Type>,
-    expected?: jasmine.Expected<boolean>,
-    expectation?: string,
-    expectationFailOutput?: any,
-    execute?: boolean,
-  ): this {
-    this.#to.be.instance(actual, constructor, expected, expectation, expectationFailOutput, execute);
-    return this;
-  }
-
-  /**
-   * 
-   * @param actual 
-   * @param expected 
-   * @param expectation 
-   * The `actual` value must be an instance of `expected`.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
-   */
-  public toBeInstanceOf<T>(
-    actual: ExpectType<T>,
-    expected: jasmine.Constructor,
-    expectation?: string,
-    expectationFailOutput?: any,
-    execute?: boolean
-  ): this {
-    this.#to.be.instanceOf(actual, expected, expectation, expectationFailOutput, execute);
-    return this;
-  }
-
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Array`
    * on the `expected` of `true`. The method uses `isArray()` function of `@angular-package/type`.
@@ -109,7 +52,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.array(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.array(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -132,7 +75,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.boolean(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.boolean(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -155,7 +98,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.date(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.date(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -178,7 +121,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.error(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.error(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -201,7 +144,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.function(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.function(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -224,7 +167,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.map(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.map(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -247,7 +190,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.number(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.number(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -270,7 +213,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.object(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.object(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -293,7 +236,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.promise(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.promise(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -316,7 +259,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.rangeError(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.rangeError(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -339,7 +282,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.referenceError(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.referenceError(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -362,7 +305,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.regExp(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.regExp(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -385,7 +328,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.set(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.set(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -408,7 +351,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.storage(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.storage(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -431,7 +374,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.string(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.string(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -454,7 +397,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.syntaxError(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.syntaxError(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -477,7 +420,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.typeError(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.typeError(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -500,7 +443,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.URIError(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.URIError(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -523,7 +466,7 @@ export class TestingToBeInstance<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.instanceof.weakSet(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBeInstanceOf.weakSet(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

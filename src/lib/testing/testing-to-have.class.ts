@@ -1,6 +1,6 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
-import { TestingItTo } from '../it/testing-it-to.class';
+import { TestingItToHave } from '../it';
 // Type.
 import { ExpectType } from '../../type';
 // Interface.
@@ -11,21 +11,11 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 export class TestingToHave<
   Descriptions extends string = string,
   Expectations extends string = string
-> extends TestingCore<
-  Descriptions,
-  Expectations
 > {
   /**
    * 
    */
-  public get to(): TestingItTo {
-    return this.#to;
-  }
-
-  /**
-   * 
-   */
-  #to: TestingItTo;
+  private toHave: TestingItToHave;
 
   /**
    * Simple `class` to support testing.
@@ -40,8 +30,7 @@ export class TestingToHave<
     allowIt: boolean,
     executable?: ExecutableTests
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.#to = new TestingItTo(allowDescribe, allowIt, executable);
+    this.toHave = new TestingItToHave(allowDescribe, allowIt, executable);
   }
 
   //#region toHaveBeenCalled
@@ -60,7 +49,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.have.been.called.called(spy, expectation, expectationFailOutput, execute);
+    this.toHave.been.called.called(spy, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -81,7 +70,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.have.been.called.before(spy, expected, expectation, expectationFailOutput, execute);
+    this.toHave.been.called.before(spy, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -94,11 +83,11 @@ export class TestingToHave<
    * @returns 
    */
   public toHaveBeenCalledOnceWith<Actual extends jasmine.Func>(
-    expectation: string = TestingToHave.expectation.toHaveBeenCalledOnceWith,
+    expectation: string = TestingCore.expectation.toHaveBeenCalledOnceWith,
     spy: ExpectType<Actual>,
     ...params: any[]
   ): this {
-    this.#to.have.been.called.onceWith(expectation, spy, ...params);
+    this.toHave.been.called.onceWith(expectation, spy, ...params);
     return this;
   }
 
@@ -119,7 +108,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.have.been.called.times(spy, expected, expectation, expectationFailOutput, execute);
+    this.toHave.been.called.times(spy, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -134,13 +123,13 @@ export class TestingToHave<
    * @returns 
    */
   public toHaveBeenCalledWith<T extends jasmine.Func>(
-    expectation: string = TestingToHave.expectation.toHaveBeenCalledWith,
+    expectation: string = TestingCore.expectation.toHaveBeenCalledWith,
     spy: ExpectType<T>,
     ...params: any[]
     // expectationFailOutput?: any,
     // execute?: boolean,
   ): this {
-    this.#to.have.been.called.with(expectation, spy, ...params);
+    this.toHave.been.called.with(expectation, spy, ...params);
     return this;
   }
   //#endregion
@@ -164,7 +153,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.have.class(actual, expected, expectation, expectationFailOutput, execute);
+    this.toHave.class(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -185,7 +174,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.have.size(actual, expected, expectation, expectationFailOutput, execute);
+    this.toHave.size(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -206,7 +195,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.have.spyInteractions(actual, expected, expectation, expectationFailOutput, execute);
+    this.toHave.spyInteractions(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

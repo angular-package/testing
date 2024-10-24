@@ -1,6 +1,5 @@
 // Class.
-import { TestingCore } from '../testing-core.class';
-import { TestingItTo } from '../it/testing-it-to.class';
+import { TestingItToBe } from '../it';
 // Type.
 import { ExpectType } from '../../type';
 // Interface.
@@ -11,21 +10,11 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 export class TestingToBeNumber<
   Descriptions extends string = string,
   Expectations extends string = string
-> extends TestingCore<
-  Descriptions,
-  Expectations
 > {
   /**
    * 
    */
-  public get to(): TestingItTo {
-    return this.#to;
-  }
-
-  /**
-   * 
-   */
-  #to: TestingItTo;
+  toBe: TestingItToBe;
 
   /**
    * Simple `class` to support testing.
@@ -40,8 +29,7 @@ export class TestingToBeNumber<
     allowIt: boolean,
     executable?: ExecutableTests
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.#to = new TestingItTo(allowDescribe, allowIt, executable);
+    this.toBe = new TestingItToBe(allowDescribe, allowIt, executable);
   }
 
   //#region toBeNumber
@@ -64,7 +52,7 @@ export class TestingToBeNumber<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.number(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.number(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -91,7 +79,7 @@ export class TestingToBeNumber<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.numberBetween(actual, min, max, expected, expectation, expectationFailOutput, execute);
+    this.toBe.numberBetween(actual, min, max, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -114,7 +102,7 @@ export class TestingToBeNumber<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.numberType(actual, expected, expectation, expectationFailOutput, execute);
+    this.toBe.numberType(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

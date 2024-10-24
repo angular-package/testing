@@ -1,6 +1,5 @@
 // Class.
-import { TestingCore } from '../testing-core.class';
-import { TestingItTo } from '../it/testing-it-to.class';
+import { TestingItToThrow } from '../it';
 // Type.
 import { ExpectType } from '../../type';
 // Interface.
@@ -11,21 +10,11 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 export class TestingToThrow<
   Descriptions extends string = string,
   Expectations extends string = string
-> extends TestingCore<
-  Descriptions,
-  Expectations
 > {
   /**
    * 
    */
-  public get to(): TestingItTo {
-    return this.#to;
-  }
-
-  /**
-   * 
-   */
-  #to: TestingItTo;
+  private toThrow: TestingItToThrow;
 
   /**
    * Simple `class` to support testing.
@@ -40,32 +29,10 @@ export class TestingToThrow<
     allowIt: boolean,
     executable?: ExecutableTests
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.#to = new TestingItTo(allowDescribe, allowIt, executable);
+    this.toThrow = new TestingItToThrow(allowDescribe, allowIt, executable);
   }
 
   //#region toThrow
-  /**
-   * 
-   * @param actual 
-   * @param expected 
-   * @param expectation 
-   * The `actual` value a function to throw something.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
-   */
-  public toThrow<T>(
-    actual: ExpectType<T>,
-    expected?: any,
-    expectation?: string,
-    expectationFailOutput?: any,
-    execute?: boolean,
-  ): this {
-    this.#to.throw.throw(actual, expected, expectation, expectationFailOutput, execute);
-    return this;
-  }
-
   /**
    * 
    * @param actual 
@@ -83,7 +50,7 @@ export class TestingToThrow<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.throw.error(actual, message, expectation, expectationFailOutput, execute);
+    this.toThrow.error(actual, message, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -104,7 +71,7 @@ export class TestingToThrow<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.throw.matching(actual, predicate, expectation, expectationFailOutput, execute);
+    this.toThrow.matching(actual, predicate, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
