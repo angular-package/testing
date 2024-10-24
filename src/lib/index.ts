@@ -7,7 +7,7 @@ export {
   TestingExpectToHaveBeen,
   TestingExpectToHaveBeenCalled,
   TestingExpectToThrow,
-} from './expectations';
+} from './expectation';
 export {
   TestingItTo,
   TestingItToBe,

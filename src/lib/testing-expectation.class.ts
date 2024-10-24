@@ -1,5 +1,5 @@
 // Class.
-import { TestingExpectTo } from './expectations/testing-expect-to.class';
+import { TestingExpectTo } from './expectation/testing-expect-to.class';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../type';

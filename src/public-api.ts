@@ -35,7 +35,7 @@ export {
   TestingExpectToHaveBeen,
   TestingExpectToHaveBeenCalled,
   TestingExpectToThrow,
-} from './lib/expectations';
+} from './lib/expectation';
 
 // Methods with `it()` function of jasmine.
 export {
