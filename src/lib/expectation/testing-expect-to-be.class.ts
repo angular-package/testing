@@ -17,22 +17,22 @@ export class TestingExpectToBe extends TestingExpect {
    * 
    */
   public get arrayof() {
-    return this.#arrayof;
+    return this.testingExpectToBeArrayOf;
   }
 
   /**
    * 
    */
   public get instanceof() {
-    return this.#instanceof;
+    return this.testingExpectToBeInstanceOf;
   }
 
-  #arrayof = new TestingExpectToBeArrayOf();
+  private testingExpectToBeArrayOf = new TestingExpectToBeArrayOf();
 
   /**
    * 
    */
-  #instanceof = new TestingExpectToBeInstanceOf();
+  private testingExpectToBeInstanceOf = new TestingExpectToBeInstanceOf();
 
   /**
    * The Default message for the expectation fails.

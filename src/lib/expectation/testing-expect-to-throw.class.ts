@@ -18,7 +18,6 @@ export class TestingExpectToThrow extends TestingExpect {
     this.setNot(false);
     return this;
   }
-
   public matching<T>(
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
@@ -28,7 +27,6 @@ export class TestingExpectToThrow extends TestingExpect {
     this.setNot(false);
     return this;
   }
-
   public throw<T>(
     actual: ExpectType<T>,
     expected?: any,

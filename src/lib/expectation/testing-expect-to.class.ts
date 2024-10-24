@@ -3,10 +3,8 @@ import { TestingExpect } from '../testing-expect.abstract';
 import { TestingExpectToBe } from './testing-expect-to-be.class';
 import { TestingExpectToHave } from './testing-expect-to-have.class';
 import { TestingExpectToThrow } from './testing-expect-to-throw.class';
-
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
-
 /**
  * Constructor description.
  * @class
@@ -18,37 +16,37 @@ export class TestingExpectTo extends TestingExpect {
    * @public
    */
   public get be(): TestingExpectToBe {
-    return this.#be;
+    return this.testingExpectToBe;
   }
 
   /**
    * @public
    */
   public get have(): TestingExpectToHave {
-    return this.#have;
+    return this.testingExpectToHave;
   }
 
   /**
    * @public
    */
   public get throw(): TestingExpectToThrow {
-    return this.#throw;
+    return this.testingExpectToThrow;
   }
 
   /**
    * 
    */
-  #be = new TestingExpectToBe();
+  private testingExpectToBe = new TestingExpectToBe();
 
   /**
    * 
    */
-  #have = new TestingExpectToHave();
+  private testingExpectToHave = new TestingExpectToHave();
 
   /**
    * 
    */
-  #throw = new TestingExpectToThrow();
+  private testingExpectToThrow = new TestingExpectToThrow();
 
   public contain<T>(
     actual: ExpectType<T>,

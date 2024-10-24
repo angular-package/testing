@@ -10,7 +10,7 @@ import { ExpectType } from '../../type/expect-type.type';
  */
 export class TestingExpectToHaveBeenCalled extends TestingExpect {
   /**
-   * 
+   * @description
    * @param spy 
    * @param expected 
    * @param expectationFailOutput 
@@ -27,7 +27,7 @@ export class TestingExpectToHaveBeenCalled extends TestingExpect {
   }
 
   /**
-   * 
+   * @description
    * @param spy 
    * @param expectationFailOutput 
    * @returns 
@@ -42,7 +42,7 @@ export class TestingExpectToHaveBeenCalled extends TestingExpect {
   }
 
   /**
-   * 
+   * @description
    * @param spy 
    * @param params 
    * @returns 

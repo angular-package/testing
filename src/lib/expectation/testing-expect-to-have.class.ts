@@ -13,14 +13,14 @@ export class TestingExpectToHave extends TestingExpect {
   /**
    *
    */
-  public get been(): TestingExpectToHaveBeen {
-    return this.#been;
+  public get been() {
+    return this.testingExpectToHaveBeen;
   }
 
   /**
    * 
    */
-  #been = new TestingExpectToHaveBeen();
+  private testingExpectToHaveBeen = new TestingExpectToHaveBeen();
 
   public class<T>(
     actual: ExpectType<T>,
@@ -33,7 +33,6 @@ export class TestingExpectToHave extends TestingExpect {
     this.setNot(false);
     return this;
   }
-
   public size<T>(
     actual: ExpectType<T>,
     expected: number,
@@ -45,7 +44,6 @@ export class TestingExpectToHave extends TestingExpect {
     this.setNot(false);
     return this;
   }
-
   public spyInteractions<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
