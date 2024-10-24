@@ -5,7 +5,7 @@ import { ExpectType } from '../../type/expect-type.type';
 /**
  * Testing `ToHaveBeenCalled` matchers.
  */
-export class TestingToHaveBeenCalled extends TestingExpect {
+export class TestingExpectToHaveBeenCalled extends TestingExpect {
   /**
    * 
    * @param spy 

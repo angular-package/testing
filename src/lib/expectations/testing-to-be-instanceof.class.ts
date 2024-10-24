@@ -5,7 +5,7 @@ import { ExpectType } from '../../type';
 /**
  * Matchers that use the `toBe()` method of jasmine.
  */
-export class TestingToBeInstanceOf extends TestingExpect {
+export class TestingExpectToBeInstanceOf extends TestingExpect {
   /**
    * The Default message for the expectation fails.
    */

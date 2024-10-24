@@ -1,19 +1,19 @@
 // Class.
 import { TestingExpect } from '../testing-expect.abstract';
-import { TestingToHaveBeenCalled } from './testing-to-have-been-called.class';
+import { TestingExpectToHaveBeenCalled } from './testing-to-have-been-called.class';
 /**
  * Testing `ToHaveBeen` matchers.
  */
-export class TestingToHaveBeen extends TestingExpect {
+export class TestingExpectToHaveBeen extends TestingExpect {
   /**
    * 
    */
-  public get called(): TestingToHaveBeenCalled {
+  public get called(): TestingExpectToHaveBeenCalled {
     return this.#called;
   }
 
   /**
    * 
    */
-  #called = new TestingToHaveBeenCalled();
+  #called = new TestingExpectToHaveBeenCalled();
 }

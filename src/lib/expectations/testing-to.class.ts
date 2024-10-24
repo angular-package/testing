@@ -1,8 +1,8 @@
 // Class.
 import { TestingExpect } from '../testing-expect.abstract';
-import { TestingToBe } from './testing-to-be.class';
-import { TestingToHave } from './testing-to-have.class';
-import { TestingToThrow } from './testing-to-throw.class';
+import { TestingExpectToBe } from './testing-to-be.class';
+import { TestingExpectToHave } from './testing-to-have.class';
+import { TestingExpectToThrow } from './testing-to-throw.class';
 
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
@@ -10,42 +10,42 @@ import { ExpectType } from '../../type/expect-type.type';
 /**
  * Testing `to`, `to.be`, `to.have`, `to.throw` matchers.
  */
-export class TestingTo extends TestingExpect {
+export class TestingExpectTo extends TestingExpect {
   /**
    * 
    */
-  public get be(): TestingToBe {
+  public get be(): TestingExpectToBe {
     return this.#be;
   }
 
   /**
    * 
    */
-  public get have(): TestingToHave {
+  public get have(): TestingExpectToHave {
     return this.#have;
   }
 
   /**
    * 
    */
-  public get throw(): TestingToThrow {
+  public get throw(): TestingExpectToThrow {
     return this.#throw;
   }
 
   /**
    * 
    */
-  #be = new TestingToBe();
+  #be = new TestingExpectToBe();
 
   /**
    * 
    */
-  #have = new TestingToHave();
+  #have = new TestingExpectToHave();
 
   /**
    * 
    */
-  #throw = new TestingToThrow();
+  #throw = new TestingExpectToThrow();
 
   public contain<T>(
     actual: ExpectType<T>,

@@ -2,14 +2,14 @@
 import { is, Constructor, typeOf } from '@angular-package/type';
 // Class.
 import { TestingExpect } from '../testing-expect.abstract';
-import { TestingToBeArrayOf } from './testing-to-be-arrayof.class';
-import { TestingToBeInstanceOf } from './testing-to-be-instanceof.class';
+import { TestingExpectToBeArrayOf } from './testing-to-be-arrayof.class';
+import { TestingExpectToBeInstanceOf } from './testing-to-be-instanceof.class';
 // Type.
 import { ExpectType } from '../../type';
 /**
  * Matchers that use the `toBe()` method of jasmine.
  */
-export class TestingToBe extends TestingExpect {
+export class TestingExpectToBe extends TestingExpect {
   /**
    * 
    */
@@ -24,12 +24,12 @@ export class TestingToBe extends TestingExpect {
     return this.#instanceof;
   }
 
-  #arrayof = new TestingToBeArrayOf();
+  #arrayof = new TestingExpectToBeArrayOf();
 
   /**
    * 
    */
-  #instanceof = new TestingToBeInstanceOf();
+  #instanceof = new TestingExpectToBeInstanceOf();
 
   /**
    * The Default message for the expectation fails.

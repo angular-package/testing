@@ -7,7 +7,7 @@ import { ExpectType } from '../../type';
 /**
  * Matchers that use the `toBeArrayOf()` method of jasmine.
  */
-export class TestingToBeArrayOf extends TestingExpect {
+export class TestingExpectToBeArrayOf extends TestingExpect {
   /**
    * The Default message for the expectation fails.
    */
