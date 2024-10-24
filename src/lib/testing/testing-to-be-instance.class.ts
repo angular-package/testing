@@ -1,11 +1,11 @@
 // Class.
-import { TestingCore } from './testing-core.class';
-import { TestingItTo } from './it/testing-it-to.class';
+import { TestingCore } from '../testing-core.class';
+import { TestingItTo } from '../it/testing-it-to.class';
 // Type.
 import { Constructor } from '@angular-package/type';
-import { ExpectType } from '../type';
+import { ExpectType } from '../../type';
 // Interface.
-import { ExecutableTests } from '../interface/executable-tests.interface';
+import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared simple tests.
  */
