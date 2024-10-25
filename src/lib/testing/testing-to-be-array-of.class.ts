@@ -8,14 +8,11 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
  * @class
  * @classdesc Prepared full named description array tests.
  */
-export class TestingToBeArrayOf<
-  Descriptions extends string = string,
-  Expectations extends string = string
-> {
+export class TestingToBeArrayOf {
   /**
    * 
    */
-  private toBeArrayOf: TestingItToBeArrayOf;
+  protected toBeArrayOf: TestingItToBeArrayOf;
 
   /**
    * Simple `class` to support testing.

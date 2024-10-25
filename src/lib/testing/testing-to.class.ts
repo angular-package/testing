@@ -7,14 +7,11 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared simple tests.
  */
-export class TestingTo<
-  Descriptions extends string = string,
-  Expectations extends string = string
-> {
+export class TestingTo {
   /**
    * 
    */
-  private to: TestingItTo;
+  protected to: TestingItTo;
 
   /**
    * Simple `class` to support testing.

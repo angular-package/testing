@@ -8,14 +8,11 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared simple tests.
  */
-export class TestingToBe<
-  Descriptions extends string = string,
-  Expectations extends string = string
-> {
+export class TestingToBe {
   /**
    * 
    */
-  private toBe: TestingItToBe;
+  protected toBe: TestingItToBe;
 
   /**
    * Simple `class` to support testing.
@@ -214,6 +211,27 @@ export class TestingToBe<
   /**
    * 
    * @param actual 
+   * @param expected 
+   * @param expectation 
+   * The `actual` value must be `function`.
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
+  public toBeFunction<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.toBe.function(actual, expected, expectation, expectationFailOutput, execute);
+    return this;
+  }
+
+  /**
+   * 
+   * @param actual 
    * @param constructor 
    * @param expected 
    * @param expectation 
@@ -254,7 +272,6 @@ export class TestingToBe<
     this.toBe.instanceOf(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
-
 
   /**
    * 
