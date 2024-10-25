@@ -16,37 +16,37 @@ export class TestingExpectTo extends TestingExpect {
    * @public
    */
   public get be(): TestingExpectToBe {
-    return this.testingExpectToBe;
+    return this.toBe;
   }
 
   /**
    * @public
    */
   public get have(): TestingExpectToHave {
-    return this.testingExpectToHave;
+    return this.toHave;
   }
 
   /**
    * @public
    */
   public get throw(): TestingExpectToThrow {
-    return this.testingExpectToThrow;
+    return this.toThrow;
   }
 
   /**
    * 
    */
-  private testingExpectToBe = new TestingExpectToBe();
+  private toBe = new TestingExpectToBe();
 
   /**
    * 
    */
-  private testingExpectToHave = new TestingExpectToHave();
+  private toHave = new TestingExpectToHave();
 
   /**
    * 
    */
-  private testingExpectToThrow = new TestingExpectToThrow();
+  private toThrow = new TestingExpectToThrow();
 
   public contain<T>(
     actual: ExpectType<T>,

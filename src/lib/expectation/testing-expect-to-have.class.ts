@@ -14,13 +14,13 @@ export class TestingExpectToHave extends TestingExpect {
    *
    */
   public get been() {
-    return this.testingExpectToHaveBeen;
+    return this.toHaveBeen;
   }
 
   /**
    * 
    */
-  private testingExpectToHaveBeen = new TestingExpectToHaveBeen();
+  private toHaveBeen = new TestingExpectToHaveBeen();
 
   public class<T>(
     actual: ExpectType<T>,

@@ -12,11 +12,11 @@ export class TestingExpectToHaveBeen extends TestingExpect {
    * 
    */
   public get called() {
-    return this.testingExpectToHaveBeenCalled;
+    return this.toHaveBeenCalled;
   }
 
   /**
    * 
    */
-  private testingExpectToHaveBeenCalled = new TestingExpectToHaveBeenCalled();
+  private toHaveBeenCalled = new TestingExpectToHaveBeenCalled();
 }

@@ -17,22 +17,22 @@ export class TestingExpectToBe extends TestingExpect {
    * 
    */
   public get arrayof() {
-    return this.testingExpectToBeArrayOf;
+    return this.toBeArrayOf;
   }
 
   /**
    * 
    */
   public get instanceof() {
-    return this.testingExpectToBeInstanceOf;
+    return this.toBeInstanceOf;
   }
 
-  private testingExpectToBeArrayOf = new TestingExpectToBeArrayOf();
+  private toBeArrayOf = new TestingExpectToBeArrayOf();
 
   /**
    * 
    */
-  private testingExpectToBeInstanceOf = new TestingExpectToBeInstanceOf();
+  private toBeInstanceOf = new TestingExpectToBeInstanceOf();
 
   /**
    * The Default message for the expectation fails.
@@ -118,7 +118,6 @@ export class TestingExpectToBe extends TestingExpect {
     this.be(is.boolean(actual), expected, expectationFailOutput);
     return this;
   }
-
   public booleanType<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
