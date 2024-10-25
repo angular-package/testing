@@ -18,6 +18,20 @@ export {
   TestingItToHaveBeenCalled,
   TestingItToThrow,
 } from './it';
+export {
+  TestingTo,
+  TestingToBe,
+  TestingToBeArrayOf,
+  TestingToBeBoolean,
+  TestingToBeGreaterThan,
+  TestingToBeInstanceOf,
+  TestingToBeLessThan,
+  TestingToBeNumber,
+  TestingToBeObject,
+  TestingToBeString,
+  TestingToHave,
+  TestingToThrow,
+} from './testing';
 export { Testing } from './testing.class';
 export { TestingActual  } from './testing-actual.class';
 export { TestingCore } from './testing-core.class';
