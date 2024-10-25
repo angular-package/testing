@@ -14,7 +14,7 @@ export class TestingItToBeInstanceOf<
 > {
   //#region toBeInstanceOf
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Array`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Array`
    * on the `expected` of `true`. The method uses `isArray()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -41,7 +41,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Boolean` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Boolean` on the
    * `expected` of `true`. The method uses `isBooleanObject()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -68,7 +68,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Date`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Date`
    * on the `expected` of `true`. The method uses `isDate()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -95,7 +95,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Error` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Error` on the
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -122,7 +122,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Function` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Function` on the
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -149,7 +149,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Map` on the `expected`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Map` on the `expected`
    * of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -176,7 +176,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Number` on the `expected`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `Number` on the `expected`
    * of `true`. The method uses `isObject()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -203,7 +203,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Object` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Object` on the
    * `expected` of `true`. The method uses `isObject()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -230,7 +230,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Promise` on the `expected`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Promise` on the `expected`
    * of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -257,7 +257,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `RangeError` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `RangeError` on the
    * `expected` state.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -284,7 +284,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `ReferenceError` on
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `ReferenceError` on
    * the `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -311,7 +311,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `RegExp` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `RegExp` on the
    * `expected` of `true`. The method uses `isRegExp()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -338,7 +338,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Set` on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Set` on the `expected` of
    * `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -365,7 +365,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Storage` on the `expected`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Storage` on the `expected`
    * of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -392,7 +392,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `String` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `String` on the
    * `expected` of `true`.The method uses `isStringObject()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -419,7 +419,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `SyntaxError` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `SyntaxError` on the
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -446,7 +446,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `TypeError` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `TypeError` on the
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -473,7 +473,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `URIError` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `URIError` on the
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -499,6 +499,15 @@ export class TestingItToBeInstanceOf<
     return this;
   }
 
+  /**
+   * @description 
+   * @param actual 
+   * @param expected 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
   public weakMap<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -514,9 +523,8 @@ export class TestingItToBeInstanceOf<
     return this;
   }
 
-
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `WeakSet` on the
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a `WeakSet` on the
    * `expected` of `true`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.

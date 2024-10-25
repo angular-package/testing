@@ -16,14 +16,14 @@ export class TestingItToHaveBeen<
   /**
    * 
    */
-  public get called(): TestingItToHaveBeenCalled {
-    return this.#called;
+  public get called() {
+    return this.toHaveBeenCalled;
   }
 
   /**
    * 
    */
-  #called: TestingItToHaveBeenCalled;
+  private toHaveBeenCalled: TestingItToHaveBeenCalled;
 
   /**
    * 
@@ -37,6 +37,6 @@ export class TestingItToHaveBeen<
     executable?: ExecutableTests
   ) {
     super(allowDescribe, allowIt, executable);
-    this.#called = new TestingItToHaveBeenCalled(allowDescribe, allowIt, executable);
+    this.toHaveBeenCalled = new TestingItToHaveBeenCalled(allowDescribe, allowIt, executable);
   }
 }

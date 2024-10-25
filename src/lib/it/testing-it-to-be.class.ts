@@ -1,6 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
 import { TestingItToBeArrayOf } from './testing-it-to-be-arrayof.class';
+import { TestingItToBeBoolean } from './testing-it-to-be-boolean.class';
 import { TestingItToBeInstanceOf } from './testing-it-to-be-instanceof.class';
 // Type.
 import { Constructor } from '@angular-package/type';
@@ -18,28 +19,43 @@ export class TestingItToBe<
   Expectations
 > {
   /**
-   * 
+   * @description 
    */
   public get arrayof() {
-    return this.#arrayof;
+    return this.toBeArrayOf;
   }
 
   /**
-   * 
+   * @description 
+   */
+  public get boolean() {
+    return this.toBeBoolean;
+  }
+
+  /**
+   * @description 
    */
   public get instanceof() {
-    return this.#instanceof;
+    return this.toBeInstanceOf;
   }
 
-  /**
-   * 
-   */
-  #arrayof: TestingItToBeArrayOf;
+  // TODO: Check.
+  // private executable?
 
   /**
    * 
    */
-  #instanceof: TestingItToBeInstanceOf;
+  private toBeArrayOf: TestingItToBeArrayOf;
+
+  /**
+   * 
+   */
+  private toBeBoolean: TestingItToBeBoolean;
+
+  /**
+   * 
+   */
+  private toBeInstanceOf: TestingItToBeInstanceOf;
 
   /**
    * 
@@ -53,13 +69,14 @@ export class TestingItToBe<
     executable?: ExecutableTests
   ) {
     super(allowDescribe, allowIt, executable);
-    this.#arrayof = new TestingItToBeArrayOf(allowDescribe, allowIt, executable);
-    this.#instanceof = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable);
+    this.toBeArrayOf = new TestingItToBeArrayOf(allowDescribe, allowIt, executable);
+    this.toBeBoolean = new TestingItToBeBoolean(allowDescribe, allowIt, executable);
+    this.toBeInstanceOf = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable);
   }
 
   //#region toBe
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value.
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value.
    * "Expect the actual value to be === to the expected value."
    * @param actual The value of any type passed to the `expect()` function of jasmine.
    * @param expected The value of any type passed to the `toBe()` method of jasmine. "The expected value to compare against."
@@ -85,7 +102,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `array` type on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `array` type on the `expected` of
    * `true`. The method uses `isArray()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -112,7 +129,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `bigint` type on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `bigint` type on the `expected` of
    * `true`. The method uses `isBigInt()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -139,61 +156,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `boolean` type or an instance of `Boolean`
-   * on the `expected` of `true`. The method uses `isBoolean()` function of `@angular-package/type`.
-   * @param actual The value of any type to check.
-   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to
-   * The `actual` value must be of a `boolean` type or an instance of `${Boolean.name}`.
-   * @param expectationFailOutput
-   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
-   * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTestToBe`.
-   */
-  public boolean<T>(
-    actual: ExpectType<T>,
-    expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingItToBe.expectation.toBeBoolean,
-    expectationFailOutput?: any,
-    execute?: boolean,
-  ): this {
-    this.it(
-      expectation,
-      () => super.expect.to.be.boolean(actual, expected, expectationFailOutput),
-      execute
-    );
-    return this;
-  }
-
-  /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `boolean` type
-   * on the `expected` of `true`. The method uses `isBooleanType()` function of `@angular-package/type`.
-   * @param actual The value of any type to check.
-   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to
-   * The `actual` value must be of a `boolean` type.
-   * @param expectationFailOutput
-   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
-   * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTestToBe`.
-   */
-  public booleanType<T>(
-    actual: ExpectType<T>,
-    expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingItToBe.expectation.toBeBooleanType,
-    expectationFailOutput?: any,
-    execute?: boolean,
-  ): this {
-    this.it(
-      expectation,
-      () => super.expect.to.be.booleanType(actual, expected, expectationFailOutput),
-      execute
-    );
-    return this;
-  }
-
-  /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `class`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `class`
    * on the `expected` of `true`. The method uses `isClass()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -220,7 +183,7 @@ export class TestingItToBe<
   }
 
   /**
-   * 
+   * @description 
    * @param actual 
    * @param expected 
    * @param precision 
@@ -246,7 +209,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `date`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `date`
    * on the `expected` of `true`. The method uses `isDate()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -318,7 +281,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `function`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `function`
    * on the `expected` of `true`. The method uses `isFunction()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -379,7 +342,7 @@ export class TestingItToBe<
   //#endregion
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a instance of `constructor`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a instance of `constructor`
    * on the `expected` of `true`. The method uses `isInstance()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param constructor Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -409,7 +372,7 @@ export class TestingItToBe<
 
   //#region toBeInstanceOf
   /**
-   * 
+   * @description 
    * @param actual 
    * @param expected 
    * @param expectation 
@@ -435,7 +398,7 @@ export class TestingItToBe<
   //#endregion
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `PropertyKey`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `PropertyKey`
    * on the `expected` of `true`. The method uses `isKey()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -524,7 +487,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `null` on the `expected` of `true`. The
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `null` on the `expected` of `true`. The
    * method uses `isNull()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -551,7 +514,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` be a `number` type or an instance of a `Number` on the `expected` of `true`. The
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` be a `number` type or an instance of a `Number` on the `expected` of `true`. The
    * method uses `isNumber()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -578,7 +541,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `number` type or an instance of a `Number` between the `range` of minimum and maximum on the `expected` of `true`. The
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `number` type or an instance of a `Number` between the `range` of minimum and maximum on the `expected` of `true`. The
    * method uses `isNumberBetween()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param min The **minimum** range of generic type variable `Min` of the given `value`.
@@ -609,7 +572,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `number` type on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `number` type on the `expected` of
    * `true`. The method uses `isNumberType()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -636,7 +599,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` on the `expected` of
    * `true`. The method uses `isObject()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -663,7 +626,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` with a given `key` on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` with a given `key` on the `expected` of
    * `true`. The method uses `isObjectKey()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param key Property name of `PropertyKey` type of potential `object` from the provided `value`.
@@ -692,7 +655,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` with a given `key` in it(or its prototype chain) on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` with a given `key` in it(or its prototype chain) on the `expected` of
    * `true`. The method uses `isobjectKeyIn()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param key Property name of a `PropertyKey` type of potential `object` from the provided `value`.
@@ -721,7 +684,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` with given `keys` on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` with given `keys` on the `expected` of
    * `true`. The method uses `isObjectKeys()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param keys An `array` of property names of the `PropertyKey` type of potential `object` from the provided `value`.
@@ -750,7 +713,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` with given `keys` on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` with given `keys` on the `expected` of
    * `true`. The method uses `isObjectKeys()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param keys An `Array` of property names or a two-dimensional `array` of property names to check if the given `value` contains some of
@@ -781,7 +744,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` with given `keys` on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an `object` with given `keys` on the `expected` of
    * `true`. The method uses `isobjectSomeKeys()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param keys An `Array` of property names or a two-dimensional `array` of property names to check if the given `value` contains some of
@@ -828,7 +791,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `RegExp`
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `RegExp`
    * on the `expected` of `true`.
    * @param actual Any kind of value to check.
    * @param expected Expects the result of the expectation must be `true` or `false`, by default it's `true`.
@@ -948,7 +911,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `string` type or an instance of a `String` on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `string` type or an instance of a `String` on the `expected` of
    * `true`. The method uses `isString()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -975,7 +938,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `string` type or an instance of a `String` that includes
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `string` type or an instance of a `String` that includes
    * the specified words/sentences on the `expected` of `true`. The method uses `isStringIncludes()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param includes An `Array` of strings as words/sentences to be case-sensitive searched for within the given `value`.
@@ -1004,7 +967,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `string` type or an instance of a `String` that includes
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `string` type or an instance of a `String` that includes
    * some of the specified words/sentences on the `expected` of `true`. The method uses `isStringIncludes()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param includes An `Array` of strings as words/sentences to be case-sensitive searched for within the given `value`.
@@ -1033,7 +996,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `string` type or an instance of a `String` of the given length
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `string` type or an instance of a `String` of the given length
    * on the `expected` of `true`. The method uses `isStringLength()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param length The **length** of generic type variable `Length` for the given `value`,
@@ -1062,7 +1025,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `string` type or an instance of a `String` of the length between the given
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `string` type or an instance of a `String` of the length between the given
    * minimum and maximum on the `expected` of `true`. The method uses `isStringLengthBetween()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -1091,7 +1054,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `string` type on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a `string` type on the `expected` of
    * `true`. The method uses `isStringType()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -1118,7 +1081,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `symbol` on the `expected` of
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `symbol` on the `expected` of
    * `true`. The method uses `isSymbol()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -1145,7 +1108,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `boolean` type or an instance of 
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `boolean` type or an instance of 
    * `Boolean` equal to`true` on the `expected` of `true`. The method uses `isSymbol()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -1187,7 +1150,7 @@ export class TestingItToBe<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `undefined` on the `expected` of `true`. The method uses `isUndefined()` function of `@angular-package/type`.
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `undefined` on the `expected` of `true`. The method uses `isUndefined()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
    * @param expectation The message for the karma, which by default is set to

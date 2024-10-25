@@ -26,7 +26,6 @@ export class TestingItToThrow<
     );
     return this;
   }
-
   public matching<T>(
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
@@ -41,7 +40,6 @@ export class TestingItToThrow<
     );
     return this;
   }
-
   public throw<T>(
     actual: ExpectType<T>,
     expected?: any,

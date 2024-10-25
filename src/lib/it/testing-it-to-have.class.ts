@@ -19,13 +19,13 @@ export class TestingItToHave<
    * 
    */
   public get been() {
-    return this.#been;
+    return this.toHaveBeen;
   }
 
   /**
    * 
    */
-  #been: TestingItToHaveBeen;
+  private toHaveBeen: TestingItToHaveBeen;
 
   /**
    * 
@@ -39,9 +39,8 @@ export class TestingItToHave<
     executable?: ExecutableTests
   ) {
     super(allowDescribe, allowIt, executable);
-    this.#been = new TestingItToHaveBeen(allowDescribe, allowIt, executable);
+    this.toHaveBeen = new TestingItToHaveBeen(allowDescribe, allowIt, executable);
   }
-
   public class<T>(
     actual: ExpectType<T>,
     expected: string,
@@ -56,7 +55,6 @@ export class TestingItToHave<
     );
     return this;
   }
-
   public size<T>(
     actual: ExpectType<T>,
     expected: number,
@@ -71,7 +69,6 @@ export class TestingItToHave<
     );
     return this;
   }
-
   public spyInteractions<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,

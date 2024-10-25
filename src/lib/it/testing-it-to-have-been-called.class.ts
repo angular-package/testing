@@ -12,7 +12,6 @@ export class TestingItToHaveBeenCalled<
   Descriptions,
   Expectations
 > {
-
   public before<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: jasmine.Func,
@@ -27,7 +26,6 @@ export class TestingItToHaveBeenCalled<
     ); 
     return this;
   }
-
   public called<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expectation: string = TestingCore.expectation.toHaveBeenCalled,
@@ -41,7 +39,6 @@ export class TestingItToHaveBeenCalled<
     );
     return this;
   }
-
   public onceWith<Actual extends jasmine.Func>(
     expectation: string = TestingCore.expectation.toHaveBeenCalledOnceWith,
     spy: ExpectType<Actual>,
@@ -54,7 +51,6 @@ export class TestingItToHaveBeenCalled<
     );
     return this;
   }
-
   public times<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: number,
@@ -69,7 +65,6 @@ export class TestingItToHaveBeenCalled<
     ); 
     return this;
   }
-
   public with<T extends jasmine.Func>(
     expectation: string = TestingCore.expectation.toHaveBeenCalledWith,
     spy: ExpectType<T>,

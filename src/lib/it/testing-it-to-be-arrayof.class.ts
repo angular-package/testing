@@ -12,6 +12,7 @@ export class TestingItToBeArrayOf<
   Descriptions,
   Expectations
 > {
+  //#region TestingItToBeArrayOf
   public bigint<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -26,7 +27,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-
   public boolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -41,7 +41,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-
   public date<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -56,7 +55,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-
   public defined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -71,7 +69,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-
   public false<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -86,7 +83,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-
   public null<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -101,7 +97,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-
   public number<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -116,7 +111,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-
   public regExp<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -131,7 +125,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-
   public string<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -146,7 +139,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-
   public symbol<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -161,7 +153,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-
   public true<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -176,7 +167,6 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
-  
   public undefined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
@@ -191,4 +181,5 @@ export class TestingItToBeArrayOf<
     );
     return this;
   }
+  //#endregion
 }

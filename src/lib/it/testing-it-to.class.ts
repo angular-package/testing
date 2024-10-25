@@ -18,40 +18,43 @@ export class TestingItTo<
   Expectations
 > {
   /**
-   * 
+   * @description 
    */
   public get be() {
-    return this.#be;
+    return this.toBe;
   }
 
   /**
-   * 
+   * @description 
    */
   public get have() {
-    return this.#have;
+    return this.toHave;
   }
 
   /**
-   * 
+   * @description 
    */
   public get throw() {
-    return this.#throw;
+    return this.toThrow;
   }
 
-  /**
-   * 
-   */
-  #be: TestingItToBe;
+  // TODO: Check.
+  // private executable?
 
   /**
    * 
    */
-  #have: TestingItToHave;
+  private toBe: TestingItToBe;
 
   /**
    * 
    */
-  #throw: TestingItToThrow;
+  private toHave: TestingItToHave;
+
+  /**
+   * 
+   */
+  private toThrow: TestingItToThrow;
 
   /**
    * 
@@ -65,13 +68,13 @@ export class TestingItTo<
     executable?: ExecutableTests
   ) {
     super(allowDescribe, allowIt, executable);
-    this.#be = new TestingItToBe(allowDescribe, allowIt, executable);
-    this.#have = new TestingItToHave(allowDescribe, allowIt, executable);
-    this.#throw = new TestingItToThrow(allowDescribe, allowIt, executable);
+    this.toBe = new TestingItToBe(allowDescribe, allowIt, executable);
+    this.toHave = new TestingItToHave(allowDescribe, allowIt, executable);
+    this.toThrow = new TestingItToThrow(allowDescribe, allowIt, executable);
   }
 
   /**
-   * 
+   * @description 
    * @param actual 
    * @param expected 
    * @param expectation 
@@ -95,7 +98,7 @@ export class TestingItTo<
   }
 
   /**
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to equal to the given `expected`.
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to equal to the given `expected`.
    * "Expect the actual `value` to be equal to the `expected`, using deep equality comparison."
    * @param actual The value of any type passed to the `expect()` function of jasmine.
    * @param expected The value of any type passed to the `toEqual()` method of jasmine. "The expected value to compare against."
@@ -121,7 +124,7 @@ export class TestingItTo<
   }
 
   /**
-   * 
+   * @description 
    * @param actual 
    * @param expected 
    * @param expectation 
