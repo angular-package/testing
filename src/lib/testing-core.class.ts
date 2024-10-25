@@ -332,6 +332,36 @@ export abstract class TestingCore<
     return this;
   }
 
+  /**
+   * 
+   * @param assertion 
+   * @param description 
+   * @param execute 
+   * @returns 
+   */
+  public spec<T>(
+    assertion: (expectation: TestingExpectation) => any,
+    description: string = '',
+    execute?: boolean,
+  ): this {
+    if (description.length === 0) {
+      Object
+        .entries(TestingCore.expectation)
+        .forEach(([name, message]) => assertion
+          .toString()
+          .includes(name) && (description += message + " and ")
+        );
+      description = description.slice(0, -5);
+    }
+    this.it(
+      description,
+      () => assertion(this.expect),
+      execute
+    );
+    return this;
+  }
+
+
   public xdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => any,
