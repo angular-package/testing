@@ -155,7 +155,7 @@ export class TestingActual<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.#to.be.boolean(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.be.boolean.boolean(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -178,7 +178,7 @@ export class TestingActual<
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.be.booleanType(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.be.boolean.type(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
