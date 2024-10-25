@@ -1,6 +1,7 @@
+// import { IntersectionOfInstances } from "../../type/intersection-of-instances.type";
 import { Constructor } from "@angular-package/type";
+import { InstanceOfConstructor } from "../../type/instance-of-constructor.type";
 import { UnionToIntersection } from "../../type/union-to-intersection.type";
-import { IntersectionOfInstances } from "../../type/intersection-of-instances.type";
 
 // Mixin function: combining multiple class constructors into one
 export function mixin<T extends Constructor<any>[]>(...classes: T) {
@@ -26,5 +27,6 @@ export function mixin<T extends Constructor<any>[]>(...classes: T) {
           // .forEach(name => (name !== 'constructor') && ((this as any)[name] = currClass.prototype[name].bind(this)));
       }
     }
-  )) as Constructor<UnionToIntersection<IntersectionOfInstances<T>>>;
+  )/*, class {}*/) as Constructor<UnionToIntersection<InstanceOfConstructor<T[number]>>>;
+  // as Constructor<UnionToIntersection<IntersectionOfInstances<T>>>;
 }
