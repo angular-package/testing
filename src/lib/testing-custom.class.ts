@@ -1,6 +1,7 @@
+// Abstract.
+import { TestingCore } from "./testing-core.abstract";
 // Class.
 import { TestingActual } from "./testing-actual.class";
-import { TestingCore } from "./testing-core.abstract";
 import { TestingDescribe } from "./testing-describe.class";
 import { TestingExpectation } from "./testing-expectation.class";
 import { TestingIt } from "./testing-it.class";
@@ -8,8 +9,7 @@ import { TestingIt } from "./testing-it.class";
 import { mixin } from "./function/mixin.func";
 // Type.
 import { Constructor } from "@angular-package/type";
-import { CounterConfig } from "../type/counter-config.type";
-import { ExpectType } from "../type";
+import { CounterConfig, ExpectType } from "../type";
 // Interface.
 import { ExecutableTests } from "../interface/executable-tests.interface";
 /**
@@ -73,8 +73,8 @@ export class TestingCustom<
   /**
    * @description
    */
-  public get test() {
-    return this.testing;
+  public get testing() {
+    return this.$testing;
   }
 
   /**
@@ -100,7 +100,7 @@ export class TestingCustom<
   /**
    * @protected
    */
-  protected testing;
+  private $testing;
 
   /**
    * @private
@@ -115,22 +115,22 @@ export class TestingCustom<
   /**
    * @description
    * @param testing
-   * @param descriptions
-   * @param expectations
    * @param allowDescribe 
    * @param allowIt 
    * @param executable 
+   * @param descriptions
+   * @param expectations
    * @param counter
    * @param testingDescribe
    * @param testingIt
    */
   constructor(
     testing: T,
-    descriptions: Descriptions[],
-    expectations: Expectations[],
     allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
+    descriptions: Descriptions[] = [],
+    expectations: Expectations[] = [],
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter)
@@ -140,10 +140,8 @@ export class TestingCustom<
     this.$descriptions = descriptions;
     this.executable = executable;
     this.$expectations = expectations;
-
     // Tests.
-    this.testing = new (mixin(...testing))(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-
+    this.$testing = new (mixin(...testing))(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
     // Class to handle core features.
     this.testingCore = new (class<
       Descriptions extends string = string,
@@ -252,6 +250,12 @@ export class TestingCustom<
     return this;
   }
 
+  /**
+   * @description
+   * @param description 
+   * @param specDefinitions 
+   * @returns 
+   */
   public fdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => any,
