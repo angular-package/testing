@@ -1,5 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
+import { TestingDescribe } from '../testing-describe.class';
+import { TestingIt } from '../testing-it.class';
 import { TestingItToBe } from './testing-it-to-be.class';
 import { TestingItToHave } from './testing-it-to-have.class';
 import { TestingItToThrow } from './testing-it-to-throw.class';
@@ -21,21 +23,21 @@ export class TestingItTo<
    * @description 
    */
   public get be() {
-    return this.toBe;
+    return this.#toBe;
   }
 
   /**
    * @description 
    */
   public get have() {
-    return this.toHave;
+    return this.#toHave;
   }
 
   /**
    * @description 
    */
   public get throw() {
-    return this.toThrow;
+    return this.#toThrow;
   }
 
   // TODO: Check.
@@ -44,17 +46,17 @@ export class TestingItTo<
   /**
    * 
    */
-  private toBe: TestingItToBe;
+  #toBe: TestingItToBe;
 
   /**
    * 
    */
-  private toHave: TestingItToHave;
+  #toHave: TestingItToHave;
 
   /**
    * 
    */
-  private toThrow: TestingItToThrow;
+  #toThrow: TestingItToThrow;
 
   /**
    * 
@@ -65,12 +67,14 @@ export class TestingItTo<
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: ExecutableTests
+    executable?: ExecutableTests,
+    testingDescribe?: TestingDescribe,
+    testingIt?: TestingIt
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.toBe = new TestingItToBe(allowDescribe, allowIt, executable);
-    this.toHave = new TestingItToHave(allowDescribe, allowIt, executable);
-    this.toThrow = new TestingItToThrow(allowDescribe, allowIt, executable);
+    super(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    this.#toBe = new TestingItToBe(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    this.#toHave = new TestingItToHave(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    this.#toThrow = new TestingItToThrow(allowDescribe, allowIt, executable, testingDescribe, testingIt);
   }
 
   /**

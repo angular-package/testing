@@ -11,7 +11,7 @@ export class TestingTo {
   /**
    * 
    */
-  protected to: TestingItTo;
+  public to: TestingItTo;
 
   /**
    * Simple `class` to support testing.

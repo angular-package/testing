@@ -1,4 +1,6 @@
 // Class.
+import { TestingDescribe } from '../testing-describe.class';
+import { TestingIt } from '../testing-it.class';
 import { TestingItToBeBoolean } from '../it/testing-it-to-be-boolean.class';
 // Type.
 import { ExpectType } from '../../type';
@@ -24,9 +26,17 @@ export class TestingToBeBoolean {
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: ExecutableTests
+    executable?: ExecutableTests,
+    testingDescribe?: TestingDescribe,
+    testingIt?: TestingIt,
   ) {
-    this.itToBeBoolean = new TestingItToBeBoolean(allowDescribe, allowIt, executable);
+    this.itToBeBoolean = new TestingItToBeBoolean(
+      allowDescribe,
+      allowIt,
+      executable,
+      testingDescribe,
+      testingIt
+    );
   }
 
   /**

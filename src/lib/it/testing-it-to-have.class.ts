@@ -1,5 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
+import { TestingDescribe } from '../testing-describe.class';
+import { TestingIt } from '../testing-it.class';
 import { TestingItToHaveBeen } from './testing-it-to-have-been.class';
 // Type.
 import { ExpectType } from '../../type';
@@ -19,13 +21,13 @@ export class TestingItToHave<
    * 
    */
   public get been() {
-    return this.toHaveBeen;
+    return this.#toHaveBeen;
   }
 
   /**
    * 
    */
-  private toHaveBeen: TestingItToHaveBeen;
+  #toHaveBeen: TestingItToHaveBeen;
 
   /**
    * 
@@ -36,10 +38,12 @@ export class TestingItToHave<
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: ExecutableTests
+    executable?: ExecutableTests,
+    testingDescribe?: TestingDescribe,
+    testingIt?: TestingIt
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.toHaveBeen = new TestingItToHaveBeen(allowDescribe, allowIt, executable);
+    super(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    this.#toHaveBeen = new TestingItToHaveBeen(allowDescribe, allowIt, executable, testingDescribe, testingIt);
   }
   public class<T>(
     actual: ExpectType<T>,

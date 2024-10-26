@@ -23,7 +23,11 @@ import { TestingCore } from './testing-core.class';
 import { TestingDescribe } from './testing-describe.class';
 import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
-
+import { TestingItTo } from './it';
+/**
+ * @class
+ * @classdesc
+ */
 export class Testing<
   Descriptions extends string = string,
   Expectations extends string = string
@@ -76,9 +80,20 @@ export class Testing<
     return this.main.expect;
   }
 
+  public get testingDescribe() {
+    return this.main.testingDescribe;
+  }
+
+  public get testingIt() {
+    return this.main.testingIt;
+  }
+
   /**
    * 
    */
+  protected allowDescribe: boolean;
+  protected allowIt: boolean;
+  protected executable?: ExecutableTests;
   protected main;
 
   /**
@@ -90,17 +105,28 @@ export class Testing<
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: ExecutableTests
+    executable?: ExecutableTests,
+    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe),
+    testingIt: TestingIt = new TestingIt(allowIt, executable?.it)
   ) {
-    super(allowDescribe, allowIt, executable);
-    // this.itTo = new TestingItTo(allowDescribe, allowIt, executable);
+    super(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    this.allowDescribe = allowDescribe;
+    this.allowIt = allowIt;
+    this.executable = executable;
+
     this.main = new (class<
       Descriptions extends string = string,
       Expectations extends string = string
     > extends TestingCore<
       Descriptions,
       Expectations
-    > {})<Descriptions, Expectations>(allowDescribe, allowIt, executable);
+    > {})<Descriptions, Expectations>(
+      this.allowDescribe,
+      this.allowIt,
+      this.executable,
+      testingDescribe,
+      testingIt
+    );
   }
 
   /**
@@ -113,7 +139,7 @@ export class Testing<
     actual: ExpectType<T>,
     specDefinitions: (test: TestingActual) => TestingActual
   ): this {
-    specDefinitions(new TestingActual(true, true).actual(actual));
+    specDefinitions(new TestingActual(this.allowDescribe, this.allowIt).actual(actual));
     return this;
   }
 
@@ -266,7 +292,11 @@ export class Testing<
     spy: () => ExpectType<T>,
     specDefinitions: (test: TestingActual) => TestingActual
   ): this {
-    specDefinitions(new TestingActual(true, true).spy(spy));
+    specDefinitions(new TestingActual(
+      this.allowDescribe,
+      this.allowIt,
+      this.executable
+    ).spy(spy));
     return this;
   }
 

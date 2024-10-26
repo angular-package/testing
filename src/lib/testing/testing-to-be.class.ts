@@ -5,6 +5,8 @@ import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
+import { TestingDescribe } from '../testing-describe.class';
+import { TestingIt } from '../testing-it.class';
 /**
  * Prepared simple tests.
  */
@@ -25,9 +27,17 @@ export class TestingToBe {
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: ExecutableTests
+    executable?: ExecutableTests,
+    testingDescribe?: TestingDescribe,
+    testingIt?: TestingIt,
   ) {
-    this.toBe = new TestingItToBe(allowDescribe, allowIt, executable);
+    this.toBe = new TestingItToBe(
+      allowDescribe,
+      allowIt,
+      executable,
+      testingDescribe,
+      testingIt
+    );
   }
 
   //#region toBe

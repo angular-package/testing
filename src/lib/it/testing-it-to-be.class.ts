@@ -1,5 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
+import { TestingDescribe } from '../testing-describe.class';
+import { TestingIt } from '../testing-it.class';
 import { TestingItToBeArrayOf } from './testing-it-to-be-arrayof.class';
 import { TestingItToBeBoolean } from './testing-it-to-be-boolean.class';
 import { TestingItToBeInstanceOf } from './testing-it-to-be-instanceof.class';
@@ -22,21 +24,21 @@ export class TestingItToBe<
    * @description 
    */
   public get arrayof() {
-    return this.toBeArrayOf;
+    return this.#toBeArrayOf;
   }
 
   /**
    * @description 
    */
   public get boolean() {
-    return this.toBeBoolean;
+    return this.#toBeBoolean;
   }
 
   /**
    * @description 
    */
   public get instanceof() {
-    return this.toBeInstanceOf;
+    return this.#toBeInstanceOf;
   }
 
   // TODO: Check.
@@ -45,17 +47,17 @@ export class TestingItToBe<
   /**
    * 
    */
-  private toBeArrayOf: TestingItToBeArrayOf;
+  #toBeArrayOf: TestingItToBeArrayOf;
 
   /**
    * 
    */
-  private toBeBoolean: TestingItToBeBoolean;
+  #toBeBoolean: TestingItToBeBoolean;
 
   /**
    * 
    */
-  private toBeInstanceOf: TestingItToBeInstanceOf;
+  #toBeInstanceOf: TestingItToBeInstanceOf;
 
   /**
    * 
@@ -66,12 +68,14 @@ export class TestingItToBe<
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: ExecutableTests
+    executable?: ExecutableTests,
+    testingDescribe?: TestingDescribe,
+    testingIt?: TestingIt,
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.toBeArrayOf = new TestingItToBeArrayOf(allowDescribe, allowIt, executable);
-    this.toBeBoolean = new TestingItToBeBoolean(allowDescribe, allowIt, executable);
-    this.toBeInstanceOf = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable);
+    super(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    this.#toBeArrayOf = new TestingItToBeArrayOf(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    this.#toBeBoolean = new TestingItToBeBoolean(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    this.#toBeInstanceOf = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable, testingDescribe, testingIt);
   }
 
   //#region toBe

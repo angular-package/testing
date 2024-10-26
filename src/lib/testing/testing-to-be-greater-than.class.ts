@@ -1,4 +1,6 @@
 // Class.
+import { TestingDescribe } from '../testing-describe.class';
+import { TestingIt } from '../testing-it.class';
 import { TestingItToBe } from '../it';
 // Type.
 import { ExpectType } from '../../type';
@@ -24,9 +26,18 @@ export class TestingToBeGreaterThan {
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: ExecutableTests
+    executable?: ExecutableTests,
+    testingDescribe?: TestingDescribe,
+    testingIt?: TestingIt,
+    
   ) {
-    this.toBe = new TestingItToBe(allowDescribe, allowIt, executable);
+    this.toBe = new TestingItToBe(
+      allowDescribe,
+      allowIt,
+      executable,
+      testingDescribe,
+      testingIt
+    );
   }
 
   //#region toBeGreaterThan

@@ -1,5 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
+import { TestingDescribe } from '../testing-describe.class';
+import { TestingIt } from '../testing-it.class';
 import { TestingItToHaveBeenCalled } from './testing-it-to-have-been-called.class';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
@@ -17,13 +19,13 @@ export class TestingItToHaveBeen<
    * 
    */
   public get called() {
-    return this.toHaveBeenCalled;
+    return this.#toHaveBeenCalled;
   }
 
   /**
    * 
    */
-  private toHaveBeenCalled: TestingItToHaveBeenCalled;
+  #toHaveBeenCalled: TestingItToHaveBeenCalled;
 
   /**
    * 
@@ -34,9 +36,11 @@ export class TestingItToHaveBeen<
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: ExecutableTests
+    executable?: ExecutableTests,
+    testingDescribe?: TestingDescribe,
+    testingIt?: TestingIt
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.toHaveBeenCalled = new TestingItToHaveBeenCalled(allowDescribe, allowIt, executable);
+    super(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    this.#toHaveBeenCalled = new TestingItToHaveBeenCalled(allowDescribe, allowIt, executable, testingDescribe, testingIt);
   }
 }

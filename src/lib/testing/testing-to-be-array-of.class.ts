@@ -1,4 +1,6 @@
 // Class.
+import { TestingDescribe } from '../testing-describe.class';
+import { TestingIt } from '../testing-it.class';
 import { TestingItToBeArrayOf } from '../it';
 // Type.
 import { ExpectType } from '../../type';
@@ -9,9 +11,13 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
  * @classdesc Prepared full named description array tests.
  */
 export class TestingToBeArrayOf {
+
   /**
    * 
    */
+  protected allowDescribe: boolean;
+  protected allowIt: boolean;
+  protected executable?: ExecutableTests;
   protected toBeArrayOf: TestingItToBeArrayOf;
 
   /**
@@ -25,9 +31,17 @@ export class TestingToBeArrayOf {
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: ExecutableTests
+    executable?: ExecutableTests,
+    testingDescribe?: TestingDescribe,
+    testingIt?: TestingIt,
   ) {
-    this.toBeArrayOf = new TestingItToBeArrayOf(allowDescribe, allowIt, executable);
+    this.toBeArrayOf = new TestingItToBeArrayOf(
+      this.allowDescribe = allowDescribe,
+      this.allowIt = allowIt,
+      this.executable = executable,
+      testingDescribe,
+      testingIt
+    );
   }
 
   //#region TestingToBeArrayOf
