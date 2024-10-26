@@ -4,6 +4,8 @@ import { is } from '@angular-package/type';
 import { TestingDescribe } from './testing-describe.class';
 import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
+// Interface.
+import { ExecutableTests } from '../interface/executable-tests.interface';
 /**
  * Core object with describe and it instances.
  */
@@ -149,21 +151,21 @@ export abstract class TestingCore<
   /**
    * 
    */
-  public get expect(): TestingExpectation {
+  public get expect() {
     return this.#expect;
   }
 
   /**
    * 
    */
-  protected get testingDescribe() {
+  public get testingDescribe() {
     return this.#testingDescribe;
   }
 
   /**
    * 
    */
-  protected get testingIt() {
+  public get testingIt() {
     return this.#testingIt;
   }
 
@@ -188,13 +190,26 @@ export abstract class TestingCore<
    * @param allowIt Allows executing `it()`  methods from a child instance.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    */
-  constructor(allowDescribe: boolean, allowIt: boolean, executable?: {
-    describe?: Array<number>,
-    it?: Array<number>
-  }) {
+  constructor(
+    allowDescribe: boolean,
+    allowIt: boolean,
+    executable?: ExecutableTests,
+    testingDescribe?: TestingDescribe<Descriptions>,
+    testingIt?: TestingIt<Expectations>
+  ) {
     if (is.defined(executable)) {
-      is.array(executable.describe) && (this.#testingDescribe = new TestingDescribe(allowDescribe, executable.describe));
-      is.array(executable.it) && (this.#testingIt = new TestingIt<Expectations>(allowIt, executable.it));
+      is.array(executable.describe) && (
+        this.#testingDescribe = new TestingDescribe<Descriptions>(allowDescribe, executable.describe)
+      );
+      is.array(executable.it) && (
+        this.#testingIt = new TestingIt<Expectations>(allowIt, executable.it)
+      );
+    }
+    if (testingDescribe) {
+      this.#testingDescribe = testingDescribe;
+    }
+    if (testingIt) {
+      this.#testingIt = testingIt;
     }
     is.true(allowDescribe) && this.#testingDescribe.allow();
     is.true(allowIt) && this.#testingIt.allow();
