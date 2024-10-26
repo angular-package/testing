@@ -23,8 +23,8 @@ import { TestingIt } from './testing-it.class';
 // Interface.
 import { ExecutableTests } from '../interface/executable-tests.interface';
 // Type.
-import { ExpectType } from '../type';
 import { CounterConfig } from '../type/counter-config.type';
+import { ExpectType } from '../type';
 /**
  * @class
  * @classdesc
@@ -78,7 +78,7 @@ export class Testing<
    * @description
    */
   public get expect() {
-    return this.main.expect;
+    return this.testingCore.expect;
   }
 
   /**
@@ -87,7 +87,7 @@ export class Testing<
   protected allowDescribe: boolean;
   protected allowIt: boolean;
   protected executable?: ExecutableTests;
-  protected main;
+  protected testingCore;
 
   /**
    * @description
@@ -109,7 +109,7 @@ export class Testing<
     this.allowDescribe = allowDescribe;
     this.allowIt = allowIt;
     this.executable = executable;
-    this.main = new (class<
+    this.testingCore = new (class<
       Descriptions extends string = string,
       Expectations extends string = string
     > extends TestingCore<
@@ -212,7 +212,7 @@ export class Testing<
     specDefinitions: () => any,
     execute?: boolean
   ): this {
-    this.main.describe(description, specDefinitions, execute);
+    this.testingCore.describe(description, specDefinitions, execute);
     return this;
   }
 
@@ -220,7 +220,7 @@ export class Testing<
     description: Descriptions | Description,
     specDefinitions: () => any,
   ): this {
-    this.main.fdescribe(description, specDefinitions);
+    this.testingCore.fdescribe(description, specDefinitions);
     return this;
   }
 
@@ -236,7 +236,7 @@ export class Testing<
     assertion: jasmine.ImplementationCallback,
     execute?: boolean
   ): this {
-    this.main.it(expectation, assertion, execute);
+    this.testingCore.it(expectation, assertion, execute);
     return this;
   }
 
@@ -247,7 +247,7 @@ export class Testing<
    * @returns 
    */
   public setSpecProperty(key: string, value: unknown) {
-    this.main.setSpecProperty(key, value);
+    this.testingCore.setSpecProperty(key, value);
     return this;
   }
 
@@ -258,7 +258,7 @@ export class Testing<
    * @returns 
    */
   public setSuiteProperty(key: string, value: unknown) {
-    this.main.setSuiteProperty(key, value);
+    this.testingCore.setSuiteProperty(key, value);
     return this;
   }
 
@@ -274,7 +274,7 @@ export class Testing<
     description: string = '',
     execute?: boolean,
   ): this {
-    this.main.spec(assertion, description, execute);
+    this.testingCore.spec(assertion, description, execute);
     return this;
   }
 
@@ -306,7 +306,7 @@ export class Testing<
     description: Descriptions | Description,
     specDefinitions: () => any,
   ): this {
-    this.main.xdescribe(description, specDefinitions);
+    this.testingCore.xdescribe(description, specDefinitions);
     return this;
   }
 }
