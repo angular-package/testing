@@ -45,5 +45,6 @@ export { TestingIt } from './testing-it.class';
 
 // Abstract.
 export { TestingCore } from './testing-core.abstract';
+export { TestingCounter } from './testing-counter.abstract';
 export { TestingExecutable } from './testing-executable.abstract';
 export { TestingExpect } from './testing-expect.abstract';
