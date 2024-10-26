@@ -1,7 +1,7 @@
 // @angular-package/type.
 import { guard, is } from '@angular-package/type';
 // Class.
-import { TestingCounter } from './testing-counter.class';
+import { TestingCounter } from './testing-counter.abstract';
 // Type.
 import { CounterConfig } from '../type/counter-config.type';
 /**
