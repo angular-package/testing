@@ -6,6 +6,8 @@ import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
 // Interface.
 import { ExecutableTests } from '../interface/executable-tests.interface';
+// Type.
+import { CounterConfig } from '../type/counter-config.type';
 /**
  * Core object with describe and it instances.
  */
@@ -194,15 +196,24 @@ export abstract class TestingCore<
     allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe<Descriptions>,
     testingIt?: TestingIt<Expectations>
   ) {
     if (is.defined(executable)) {
       is.array(executable.describe) && (
-        this.#testingDescribe = new TestingDescribe<Descriptions>(allowDescribe, executable.describe)
+        this.#testingDescribe = new TestingDescribe<Descriptions>(
+          allowDescribe,
+          executable.describe,
+          counter
+        )
       );
       is.array(executable.it) && (
-        this.#testingIt = new TestingIt<Expectations>(allowIt, executable.it)
+        this.#testingIt = new TestingIt<Expectations>(
+          allowIt,
+          executable.it,
+          counter
+        )
       );
     }
     if (testingDescribe) {
@@ -375,7 +386,6 @@ export abstract class TestingCore<
     );
     return this;
   }
-
 
   public xdescribe<Description extends string>(
     description: Descriptions | Description,
