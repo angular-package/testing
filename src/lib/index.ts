@@ -33,6 +33,7 @@ export {
   TestingToThrow,
 } from './testing';
 export { Testing } from './testing.class';
+export { TestingCustom } from './testing-custom.class';
 export { TestingActual  } from './testing-actual.class';
 export { TestingCore } from './testing-core.class';
 export { TestingDescribe } from './testing-describe.class';
