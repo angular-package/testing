@@ -1,6 +1,6 @@
 // Class.
 import { TestingActual } from "./testing-actual.class";
-import { TestingCore } from "./testing-core.class";
+import { TestingCore } from "./testing-core.abstract";
 import { TestingDescribe } from "./testing-describe.class";
 import { TestingExpectation } from "./testing-expectation.class";
 import { TestingIt } from "./testing-it.class";

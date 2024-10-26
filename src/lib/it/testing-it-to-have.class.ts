@@ -1,5 +1,5 @@
 // Class.
-import { TestingCore } from '../testing-core.class';
+import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToHaveBeen } from './testing-it-to-have-been.class';

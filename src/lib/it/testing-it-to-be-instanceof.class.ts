@@ -1,5 +1,5 @@
 // Class.
-import { TestingCore } from '../testing-core.class';
+import { TestingCore } from '../testing-core.abstract';
 // Type.
 import { ExpectType } from '../../type';
 /**
