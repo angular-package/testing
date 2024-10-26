@@ -6,6 +6,7 @@ import { TestingItToBe } from './testing-it-to-be.class';
 import { TestingItToHave } from './testing-it-to-have.class';
 import { TestingItToThrow } from './testing-it-to-throw.class';
 // Type.
+import { CounterConfig } from '../../type/counter-config.type';
 import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
@@ -68,13 +69,14 @@ export class TestingItTo<
     allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
     testingIt?: TestingIt
   ) {
-    super(allowDescribe, allowIt, executable, testingDescribe, testingIt);
-    this.#toBe = new TestingItToBe(allowDescribe, allowIt, executable, testingDescribe, testingIt);
-    this.#toHave = new TestingItToHave(allowDescribe, allowIt, executable, testingDescribe, testingIt);
-    this.#toThrow = new TestingItToThrow(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    this.#toBe = new TestingItToBe(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    this.#toHave = new TestingItToHave(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    this.#toThrow = new TestingItToThrow(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
   }
 
   /**

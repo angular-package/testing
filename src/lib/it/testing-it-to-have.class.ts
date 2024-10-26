@@ -4,6 +4,7 @@ import { TestingDescribe } from '../testing-describe.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToHaveBeen } from './testing-it-to-have-been.class';
 // Type.
+import { CounterConfig } from '../../type/counter-config.type';
 import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
@@ -39,11 +40,12 @@ export class TestingItToHave<
     allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
     testingIt?: TestingIt
   ) {
-    super(allowDescribe, allowIt, executable, testingDescribe, testingIt);
-    this.#toHaveBeen = new TestingItToHaveBeen(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    this.#toHaveBeen = new TestingItToHaveBeen(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
   }
   public class<T>(
     actual: ExpectType<T>,
