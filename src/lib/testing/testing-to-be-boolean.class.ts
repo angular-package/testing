@@ -3,6 +3,7 @@ import { TestingDescribe } from '../testing-describe.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBeBoolean } from '../it/testing-it-to-be-boolean.class';
 // Type.
+import { CounterConfig } from '../../type/counter-config.type';
 import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
@@ -27,6 +28,7 @@ export class TestingToBeBoolean {
     allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
@@ -34,6 +36,7 @@ export class TestingToBeBoolean {
       allowDescribe,
       allowIt,
       executable,
+      counter,
       testingDescribe,
       testingIt
     );

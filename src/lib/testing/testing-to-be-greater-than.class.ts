@@ -3,6 +3,7 @@ import { TestingDescribe } from '../testing-describe.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBe } from '../it';
 // Type.
+import { CounterConfig } from '../../type/counter-config.type';
 import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
@@ -27,14 +28,15 @@ export class TestingToBeGreaterThan {
     allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt,
-    
+    testingIt?: TestingIt,  
   ) {
     this.toBe = new TestingItToBe(
       allowDescribe,
       allowIt,
       executable,
+      counter,
       testingDescribe,
       testingIt
     );

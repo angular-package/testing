@@ -3,6 +3,7 @@ import { TestingDescribe } from '../testing-describe.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBeArrayOf } from '../it';
 // Type.
+import { CounterConfig } from '../../type/counter-config.type';
 import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
@@ -32,6 +33,7 @@ export class TestingToBeArrayOf {
     allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
@@ -39,6 +41,7 @@ export class TestingToBeArrayOf {
       this.allowDescribe = allowDescribe,
       this.allowIt = allowIt,
       this.executable = executable,
+      counter,
       testingDescribe,
       testingIt
     );

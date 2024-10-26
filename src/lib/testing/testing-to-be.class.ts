@@ -2,6 +2,7 @@
 import { TestingItToBe } from '../it';
 // Type.
 import { Constructor } from '@angular-package/type';
+import { CounterConfig } from '../../type/counter-config.type';
 import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
@@ -28,6 +29,7 @@ export class TestingToBe {
     allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
@@ -35,6 +37,7 @@ export class TestingToBe {
       allowDescribe,
       allowIt,
       executable,
+      counter,
       testingDescribe,
       testingIt
     );

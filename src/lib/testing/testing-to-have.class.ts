@@ -1,7 +1,10 @@
 // Class.
 import { TestingCore } from '../testing-core.class';
+import { TestingDescribe } from '../testing-describe.class';
+import { TestingIt } from '../testing-it.class';
 import { TestingItToHave } from '../it';
 // Type.
+import { CounterConfig } from '../../type/counter-config.type';
 import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
@@ -25,9 +28,19 @@ export class TestingToHave {
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: ExecutableTests
+    executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
+    testingDescribe?: TestingDescribe,
+    testingIt?: TestingIt,
   ) {
-    this.toHave = new TestingItToHave(allowDescribe, allowIt, executable);
+    this.toHave = new TestingItToHave(
+      allowDescribe,
+      allowIt,
+      executable,
+      counter,
+      testingDescribe,
+      testingIt
+    );
   }
 
   //#region toHaveBeenCalled
