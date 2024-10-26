@@ -1,7 +1,5 @@
 // Function.
 import { mixin } from './function/mixin.func';
-// Interface.
-import { ExecutableTests } from '../interface/executable-tests.interface';
 // Testing.
 import {
   TestingToBeArrayOf,
@@ -17,13 +15,16 @@ import {
   TestingToThrow,
   TestingTo,
 } from './testing';
-import { ExpectType } from '../type';
 import { TestingActual } from './testing-actual.class';
 import { TestingCore } from './testing-core.class';
 import { TestingDescribe } from './testing-describe.class';
 import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
-import { TestingItTo } from './it';
+// Interface.
+import { ExecutableTests } from '../interface/executable-tests.interface';
+// Type.
+import { ExpectType } from '../type';
+import { CounterConfig } from '../type/counter-config.type';
 /**
  * @class
  * @classdesc
@@ -80,14 +81,6 @@ export class Testing<
     return this.main.expect;
   }
 
-  public get testingDescribe() {
-    return this.main.testingDescribe;
-  }
-
-  public get testingIt() {
-    return this.main.testingIt;
-  }
-
   /**
    * 
    */
@@ -101,11 +94,14 @@ export class Testing<
    * @param allowDescribe 
    * @param allowIt 
    * @param executable 
+   * @param testingDescribe
+   * @param testingIt
    */
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it)
   ) {
@@ -113,7 +109,6 @@ export class Testing<
     this.allowDescribe = allowDescribe;
     this.allowIt = allowIt;
     this.executable = executable;
-
     this.main = new (class<
       Descriptions extends string = string,
       Expectations extends string = string
@@ -124,6 +119,7 @@ export class Testing<
       this.allowDescribe,
       this.allowIt,
       this.executable,
+      counter,
       testingDescribe,
       testingIt
     );
