@@ -87,6 +87,15 @@ export class TestingDescribe<
     return this;
   }
 
+  public xdescribe<Description extends string>(
+    description: Descriptions | Description,
+    specDefinitions: () => void,
+  ): this {
+    this.count();
+    xdescribe(description, specDefinitions);
+    return this;
+  }
+
   /**
    * Defines description for `describe()` method with adding counter on demand.
    * @param description A `string` type value.
@@ -97,14 +106,5 @@ export class TestingDescribe<
       return description.replace('[counter]', `${this.getCounter()}`);
     }
     return '';
-  }
-
-  public xdescribe<Description extends string>(
-    description: Descriptions | Description,
-    specDefinitions: () => void,
-  ): this {
-    this.count();
-    xdescribe(description, specDefinitions);
-    return this;
   }
 }
