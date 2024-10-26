@@ -1,7 +1,7 @@
 // @angular-package/type.
 import { is } from '@angular-package/type';
 // Class.
-import { TestingExecutable } from './testing-executable.class';
+import { TestingExecutable } from './testing-executable.abstract';
 // Type.
 import { CounterConfig } from '../type/counter-config.type';
 /**
@@ -13,7 +13,10 @@ export class TestingIt<
   Expectations extends string = string,
   CounterActive extends boolean = boolean,
   CounterDescription extends boolean = boolean
-> extends TestingExecutable {
+> extends TestingExecutable<
+  CounterActive,
+  CounterDescription
+> {
   /**
    * @description Defines the wrapper function for the `it()` function of jasmine with the ability to decide its execution.
    * @param expectation "Textual description of what this spec is checking"

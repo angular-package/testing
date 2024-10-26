@@ -9,7 +9,7 @@ import { CounterConfig } from '../type/counter-config.type';
  * @class
  * @classdesc Manages the `Set` storage of executable tests.
  */
-export class TestingExecutable<
+export abstract class TestingExecutable<
   CounterActive extends boolean = boolean,
   CounterDescription extends boolean = boolean,
 > extends TestingCounter<

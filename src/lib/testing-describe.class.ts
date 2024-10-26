@@ -1,7 +1,7 @@
 // @angular-package/type.
 import { is } from '@angular-package/type';
 // Class.
-import { TestingExecutable } from './testing-executable.class';
+import { TestingExecutable } from './testing-executable.abstract';
 // Type.
 import { CounterConfig } from '../type/counter-config.type';
 /**
