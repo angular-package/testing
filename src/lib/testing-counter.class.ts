@@ -28,7 +28,7 @@ export abstract class TestingCounter {
   /**
    * Gets the actual counter.
    */
-  protected getCounter(): number {
+  public getCounter(): number {
     return this.#counter;
   }
 }
