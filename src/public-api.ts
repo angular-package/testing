@@ -12,11 +12,17 @@ export {
   // Class to handle `describe`, `it`, `expect` of jasmine.
   TestingCore,
 
+  // Class to customize testing.
+  TestingCustom,
+
   // Class to handle `describe()` function of jasmine.
   TestingDescribe,
 
   // Class to handle `expect()` function of jasmine.
   TestingExpect,
+
+  // Abstract class to handle executable tests.
+  TestingExecutable,
 
   // Full named expectations. Methods with `expect()` + jasmine matchers.
   TestingExpectation,
@@ -48,6 +54,22 @@ export {
   TestingItToHaveBeenCalled,
   TestingItToThrow,
 } from './lib/it';
+
+// Testing for customization.
+export {
+  TestingTo,
+  TestingToBe,
+  TestingToBeArrayOf,
+  TestingToBeBoolean,
+  TestingToBeGreaterThan,
+  TestingToBeInstanceOf,
+  TestingToBeLessThan,
+  TestingToBeNumber,
+  TestingToBeObject,
+  TestingToBeString,
+  TestingToHave,
+  TestingToThrow,
+} from './lib/testing';
 
 /**
  * Constant.

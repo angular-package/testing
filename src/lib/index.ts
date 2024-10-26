@@ -32,11 +32,18 @@ export {
   TestingToHave,
   TestingToThrow,
 } from './testing';
+
+// Testing purpose.
 export { Testing } from './testing.class';
-export { TestingCustom } from './testing-custom.class';
 export { TestingActual  } from './testing-actual.class';
-export { TestingCore } from './testing-core.abstract';
-export { TestingDescribe } from './testing-describe.class';
-export { TestingExpect } from './testing-expect.abstract';
+export { TestingCustom } from './testing-custom.class';
 export { TestingExpectation } from './testing-expectation.class';
+
+// Describe and It.
+export { TestingDescribe } from './testing-describe.class';
 export { TestingIt } from './testing-it.class';
+
+// Abstract.
+export { TestingCore } from './testing-core.abstract';
+export { TestingExecutable } from './testing-executable.abstract';
+export { TestingExpect } from './testing-expect.abstract';
