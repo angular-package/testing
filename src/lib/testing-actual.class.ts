@@ -1,9 +1,14 @@
 // Class.
 import { TestingCore } from './testing-core.class';
+import { TestingDescribe } from './testing-describe.class';
+import { TestingIt } from './testing-it.class';
 import { TestingItTo } from './it/testing-it-to.class';
 // Type.
 import { Constructor } from '@angular-package/type';
+import { CounterConfig } from '../type/counter-config.type';
 import { ExpectType } from '../type';
+// Interface.
+import { ExecutableTests } from '../interface/executable-tests.interface';
 /**
  * Prepared simple tests.
  */
@@ -27,7 +32,7 @@ export class TestingActual<
   /**
    * 
    */
-  #to: TestingItTo;
+  #to;
 
   /**
    * 
@@ -38,13 +43,13 @@ export class TestingActual<
   constructor(
     allowDescribe: boolean,
     allowIt: boolean,
-    executable?: {
-      describe?: Array<number>,
-      it?: Array<number>
-    }
+    executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
+    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe),
+    testingIt: TestingIt = new TestingIt(allowIt, executable?.it)
   ) {
-    super(allowDescribe, allowIt, executable);
-    this.#to = new TestingItTo(allowDescribe, allowIt, executable);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    this.#to = new TestingItTo(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
   }
 
   /**
