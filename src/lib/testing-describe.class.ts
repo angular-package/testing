@@ -1,15 +1,24 @@
 // @angular-package/type.
-import { guard, is } from '@angular-package/type';
+import { is } from '@angular-package/type';
 // Class.
 import { TestingExecutable } from './testing-executable.class';
+// Type.
+import { CounterConfig } from '../type/counter-config.type';
 /**
- * Manages `describe()` function of jasmine.
+ * Initialize executable storage.
+ * @class
+ * @classdesc Manages `describe()` function of jasmine.
  */
 export class TestingDescribe<
-  Descriptions extends string = string
-> extends TestingExecutable {
+  Descriptions extends string = string,
+  CounterActive extends boolean = boolean,
+  CounterDescription extends boolean = boolean,
+> extends TestingExecutable<
+  CounterActive,
+  CounterDescription
+> {
   /**
-   * Defines the wrapper function for the `describe()` function of jasmine with the ability to decide its execution.
+   * @description Defines the wrapper function for the `describe()` function of jasmine with the ability to decide its execution.
    * @param description "Textual description of the group" with a defined prefix indicating its unique number.
    * @param specDefinitions "Function for Jasmine to invoke that will define"
    * @returns The return value is a `function` that contains `describe()` of jasmine with the ability to decide of its execution.
@@ -23,23 +32,26 @@ export class TestingDescribe<
   }
 
   /**
-   * Privately stored allow state of executing `describe)` method, which by default is set to `false`.
+   * @description Privately stored allow state of executing `describe)` method, which by default is set to `false`.
    */
   #allow = false;
 
   /**
-   * Manages `describe()` function of jasmine.
-   * Initialize executable storage.
    * @allow An optional value of a `boolean` to initially allow executing `describe()` methods.
    * @param executable An optional `array` of unique numbers type to initially set executable storage.
+   * @param counter
    */
-  constructor(allow?: boolean, executable?: Array<number>) {
-    super(executable);
+  constructor(
+    allow?: boolean,
+    executable?: Array<number>,
+    counter: CounterConfig<CounterActive, CounterDescription> = [true, false] as any
+  ) {
+    super(executable, counter);
     this.#allow = is.boolean(allow) ? allow : this.#allow;
   }
 
   /**
-   * Allows executing `describe()` methods.
+   * @description Allows executing `describe()` methods.
    * @returns The return value is an instance of `TestingDescribe`.
    */
   public allow(): this {
@@ -48,7 +60,7 @@ export class TestingDescribe<
   }
 
   /**
-   * Disallows executing `describe()` methods, which means only those specified in the executable storage can be executed.
+   * @description Disallows executing `describe()` methods, which means only those specified in the executable storage can be executed.
    * @returns The return value is an instance of `TestingDescribe`.
    */
   public disallow(): this {
@@ -57,7 +69,7 @@ export class TestingDescribe<
   }
 
   /**
-   * Executes defined `describe()` function of jasmine on provided state `true` from the `execute`.
+   * @description Executes defined `describe()` function of jasmine on provided state `true` from the `execute`.
    * @param description "Textual description of the group" with an optional its unique number when adding `[counter]`.
    * @param specDefinitions "Function for Jasmine to invoke that will define inner suites a specs"
    * @param execute A `boolean` type value to decide whether or not execute defined `describe()` of jasmine function.
@@ -72,7 +84,7 @@ export class TestingDescribe<
   ): this {
     this.count();
     TestingDescribe.define(
-      this.defineDescription(description),
+      this.replaceCounter(description),
       specDefinitions
     )(execute);
     return this;
@@ -94,17 +106,5 @@ export class TestingDescribe<
     this.count();
     xdescribe(description, specDefinitions);
     return this;
-  }
-
-  /**
-   * Defines description for `describe()` method with adding counter on demand.
-   * @param description A `string` type value.
-   * @returns The return value is a `string` type description.
-   */
-  private defineDescription(description: string): string {
-    if (guard.string(description)) {
-      return description.replace('[counter]', `${this.getCounter()}`);
-    }
-    return '';
   }
 }
