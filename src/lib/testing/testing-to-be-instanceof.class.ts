@@ -3,8 +3,7 @@ import { TestingDescribe } from '../testing-describe.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBeInstanceOf } from '../it';
 // Type.
-import { CounterConfig } from '../../type/counter-config.type';
-import { ExpectType } from '../../type';
+import { CounterConfig, ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**

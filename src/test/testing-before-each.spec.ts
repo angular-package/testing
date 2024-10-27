@@ -1,41 +1,48 @@
 import { Testing } from "../lib";
-import { TestingToBe } from '../lib/expectations/testing-to-be.class';
 
+import { TestingExpectToBe } from '../lib/expectation/testing-expect-to-be.class';
+import { Execute } from "./execute";
 
-const testingExp = new TestingToBe();
+const execute = true;
+const executeDescribe = true;
+const executeIt = true;
 
-const testing = new Testing(true, true);
+if (execute) {
+  const e = new TestingExpectToBe();
+  const t = new Testing(
+    executeDescribe || Execute.describe["testing-before-each"], 
+    executeIt || Execute.it["testing-before-each"]
+  );
 
+  let arr: any[];
 
-let arr: any[];
-
-
-// native
-beforeEach(() => {
-  arr = ['a', 'b', 'c'];
-});
-
-testing.beforeEach(() => {
-  arr = ['a', 'b', 'c'];
-});
-
-
-describe(`native`, () => {
-  console.log(`native arr:`, arr);
-  it(`native`, () => {
+  // native
+  beforeEach(() => {
+    arr = ['a', 'b', 'c'];
+  });
+  
+  t.beforeEach(() => {
+    arr = ['a', 'b', 'c'];
+  });
+  
+  
+  describe(`native`, () => {
     console.log(`native arr:`, arr);
+    it(`native`, () => {
+      console.log(`native arr:`, arr);
+    });
   });
-});
-
-// 
-testing.describe('testing.describe', () => {
-  console.log(`testing.describe arr`, arr);
-
-  it(`testing native`, () => {
-    console.log(`testing native arr:`, arr);
-  });
-
-  testing.it('testing it', () => {
-    console.log(`testing it arr:`, arr);
-  });
-});
+  
+  
+  t.describe('testing.describe', () => {
+    console.log(`testing.describe arr`, arr);
+  
+    it(`testing native`, () => {
+      console.log(`testing native arr:`, arr);
+    });
+  
+    t.it('testing it', () => {
+      console.log(`testing it arr:`, arr);
+    });
+  });  
+}
