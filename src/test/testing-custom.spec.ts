@@ -1,7 +1,9 @@
 // TestingCustom
+import { TestingDescribe, TestingIt } from "../lib";
 import { TestingCustom } from "../lib/testing-custom.class";
 
 // Selected.
+import { TestingToBe } from "../lib/testing/testing-to-be.class";
 import { TestingToBeArrayOf } from "../lib/testing/testing-to-be-array-of.class";
 import { TestingToBeBoolean } from "../lib/testing/testing-to-be-boolean.class";
 import { TestingToBeGreaterThan } from "../lib/testing/testing-to-be-greater-than.class";
@@ -10,7 +12,6 @@ import { TestingToBeLessThan } from "../lib/testing/testing-to-be-less-than.clas
 import { TestingToBeNumber } from "../lib/testing/testing-to-be-number.class";
 import { TestingToBeObject } from "../lib/testing/testing-to-be-object.class";
 import { TestingToBeString } from "../lib/testing/testing-to-be-string.class";
-import { TestingToBe } from "../lib/testing/testing-to-be.class";
 import { TestingToHave } from "../lib/testing/testing-to-have.class";
 
 // Execute.
@@ -21,6 +22,17 @@ const executeDescribe = true;
 const executeIt = true;
 
 if (execute) {
+  const README = new TestingCustom(
+    [TestingToBe], // List of test.
+    true, // Describe executable.
+    true, // It executable.
+    { describe: [], it: [] }, // Executable numbers of `describe` and `it`.
+    ['DescribeA'], // Descriptions for `describe`.
+    ['ItA'], // Expectations for `it`.
+    [false, false], // `boolean` or list of [`boolean`, `boolean`]
+    new TestingDescribe(), // Instance for `TestingDescribe` for `counter` purposes
+    new TestingIt()  // Instance for `TestingIt` for `counter` purposes
+  );
   const t = new TestingCustom(
     [
       TestingToBeArrayOf,
