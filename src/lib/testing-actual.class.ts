@@ -45,8 +45,8 @@ export class TestingActual<
     allowIt: boolean,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe),
-    testingIt: TestingIt = new TestingIt(allowIt, executable?.it)
+    testingDescribe?: TestingDescribe,
+    testingIt?: TestingIt
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
     this.#to = new TestingItTo(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
