@@ -10,15 +10,15 @@ export abstract class TestingCounter<
   /**
    * @description Status of activated counter.
    */
-  public get counterActive(): Active {
-    return this.#active as Active;
+  public get counterActive() {
+    return this.#active;
   }
 
   /**
    * @description Status of automatically joined `[counter]` in description.
    */
-  public get counterDescription(): Description {
-    return this.#auto;
+  public get counterDescription() {
+    return this.#description;
   }
 
   /**
@@ -29,7 +29,7 @@ export abstract class TestingCounter<
   /**
    * 
    */
-  #auto: Description;
+  #description: Description;
 
   /**
    * @description Privately stored counter, which by default is set to `0`.
@@ -46,7 +46,7 @@ export abstract class TestingCounter<
     description: Description = false as Description
   ) {
     this.#active = active;
-    this.#auto = description;
+    this.#description = description;
   }
 
   /**
@@ -89,7 +89,7 @@ export abstract class TestingCounter<
    * @returns The return value is a `string` type description.
    */
   protected replaceCounter(description: string): string {
-    return (this.#auto
+    return (this.#description
       ? this.joinCounter(description)
       : description).replace('[counter]', `${this.getCounter()}`);
   }
