@@ -13,38 +13,46 @@ import { TestingToBeString } from "../lib/testing/testing-to-be-string.class";
 import { TestingToBe } from "../lib/testing/testing-to-be.class";
 import { TestingToHave } from "../lib/testing/testing-to-have.class";
 
-const t = new TestingCustom(
-  [
-    TestingToBeArrayOf,
-    TestingToBeBoolean,
-    TestingToBeGreaterThan,
-    TestingToBeInstanceOf,
-    TestingToBeLessThan,
-    TestingToBeNumber,
-    TestingToBeObject,
-    TestingToBeString,
-    TestingToBe,
-    TestingToHave,
-  ],
-  true,
-  true,
-  undefined,
-  ['describeA', 'describeB'],
-  ['itA', 'itB'],
-  true,
-);
+// Execute.
+import { Execute } from "./execute";
 
-t.describe('Describe', () => {
-  t.it('it expect usage: t.expect.toBeArray()', () => {
-    t.expect.toBeArray([27, 37]);
-  });
+const execute = true;
+const executeDescribe = true;
+const executeIt = true;
 
-  // Described in `descriptions` and `expectations`.
-  t.describe('describeA', () => t.it('itA', () => t.expect.toBeArrayOfDate([new Date()])));
-
-  t.testing
-    .toBeArrayOfBigInt([BigInt(27)])
-    .toBeGreaterThan(37, 27)
-    .toHaveSize([27, 37, 47], 3)
-});
-
+if (execute) {
+  const t = new TestingCustom(
+    [
+      TestingToBeArrayOf,
+      TestingToBeBoolean,
+      TestingToBeGreaterThan,
+      TestingToBeInstanceOf,
+      TestingToBeLessThan,
+      TestingToBeNumber,
+      TestingToBeObject,
+      TestingToBeString,
+      TestingToBe,
+      TestingToHave,
+    ],
+    executeDescribe || Execute.describe["testing-custom"],
+    executeIt || Execute.it["testing-custom"],
+    undefined,
+    ['describeA', 'describeB'],
+    ['itA', 'itB'],
+    true,
+  );
+  
+  t.describe('Describe', () => {
+    t.it('it expect usage: t.expect.toBeArray()', () => {
+      t.expect.toBeArray([27, 37]);
+    });
+  
+    // Described in `descriptions` and `expectations`.
+    t.describe('describeA', () => t.it('itA', () => t.expect.toBeArrayOfDate([new Date()])));
+  
+    t.testing
+      .toBeArrayOfBigInt([BigInt(27)])
+      .toBeGreaterThan(37, 27)
+      .toHaveSize([27, 37, 47], 3)
+  });  
+}

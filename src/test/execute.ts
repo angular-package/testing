@@ -4,7 +4,7 @@ export class Execute {
   static #it = false;
 
   public static describe = {
-    'expectation': {
+    expectation: {
       'testing-to-be-arrayof': this.#describe,
       'testing-to-be-instanceof': this.#describe,
       'testing-to-be': this.#describe,
@@ -31,6 +31,7 @@ export class Execute {
     'random-string': this.#describe,
     'README.md': this.#describe,
     'testing-before-each': this.#describe,
+    'testing-custom': this.#describe,
     'testing-custom-matcher': this.#describe,
     'testing-describe': this.#describe,
     'testing-test': this.#describe,
@@ -65,6 +66,7 @@ export class Execute {
     'random-string': this.#it,
     'README.md': this.#it,
     'testing-before-each': this.#it,
+    'testing-custom': this.#it,
     'testing-custom-matcher': this.#it,
     'testing-describe': this.#it,
     'testing-test': this.#it,
