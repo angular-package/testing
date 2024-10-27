@@ -1,5 +1,5 @@
 // Class.
-
+import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToThrow } from '../it';
@@ -10,13 +10,16 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared simple tests.
  */
-export class TestingToThrow {
+export class TestingToThrow<
+  Descriptions extends string = string,
+  Expectations extends string = string
+> extends TestingCore<
+  Descriptions,
+  Expectations
+> {
   /**
    * 
    */
-  protected allowIt: boolean;
-  protected counter: CounterConfig;
-  protected executable?: ExecutableTests;
   protected toThrow: TestingItToThrow;
 
   /**
@@ -28,19 +31,21 @@ export class TestingToThrow {
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    */
   constructor(
-    // allowDescribe: boolean,
+    allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    // testingDescribe?: TestingDescribe,
+    testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+
     this.toThrow = new TestingItToThrow(
-      true, // this.allowDescribe = allowDescribe,
-      this.allowIt = allowIt,
-      this.executable = executable,
-      this.counter = counter,
-      undefined, // testingDescribe,
+      allowDescribe,
+      allowIt,
+      executable,
+      counter,
+      testingDescribe,
       testingIt
     );
   }

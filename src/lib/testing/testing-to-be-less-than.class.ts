@@ -1,4 +1,5 @@
 // Class.
+import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBe } from '../it';
@@ -9,13 +10,16 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared simple tests.
  */
-export class TestingToBeLessThan {
+export class TestingToBeLessThan<
+  Descriptions extends string = string,
+  Expectations extends string = string
+> extends TestingCore<
+  Descriptions,
+  Expectations
+> {
   /**
    * 
    */
-  protected allowIt: boolean;
-  protected counter: CounterConfig;
-  protected executable?: ExecutableTests;
   protected toBe: TestingItToBe;
 
   /**
@@ -27,19 +31,20 @@ export class TestingToBeLessThan {
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    */
   constructor(
-    // allowDescribe: boolean,
+    allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    // testingDescribe?: TestingDescribe,
+    testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
     this.toBe = new TestingItToBe(
-      true, // this.allowDescribe = allowDescribe,
-      this.allowIt = allowIt,
-      this.executable = executable,
-      this.counter = counter,
-      undefined, // testingDescribe,
+      allowDescribe,
+      allowIt,
+      executable,
+      counter,
+      testingDescribe,
       testingIt
     );
   }

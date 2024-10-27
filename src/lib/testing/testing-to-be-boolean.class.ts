@@ -1,4 +1,5 @@
 // Class.
+import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBeBoolean } from '../it/testing-it-to-be-boolean.class';
@@ -9,13 +10,16 @@ import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
  * Prepared simple tests.
  */
-export class TestingToBeBoolean {
+export class TestingToBeBoolean<
+  Descriptions extends string = string,
+  Expectations extends string = string
+> extends TestingCore<
+  Descriptions,
+  Expectations
+> {
   /**
    * 
    */
-  protected allowIt: boolean;
-  protected counter: CounterConfig;
-  protected executable?: ExecutableTests;
   protected itToBeBoolean: TestingItToBeBoolean;
 
   /**
@@ -25,21 +29,25 @@ export class TestingToBeBoolean {
    * @param allowDescribe Allow executing `describe()` methods.
    * @param allowIt Allow executing `it()` methods.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
+   * @param counter
+   * @param testingDescribe
+   * @param testingIt
    */
   constructor(
-    // allowDescribe: boolean,
+    allowDescribe: boolean,
     allowIt: boolean,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    // testingDescribe?: TestingDescribe,
+    testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
     this.itToBeBoolean = new TestingItToBeBoolean(
-      true, // this.allowDescribe = allowDescribe,
-      this.allowIt = allowIt,
-      this.executable = executable,
-      this.counter = counter,
-      undefined, // testingDescribe,
+      allowDescribe,
+      allowIt,
+      executable,
+      counter,
+      testingDescribe,
       testingIt
     );
   }
