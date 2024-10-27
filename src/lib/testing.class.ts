@@ -1,5 +1,5 @@
 // Function.
-import { mixin } from './function/mixin.func';
+import { mixinTesting } from './function';
 // Testing.
 import {
   TestingToBeArrayOf,
@@ -32,7 +32,7 @@ import { ExpectType } from '../type';
 export class Testing<
   Descriptions extends string = string,
   Expectations extends string = string
-> extends mixin(
+> extends mixinTesting(
   TestingToBeArrayOf,
   TestingToBeBoolean,
   TestingToBeGreaterThan,
@@ -102,10 +102,10 @@ export class Testing<
     allowIt: boolean,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe),
-    testingIt: TestingIt = new TestingIt(allowIt, executable?.it)
+    testingDescribe = new TestingDescribe(allowDescribe, executable?.describe),
+    testingIt = new TestingIt(allowIt, executable?.it)
   ) {
-    super(allowDescribe, allowIt, executable, testingDescribe, testingIt);
+    super(allowIt, executable, testingDescribe, testingIt);
     this.allowDescribe = allowDescribe;
     this.allowIt = allowIt;
     this.executable = executable;

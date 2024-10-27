@@ -24,19 +24,19 @@ export class TestingToBeNumber {
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    */
   constructor(
-    allowDescribe: boolean,
-    allowIt: boolean,
-    executable?: ExecutableTests,
-    counter: CounterConfig = [true, false],
-    testingDescribe?: TestingDescribe,
+    // allowDescribe: boolean,
+    // allowIt: boolean,
+    // executable?: ExecutableTests,
+    // counter: CounterConfig = [true, false],
+    // testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
     this.toBe = new TestingItToBe(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
+      true, // this.allowDescribe = allowDescribe,
+      true, // this.allowIt = allowIt,
+      undefined, // this.executable = executable,
+      undefined, // counter,
+      undefined, // testingDescribe,
       testingIt
     );
   }

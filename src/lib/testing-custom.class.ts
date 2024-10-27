@@ -6,7 +6,7 @@ import { TestingDescribe } from "./testing-describe.class";
 import { TestingExpectation } from "./testing-expectation.class";
 import { TestingIt } from "./testing-it.class";
 // Function.
-import { mixin } from "./function/mixin.func";
+import { mixinTesting } from "./function";
 // Type.
 import { Constructor } from "@angular-package/type";
 import { CounterConfig, ExpectType } from "../type";
@@ -141,7 +141,10 @@ export class TestingCustom<
     this.executable = executable;
     this.$expectations = expectations;
     // Tests.
-    this.$testing = new (mixin(...testing))(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    this.$testing = new (mixinTesting(...testing))(
+      // allowDescribe, allowIt, executable, counter, testingDescribe,
+      testingIt
+    );
     // Class to handle core features.
     this.testingCore = new (class<
       Descriptions extends string = string,
