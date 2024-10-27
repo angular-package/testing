@@ -95,7 +95,7 @@ export class TestingDescribe<
     specDefinitions: () => void,
   ): this {
     this.count();
-    fdescribe(description, specDefinitions);
+    fdescribe(this.replaceCounter(description), specDefinitions);
     return this;
   }
 
@@ -104,7 +104,7 @@ export class TestingDescribe<
     specDefinitions: () => void,
   ): this {
     this.count();
-    xdescribe(description, specDefinitions);
+    xdescribe(this.replaceCounter(description), specDefinitions);
     return this;
   }
 }
