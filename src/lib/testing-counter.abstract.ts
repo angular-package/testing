@@ -79,8 +79,8 @@ export abstract class TestingCounter<
    * @param description 
    * @returns 
    */
-  protected joinCounter<Description extends string>(description: Description): `[counter] ${Description}` {
-    return `[counter] ${description}` as `[counter] ${Description}`;
+  protected joinCounter<Description extends string>(description: Description): `[counter]. ${Description}` {
+    return `[counter]. ${description}` as `[counter]. ${Description}`;
   }
 
   /**
