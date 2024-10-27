@@ -5,6 +5,7 @@ import { TestingIt } from '../testing-it.class';
 import { TestingItToBe } from './testing-it-to-be.class';
 import { TestingItToHave } from './testing-it-to-have.class';
 import { TestingItToThrow } from './testing-it-to-throw.class';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig } from '../../type/counter-config.type';
 import { ExpectType } from '../../type';
@@ -91,7 +92,7 @@ export class TestingItTo<
   public contain<T>(
     actual: ExpectType<T>,
     expected: any,
-    expectation: string = TestingCore.expectation.toContain,
+    expectation: string = TextualExpectation.toContain,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -117,7 +118,7 @@ export class TestingItTo<
   public equal<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
-    expectation: string = TestingCore.expectation.toEqual,
+    expectation: string = TextualExpectation.toEqual,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -141,7 +142,7 @@ export class TestingItTo<
   public match<T>(
     actual: ExpectType<T>,
     expected: string | RegExp,
-    expectation: string = TestingCore.expectation.toMatch, 
+    expectation: string = TextualExpectation.toMatch, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {

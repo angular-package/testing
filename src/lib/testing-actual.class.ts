@@ -3,6 +3,7 @@ import { TestingCore } from './testing-core.abstract';
 import { TestingDescribe } from './testing-describe.class';
 import { TestingIt } from './testing-it.class';
 import { TestingItTo } from './it/testing-it-to.class';
+import { TextualExpectation } from './textual-expectation.abstract';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { CounterConfig } from '../type/counter-config.type';
@@ -1637,7 +1638,7 @@ export class TestingActual<
    * @returns 
    */
   public toHaveBeenCalled<T extends jasmine.Func>(
-    expectation: string = TestingCore.expectation.toHaveBeenCalled,
+    expectation: string = TextualExpectation.toHaveBeenCalled,
     expectationFailOutput?: any,
     execute?: boolean,
     spy: () => ExpectType<T> = this.#spy
@@ -1662,7 +1663,7 @@ export class TestingActual<
    */
   public toHaveBeenCalledBefore<T extends jasmine.Func>(
     expected: jasmine.Func,
-    expectation: string = TestingCore.expectation.toHaveBeenCalledBefore,
+    expectation: string = TextualExpectation.toHaveBeenCalledBefore,
     expectationFailOutput?: any,
     execute?: boolean,
     spy: () => ExpectType<T> = this.#spy
@@ -1687,7 +1688,7 @@ export class TestingActual<
     ...params: any[]
   ): this {
     this.it(
-      TestingCore.expectation.toHaveBeenCalledOnceWith,
+      TextualExpectation.toHaveBeenCalledOnceWith,
       () => super.expect.to.have.been.called.onceWith(this.#spy(), ...params),
       true
     );
@@ -1706,7 +1707,7 @@ export class TestingActual<
    */
   public toHaveBeenCalledTimes<T extends jasmine.Func>(
     expected: number,
-    expectation: string = TestingCore.expectation.toHaveBeenCalledTimes,
+    expectation: string = TextualExpectation.toHaveBeenCalledTimes,
     expectationFailOutput?: any,
     execute?: boolean,
     spy: () => ExpectType<T> = this.#spy
@@ -1733,7 +1734,7 @@ export class TestingActual<
     ...params: any[]
   ): this {
     this.it(
-      TestingCore.expectation.toHaveBeenCalledWith,
+      TextualExpectation.toHaveBeenCalledWith,
       () => super.expect.to.have.been.called.with(this.#spy(), ...params),
       true
     );

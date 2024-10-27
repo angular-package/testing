@@ -1,5 +1,6 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { ExpectType } from '../../type';
 /**
@@ -15,7 +16,7 @@ export class TestingItToHaveBeenCalled<
   public before<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: jasmine.Func,
-    expectation: string = TestingCore.expectation.toHaveBeenCalledBefore,
+    expectation: string = TextualExpectation.toHaveBeenCalledBefore,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -28,7 +29,7 @@ export class TestingItToHaveBeenCalled<
   }
   public called<T extends jasmine.Func>(
     spy: ExpectType<T>,
-    expectation: string = TestingCore.expectation.toHaveBeenCalled,
+    expectation: string = TextualExpectation.toHaveBeenCalled,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {    
@@ -40,7 +41,7 @@ export class TestingItToHaveBeenCalled<
     return this;
   }
   public onceWith<Actual extends jasmine.Func>(
-    expectation: string = TestingCore.expectation.toHaveBeenCalledOnceWith,
+    expectation: string = TextualExpectation.toHaveBeenCalledOnceWith,
     spy: ExpectType<Actual>,
     ...params: any[]
   ): this {
@@ -54,7 +55,7 @@ export class TestingItToHaveBeenCalled<
   public times<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: number,
-    expectation: string = TestingCore.expectation.toHaveBeenCalledTimes,
+    expectation: string = TextualExpectation.toHaveBeenCalledTimes,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -66,7 +67,7 @@ export class TestingItToHaveBeenCalled<
     return this;
   }
   public with<T extends jasmine.Func>(
-    expectation: string = TestingCore.expectation.toHaveBeenCalledWith,
+    expectation: string = TextualExpectation.toHaveBeenCalledWith,
     spy: ExpectType<T>,
     ...params: any[]
     // expectationFailOutput?: any,

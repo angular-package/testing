@@ -1,5 +1,6 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { ExpectType } from '../../type';
 /**
@@ -15,7 +16,7 @@ export class TestingItToThrow<
   public error<T extends jasmine.Func>(
     actual: ExpectType<T>,
     message?: string | RegExp,
-    expectation: string = TestingCore.expectation.toThrowError,
+    expectation: string = TextualExpectation.toThrowError,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -29,7 +30,7 @@ export class TestingItToThrow<
   public matching<T>(
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
-    expectation: string = TestingCore.expectation.toThrowMatching,
+    expectation: string = TextualExpectation.toThrowMatching,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -43,7 +44,7 @@ export class TestingItToThrow<
   public throw<T>(
     actual: ExpectType<T>,
     expected?: any,
-    expectation: string = TestingCore.expectation.toThrow,
+    expectation: string = TextualExpectation.toThrow,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {

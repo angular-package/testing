@@ -1,6 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
+import { TextualExpectation } from '../textual-expectation.abstract';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToHaveBeen } from './testing-it-to-have-been.class';
 // Type.
@@ -50,7 +51,7 @@ export class TestingItToHave<
   public class<T>(
     actual: ExpectType<T>,
     expected: string,
-    expectation: string = TestingCore.expectation.toHaveClass, 
+    expectation: string = TextualExpectation.toHaveClass, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -64,7 +65,7 @@ export class TestingItToHave<
   public size<T>(
     actual: ExpectType<T>,
     expected: number,
-    expectation: string = TestingCore.expectation.toHaveSize, 
+    expectation: string = TextualExpectation.toHaveSize, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -78,7 +79,7 @@ export class TestingItToHave<
   public spyInteractions<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
-    expectation: string = TestingCore.expectation.toHaveSpyInteractions,
+    expectation: string = TextualExpectation.toHaveSpyInteractions,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {

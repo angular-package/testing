@@ -1,5 +1,6 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { ExpectType } from '../../type';
 /**
@@ -16,7 +17,7 @@ export class TestingItToBeArrayOf<
   public bigint<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfBigInt,
+    expectation: string = TextualExpectation.toBeArrayOfBigInt,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -30,7 +31,7 @@ export class TestingItToBeArrayOf<
   public boolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfBoolean,
+    expectation: string = TextualExpectation.toBeArrayOfBoolean,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -44,7 +45,7 @@ export class TestingItToBeArrayOf<
   public date<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfDate,
+    expectation: string = TextualExpectation.toBeArrayOfDate,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -58,7 +59,7 @@ export class TestingItToBeArrayOf<
   public defined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfDefined,
+    expectation: string = TextualExpectation.toBeArrayOfDefined,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -72,7 +73,7 @@ export class TestingItToBeArrayOf<
   public false<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfFalse,
+    expectation: string = TextualExpectation.toBeArrayOfFalse,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -86,7 +87,7 @@ export class TestingItToBeArrayOf<
   public null<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfNull,
+    expectation: string = TextualExpectation.toBeArrayOfNull,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -100,7 +101,7 @@ export class TestingItToBeArrayOf<
   public number<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfNumber,
+    expectation: string = TextualExpectation.toBeArrayOfNumber,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -114,7 +115,7 @@ export class TestingItToBeArrayOf<
   public regExp<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfRegExp,
+    expectation: string = TextualExpectation.toBeArrayOfRegExp,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -128,7 +129,7 @@ export class TestingItToBeArrayOf<
   public string<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfString,
+    expectation: string = TextualExpectation.toBeArrayOfString,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -142,7 +143,7 @@ export class TestingItToBeArrayOf<
   public symbol<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfSymbol,
+    expectation: string = TextualExpectation.toBeArrayOfSymbol,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -156,7 +157,7 @@ export class TestingItToBeArrayOf<
   public true<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfTrue,
+    expectation: string = TextualExpectation.toBeArrayOfTrue,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -170,7 +171,7 @@ export class TestingItToBeArrayOf<
   public undefined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingCore.expectation.toBeArrayOfUndefined,
+    expectation: string = TextualExpectation.toBeArrayOfUndefined,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {

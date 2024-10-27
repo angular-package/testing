@@ -16,8 +16,9 @@ export class TestingToBeArrayOf {
    * 
    */
   // protected allowDescribe: boolean;
-  // protected allowIt: boolean;
-  // protected executable?: ExecutableTests;
+  protected allowIt: boolean;
+  protected counter: CounterConfig;
+  protected executable?: ExecutableTests;
   protected toBeArrayOf: TestingItToBeArrayOf;
 
   /**
@@ -30,17 +31,17 @@ export class TestingToBeArrayOf {
    */
   constructor(
     // allowDescribe: boolean,
-    // allowIt: boolean,
-    // executable?: ExecutableTests,
-    // counter: CounterConfig = [true, false],
+    allowIt: boolean,
+    executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     // testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
     this.toBeArrayOf = new TestingItToBeArrayOf(
       true, // this.allowDescribe = allowDescribe,
-      true, // this.allowIt = allowIt,
-      undefined, // this.executable = executable,
-      undefined, // counter,
+      this.allowIt = allowIt,
+      this.executable = executable,
+      this.counter = counter,
       undefined, // testingDescribe,
       testingIt
     );

@@ -3,6 +3,7 @@ import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToHave } from '../it';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
@@ -14,6 +15,9 @@ export class TestingToHave {
   /**
    * 
    */
+  protected allowIt: boolean;
+  protected counter: CounterConfig;
+  protected executable?: ExecutableTests;
   protected toHave: TestingItToHave;
 
   /**
@@ -26,17 +30,17 @@ export class TestingToHave {
    */
   constructor(
     // allowDescribe: boolean,
-    // allowIt: boolean,
-    // executable?: ExecutableTests,
-    // counter: CounterConfig = [true, false],
+    allowIt: boolean,
+    executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     // testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
     this.toHave = new TestingItToHave(
       true, // this.allowDescribe = allowDescribe,
-      true, // this.allowIt = allowIt,
-      undefined, // this.executable = executable,
-      undefined, // counter,
+      this.allowIt = allowIt,
+      this.executable = executable,
+      this.counter = counter,
       undefined, // testingDescribe,
       testingIt
     );
@@ -92,7 +96,7 @@ export class TestingToHave {
    * @returns 
    */
   public toHaveBeenCalledOnceWith<Actual extends jasmine.Func>(
-    expectation: string = TestingCore.expectation.toHaveBeenCalledOnceWith,
+    expectation: string = TextualExpectation.toHaveBeenCalledOnceWith,
     spy: ExpectType<Actual>,
     ...params: any[]
   ): this {
@@ -132,7 +136,7 @@ export class TestingToHave {
    * @returns 
    */
   public toHaveBeenCalledWith<T extends jasmine.Func>(
-    expectation: string = TestingCore.expectation.toHaveBeenCalledWith,
+    expectation: string = TextualExpectation.toHaveBeenCalledWith,
     spy: ExpectType<T>,
     ...params: any[]
     // expectationFailOutput?: any,

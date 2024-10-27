@@ -1,5 +1,6 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { ExpectType } from '../../type';
 /**
@@ -28,7 +29,7 @@ export class TestingItToBeBoolean<
   public boolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingItToBeBoolean.expectation.toBeBoolean,
+    expectation: string = TextualExpectation.toBeBoolean,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -55,7 +56,7 @@ export class TestingItToBeBoolean<
   public type<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TestingItToBeBoolean.expectation.toBeBooleanType,
+    expectation: string = TextualExpectation.toBeBooleanType,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {

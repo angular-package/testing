@@ -14,6 +14,9 @@ export class TestingToBe {
   /**
    * 
    */
+  protected allowIt: boolean;
+  protected counter: CounterConfig;
+  protected executable?: ExecutableTests;
   protected toBe: TestingItToBe;
 
   /**
@@ -26,17 +29,17 @@ export class TestingToBe {
    */
   constructor(
     // allowDescribe: boolean,
-    // allowIt: boolean,
-    // executable?: ExecutableTests,
-    // counter: CounterConfig = [true, false],
+    allowIt: boolean,
+    executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     // testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
     this.toBe = new TestingItToBe(
       true, // this.allowDescribe = allowDescribe,
-      true, // this.allowIt = allowIt,
-      undefined, // this.executable = executable,
-      undefined, // counter,
+      this.allowIt = allowIt,
+      this.executable = executable,
+      this.counter = counter,
       undefined, // testingDescribe,
       testingIt
     );

@@ -105,7 +105,7 @@ export class Testing<
     testingDescribe = new TestingDescribe(allowDescribe, executable?.describe),
     testingIt = new TestingIt(allowIt, executable?.it)
   ) {
-    super(allowIt, executable, testingDescribe, testingIt);
+    super(allowIt, executable, counter, testingIt);
     this.allowDescribe = allowDescribe;
     this.allowIt = allowIt;
     this.executable = executable;

@@ -13,6 +13,9 @@ export class TestingToBeInstanceOf {
   /**
    * 
    */
+  protected allowIt: boolean;
+  protected counter: CounterConfig;
+  protected executable?: ExecutableTests;
   protected toBeInstanceOf: TestingItToBeInstanceOf;
 
   /**
@@ -25,17 +28,17 @@ export class TestingToBeInstanceOf {
    */
   constructor(
     // allowDescribe: boolean,
-    // allowIt: boolean,
-    // executable?: ExecutableTests,
-    // counter: CounterConfig = [true, false],
+    allowIt: boolean,
+    executable?: ExecutableTests,
+    counter: CounterConfig = [true, false],
     // testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
   ) {
     this.toBeInstanceOf = new TestingItToBeInstanceOf(
       true, // this.allowDescribe = allowDescribe,
-      true, // this.allowIt = allowIt,
-      undefined, // this.executable = executable,
-      undefined, // counter,
+      this.allowIt = allowIt,
+      this.executable = executable,
+      this.counter = counter,
       undefined, // testingDescribe,
       testingIt
     );
