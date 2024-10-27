@@ -1,16 +1,27 @@
+// Constant.
+import { Execute } from "./execute";
+
+// Class.
 import { Testing } from "../lib";
 
-const t = new Testing(true, true);
+const execute = true;
+const executeDescribe = true;
+const executeIt = true;
 
-let arr: any[];
+if (execute) {
+  const t = new Testing(
+    executeDescribe || Execute.describe["how-to-before-each"],
+    executeIt || Execute.it["how-to-before-each"]
+  );
 
-// native
-beforeEach(() => {
-  arr = ['a', 'b', 'c'];
-});
+  let arr: any[];
+  
+  // native
+  beforeEach(() => arr = ['a', 'b', 'c']);
 
-t.describe('How to use beforeEach()', () => t
-  .beforeEach(() => (arr = ['a', 'b', 'c']))
-  .spec(e => e.toBeArray(arr).not.toBeBoolean(arr))
-  .it('it', () => t.expect.toBeArray(arr))
-);
+  t.describe('How to use beforeEach()', () => t
+    .beforeEach(() => (arr = ['a', 'b', 'c']))
+    .spec(e => e.toBeArray(arr).not.toBeBoolean(arr))
+    .it('it', () => t.expect.toBeArray(arr))
+  );  
+}
