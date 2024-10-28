@@ -1,7 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
-import { TestingExpect } from '../testing-expect.class';
+import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBe } from '../it';
 // Type.
@@ -18,14 +18,6 @@ export class TestingToBeNumber<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  public get not() {
-    this.toBe.not;
-    return this;
-  }
-
   /**
    * 
    */
@@ -48,11 +40,11 @@ export class TestingToBeNumber<
     allowIt: boolean = true,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt,
-    testingExpect?: TestingExpect,
+    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
+    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
+    testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
     this.toBe = new TestingItToBe(
       allowDescribe,
       allowIt,
@@ -60,7 +52,7 @@ export class TestingToBeNumber<
       counter,
       testingDescribe,
       testingIt,
-      testingExpect
+      testingExpectation
     );
   }
 

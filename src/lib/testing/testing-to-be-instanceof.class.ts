@@ -1,7 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
-import { TestingExpect } from '../testing-expect.class';
+import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBeInstanceOf } from '../it';
 // Type.
@@ -40,11 +40,11 @@ export class TestingToBeInstanceOf<
     allowIt: boolean = true,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt,
-    testingExpect?: TestingExpect
+    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
+    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
+    testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
     this.toBeInstanceOf = new TestingItToBeInstanceOf(
       allowDescribe,
       allowIt,
@@ -52,7 +52,7 @@ export class TestingToBeInstanceOf<
       counter,
       testingDescribe,
       testingIt,
-      testingExpect
+      testingExpectation
     );
   }
 

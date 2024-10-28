@@ -1,7 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
-import { TestingExpect } from '../testing-expect.class';
+import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBeArrayOf } from '../it';
 // Type.
@@ -20,13 +20,12 @@ export class TestingToBeArrayOf<
   Expectations
 > {
   /**
-   * 
+   * @description
    */
   protected toBeArrayOf: TestingItToBeArrayOf;
 
   /**
-   * Simple `class` to support testing.
-   * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
+   * @description Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
    * and optionally sets the list of allowed executable tests (those that execute even on the disallowed state).
    * @param allowDescribe Allow executing `describe()` methods.
    * @param allowIt Allow executing `it()` methods.
@@ -41,11 +40,11 @@ export class TestingToBeArrayOf<
     allowIt: boolean = true,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt,
-    testingExpect?: TestingExpect
+    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
+    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
+    testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
     this.toBeArrayOf = new TestingItToBeArrayOf(
       allowDescribe,
       allowIt,
@@ -53,7 +52,7 @@ export class TestingToBeArrayOf<
       counter,
       testingDescribe,
       testingIt,
-      testingExpect
+      testingExpectation
     );
   }
 
