@@ -17,6 +17,25 @@ export abstract class TestingExecutable<
   CounterDescription
 > {
   /**
+   * @description
+   */
+  public get allowed() {
+    return this.#allow;
+  }
+
+  /**
+   * @description Executables.
+   */
+  public get executable() {
+    return this.#executable;
+  }
+
+  /**
+   * @description Privately stored allow state of executing `describe)` method, which by default is set to `false`.
+   */
+  #allow = false;
+
+  /**
    * @description An instance `Set` of unique numbers with allowed tests to execute.
    */
   #executable: Set<number> = new Set();
@@ -26,13 +45,33 @@ export abstract class TestingExecutable<
    * @param executable An optional `array` of unique numbers type to initially set executable storage.
    */
   constructor(
+    allow?: boolean,
     executable?: Array<number>,
     counter: CounterConfig<CounterActive, CounterDescription> = [true, false] as any
   ) {
     super(...(typeof counter === 'boolean' ? [counter, counter] : counter) as any);
+    this.#allow = is.boolean(allow) ? allow : this.#allow;
     is.defined(executable)
       && guard.array(executable)
       && (this.#executable = new Set(executable));
+  }
+
+  /**
+   * @description Allows executing `describe()` methods.
+   * @returns The return value is an instance of `TestingDescribe`.
+   */
+  public allow(): this {
+    this.#allow = true;
+    return this;
+  }
+
+  /**
+   * @description Disallows executing `describe()` methods, which means only those specified in the executable storage can be executed.
+   * @returns The return value is an instance of `TestingDescribe`.
+   */
+  public disallow(): this {
+    this.#allow = false;
+    return this;
   }
 
   /**
