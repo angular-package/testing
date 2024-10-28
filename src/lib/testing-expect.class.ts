@@ -1,15 +1,14 @@
 // @angular-package/type.
 import { is } from '@angular-package/type';
-
 // Type.
 import { ExpectType } from '../type';
-
 /**
- * Manages `expect()` function of jasmine.
+ * @class
+ * @classdesc Manages `expect()` function of jasmine.
  */
-export abstract class TestingExpect {
+export class TestingExpect {
   /**
-   * Fail as soon as possible if the actual is pending. Otherwise evaluate the matcher.
+   * @description Fail as soon as possible if the actual is pending. Otherwise evaluate the matcher.
    */
   public get already(): this {
     this.#already = true;
@@ -17,7 +16,7 @@ export abstract class TestingExpect {
   }
 
   /**
-   * Invert the matcher.
+   * @description Invert the matcher.
    */
   public get not(): this {
     this.#not = true;
@@ -25,17 +24,17 @@ export abstract class TestingExpect {
   }
 
   /**
-   * 
+   * @description 
    */
   #already = false;
  
   /**
-   * Privately stored state of invert the matcher.
+   * @description Privately stored state of invert the matcher.
    */
   #not = false;
 
   /**
-   * Wrapper method for the `expect()` function of jasmine.
+   * @description Wrapper method for the `expect()` function of jasmine.
    * @param actual The value of a type captured from the `actual` that is passed to the `expect()` function of jasmine.
    * @param expectationFailOutput
    * @returns The return value is an `object` of jasmine matchers to use.
@@ -76,7 +75,7 @@ export abstract class TestingExpect {
   }
 
   /**
-   * Returns the state of invert the matcher.
+   * @description Returns the state of invert the matcher.
    * @returns The return value is a state of invert the matcher.
    */
   public getNot() {
@@ -84,7 +83,7 @@ export abstract class TestingExpect {
   }
 
   /**
-   * 
+   * @description 
    * @param already 
    * @returns 
    */
@@ -94,7 +93,7 @@ export abstract class TestingExpect {
   }
 
   /**
-   * Sets a state of a `boolean` type to invert the matcher .
+   * @description Sets a state of a `boolean` type to invert the matcher .
    * @param not Value of a `boolean` type indicating a state to invert the matcher.
    * @returns The return value is an instance of a child class.
    */
