@@ -32,8 +32,8 @@ export class TestingToHave<
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    */
   constructor(
-    allowDescribe: boolean,
-    allowIt: boolean,
+    allowDescribe: boolean = true,
+    allowIt: boolean = true,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
@@ -53,7 +53,8 @@ export class TestingToHave<
 
   //#region toHaveBeenCalled
   /**
-   * TODO: spyOn problem
+   * ! Spy parameter 
+   * @description
    * @param spy 
    * @param expectation 
    * The `actual` value (a Spy) to have been called.
@@ -62,7 +63,7 @@ export class TestingToHave<
    * @returns 
    */
   public toHaveBeenCalled<T extends jasmine.Func>(
-    spy: ExpectType<T>,
+    spy: () => ExpectType<T> | ExpectType<T>[],
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
@@ -72,9 +73,7 @@ export class TestingToHave<
   }
 
   /**
-   * TODO: spyOn problem
-   * @param spy 
-   * @param expected 
+   * @param spyExpected
    * @param expectation 
    * The `actual` value (a Spy) to have been called before another Spy.
    * @param expectationFailOutput 
@@ -82,13 +81,12 @@ export class TestingToHave<
    * @returns 
    */
   public toHaveBeenCalledBefore<T extends jasmine.Func>(
-    spy: ExpectType<T>,
-    expected: jasmine.Func,
+    spyExpected: () => [ExpectType<T>, jasmine.Func],
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toHave.been.called.before(spy, expected, expectation, expectationFailOutput, execute);
+    this.toHave.been.called.before(spyExpected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -120,7 +118,7 @@ export class TestingToHave<
    * @returns 
    */
   public toHaveBeenCalledTimes<T extends jasmine.Func>(
-    spy: ExpectType<T>,
+    spy: () => ExpectType<T>,
     expected: number,
     expectation?: string,
     expectationFailOutput?: any,
@@ -142,7 +140,7 @@ export class TestingToHave<
    */
   public toHaveBeenCalledWith<T extends jasmine.Func>(
     expectation: string = TextualExpectation.toHaveBeenCalledWith,
-    spy: ExpectType<T>,
+    spy: () => ExpectType<T>,
     ...params: any[]
     // expectationFailOutput?: any,
     // execute?: boolean,

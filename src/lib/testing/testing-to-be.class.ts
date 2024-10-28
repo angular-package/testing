@@ -32,8 +32,8 @@ export class TestingToBe<
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    */
   constructor(
-    allowDescribe: boolean,
-    allowIt: boolean,
+    allowDescribe: boolean = true,
+    allowIt: boolean = true,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
@@ -462,13 +462,14 @@ export class TestingToBe<
    * @param execute 
    * @returns 
    */
-  public toBeRejectedWith<T>(
+  public toBeRejectedWith<T, U>(
     actual: T | PromiseLike<T>,
+    expected: jasmine.Expected<U>,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.rejectedWith(actual, expectation, expectationFailOutput, execute);
+    this.toBe.rejectedWith(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 

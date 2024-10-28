@@ -30,10 +30,13 @@ export class TestingToBeArrayOf<
    * @param allowDescribe Allow executing `describe()` methods.
    * @param allowIt Allow executing `it()` methods.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
+   * @param counter
+   * @param testingDescribe
+   * @param testingIt
    */
   constructor(
-    allowDescribe: boolean,
-    allowIt: boolean,
+    allowDescribe: boolean = true,
+    allowIt: boolean = true,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
