@@ -1,58 +1,35 @@
 // Class.
+import { Expect } from './expect.class';
+import { TestingExpect } from './testing-expect.class';
 import { TestingExpectTo } from './expectation/testing-expect-to.class';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType } from '../type';
 /**
  * Testing expectation.
+ * @class
+ * @classdesc
  */
-export class TestingExpectation {
+export class TestingExpectation extends Expect {
   /**
-   * Fail as soon as possible if the actual is pending. Otherwise evaluate the matcher.
+   * @description
    */
-  public get already(): this {
-    this.#already = true;
-    return this;
-  }
-
-  /**
-   * Invert the matcher.
-   */
-  public get not(): this {
-    this.#not = true;
-    return this;
-  }
-
-  /**
-   * 
-   */
-  public get to(): TestingExpectTo {
+  public get to() {
     return this.#testingTo;
   }
 
   /**
-   * 
+   * @description
    */
-  #already = false;
+  #testingTo;
 
   /**
-   * 
+   * @description
+   * @param expect 
    */
-  #testingTo = new TestingExpectTo();
-
-  /**
-   * 
-   */
-  #not = false;
-
-  public setAlready(already: boolean): this {
-    this.#already = already;
-    return this;
-  }
-
-  public setNot(not: boolean): this {
-    this.#not = not;
-    return this;
+  constructor(expect: TestingExpect = new TestingExpect()) {
+    super(expect);
+    this.#testingTo = new TestingExpectTo(expect);
   }
 
   //#region toBe
@@ -61,170 +38,152 @@ export class TestingExpectation {
     expected: jasmine.Expected<typeof actual>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.be(actual, expected, expectationFailOutput));
+    this.#testingTo.be.be(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArray<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.array(actual, expected, expectationFailOutput));
+    this.#testingTo.be.array(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfBigInt<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.bigint(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.bigint(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfBoolean<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.boolean(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.boolean(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfDate<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.date(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.date(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfDefined<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.defined(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.defined(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfFalse<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.false(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.false(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfNull<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.null(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.null(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfNumber<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.number(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.number(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfRegExp<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.regExp(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.regExp(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfString<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.string(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.string(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfSymbol<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.symbol(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.symbol(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfTrue<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.true(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.true(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeArrayOfUndefined<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.arrayof.undefined(actual, expected, expectationFailOutput));
+    this.#testingTo.be.arrayof.undefined(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeBigInt<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.bigint(actual, expected, expectationFailOutput));
+    this.#testingTo.be.bigint(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeBoolean<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.boolean(actual, expected, expectationFailOutput));
+    this.#testingTo.be.boolean(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeBooleanType<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.booleanType(actual, expected, expectationFailOutput));
+    this.#testingTo.be.booleanType(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeClass<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.class(actual, expected, expectationFailOutput));
+    this.#testingTo.be.class(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeCloseTo<T extends number>(
     actual: ExpectType<T>,
     expected: number,
     precision?: any,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.closeTo(actual, expected, precision, expectationFailOutput));
+    this.#testingTo.be.closeTo(actual, expected, precision, expectationFailOutput);
     return this;
   }
 
@@ -233,7 +192,7 @@ export class TestingExpectation {
     expected: any,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.date(actual, expected, expectationFailOutput));
+    this.#testingTo.be.date(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -242,7 +201,7 @@ export class TestingExpectation {
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.defined(actual, expected, expectationFailOutput));
+    this.#testingTo.be.defined(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -252,16 +211,15 @@ export class TestingExpectation {
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.false(actual, expected, expectationFailOutput));
+    this.#testingTo.be.false(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeFalsy<T>(
     actual: ExpectType<T>,
     expected: any,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.falsy(actual, expected, expectationFailOutput));
+    this.#testingTo.be.falsy(actual, expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -271,7 +229,7 @@ export class TestingExpectation {
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.function(actual, expected, expectationFailOutput));
+    this.#testingTo.be.function(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -281,16 +239,15 @@ export class TestingExpectation {
     expected: number,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.greaterThan(actual, expected, expectationFailOutput));
+    this.#testingTo.be.greaterThan(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeGreaterThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.greaterThanOrEqual(actual, expected, expectationFailOutput));
+    this.#testingTo.be.greaterThanOrEqual(actual, expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -301,7 +258,7 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.instance(actual, constructor, expected, expectationFailOutput));
+    this.#testingTo.be.instance(actual, constructor, expected, expectationFailOutput);
     return this;
   }
 
@@ -311,178 +268,159 @@ export class TestingExpectation {
     expected: jasmine.Constructor,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.instanceOf(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceOf(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfArray<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.array(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.array(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfBoolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.boolean(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.boolean(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfDate<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.date(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.date(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.error(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.error(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfFunction<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.function(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.function(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfMap<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.map(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.map(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfNumber<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.number(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.number(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfObject<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.object(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.object(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfPromise<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.promise(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.promise(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfRangeError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.rangeError(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.rangeError(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfReferenceError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.referenceError(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.referenceError(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfRegExp<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.regexp(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.regexp(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfSet<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.set(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.set(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfStorage<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.storage(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.storage(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfString<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.string(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.string(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfSyntaxError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.syntaxError(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.syntaxError(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfTypeError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.typeError(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.typeError(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfURIError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.URIError(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.URIError(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeInstanceOfWeakSet<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBeInstanceOf(e => e.weakSet(actual, expected, expectationFailOutput));
+    this.#testingTo.be.instanceof.weakSet(actual, expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -492,7 +430,7 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.key(actual, expected, expectationFailOutput));
+    this.#testingTo.be.key(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -502,16 +440,15 @@ export class TestingExpectation {
     expected: number,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.lessThan(actual, expected, expectationFailOutput));
+    this.#testingTo.be.lessThan(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeLessThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.lessThanOrEqual(actual, expected, expectationFailOutput));
+    this.#testingTo.be.lessThanOrEqual(actual, expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -521,25 +458,23 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.naN(actual, expected, expectationFailOutput));
+    this.#testingTo.be.naN(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeNegativeInfinity<T extends number>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.negativeInfinity(actual, expected, expectationFailOutput));
+    this.#testingTo.be.negativeInfinity(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeNull<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.null(actual, expected, expectationFailOutput));
+    this.#testingTo.be.null(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -549,10 +484,9 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.number(actual, expected, expectationFailOutput));
+    this.#testingTo.be.number(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeNumberBetween<T, Min extends number, Max extends number>(
     actual: ExpectType<T>,
     min: Min,
@@ -560,16 +494,15 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.numberBetween(actual, min, max, expected, expectationFailOutput));
+    this.#testingTo.be.numberBetween(actual, min, max, expected, expectationFailOutput);
     return this;
   }
-
   public toBeNumberType<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.numberType(actual, expected, expectationFailOutput));
+    this.#testingTo.be.numberType(actual, expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -580,57 +513,52 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.object(actual, expected, expectationFailOutput));
+    this.#testingTo.be.object(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeObjectKey<T>(
     actual: ExpectType<T>,
     key: PropertyKey,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.objectKey(actual, key, expected, expectationFailOutput));
+    this.#testingTo.be.objectKey(actual, key, expected, expectationFailOutput);
     return this;
   }
-
   public toBeObjectKeyIn<T>(
     actual: ExpectType<T>,
     key: PropertyKey,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.objectKeyIn(actual, key, expected, expectationFailOutput));
+    this.#testingTo.be.objectKeyIn(actual, key, expected, expectationFailOutput);
     return this;
   }
-
   public toBeObjectKeys<T>(
     actual: ExpectType<T>,
     keys: PropertyKey[],
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.objectKeys(actual, keys, expected, expectationFailOutput));
+    this.#testingTo.be.objectKeys(actual, keys, expected, expectationFailOutput);
     return this;
   }
-
   public toBeObjectKeysIn<T>(
     actual: ExpectType<T>,
     keys: PropertyKey[],
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.objectKeysIn(actual, keys, expected, expectationFailOutput));
+    this.#testingTo.be.objectKeysIn(actual, keys, expected, expectationFailOutput);
     return this;
   }
-
   public toBeObjectSomeKeys<T>(
     actual: ExpectType<T>,
     keys: (PropertyKey | PropertyKey[])[],
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.objectSomeKeys(actual, keys, expected, expectationFailOutput));
+    this.#testingTo.be.objectSomeKeys(actual, keys, expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -639,25 +567,23 @@ export class TestingExpectation {
     actual: T | PromiseLike<T>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.pending(actual, expectationFailOutput));
+    this.#testingTo.be.pending(actual, expectationFailOutput);
     return this;
   }
-
   public toBePositiveInfinity<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.positiveInfinity(actual, expected, expectationFailOutput));
+    this.#testingTo.be.positiveInfinity(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeRegExp<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.regexp(actual, expected, expectationFailOutput));
+    this.#testingTo.be.regexp(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -666,26 +592,24 @@ export class TestingExpectation {
     actual: T | PromiseLike<T>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.rejected(actual, expectationFailOutput));
+    this.#testingTo.be.rejected(actual, expectationFailOutput);
     return this;
   }
-
   public toBeRejectedWith<T, U>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<U>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.rejectedWith(actual, expected, expectationFailOutput));
+    this.#testingTo.be.rejectedWith(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeRejectedWithError<T, U>(
     actual: T | PromiseLike<T>,
     expected?: new (...args: any[]) => Error,
     message?: string | RegExp,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.rejectedWithError(actual, expected, message, expectationFailOutput));
+    this.#testingTo.be.rejectedWithError(actual, expected, message, expectationFailOutput);
     return this;
   }
 
@@ -694,16 +618,15 @@ export class TestingExpectation {
     actual: T | PromiseLike<T>,
     expectationFailOutput?: any,
   ): this {
-    this.#toBe(e => e.resolved(actual, expectationFailOutput));
+    this.#testingTo.be.resolved(actual, expectationFailOutput);
     return this;
   }
-
   public toBeResolvedTo<T>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<T>,
     expectationFailOutput?: any,
   ): this {
-    this.#toBe(e => e.resolvedTo(actual, expected, expectationFailOutput));
+    this.#testingTo.be.resolvedTo(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -713,40 +636,36 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.string(actual, expected, expectationFailOutput));
+    this.#testingTo.be.string(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeStringIncludes<T>(
     actual: ExpectType<T>,
     includes: string[],
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.stringIncludes(actual, includes, expected, expectationFailOutput));
+    this.#testingTo.be.stringIncludes(actual, includes, expected, expectationFailOutput);
     return this;
   }
-
   public toBeStringIncludesSome<T>(
     actual: ExpectType<T>,
     includes: string[],
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.stringIncludesSome(actual, includes, expected, expectationFailOutput));
+    this.#testingTo.be.stringIncludesSome(actual, includes, expected, expectationFailOutput);
     return this;
   }
-
   public toBeStringOfLength<T, Length extends number>(
     actual: ExpectType<T>,
     length: Length,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.stringOfLength(actual, length, expected, expectationFailOutput));
+    this.#testingTo.be.stringOfLength(actual, length, expected, expectationFailOutput);
     return this;
   }
-
   public toBeStringOfLengthBetween<T, Min extends number, Max extends number>(
     actual: ExpectType<T>,
     min: Min,
@@ -754,16 +673,15 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.stringOfLengthBetween(actual, min, max, expected, expectationFailOutput));
+    this.#testingTo.be.stringOfLengthBetween(actual, min, max, expected, expectationFailOutput);
     return this;
   }
-
   public toBeStringType<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.stringType(actual, expected, expectationFailOutput));
+    this.#testingTo.be.stringType(actual, expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -773,7 +691,7 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.symbol(actual, expected, expectationFailOutput));
+    this.#testingTo.be.symbol(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -783,7 +701,7 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.true(actual, expected, expectationFailOutput));
+    this.#testingTo.be.true(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -792,7 +710,7 @@ export class TestingExpectation {
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.truthy(actual, expected, expectationFailOutput));
+    this.#testingTo.be.truthy(actual, expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -802,34 +720,31 @@ export class TestingExpectation {
     expected: jasmine.Expected<string>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.typeOf(actual, expected, expectationFailOutput));
+    this.#testingTo.be.typeOf(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeUndefined<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     expectationFailOutput?: any
   ): this {
-    this.#toBe(e => e.undefined(actual, expected, expectationFailOutput));
+    this.#testingTo.be.undefined(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toContain<T>(
     actual: ExpectType<T>,
     expected: any,
     expectationFailOutput?: any
   ): this {
-    this.#to(e => e.contain(actual, expected, expectationFailOutput));
+    this.#testingTo.contain(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toEqual<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
     expectationFailOutput?: any
   ): this {
-    this.#to(e => e.equal(actual, expected, expectationFailOutput));
+    this.#testingTo.equal(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -838,41 +753,37 @@ export class TestingExpectation {
     spy: ExpectType<T>,
     expectationFailOutput?: any
   ): this {
-    this.#toHaveBeenCalled(e => e.called(spy, expectationFailOutput));
+    this.#testingTo.have.been.called.called(spy, expectationFailOutput);
     return this;
   }
-
   public toHaveBeenCalledBefore<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: jasmine.Func,
     expectationFailOutput?: any
   ): this {
-    this.#toHaveBeenCalled(e => e.before(spy, expected, expectationFailOutput));
+    this.#testingTo.have.been.called.before(spy, expected, expectationFailOutput);
     return this;
   }
-
   public toHaveBeenCalledOnceWith<T extends jasmine.Func>(
     spy: ExpectType<T>,
     ...params: any[]
   ): this {
-    this.#toHaveBeenCalled(e => e.onceWith(spy, ...params));
+    this.#testingTo.have.been.called.onceWith(spy, ...params);
     return this;
   }
-
   public toHaveBeenCalledTimes<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: number,
     expectationFailOutput?: any
   ): this {
-    this.#toHaveBeenCalled(e => e.times(spy, expected, expectationFailOutput));
+    this.#testingTo.have.been.called.times(spy, expected, expectationFailOutput);
     return this;
   }
-
   public toHaveBeenCalledWith<T extends jasmine.Func>(
     spy: ExpectType<T>,
     ...params: any[]
   ): this {
-    this.#toHaveBeenCalled(e => e.with(spy, ...params));
+    this.#testingTo.have.been.called.with(spy, ...params);
     return this;
   }
   //#endregion
@@ -883,25 +794,23 @@ export class TestingExpectation {
     expected: string,
     expectationFailOutput?: any
   ): this {
-    this.#toHave(e => e.class(actual, expected, expectationFailOutput));
+    this.#testingTo.have.class(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toHaveSize<T>(
     actual: ExpectType<T>,
     expected: number,
     expectationFailOutput?: any
   ): this {
-    this.#toHave(e => e.size(actual, expected, expectationFailOutput));
+    this.#testingTo.have.size(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toHaveSpyInteractions<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
     expectationFailOutput?: any
   ): this {
-    this.#toHave(e => e.spyInteractions(actual, expected, expectationFailOutput));
+    this.#testingTo.have.spyInteractions(actual, expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -911,7 +820,7 @@ export class TestingExpectation {
     expected: string | RegExp,
     expectationFailOutput?: any
   ): this {
-    this.#to(e => e.match(actual, expected, expectationFailOutput));
+    this.#testingTo.match(actual, expected, expectationFailOutput);
     return this;
   }
 
@@ -921,64 +830,23 @@ export class TestingExpectation {
     expected?: any,
     expectationFailOutput?: any
   ): this {
-    this.#toThrow(e => e.throw(actual, expected, expectationFailOutput));
+    this.#testingTo.throw.throw(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toThrowError<T extends jasmine.Func>(
     actual: ExpectType<T>,
     message?: string | RegExp,
     expectationFailOutput?: any
   ): this {
-    this.#toThrow(e => e.error(actual, message, expectationFailOutput));
+    this.#testingTo.throw.error(actual, message, expectationFailOutput);
     return this;
   }
-
   public toThrowMatching<T>(
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
     expectationFailOutput?: any
   ): this {
-    this.#toThrow(e => e.matching(actual, predicate, expectationFailOutput));
-    return this;
-  }
-  //#endregion
-
-  //#region helpers
-  #to(callbackfn: (expectation: typeof this.to) => any) {
-    callbackfn(this.#not ? this.#testingTo.not : this.#testingTo);
-    this.setNot(false);
-    return this;
-  }
-
-  #toHave(callbackfn: (expectation: typeof this.to.have) => any) {
-    callbackfn(this.#not ? this.#testingTo.have.not : this.#testingTo.have);
-    this.setNot(false);
-    return this;
-  }
-
-  #toHaveBeenCalled(callbackfn: (expectation: typeof this.to.have.been.called) => any) {
-    callbackfn(this.#not ? this.#testingTo.have.been.called.not : this.#testingTo.have.been.called);
-    this.setNot(false);
-    return this;
-  }
-
-  #toBe(callbackfn: (expectation: typeof this.to.be) => any) {
-    const e = this.#not ? this.#testingTo.be.not : this.#testingTo.be;
-    callbackfn(this.#already ? e.already : e);
-    this.setAlready(false).setNot(false);
-    return this;
-  }
-
-  #toBeInstanceOf(callbackfn: (expectation: typeof this.to.be.instanceof) => any) {
-    callbackfn(this.#not ? this.#testingTo.be.instanceof.not : this.#testingTo.be.instanceof);
-    this.setNot(false);
-    return this;
-  }
-
-  #toThrow(callbackfn: (expectation: typeof this.to.throw) => any) {
-    callbackfn(this.#not ? this.#testingTo.throw.not : this.#testingTo.throw);
-    this.setNot(false);
+    this.#testingTo.throw.matching(actual, predicate, expectationFailOutput);
     return this;
   }
   //#endregion
