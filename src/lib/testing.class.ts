@@ -102,12 +102,11 @@ export class Testing<
     allowIt: boolean,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    testingDescribe = new TestingDescribe(allowDescribe, executable?.describe),
-    testingIt = new TestingIt(allowIt, executable?.it),
-    testingExpect = new TestingExpect(),
-    testingExpectation = new TestingExpectation(testingExpect)
+    testingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
+    testingIt = new TestingIt(allowIt, executable?.it, counter),
+    testingExpectation = new TestingExpectation()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect, testingExpectation);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
     this.allowDescribe = allowDescribe;
     this.allowIt = allowIt;
     this.executable = executable;
@@ -124,7 +123,6 @@ export class Testing<
       counter,
       testingDescribe,
       testingIt,
-      testingExpect,
       testingExpectation
     );
   }
