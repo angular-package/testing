@@ -4,6 +4,8 @@ import { is } from '@angular-package/type';
 import { TestingExecutable } from './testing-executable.abstract';
 // Type.
 import { CounterConfig } from '../type/counter-config.type';
+// Interface.
+import { ExecutableTests } from '../interface/executable-tests.interface';
 /**
  * Creates an instance with optional allowed executing methods and executable storage.
  * @class
@@ -48,29 +50,10 @@ export class TestingIt<
    */
   constructor(
     allow?: boolean,
-    executable?: Array<number>,
+    executable?: ExecutableTests['it'],
     counter: CounterConfig<CounterActive, CounterDescription> = [true, false] as any
   ) {
-    super(executable, counter);
-    this.#allow = is.boolean(allow) ? allow : this.#allow;
-  }
-
-  /**
-   * @description Allow executing `it()` methods.
-   * @returns The return value is an instance of `TestingIt`.
-   */
-  public allow(): this {
-    this.#allow = true;
-    return this;
-  }
-
-  /**
-   * @description Disallow executing `it()` methods, which means only those specified in the executable storage can be executed.
-   * @returns The return value is an instance of `TestingIt`.
-   */
-  public disallow(): this {
-    this.#allow = false;
-    return this;
+    super(allow, executable, counter);
   }
 
   /**
@@ -83,8 +66,8 @@ export class TestingIt<
   public it<Expectation extends string>(
     expectation: Expectations | Expectation,
     assertion: jasmine.ImplementationCallback,
-    execute: boolean = is.false(this.#allow)
-      ? this.isExecutable(this.getCounter() + 1)
+    execute: boolean = is.false(super.allowed)
+      ? super.isExecutable(this.getCounter() + 1)
       : true,
     timeout?: number
   ): this {
