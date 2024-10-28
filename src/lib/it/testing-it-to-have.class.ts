@@ -1,6 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
+import { TestingExpect } from '../testing-expect.class';
 import { TextualExpectation } from '../textual-expectation.abstract';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToHaveBeen } from './testing-it-to-have-been.class';
@@ -43,10 +44,11 @@ export class TestingItToHave<
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt
+    testingIt?: TestingIt,
+    testingExpect?: TestingExpect
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#toHaveBeen = new TestingItToHaveBeen(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    this.#toHaveBeen = new TestingItToHaveBeen(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
   }
   public class<T>(
     actual: ExpectType<T>,

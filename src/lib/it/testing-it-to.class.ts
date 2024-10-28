@@ -1,6 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
+import { TestingExpect } from '../testing-expect.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBe } from './testing-it-to-be.class';
 import { TestingItToHave } from './testing-it-to-have.class';
@@ -71,13 +72,15 @@ export class TestingItTo<
     allowIt: boolean,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
+    // Common instances.
     testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt
+    testingIt?: TestingIt,
+    testingExpect?: TestingExpect
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#toBe = new TestingItToBe(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#toHave = new TestingItToHave(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#toThrow = new TestingItToThrow(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    this.#toBe = new TestingItToBe(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    this.#toHave = new TestingItToHave(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    this.#toThrow = new TestingItToThrow(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
   }
 
   /**

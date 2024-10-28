@@ -1,11 +1,12 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
-import { TextualExpectation } from '../textual-expectation.abstract';
+import { TestingExpect } from '../testing-expect.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBeArrayOf } from './testing-it-to-be-arrayof.class';
 import { TestingItToBeBoolean } from './testing-it-to-be-boolean.class';
 import { TestingItToBeInstanceOf } from './testing-it-to-be-instanceof.class';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { ExpectType, CounterConfig } from '../../type';
@@ -73,11 +74,12 @@ export class TestingItToBe<
     counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
+    testingExpect?: TestingExpect
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#toBeArrayOf = new TestingItToBeArrayOf(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#toBeBoolean = new TestingItToBeBoolean(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#toBeInstanceOf = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    this.#toBeArrayOf = new TestingItToBeArrayOf(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    this.#toBeBoolean = new TestingItToBeBoolean(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    this.#toBeInstanceOf = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
   }
 
   //#region toBe

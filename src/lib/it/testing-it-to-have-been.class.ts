@@ -1,6 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
+import { TestingExpect } from '../testing-expect.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToHaveBeenCalled } from './testing-it-to-have-been-called.class';
 // Type.
@@ -41,9 +42,10 @@ export class TestingItToHaveBeen<
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt
+    testingIt?: TestingIt,
+    testingExpect?: TestingExpect
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#toHaveBeenCalled = new TestingItToHaveBeenCalled(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    this.#toHaveBeenCalled = new TestingItToHaveBeenCalled(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
   }
 }
