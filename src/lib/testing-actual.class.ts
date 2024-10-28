@@ -1,6 +1,7 @@
 // Class.
 import { TestingCore } from './testing-core.abstract';
 import { TestingDescribe } from './testing-describe.class';
+import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
 import { TestingItTo } from './it/testing-it-to.class';
 import { TextualExpectation } from './textual-expectation.abstract';
@@ -42,15 +43,16 @@ export class TestingActual<
    * @param executable 
    */
   constructor(
-    allowDescribe: boolean,
-    allowIt: boolean,
+    allowDescribe: boolean = true,
+    allowIt: boolean = true,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt
+    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
+    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
+    testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#to = new TestingItTo(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
+    this.#to = new TestingItTo(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
   }
 
   /**
