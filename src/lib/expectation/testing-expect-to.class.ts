@@ -17,7 +17,7 @@ export class TestingExpectTo extends Expect {
    * @public
    * @description
    */
-  public get be(): TestingExpectToBe {
+  public get be() {
     return this.toBe;
   }
 
@@ -25,7 +25,7 @@ export class TestingExpectTo extends Expect {
    * @public
    * @description
    */
-  public get have(): TestingExpectToHave {
+  public get have() {
     return this.toHave;
   }
 
@@ -33,24 +33,24 @@ export class TestingExpectTo extends Expect {
    * @public
    * @description
    */
-  public get throw(): TestingExpectToThrow {
+  public get throw() {
     return this.toThrow;
   }
 
   /**
    * @description
    */
-  private toBe = new TestingExpectToBe();
+  private toBe;
 
   /**
    * @description
    */
-  private toHave = new TestingExpectToHave();
+  private toHave;
 
   /**
    * @description
    */
-  private toThrow = new TestingExpectToThrow();
+  private toThrow;
 
   /**
    * @description
