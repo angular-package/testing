@@ -18,6 +18,7 @@ import {
 import { TestingActual } from './testing-actual.class';
 import { TestingCore } from './testing-core.abstract';
 import { TestingDescribe } from './testing-describe.class';
+import { TestingExpect } from './testing-expect.class';
 import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
 // Interface.
@@ -102,9 +103,11 @@ export class Testing<
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
     testingDescribe = new TestingDescribe(allowDescribe, executable?.describe),
-    testingIt = new TestingIt(allowIt, executable?.it)
+    testingIt = new TestingIt(allowIt, executable?.it),
+    testingExpect = new TestingExpect(),
+    testingExpectation = new TestingExpectation(testingExpect)
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect, testingExpectation);
     this.allowDescribe = allowDescribe;
     this.allowIt = allowIt;
     this.executable = executable;
@@ -120,7 +123,9 @@ export class Testing<
       this.executable,
       counter,
       testingDescribe,
-      testingIt
+      testingIt,
+      testingExpect,
+      testingExpectation
     );
   }
 
