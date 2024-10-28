@@ -67,24 +67,9 @@ export class TestingExpectTo extends Expect {
     expected: any,
     expectationFailOutput?: any
   ): this {
-    // this.setNot(false);
-    // this.toBe.setNot(false);
-    // this.toHave.setNot(false);
-    // this.toThrow.setNot(false);
-    // const a = this.toBe.getNot();
-    // const b = this.toHave.getNot();
-    // const c = this.toThrow.getNot()
-    // const d = this.getNot();
-    // console.log(a, b, c, d);
     this
       .expectation(actual, e => e.toContain(expected), expectationFailOutput)
       .setNot(false);
-
-    // const a = this.toBe.getNot();
-    // const b = this.toHave.getNot();
-    // const c = this.toThrow.getNot()
-    // const d = this.getNot();
-    // console.log(a, b, c, d);
     return this;
   }
   public equal<T>(
