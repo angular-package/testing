@@ -1,6 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
+import { TestingExpect } from '../testing-expect.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBeArrayOf } from '../it';
 // Type.
@@ -33,6 +34,7 @@ export class TestingToBeArrayOf<
    * @param counter
    * @param testingDescribe
    * @param testingIt
+   * @param testingExpect
    */
   constructor(
     allowDescribe: boolean = true,
@@ -41,15 +43,17 @@ export class TestingToBeArrayOf<
     counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
+    testingExpect?: TestingExpect
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
     this.toBeArrayOf = new TestingItToBeArrayOf(
       allowDescribe,
       allowIt,
       executable,
       counter,
       testingDescribe,
-      testingIt
+      testingIt,
+      testingExpect
     );
   }
 

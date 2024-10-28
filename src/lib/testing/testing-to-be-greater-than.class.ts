@@ -7,6 +7,7 @@ import { TestingItToBe } from '../it';
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
+import { TestingExpect } from '../testing-expect.class';
 /**
  * Prepared simple tests.
  */
@@ -29,6 +30,10 @@ export class TestingToBeGreaterThan<
    * @param allowDescribe Allow executing `describe()` methods.
    * @param allowIt Allow executing `it()` methods.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
+   * @param counter
+   * @param testingDescribe
+   * @param testingIt
+   * @param testingExpect
    */
   constructor(
     allowDescribe: boolean = true,
@@ -37,15 +42,17 @@ export class TestingToBeGreaterThan<
     counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
+    testingExpect?: TestingExpect
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
     this.toBe = new TestingItToBe(
       allowDescribe,
       allowIt,
       executable,
       counter,
       testingDescribe,
-      testingIt
+      testingIt,
+      testingExpect
     );
   }
 

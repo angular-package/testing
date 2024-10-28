@@ -1,6 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
+import { TestingExpect } from '../testing-expect.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBeBoolean } from '../it/testing-it-to-be-boolean.class';
 // Type.
@@ -40,15 +41,17 @@ export class TestingToBeBoolean<
     counter: CounterConfig = [true, false],
     testingDescribe?: TestingDescribe,
     testingIt?: TestingIt,
+    testingExpect?: TestingExpect
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
     this.itToBeBoolean = new TestingItToBeBoolean(
       allowDescribe,
       allowIt,
       executable,
       counter,
       testingDescribe,
-      testingIt
+      testingIt,
+      testingExpect
     );
   }
 
