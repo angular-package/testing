@@ -1,65 +1,74 @@
-// @angular-package/type.
-import { is } from '@angular-package/type';
 // Class.
 import { TestingDescribe } from './testing-describe.class';
+import { TestingExpect } from './testing-expect.class';
 import { TestingExpectation } from './testing-expectation.class';
+import { TextualExpectation } from './textual-expectation.abstract';
 import { TestingIt } from './testing-it.class';
 // Interface.
 import { ExecutableTests } from '../interface/executable-tests.interface';
 // Type.
 import { CounterConfig } from '../type/counter-config.type';
-import { TextualExpectation } from './textual-expectation.abstract';
 /**
- * Core object with describe and it instances.
+ * @abstract
+ * @class
+ * @classdesc Core object with describe and it instances.
  */
 export abstract class TestingCore<
   Descriptions extends string = string,
   Expectations extends string = string
 > {
   /**
-   * 
+   * @description
    */
   public get expect() {
-    return this.#expect;
+    return this.#expectation;
   }
 
   /**
-   * 
+   * @description
+   */
+  public get not() {
+    this.#expectation.not;
+    return this;
+  }
+
+  /**
+   * @description
    */
   public get testingDescribe() {
     return this.#testingDescribe;
   }
 
   /**
-   * 
+   * @description
    */
   public get testingIt() {
     return this.#testingIt;
   }
 
   /**
-   * 
+   * @description
    */
-  #expect = new TestingExpectation();
+  #expectation;
 
   /**
-   * Privately stored instance of a `TestingDescribe`.
+   * @description Privately stored instance of a `TestingDescribe`.
    */
   #testingDescribe: TestingDescribe<Descriptions>;
 
   /**
-   * Privately stored instance of a `TestingIt`.
+   * @description Privately stored instance of a `TestingIt`.
    */
   #testingIt: TestingIt<Expectations>;
 
   /**
-   * Core object with describe and it instances.
    * @param allowDescribe Allows executing `describe()` methods from a child instance.
    * @param allowIt Allows executing `it()`  methods from a child instance.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    * @param counter
    * @param testingDescribe
    * @param testingIt
+   * @param testingExpect
    */
   constructor(
     allowDescribe: boolean,
@@ -76,14 +85,17 @@ export abstract class TestingCore<
       allowIt,
       executable?.it,
       counter
-    )
+    ),
+    testingExpect: TestingExpect = new TestingExpect(),
+    testingExpectation = new TestingExpectation(testingExpect) 
   ) {
     this.#testingDescribe = testingDescribe;
     this.#testingIt = testingIt;
+    this.#expectation = testingExpectation;
   }
 
   /**
-   * 
+   * @description
    * @param action 
    * @param timeout 
    * @returns 
@@ -98,7 +110,7 @@ export abstract class TestingCore<
   }
 
   /**
-   * 
+   * @description
    * @param action 
    * @param timeout 
    * @returns 
@@ -113,7 +125,7 @@ export abstract class TestingCore<
   }
 
   /**
-   * 
+   * @description
    * @param action 
    * @param timeout 
    * @returns 
@@ -128,7 +140,7 @@ export abstract class TestingCore<
   }
 
   /**
-   * 
+   * @description
    * @param action 
    * @param timeout 
    * @returns 
@@ -143,7 +155,7 @@ export abstract class TestingCore<
   }
 
   /**
-   * Executes defined `describe()` function of jasmine on provided state `true` from the `execute`, and resets the counter to `0`.
+   * @description Executes defined `describe()` function of jasmine on provided state `true` from the `execute`, and resets the counter to `0`.
    * @param description "Textual description of the group" with an optional defined prefix indicating its unique number
    * inside the describe.
    * @param specDefinitions "Function for Jasmine to invoke that will define inner suites a specs"
@@ -164,6 +176,12 @@ export abstract class TestingCore<
     return this;
   }
 
+  /**
+   * @description
+   * @param description 
+   * @param specDefinitions 
+   * @returns 
+   */
   public fdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => any,
@@ -177,7 +195,7 @@ export abstract class TestingCore<
   }
 
   /**
-   * Executes defined `it()` function of jasmine on provided state `true` from the `execute`.
+   * @description Executes defined `it()` function of jasmine on provided state `true` from the `execute`.
    * @param expectation "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]`.
    * @param assertion "Function that contains the code of your test. If not provided the test will be pending."
    * @param execute A `boolean` type value to decide whether or not execute defined `it()` of jasmine function.
@@ -193,7 +211,7 @@ export abstract class TestingCore<
   }
 
   /**
-   * 
+   * @description
    * @param key 
    * @param value 
    * @returns 
@@ -204,7 +222,7 @@ export abstract class TestingCore<
   }
 
   /**
-   * 
+   * @description
    * @param key 
    * @param value 
    * @returns 
@@ -215,7 +233,7 @@ export abstract class TestingCore<
   }
 
   /**
-   * 
+   * @description
    * @param assertion 
    * @param description 
    * @param execute 
@@ -243,6 +261,12 @@ export abstract class TestingCore<
     return this;
   }
 
+  /**
+   * @description
+   * @param description 
+   * @param specDefinitions 
+   * @returns 
+   */
   public xdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => any,
