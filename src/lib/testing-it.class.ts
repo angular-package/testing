@@ -106,7 +106,7 @@ export class TestingIt<
     timeout?: number
   ): this {
     this.count();
-    fit(expectation, assertion, timeout);
+    fit(this.replaceCounter(expectation), assertion, timeout);
     return this;
   }
 
@@ -123,7 +123,7 @@ export class TestingIt<
     timeout?: number
   ): this {
     this.count();
-    xit(expectation, assertion, timeout);
+    xit(this.replaceCounter(expectation), assertion, timeout);
     return this;
   }
 }
