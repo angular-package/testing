@@ -1,7 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
-import { TestingExpect } from '../testing-expect.class';
+import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBe } from './testing-it-to-be.class';
 import { TestingItToHave } from './testing-it-to-have.class';
@@ -13,7 +13,9 @@ import { ExpectType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
- * Prepared tests.
+ * @class
+ * @classdesc Prepared tests.
+ * @license MIT
  */
 export class TestingItTo<
   Descriptions extends string = string,
@@ -73,14 +75,14 @@ export class TestingItTo<
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
     // Common instances.
-    testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt,
-    testingExpect?: TestingExpect
+    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
+    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
+    testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
-    this.#toBe = new TestingItToBe(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
-    this.#toHave = new TestingItToHave(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
-    this.#toThrow = new TestingItToThrow(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
+    this.#toBe = new TestingItToBe(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
+    this.#toHave = new TestingItToHave(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
+    this.#toThrow = new TestingItToThrow(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
   }
 
   /**

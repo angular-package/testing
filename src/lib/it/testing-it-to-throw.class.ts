@@ -4,7 +4,9 @@ import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { ExpectType } from '../../type';
 /**
- * Prepared `toThrow` tests.
+ * @class
+ * @classdesc Prepared `toThrow` tests.
+ * @license MIT
  */
 export class TestingItToThrow<
   Descriptions extends string = string,

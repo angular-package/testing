@@ -1,7 +1,7 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
-import { TestingExpect } from '../testing-expect.class';
+import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToBeArrayOf } from './testing-it-to-be-arrayof.class';
 import { TestingItToBeBoolean } from './testing-it-to-be-boolean.class';
@@ -13,7 +13,9 @@ import { ExpectType, CounterConfig } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
- * Prepared simple tests.
+ * @class
+ * @classdesc Prepared tests `it` of "toBe".
+ * @license MIT
  */
 export class TestingItToBe<
   Descriptions extends string = string,
@@ -72,14 +74,14 @@ export class TestingItToBe<
     allowIt: boolean,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt,
-    testingExpect?: TestingExpect
+    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
+    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
+    testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
-    this.#toBeArrayOf = new TestingItToBeArrayOf(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
-    this.#toBeBoolean = new TestingItToBeBoolean(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
-    this.#toBeInstanceOf = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpect);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
+    this.#toBeArrayOf = new TestingItToBeArrayOf(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
+    this.#toBeBoolean = new TestingItToBeBoolean(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
+    this.#toBeInstanceOf = new TestingItToBeInstanceOf(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
   }
 
   //#region toBe
@@ -128,6 +130,7 @@ export class TestingItToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
+    // console.log(`expect.array()`, super.expect.getNot(), super.expect.to.be.getNot());
     this.it(
       expectation,
       () => super.expect.to.be.array(actual, expected, expectationFailOutput),

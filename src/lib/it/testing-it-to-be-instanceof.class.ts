@@ -4,7 +4,9 @@ import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { ExpectType } from '../../type';
 /**
- * Prepared simple tests.
+ * @class
+ * @classdesc Prepared tests `it` to determine instances.
+ * @license MIT
  */
 export class TestingItToBeInstanceOf<
   Descriptions extends string = string,

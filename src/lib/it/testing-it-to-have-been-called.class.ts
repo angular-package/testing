@@ -4,7 +4,9 @@ import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { ExpectType } from '../../type';
 /**
- * Prepared simple tests.
+ * @class
+ * @classdesc
+ * @license MIT
  */
 export class TestingItToHaveBeenCalled<
   Descriptions extends string = string,
@@ -15,8 +17,6 @@ export class TestingItToHaveBeenCalled<
 > {
   public before<T extends jasmine.Func>(
     spyExpected: () => [ExpectType<T>, jasmine.Func],
-    // spy: () => ExpectType<T>,
-    // expected: () => jasmine.Func,
     expectation: string = TextualExpectation.toHaveBeenCalledBefore,
     expectationFailOutput?: any,
     execute?: boolean,
