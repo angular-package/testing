@@ -1,7 +1,7 @@
 // @angular-package/type.
 import { are} from '@angular-package/type';
 // Class.
-import { TestingExpect } from '../testing-expect.abstract';
+import { Expect } from '../expect.class';
 // Type.
 import { ExpectType } from '../../type';
 /**
@@ -10,7 +10,7 @@ import { ExpectType } from '../../type';
  * @classdesc Matchers that use the `toBeArrayOf()` method of jasmine.
  * @license MIT
  */
-export class TestingExpectToBeArrayOf extends TestingExpect {
+export class TestingExpectToBeArrayOf extends Expect {
   /**
    * @private
    * The Default message for the expectation fails.

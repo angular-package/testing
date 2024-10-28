@@ -1,5 +1,6 @@
 // Class.
-import { TestingExpect } from '../testing-expect.abstract';
+import { Expect } from '../expect.class';
+import { TestingExpect } from '../testing-expect.class';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
 /**
@@ -8,7 +9,7 @@ import { ExpectType } from '../../type/expect-type.type';
  * @classdesc Testing `throw` matchers.
  * @license MIT
  */
-export class TestingExpectToThrow extends TestingExpect {
+export class TestingExpectToThrow extends Expect {
   public error<T extends jasmine.Func>(
     actual: ExpectType<T>,
     message?: string | RegExp,

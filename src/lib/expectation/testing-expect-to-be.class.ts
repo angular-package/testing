@@ -1,7 +1,8 @@
 // @angular-package/type.
 import { is, Constructor, typeOf } from '@angular-package/type';
 // Class.
-import { TestingExpect } from '../testing-expect.abstract';
+import { Expect } from '../expect.class';
+import { TestingExpect } from '../testing-expect.class';
 import { TestingExpectToBeArrayOf } from './testing-expect-to-be-arrayof.class';
 import { TestingExpectToBeInstanceOf } from './testing-expect-to-be-instanceof.class';
 // Type.
@@ -12,35 +13,44 @@ import { ExpectType } from '../../type';
  * @classdesc Matchers that use the `toBe()` method of jasmine.
  * @license MIT
  */
-export class TestingExpectToBe extends TestingExpect {
+export class TestingExpectToBe extends Expect {
   /**
-   * 
+   * @description
    */
   public get arrayof() {
     return this.toBeArrayOf;
   }
 
   /**
-   * 
+   * @description
    */
   public get instanceof() {
     return this.toBeInstanceOf;
   }
 
-  private toBeArrayOf = new TestingExpectToBeArrayOf();
-
   /**
-   * 
+   * @description
    */
-  private toBeInstanceOf = new TestingExpectToBeInstanceOf();
+  private toBeArrayOf;
 
   /**
-   * The Default message for the expectation fails.
+   * @description
+   */
+  private toBeInstanceOf;
+
+  /**
+   * @description The Default message for the expectation fails.
    */
   private expectationFailOutput = `The expected value should`;
 
+  constructor(expect: TestingExpect = new TestingExpect()) {
+    super(expect);
+    this.toBeArrayOf = new TestingExpectToBeArrayOf(expect);
+    this.toBeInstanceOf = new TestingExpectToBeInstanceOf(expect);
+  }
+
   /**
-   * Expects provided value to be an `array`. The method uses `isArray()` function from the `@angular-package/type`.
+   * @description Expects provided value to be an `array`. The method uses `isArray()` function from the `@angular-package/type`.
    * @param actual The value of any type that is checked against the `array` and the result of its check is passed to the `expect()`
    * function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -61,7 +71,7 @@ export class TestingExpectToBe extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be the given `expected`.
+   * @description Expects provided value to be the given `expected`.
    * @param actual The value of a generic `Value` type captured from the given `value` and passed to the `expect()` function of
    * jasmine.
    * @param expected The expected value to compare against the given `value`, passed to the `toBe()` method of `jasmine.Matchers`.
@@ -72,7 +82,9 @@ export class TestingExpectToBe extends TestingExpect {
   public be<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
-    expectationFailOutput?: any
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be \`expected\``
   ): this {
     this.expect(actual, expectationFailOutput).toBe(expected);
     this.setNot(false);
@@ -80,7 +92,7 @@ export class TestingExpectToBe extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be a `bigint` type. The method uses `isBigInt()` function from the `@angular-package/type`.
+   * @description Expects provided value to be a `bigint` type. The method uses `isBigInt()` function from the `@angular-package/type`.
    * @param actual The value of any type that is checked against `bigint` and the result of its check is passed to the `expect()` function
    * of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -100,6 +112,7 @@ export class TestingExpectToBe extends TestingExpect {
   }
 
   /**
+   * @description 
    * @param actual The value of any type that is checked against a `boolean` type or an instance of `Boolean` and the result of its check
    * is passed to the `expect()` function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -130,7 +143,7 @@ export class TestingExpectToBe extends TestingExpect {
   }
 
   /**
-   * Expects provided value to be `class`. The method uses `isClass()` function from the `@angular-package/type`.
+   * @description Expects provided value to be `class`. The method uses `isClass()` function from the `@angular-package/type`.
    * @param actual The value of any type that is checked against `class` and the result of its check is passed to the `expect()`
    * function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -154,7 +167,9 @@ export class TestingExpectToBe extends TestingExpect {
     actual: ExpectType<T>,
     expected: number,
     precision?: any,
-    expectationFailOutput?: any
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be close to \`expected\``
   ): this {
     this.expect(actual, expectationFailOutput).toBeCloseTo(expected, precision);
     this.setNot(false);
@@ -243,7 +258,7 @@ export class TestingExpectToBe extends TestingExpect {
   //#endregion
 
   /**
-   * Expects provided value to be `function`. The method uses `isFunction()` function from the `@angular-package/type`.
+   * @description Expects provided value to be `function`. The method uses `isFunction()` function from the `@angular-package/type`.
    * @param actual The value of any type that is checked against `function` and the result of its check is passed to the `expect()`
    * function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -268,7 +283,9 @@ export class TestingExpectToBe extends TestingExpect {
   public greaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectationFailOutput?: any
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be greater than \`expected\``
   ): this {
     this.expect(actual, expectationFailOutput).toBeGreaterThan(expected);
     this.setNot(false);
@@ -279,7 +296,9 @@ export class TestingExpectToBe extends TestingExpect {
   public greaterThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectationFailOutput?: any
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be greater or equal than \`expected\``
   ): this {
     this.expect(actual, expectationFailOutput).toBeGreaterThanOrEqual(expected);
     this.setNot(false);
@@ -289,7 +308,7 @@ export class TestingExpectToBe extends TestingExpect {
 
   //#region instance
   /**
-   * Expects provided value to be an instance of a `class` from the given `constructor`. The method uses `isInstance()` function from the
+   * @description Expects provided value to be an instance of a `class` from the given `constructor`. The method uses `isInstance()` function from the
    * `@angular-package/type`.
    * @param actual The value of any type that is checked against an instance of a `class` from the given `constructor` and the result of its
    * check is passed to the `expect()` function of jasmine.
@@ -326,7 +345,7 @@ export class TestingExpectToBe extends TestingExpect {
   //#endregion
 
   /**
-   * Expects provided value to be property key. The method uses `isKey()` function from the `@angular-package/type`.
+   * @description Expects provided value to be property key. The method uses `isKey()` function from the `@angular-package/type`.
    * @param actual The value of any type that is checked against the property key and the result of its check is passed to the `expect()`
    * function of jasmine.
    * @param expected The expected `value` of a `boolean` to compare against the result of the `value` check that is passed to the `toBe()`
@@ -351,7 +370,9 @@ export class TestingExpectToBe extends TestingExpect {
   public lessThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectationFailOutput?: any
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be less than \`expected\``
   ): this {
     this.expect(actual, expectationFailOutput).toBeLessThan(expected);
     this.setNot(false);
@@ -362,7 +383,9 @@ export class TestingExpectToBe extends TestingExpect {
   public lessThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectationFailOutput?: any
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be less or equal than \`expected\``
   ): this {
     this.expect(actual, expectationFailOutput).toBeLessThanOrEqual(expected);
     this.setNot(false);
@@ -667,7 +690,9 @@ export class TestingExpectToBe extends TestingExpect {
   //#region rejected
   public rejected<T>(
     actual: T | PromiseLike<T>,
-    expectationFailOutput?: any,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be rejected`
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeRejected();
     this.setAlready(false).setNot(false);
@@ -677,7 +702,9 @@ export class TestingExpectToBe extends TestingExpect {
   public rejectedWith<T, U>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<U>,
-    expectationFailOutput?: any,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be rejected with \`expected\``
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeRejectedWith(expected);
     this.setAlready(false).setNot(false);
@@ -688,7 +715,9 @@ export class TestingExpectToBe extends TestingExpect {
     actual: T | PromiseLike<T>,
     expected?: new (...args: any[]) => Error,
     message?: string | RegExp,
-    expectationFailOutput?: any,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be resolved with error`
   ): this {
     this.expectAsync<T, U>(actual, expectationFailOutput).toBeRejectedWithError(expected, message)
     this.setAlready(false).setNot(false);
@@ -697,7 +726,9 @@ export class TestingExpectToBe extends TestingExpect {
 
   public resolved<T>(
     actual: T | PromiseLike<T>,
-    expectationFailOutput?: any,
+    expectationFailOutput: any = `${this.expectationFailOutput} ${
+      this.getNot() === true ? `not` : ``
+    } be resolved`
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeResolved();
     this.setAlready(false).setNot(false);

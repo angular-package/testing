@@ -1,5 +1,6 @@
 // Class.
-import { TestingExpect } from '../testing-expect.abstract';
+import { Expect } from '../expect.class';
+import { TestingExpect } from '../testing-expect.class';
 import { TestingExpectToBe } from './testing-expect-to-be.class';
 import { TestingExpectToHave } from './testing-expect-to-have.class';
 import { TestingExpectToThrow } from './testing-expect-to-throw.class';
@@ -11,9 +12,10 @@ import { ExpectType } from '../../type/expect-type.type';
  * @classdesc Testing `to`, `to.be`, `to.have`, `to.throw` matchers.
  * @license MIT
  */
-export class TestingExpectTo extends TestingExpect {
+export class TestingExpectTo extends Expect {
   /**
    * @public
+   * @description
    */
   public get be(): TestingExpectToBe {
     return this.toBe;
@@ -21,6 +23,7 @@ export class TestingExpectTo extends TestingExpect {
 
   /**
    * @public
+   * @description
    */
   public get have(): TestingExpectToHave {
     return this.toHave;
@@ -28,37 +31,62 @@ export class TestingExpectTo extends TestingExpect {
 
   /**
    * @public
+   * @description
    */
   public get throw(): TestingExpectToThrow {
     return this.toThrow;
   }
 
   /**
-   * 
+   * @description
    */
   private toBe = new TestingExpectToBe();
 
   /**
-   * 
+   * @description
    */
   private toHave = new TestingExpectToHave();
 
   /**
-   * 
+   * @description
    */
   private toThrow = new TestingExpectToThrow();
 
+  /**
+   * @description
+   * @param expect 
+   */
+  constructor(expect: TestingExpect = new TestingExpect()) {
+    super(expect);
+    this.toBe = new TestingExpectToBe(expect);
+    this.toHave = new TestingExpectToHave(expect);
+    this.toThrow = new TestingExpectToThrow(expect);
+  }
   public contain<T>(
     actual: ExpectType<T>,
     expected: any,
     expectationFailOutput?: any
   ): this {
+    // this.setNot(false);
+    // this.toBe.setNot(false);
+    // this.toHave.setNot(false);
+    // this.toThrow.setNot(false);
+    // const a = this.toBe.getNot();
+    // const b = this.toHave.getNot();
+    // const c = this.toThrow.getNot()
+    // const d = this.getNot();
+    // console.log(a, b, c, d);
     this
       .expectation(actual, e => e.toContain(expected), expectationFailOutput)
       .setNot(false);
+
+    // const a = this.toBe.getNot();
+    // const b = this.toHave.getNot();
+    // const c = this.toThrow.getNot()
+    // const d = this.getNot();
+    // console.log(a, b, c, d);
     return this;
   }
-
   public equal<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
@@ -69,7 +97,6 @@ export class TestingExpectTo extends TestingExpect {
       .setNot(false);
     return this;
   }
-
   public match<T>(
     actual: ExpectType<T>,
     expected: string | RegExp,

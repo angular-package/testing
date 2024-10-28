@@ -1,5 +1,6 @@
 // Class.
-import { TestingExpect } from '../testing-expect.abstract';
+import { Expect } from '../expect.class';
+import { TestingExpect } from '../testing-expect.class';
 import { TestingExpectToHaveBeen } from './testing-expect-to-have-been.class';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
@@ -9,19 +10,27 @@ import { ExpectType } from '../../type/expect-type.type';
  * @classdesc Testing matchers.
  * @license MIT
  */
-export class TestingExpectToHave extends TestingExpect {
+export class TestingExpectToHave extends Expect {
   /**
-   *
+   * @description
    */
   public get been() {
     return this.toHaveBeen;
   }
 
   /**
-   * 
+   * @description
    */
-  private toHaveBeen = new TestingExpectToHaveBeen();
+  private toHaveBeen;
 
+  /**
+   * @description
+   * @param expect 
+   */
+  constructor(expect: TestingExpect = new TestingExpect()) {
+    super(expect);
+    this.toHaveBeen = new TestingExpectToHaveBeen(expect);
+  }
   public class<T>(
     actual: ExpectType<T>,
     expected: string,

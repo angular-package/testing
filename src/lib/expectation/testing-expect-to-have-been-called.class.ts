@@ -1,5 +1,6 @@
 // Class.
-import { TestingExpect } from '../testing-expect.abstract';
+import { Expect } from '../expect.class';
+import { TestingExpect } from '../testing-expect.class';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
 /**
@@ -8,7 +9,7 @@ import { ExpectType } from '../../type/expect-type.type';
  * @classdesc Testing `ToHaveBeenCalled` matchers.
  * @license MIT
  */
-export class TestingExpectToHaveBeenCalled extends TestingExpect {
+export class TestingExpectToHaveBeenCalled extends Expect {
   /**
    * @description
    * @param spy 
