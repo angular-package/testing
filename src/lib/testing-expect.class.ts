@@ -42,7 +42,9 @@ export class TestingExpect {
   public expect<T>(
     actual: ExpectType<T>,
     expectationFailOutput?: any,
-    e = expect(actual).withContext(expectationFailOutput)
+    e = expectationFailOutput
+      ? expect(actual).withContext(expectationFailOutput)
+      : expect(actual)
   ): jasmine.Matchers<typeof actual> {
     return is.true(this.#not) ? e.not : e;
   }
@@ -61,7 +63,9 @@ export class TestingExpect {
     expectationFailOutput?: any,
     not?: boolean,
     already?: boolean,
-    e = expectAsync(actual).withContext(expectationFailOutput)
+    e = expectationFailOutput
+      ? expectAsync(actual).withContext(expectationFailOutput)
+      : expectAsync(actual)
   ): jasmine.AsyncMatchers<T, U> {
     already && this.already;
     not && this.not;
