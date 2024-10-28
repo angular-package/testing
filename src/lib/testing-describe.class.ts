@@ -4,6 +4,8 @@ import { is } from '@angular-package/type';
 import { TestingExecutable } from './testing-executable.abstract';
 // Type.
 import { CounterConfig } from '../type/counter-config.type';
+// Interface.
+import { ExecutableTests } from '../interface/executable-tests.interface';
 /**
  * Initialize executable storage.
  * @class
@@ -32,40 +34,16 @@ export class TestingDescribe<
   }
 
   /**
-   * @description Privately stored allow state of executing `describe)` method, which by default is set to `false`.
-   */
-  #allow = false;
-
-  /**
    * @allow An optional value of a `boolean` to initially allow executing `describe()` methods.
    * @param executable An optional `array` of unique numbers type to initially set executable storage.
    * @param counter
    */
   constructor(
     allow?: boolean,
-    executable?: Array<number>,
-    counter: CounterConfig<CounterActive, CounterDescription> = [true, false] as any
+    executable?: ExecutableTests['describe'],
+    counter: CounterConfig<CounterActive, CounterDescription> = [true, false] as any,
   ) {
-    super(executable, counter);
-    this.#allow = is.boolean(allow) ? allow : this.#allow;
-  }
-
-  /**
-   * @description Allows executing `describe()` methods.
-   * @returns The return value is an instance of `TestingDescribe`.
-   */
-  public allow(): this {
-    this.#allow = true;
-    return this;
-  }
-
-  /**
-   * @description Disallows executing `describe()` methods, which means only those specified in the executable storage can be executed.
-   * @returns The return value is an instance of `TestingDescribe`.
-   */
-  public disallow(): this {
-    this.#allow = false;
-    return this;
+    super(allow, executable, counter);
   }
 
   /**
@@ -78,7 +56,7 @@ export class TestingDescribe<
   public describe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => void,
-    execute: boolean = is.false(this.#allow)
+    execute: boolean = is.false(super.allowed)
       ? this.isExecutable(this.getCounter() + 1)
       : true
   ): this {
