@@ -27,14 +27,6 @@ export abstract class TestingCore<
   /**
    * @description
    */
-  public get not() {
-    this.#expectation.not;
-    return this;
-  }
-
-  /**
-   * @description
-   */
   public get testingDescribe() {
     return this.#testingDescribe;
   }
@@ -71,8 +63,8 @@ export abstract class TestingCore<
    * @param testingExpect
    */
   constructor(
-    allowDescribe: boolean,
-    allowIt: boolean,
+    allowDescribe: boolean = true,
+    allowIt: boolean = true,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
     // Replaces instances.
@@ -86,8 +78,7 @@ export abstract class TestingCore<
       executable?.it,
       counter
     ),
-    testingExpect: TestingExpect = new TestingExpect(),
-    testingExpectation = new TestingExpectation(testingExpect) 
+    testingExpectation = new TestingExpectation() 
   ) {
     this.#testingDescribe = testingDescribe;
     this.#testingIt = testingIt;
