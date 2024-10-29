@@ -300,11 +300,35 @@ public expectation(actual, expected) {
 
 ### Nested expectations
 
-Expectation methods are accessed by using nested object structure and method names.
+Expectation methods are accessed in `TestingExpectTo` by using nested object structure and method names.
+
+Example
+
+```typescript
+import { Testing, TestingExpectTo } from "@angular-package/testing";
+
+const t = new Testing();
+const to = new TestingExpectTo();
+
+t.describe(`TestingExpectTo`, () => t
+  .it(`it`, () => to
+    .contain(['a', 'b', 'c'], 'c')
+    .contain('string number', 'ber')
+    .equal({a: 2}, {a: 2})
+    .match("my string", /string$/)
+    .match('number', 'ber')
+
+    .not.contain(['a', 'b', 'c'], 'h')
+    .contain(['a', 'b', 'c'], 'a')
+
+    .be.not.bigint('a')
+  )
+);
+```
 
 ### Standalone expectations
 
-Expectation methods are directly accessed by using method names instead of nested structure, but using it through the `TestingExpectTo`.
+Expectation methods are directly accessed in `TestingExpectation` by using method names instead of nested structure, but using it through the `TestingExpectTo`.
 
 Jasmine matchers in use.
 
