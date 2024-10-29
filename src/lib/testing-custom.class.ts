@@ -3,7 +3,7 @@ import { TestingCore } from "./testing-core.abstract";
 // Class.
 import { TestingActual } from "./testing-actual.class";
 import { TestingDescribe } from "./testing-describe.class";
-import { TestingExpectation } from "./testing-expectation.class";
+import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from "./testing-it.class";
 // Function.
 import { mixinTesting } from "./function";
@@ -126,14 +126,15 @@ export class TestingCustom<
    */
   constructor(
     testing: T,
-    allowDescribe: boolean,
-    allowIt: boolean,
+    allowDescribe: boolean = true,
+    allowIt: boolean = true,
     executable?: ExecutableTests,
     descriptions: Descriptions[] = [],
     expectations: Expectations[] = [],
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
-    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter)
+    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
+    testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     this.allowDescribe = allowDescribe;
     this.allowIt = allowIt;
@@ -142,8 +143,13 @@ export class TestingCustom<
     this.$expectations = expectations;
     // Tests.
     this.$testing = new (mixinTesting(...testing))(
-      // allowDescribe, allowIt, executable, counter, testingDescribe,
-      testingIt
+      allowDescribe,
+      allowIt,
+      executable,
+      counter,
+      testingDescribe,
+      testingIt,
+      testingExpectation
     );
     // Class to handle core features.
     this.testingCore = new (class<
@@ -158,7 +164,8 @@ export class TestingCustom<
       this.executable,
       counter,
       testingDescribe,
-      testingIt
+      testingIt,
+      testingExpectation
     );
   }
 
