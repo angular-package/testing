@@ -97,8 +97,8 @@ export class Testing<
    * @param testingIt
    */
   constructor(
-    allowDescribe: boolean,
-    allowIt: boolean,
+    allowDescribe: boolean = true,
+    allowIt: boolean = true,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
     testingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
