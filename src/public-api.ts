@@ -5,6 +5,8 @@
  * Main.
  */
 export {
+  Random,
+
   Testing, // Main class with all testings.
   TestingActual, // Initialize testing for `actual`.
   TestingCustom, // Class to pass custom testings.
