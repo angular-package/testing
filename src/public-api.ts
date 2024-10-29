@@ -5,30 +5,30 @@
  * Main.
  */
 export {
-  // Class.
-  Testing,
-  TestingActual,
-
-  // Class to handle `describe`, `it`, `expect` of jasmine.
-  TestingCore,
-
-  // Class to customize testing.
-  TestingCustom,
-
-  // Class to handle `describe()` function of jasmine.
-  TestingDescribe,
-
-  // Class to handle `expect()` function of jasmine.
-  TestingExpect,
-
-  // Abstract class to handle executable tests.
-  TestingExecutable,
+  Testing, // Main class with all testings.
+  TestingActual, // Initialize testing for `actual`.
+  TestingCustom, // Class to pass custom testings.
 
   // Full named expectations. Methods with `expect()` + jasmine matchers.
   TestingExpectation,
 
+  // Class to handle `describe()` function of jasmine.
+  TestingDescribe,
+
   // Class to handle `it()` function of jasmine.
   TestingIt,
+
+  // Class to handle `expect()` function of jasmine.
+  TestingExpect,
+
+  // Class to handle `describe`, `it`, `expect` of jasmine.
+  TestingCore,
+
+  // Abstract class to handle `describe` and `it` counter.
+  TestingCounter,
+
+  // Abstract class to handle executable tests.
+  TestingExecutable,
 } from './lib';
 
 // Specific expectations.
@@ -48,6 +48,7 @@ export {
   TestingItTo,
   TestingItToBe,
   TestingItToBeArrayOf,
+  TestingItToBeBoolean,
   TestingItToBeInstanceOf,
   TestingItToHave,
   TestingItToHaveBeen,
@@ -55,7 +56,7 @@ export {
   TestingItToThrow,
 } from './lib/it';
 
-// Testing for customization.
+// Testing classes for use with `TestingCustom`.
 export {
   TestingTo,
   TestingToBe,

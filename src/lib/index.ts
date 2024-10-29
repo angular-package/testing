@@ -12,6 +12,7 @@ export {
   TestingItTo,
   TestingItToBe,
   TestingItToBeArrayOf,
+  TestingItToBeBoolean,
   TestingItToBeInstanceOf,
   TestingItToHave,
   TestingItToHaveBeen,
