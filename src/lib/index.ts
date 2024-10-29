@@ -1,3 +1,4 @@
+export { Random } from "./random.class";
 export {
   TestingExpectTo,
   TestingExpectToBe,
