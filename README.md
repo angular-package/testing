@@ -43,6 +43,8 @@ Jasmine unit testing wrapper with additional custom testing features.
 * [Usage](#usage)
 * [Features](#features)
   * [Expectations](#expectations)
+    * [Nested](#nested-expectations)
+    * [Standalone](#standalone-expectations)
   * [It](#it)
     * [Nested](#nested)
     * [Standalone](#standalone)
@@ -110,31 +112,28 @@ npm i --save @angular-package/testing
  * Main.
  */
 export {
-  // Class.
-  Testing,
-  TestingActual,
-
-  // Class to handle `describe`, `it`, `expect` of jasmine.
-  TestingCore,
-
-  // Class to customize testing.
-  TestingCustom,
-
-  // Class to handle `describe()` function of jasmine.
-  TestingDescribe,
-
-  // Class to handle `expect()` function of jasmine.
-  TestingExpect,
-
-  // Abstract class to handle executable tests.
-  TestingExecutable,
+  Testing, // Main class with all testings.
+  TestingActual, // Initialize testing for `actual`.
+  TestingCustom, // Class to pass custom testings.
 
   // Full named expectations. Methods with `expect()` + jasmine matchers.
   TestingExpectation,
 
+  // Class to handle `describe()` function of jasmine.
+  TestingDescribe,
+
   // Class to handle `it()` function of jasmine.
   TestingIt,
-} from '@angular-package/testing';
+
+  // Class to handle `expect()` function of jasmine.
+  TestingExpect,
+
+  // Class to handle `describe`, `it`, `expect` of jasmine.
+  TestingCore,
+
+  // Abstract class to handle executable tests.
+  TestingExecutable,
+} from './lib';
 
 // Specific expectations.
 export {
@@ -146,21 +145,22 @@ export {
   TestingExpectToHaveBeen,
   TestingExpectToHaveBeenCalled,
   TestingExpectToThrow,
-} from '@angular-package/testing';
+} from './lib/expectation';
 
 // Methods with `it()` function of jasmine.
 export {
   TestingItTo,
   TestingItToBe,
   TestingItToBeArrayOf,
+  TestingItToBeBoolean,
   TestingItToBeInstanceOf,
   TestingItToHave,
   TestingItToHaveBeen,
   TestingItToHaveBeenCalled,
   TestingItToThrow,
-} from '@angular-package/testing';
+} from './lib/it';
 
-// Testing for customization.
+// Testing classes for use with `TestingCustom`.
 export {
   TestingTo,
   TestingToBe,
@@ -174,7 +174,7 @@ export {
   TestingToBeString,
   TestingToHave,
   TestingToThrow,
-} from '@angular-package/testing';
+} from './lib/testing';
 ```
 
 ```typescript
@@ -261,7 +261,13 @@ import { Testing } from "@angular-package/testing";
 Use `TestingCustom` class for custom testing.
 
 ```typescript
-import { TestingDescribe, TestingCustom, TestingIt, TestingToBe } from "@angular-package/testing";
+import {
+  TestingCustom,
+  TestingDescribe,
+  TestingExpectation,
+  TestingIt,
+  TestingToBe,
+} from "@angular-package/testing";
 
 const t = new TestingCustom(
   [TestingToBe], // List of test.
@@ -271,8 +277,9 @@ const t = new TestingCustom(
   ['DescribeA'], // Descriptions for `describe`.
   ['ItA'], // Expectations for `it`.
   [false, false], // `boolean` or list of [`boolean`, `boolean`]
-  new TestingDescribe(), // Instance for `TestingDescribe` for `counter` purposes
-  new TestingIt()  // Instance for `TestingIt` for `counter` purposes
+  new TestingDescribe(), // Common instance for `TestingDescribe` for `counter` purposes
+  new TestingIt(),  // Common instance for `TestingIt` for `counter` purposes
+  new TestingExpectation() // Common instance for `TestingExpectation`
 );
 ```
 
@@ -285,12 +292,19 @@ const t = new TestingCustom(
 Expectation is a method built from `expect()` and `jasmine` matcher.
 
 ```typescript
-expect(expect).matcher(expected)
+public expectation(actual, expected) {
+  expect(actual).matcher(expected);
+  return this;
+}
 ```
 
-```typescript
-import { TestingExpectation } from "@angular-package/testing";
-```
+### Nested expectations
+
+Expectation methods are accessed by using nested object structure and method names.
+
+### Standalone expectations
+
+Expectation methods are directly accessed by using method names instead of nested structure, but using it through the `TestingExpectTo`.
 
 Jasmine matchers in use.
 
@@ -405,6 +419,31 @@ Expectations based on the `are` of `@angular-package/type` and `toBe()` matcher 
 - [x] `toBeArrayOfTrue()`
 - [x] `toBeArrayOfUndefined()`
 
+Example
+
+```typescript
+import { Testing, TestingExpectation } from "@angular-package/testing";
+
+const t = new Testing();
+const to = new TestingExpectation();  
+
+t.describe(`TestingExpectation`, () => t
+  .spec(e => e.toBeArrayOfNull([null, null]))
+  .it(`it`, () => to
+    .toContain(['a', 'b', 'c'], 'c')
+    .toContain('string number', 'ber')
+    .toEqual({a: 2}, {a: 2})
+    .toMatch("my string", /string$/)
+    .toMatch('number', 'ber')
+
+    .not.toContain(['a', 'b', 'c'], 'h')
+    .toContain(['a', 'b', 'c'], 'a')
+
+    .not.toBeBigInt('a')
+  )
+);
+```
+
 ### It
 
 Prepared specs `it` of `jasmine` built. Spec is a method built from `it` with expectation - `expect()` and `jasmine` matcher.
@@ -415,7 +454,7 @@ it(description, () => expect(expect).matcher(expected))
 
 ### Nested
 
-`it` methods accessed by using nested object structure and method names.
+`it` methods are accessed by using nested object structure and method names.
 
 ### `TestingItTo`
 
@@ -827,7 +866,7 @@ Method
 
 ### Standalone
 
-`it` methods directly accessed by using method names instead of nested structure, but using it.
+`it` methods are directly accessed by using method names instead of nested structure, but using it.
 Standalone tests are designed to mixin them in `TestingCustom` class.
 
 ### `TestingToBeArrayOf`
