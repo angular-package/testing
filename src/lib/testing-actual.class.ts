@@ -1798,13 +1798,12 @@ export class TestingActual<
    * @returns 
    */
   public toHaveSpyInteractions<T>(
-    expected: jasmine.Expected<typeof actual>,
     expectation?: string, //toHaveSpyInteractions,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.have.spyInteractions(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.have.spyInteractions(actual, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
