@@ -42,7 +42,7 @@ Jasmine unit testing wrapper with additional custom testing features.
 * [Api](#api)
 * [Usage](#usage)
 * [Jasmine](#jasmine)
-
+  *[Matchers](#jasmine-matchers)
 * [Changelog](#changelog)
 * [Git](#git)
   * [Commit](#commit)
@@ -217,7 +217,9 @@ const t = new TestingCustom(
 
 <br>
 
-## Jasmine matchers
+## Jasmine
+
+### Jasmine matchers
 
 - [x] toBe()
 - [x] toBeCloseTo()
