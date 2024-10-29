@@ -1,13 +1,12 @@
 // Example usage.
-import { Testing, TestingToBeMatchers } from '../lib';
+import { Testing, TestingExpectToBe } from '../lib';
 // Constant.
-import { TestingClass } from '../lib/constants/class.const';
-import { TESTING_SYMBOL_NUMBER } from '../lib/constants/symbol.const';
+import { TestingClass, TESTING_SYMBOL_NUMBER } from '../lib/constants';
 /**
  * Create `Testing` instance.
  */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
+const testing = new Testing();
+const toBe = new TestingExpectToBe();
 /**
  * Tests.
  */
