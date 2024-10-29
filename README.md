@@ -253,7 +253,15 @@ Use `Testing` class for testing.
 ```typescript
 import { Testing } from "@angular-package/testing";
 
+const t = new Testing();
 
+// Describe.
+t.describe(`Describe`, () => {
+  // Prepared `it` spec.
+  t.toBeBigInt(BigInt(37));
+  // Prepared expectation.
+  t.it(`It`, () => t.expect.toBeBigInt(BigInt(27)));
+});
 ```
 
 ### `TestingCustom`
@@ -329,6 +337,31 @@ t.describe(`TestingExpectTo`, () => t
 ### Standalone expectations
 
 Expectation methods are directly accessed in `TestingExpectation` by using method names instead of nested structure, but using it through the `TestingExpectTo`.
+
+Example expectation method with `actual` param.
+
+```typescript
+public toBeTypeOf<T>(
+  actual: ExpectType<T>,
+  expected: jasmine.Expected<string>,
+  expectationFailOutput?: any
+): this {
+  this.#testingTo.be.typeOf(actual, expected, expectationFailOutput);
+  return this;
+}
+```
+
+Example expectation method with `spy` param.
+
+```typescript
+public toHaveBeenCalled<T extends jasmine.Func>(
+  spy: ExpectType<T>,
+  expectationFailOutput?: any
+): this {
+  this.#testingTo.have.been.called.called(spy, expectationFailOutput);
+  return this;
+}
+```
 
 Jasmine matchers in use.
 
@@ -892,6 +925,35 @@ Method
 
 `it` methods are directly accessed by using method names instead of nested structure, but using it.
 Standalone tests are designed to mixin them in `TestingCustom` class.
+
+Example `it` method with `actual` param.
+
+```typescript
+public toEqual<T>(
+  actual: ExpectType<T>,
+  expected: jasmine.Expected<typeof actual>,
+  expectation?: string,
+  expectationFailOutput?: any,
+  execute?: boolean,
+): this {
+  this.to.equal(actual, expected, expectation, expectationFailOutput, execute);
+  return this;
+}
+```
+
+Example `it` method with `spy` param.
+
+```typescript
+public toHaveBeenCalled<T extends jasmine.Func>(
+  spy: () => ExpectType<T> | ExpectType<T>[],
+  expectation?: string,
+  expectationFailOutput?: any,
+  execute?: boolean,
+): this {
+  this.toHave.been.called.called(spy, expectation, expectationFailOutput, execute);
+  return this;
+}
+```
 
 ### `TestingToBeArrayOf`
 
