@@ -1,3 +1,4 @@
+export { AllowItNumber } from "./allow-it-number.type";
 export { ArrayToObject } from './array-to-object.type';
 export { CounterConfig } from './counter-config.type';
 export { ExpectType } from './expect-type.type';

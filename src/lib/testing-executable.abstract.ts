@@ -1,9 +1,9 @@
 // @angular-package/type.
-import { guard, is } from '@angular-package/type';
+import { is } from '@angular-package/type';
 // Class.
 import { TestingCounter } from './testing-counter.abstract';
 // Type.
-import { CounterConfig } from '../type/counter-config.type';
+import { AllowItNumber, CounterConfig } from '../type';
 /**
  * Initialize executable storage.
  * @class
@@ -46,14 +46,12 @@ export abstract class TestingExecutable<
    */
   constructor(
     allow?: boolean,
-    executable?: Array<number>,
+    executable?: AllowItNumber,
     counter: CounterConfig<CounterActive, CounterDescription> = [true, false] as any
   ) {
     super(...(typeof counter === 'boolean' ? [counter, counter] : counter) as any);
     this.#allow = is.boolean(allow) ? allow : this.#allow;
-    is.defined(executable)
-      && guard.array(executable)
-      && (this.#executable = new Set(executable));
+    is.defined(executable) && (this.#executable = new Set(!Array.isArray(executable) ? [executable] : executable));
   }
 
   /**
