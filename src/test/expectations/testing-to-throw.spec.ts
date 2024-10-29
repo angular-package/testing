@@ -1,5 +1,7 @@
+// Class.
 import { Testing, TestingExpectToThrow } from "../../lib";
-import { Execute } from "../execute";
+// Execute.
+import { ExecuteSpec } from "../execute";
 
 const execute = true;
 const executeDescribe = true;
@@ -7,8 +9,8 @@ const executeIt = true;
 
 if (execute) {
   const t = new Testing(
-    executeDescribe || Execute.describe.expectation["testing-to-throw"],
-    executeIt || Execute.it.expectation["testing-to-throw"]
+    executeDescribe || ExecuteSpec.describe.expectation["testing-to-throw"],
+    executeIt || ExecuteSpec.it.expectation["testing-to-throw"]
   );
   const e = new TestingExpectToThrow();
   
