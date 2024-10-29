@@ -112,6 +112,8 @@ npm i --save @angular-package/testing
  * Main.
  */
 export {
+  Random,
+
   Testing, // Main class with all testings.
   TestingActual, // Initialize testing for `actual`.
   TestingCustom, // Class to pass custom testings.
@@ -266,7 +268,7 @@ t.describe(`Describe`, () => {
 
 ### `TestingCustom`
 
-Use `TestingCustom` class for custom testing.
+Use `TestingCustom` class for custom testing. Access to the included tests are through the `testing` getter.
 
 ```typescript
 import {
@@ -278,7 +280,10 @@ import {
 } from "@angular-package/testing";
 
 const t = new TestingCustom(
-  [TestingToBe], // List of test.
+  // List of test to use.
+  [
+    TestingToBe
+  ],
   true, // Describe executable.
   true, // It executable.
   { describe: [], it: [] }, // Executable numbers of `describe` and `it`.
@@ -288,6 +293,14 @@ const t = new TestingCustom(
   new TestingDescribe(), // Common instance for `TestingDescribe` for `counter` purposes
   new TestingIt(),  // Common instance for `TestingIt` for `counter` purposes
   new TestingExpectation() // Common instance for `TestingExpectation`
+);
+
+t.describe(
+  `DescribeA`,
+  () => t.testing // testing getter
+    .beforeEach(() => {})
+    .toBeDate(new Date())
+    .toBeUndefined(undefined)
 );
 ```
 
