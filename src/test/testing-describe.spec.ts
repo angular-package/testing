@@ -1,7 +1,7 @@
 import { TestingDescribe } from "../lib";
-import { Execute } from "./execute";
+import { ExecuteSpec } from "./execute";
 
-const execute = true;
+const execute = false;
 
 if (execute) {
   const range = (start: number, stop: number, step: number = 1) =>
@@ -11,7 +11,7 @@ if (execute) {
     );
   
   const t = new TestingDescribe<'DescribeA' | 'FDescribe' | 'XDescribe'>(
-    execute || Execute.describe["testing-describe"]
+    execute || ExecuteSpec.describe["testing-describe"]
   );
   
   console.log(t.counterActive); // true

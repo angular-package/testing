@@ -1,17 +1,17 @@
 import { Testing } from "../lib";
 
 import { TestingExpectToBe } from '../lib/expectation/testing-expect-to-be.class';
-import { Execute } from "./execute";
+import { ExecuteSpec } from "./execute";
 
-const execute = true;
+const execute = false;
 const executeDescribe = true;
 const executeIt = true;
 
 if (execute) {
   const e = new TestingExpectToBe();
   const t = new Testing(
-    executeDescribe || Execute.describe["testing-before-each"], 
-    executeIt || Execute.it["testing-before-each"]
+    executeDescribe || ExecuteSpec.describe["testing-before-each"], 
+    executeIt || ExecuteSpec.it["testing-before-each"]
   );
 
   let arr: any[];

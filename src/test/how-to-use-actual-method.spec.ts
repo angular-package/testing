@@ -1,17 +1,17 @@
 // Constants.
-import { Execute } from './execute';
+import { ExecuteSpec } from './execute';
 
 // Class.
 import { Testing } from '../lib';
 
-const execute = true;
+const execute = false;
 const executeDescribe = true;
 const executeIt = true;
 
 if (execute) {
   const t = new Testing(
-    executeDescribe || Execute.describe['how-to-actual-method'],
-    executeIt || Execute.it['how-to-actual-method']
+    executeDescribe || ExecuteSpec.describe['how-to-actual-method'],
+    executeIt || ExecuteSpec.it['how-to-actual-method']
   );
   
   const Calculator = {

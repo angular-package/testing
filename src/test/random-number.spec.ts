@@ -3,19 +3,19 @@ import { randomNumber } from '../lib/function/random-number.func';
 // Class.
 import { Testing } from '../lib/testing.class';
 // Constant.
-import { Execute } from './execute';
+import { ExecuteSpec } from './execute';
 /**
  * Initialize testing.
  */
 
-const execute = true;
+const execute = false;
 const executeDescribe = true;
 const executeIt = true;
 
 if (execute ) {
   const t = new Testing(
-    executeDescribe || Execute.describe['random-number'],
-    executeIt || Execute.it['random-number']
+    executeDescribe || ExecuteSpec.describe['random-number'],
+    executeIt || ExecuteSpec.it['random-number']
   );
   /**
    * Execute.

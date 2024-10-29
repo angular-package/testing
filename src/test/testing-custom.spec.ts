@@ -1,5 +1,5 @@
 // TestingCustom
-import { TestingDescribe, TestingIt } from "../lib";
+import { TestingDescribe, TestingExpectation, TestingIt } from "../lib";
 import { TestingCustom } from "../lib/testing-custom.class";
 
 // Selected.
@@ -15,9 +15,9 @@ import { TestingToBeString } from "../lib/testing/testing-to-be-string.class";
 import { TestingToHave } from "../lib/testing/testing-to-have.class";
 
 // Execute.
-import { Execute } from "./execute";
+import { ExecuteSpec } from "./execute";
 
-const execute = true;
+const execute = false;
 const executeDescribe = true;
 const executeIt = true;
 
@@ -30,8 +30,9 @@ if (execute) {
     ['DescribeA'], // Descriptions for `describe`.
     ['ItA'], // Expectations for `it`.
     [false, false], // `boolean` or list of [`boolean`, `boolean`]
-    new TestingDescribe(), // Instance for `TestingDescribe` for `counter` purposes
-    new TestingIt()  // Instance for `TestingIt` for `counter` purposes
+    new TestingDescribe(), // Common instance for `TestingDescribe` for `counter` purposes
+    new TestingIt(),  // Common instance for `TestingIt` for `counter` purposes
+    new TestingExpectation() // Common instance for `TestingExpectation`
   );
   const t = new TestingCustom(
     [
@@ -46,8 +47,8 @@ if (execute) {
       TestingToBe,
       TestingToHave,
     ],
-    executeDescribe || Execute.describe["testing-custom"],
-    executeIt || Execute.it["testing-custom"],
+    executeDescribe || ExecuteSpec.describe["testing-custom"],
+    executeIt || ExecuteSpec.it["testing-custom"],
     undefined,
     ['describeA', 'describeB'],
     ['itA', 'itB'],

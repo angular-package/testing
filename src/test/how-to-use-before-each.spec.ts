@@ -1,17 +1,17 @@
 // Constant.
-import { Execute } from "./execute";
+import { ExecuteSpec } from "./execute";
 
 // Class.
 import { Testing } from "../lib";
 
-const execute = true;
+const execute = false;
 const executeDescribe = true;
 const executeIt = true;
 
 if (execute) {
   const t = new Testing(
-    executeDescribe || Execute.describe["how-to-before-each"],
-    executeIt || Execute.it["how-to-before-each"]
+    executeDescribe || ExecuteSpec.describe["how-to-before-each"],
+    executeIt || ExecuteSpec.it["how-to-before-each"]
   );
 
   let arr: any[];

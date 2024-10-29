@@ -2,11 +2,11 @@
 import { randomString } from '../lib/function/random-string.func';
 // Class.
 import { Testing } from '../lib/testing.class';
-import { Execute } from './execute';
+import { ExecuteSpec } from './execute';
 
 import { TestingExpectToBe } from '../lib/expectation/testing-expect-to-be.class';
 
-const execute = true;
+const execute = false;
 const executeDescribe = true;
 const executeIt = true;
 
@@ -15,8 +15,8 @@ if (execute) {
    * Initialize testing.
    */
   const t = new Testing(
-    executeDescribe || Execute.describe['random-string'],
-    executeIt || Execute.it['random-string']
+    executeDescribe || ExecuteSpec.describe['random-string'],
+    executeIt || ExecuteSpec.it['random-string']
   );
   // const toBe = new TestingToBeMatchers();
   /**

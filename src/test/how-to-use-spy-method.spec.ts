@@ -2,16 +2,16 @@
 import { Testing } from '../lib';
 
 // Constants.
-import { Execute } from './execute';
+import { ExecuteSpec } from './execute';
 
-const execute = true;
+const execute = false;
 const executeDescribe = true;
 const executeIt = true;
 
 if (execute) {
   const t = new Testing(
-    executeDescribe || Execute.describe['how-to-spy-method'],
-    executeIt || Execute.it['how-to-spy-method']
+    executeDescribe || ExecuteSpec.describe['how-to-spy-method'],
+    executeIt || ExecuteSpec.it['how-to-spy-method']
   );
   const Calculator = {
     currentVal:0,
