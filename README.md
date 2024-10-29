@@ -16,7 +16,7 @@ The angular-package supports the development process of [angular](https://angula
 
 @angular-package/testing
 
-Wrapper to Jasmine unit testing.
+Jasmine unit testing wrapper with additional custom testing features.
 
 [![Gitter][gitter-badge]][gitter-chat]
 [![Discord][discord-badge]][discord-channel]
@@ -40,6 +40,9 @@ Wrapper to Jasmine unit testing.
 * [Skeleton](#skeleton)
 * [Installation](#installation)
 * [Api](#api)
+* [Usage](#usage)
+* [Jasmine](#jasmine)
+
 * [Changelog](#changelog)
 * [Git](#git)
   * [Commit](#commit)
@@ -181,6 +184,72 @@ import {
   TestingPersonShape
 } from '@angular-package/testing';
 ```
+
+<br>
+
+## Usage
+
+Use `Testing` class for testing.
+
+```typescript
+import { Testing } from "@angular-package/testing";
+
+
+```
+
+Use `TestingCustom` class for custom testing.
+
+```typescript
+import { TestingDescribe, TestingCustom, TestingIt, TestingToBe } from "@angular-package/testing";
+
+const t = new TestingCustom(
+  [TestingToBe], // List of test.
+  true, // Describe executable.
+  true, // It executable.
+  { describe: [], it: [] }, // Executable numbers of `describe` and `it`.
+  ['DescribeA'], // Descriptions for `describe`.
+  ['ItA'], // Expectations for `it`.
+  [false, false], // `boolean` or list of [`boolean`, `boolean`]
+  new TestingDescribe(), // Instance for `TestingDescribe` for `counter` purposes
+  new TestingIt()  // Instance for `TestingIt` for `counter` purposes
+);
+```
+
+<br>
+
+## Jasmine matchers
+
+- [x] toBe()
+- [x] toBeCloseTo()
+- [x] toBeDefined()
+- [x] toBeFalse()
+- [x] toBeFalsy()
+- [x] toBeGreaterThan()
+- [x] toBeGreaterThanOrEqual()
+- [x] toBeInstanceOf()
+- [x] toBeLessThan()
+- [x] toBeLessThanOrEqual()
+- [x] toBeNaN()
+- [x] toBeNegativeInfinity()
+- [x] toBeNull()
+- [x] toBePositiveInfinity()
+- [x] toBeTrue()
+- [x] toBeTruthy()
+- [x] toBeUndefined()
+- [x] toContain()
+- [x] toEqual()
+- [x] toHaveBeenCalled()
+- [x] toHaveBeenCalledBefore()
+- [x] toHaveBeenCalledOnceWith()
+- [x] toHaveBeenCalledTimes()
+- [x] toHaveBeenCalledWith()
+- [x] toHaveClass()
+- [x] toHaveSize()
+- [x] toHaveSpyInteractions()
+- [x] toMatch()
+- [x] toThrow()
+- [x] toThrowError()
+- [x] toThrowMatching()
 
 <br>
 
