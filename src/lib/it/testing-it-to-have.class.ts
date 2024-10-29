@@ -82,14 +82,13 @@ export class TestingItToHave<
   }
   public spyInteractions<T>(
     actual: ExpectType<T>,
-    expected: jasmine.Expected<typeof actual>,
     expectation: string = TextualExpectation.toHaveSpyInteractions,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.have.spyInteractions(actual, expected, expectationFailOutput),
+      () => super.expect.to.have.spyInteractions(actual, expectationFailOutput),
       execute
     );
     return this;
