@@ -42,7 +42,8 @@ Jasmine unit testing wrapper with additional custom testing features.
 * [Api](#api)
 * [Usage](#usage)
 * [Features](#features)
-  * [Matchers](#jasmine-matchers)
+  * [Expectations](#expectations)
+  * [It](#it)
 * [Changelog](#changelog)
 * [Git](#git)
   * [Commit](#commit)
@@ -278,8 +279,10 @@ const t = new TestingCustom(
 Expectation is a method built from `expect()` and `jasmine` matcher.
 
 ```typescript
-expect().matcher()
+expect(expect).matcher(expected)
 ```
+
+Desc
 
 Jasmine matchers in use.
 
@@ -364,7 +367,6 @@ Object
 - [x] toBeObjectKeysIn()
 - [x] toBeObjectSomeKeys()
 
-
 String
 
 - [x] toBeString()
@@ -380,7 +382,7 @@ Other
 - [x] toBeSymbol()
 - [x] toBeTypeOf()
 
-Matchers that are using `are` of `@angular-package/type`.
+Expectations based on the `are` of `@angular-package/type` and `toBe()` matcher of `jasmine`.
 
 - [x] toBeArrayOfBigInt()
 - [x] toBeArrayOfBoolean()
@@ -394,6 +396,115 @@ Matchers that are using `are` of `@angular-package/type`.
 - [x] toBeArrayOfSymbol()
 - [x] toBeArrayOfTrue()
 - [x] toBeArrayOfUndefined()
+
+### It
+
+Prepared specs `it` of `jasmine`. Spec is a method built from `it` with expectation - `expect()` and `jasmine` matcher.
+
+```typescript
+it(description, () => expect(expect).matcher(expected))
+```
+
+### `TestingItTo`
+
+It under specific getter
+
+- [x] `get be(): TestingItToBe`
+- [x] `get have(): TestingItToHave`
+- [x] `get throw(): TestingItToThrow`
+
+Method
+
+- [x] `contain()`
+- [x] `equal()`
+- [x] `match()`
+
+### `TestingItToBe`
+
+It under specific getter
+
+- [x] `get arrayof(): TestingItToBeArrayOf`
+- [x] `get boolean(): TestingItToBeBoolean`
+- [x] `get instanceof(): TestingItToBeInstanceOf`
+
+Method
+
+- [x] `be()`
+- [x] `array()`
+- [x] `bigInt()`
+- [x] `class()`
+- [x] `closeTo()`
+- [x] `date()`
+- [x] `defined()`
+- [x] `false()`
+- [x] `falsy()`
+- [x] `function()`
+- [x] `greaterThan()`
+- [x] `greaterThanOrEqual()`
+- [x] `instance()`
+- [x] `instanceOf()`
+- [x] `key()`
+- [x] `lessThan()`
+- [x] `lessThanOrEqual()`
+- [x] `naN()`
+- [x] `negativeInfinity()`
+- [x] `null()`
+- [x] `number()`
+- [x] `numberBetween()`
+- [x] `numberType()`
+- [x] `object()`
+- [x] `objectKey()`
+- [x] `objectKeyIn()`
+- [x] `objectKeys()`
+- [x] `objectKeysIn()`
+- [x] `objectSomeKeys()`
+- [x] `positiveInfinity()`
+- [x] `regExp()`
+- [x] `pending()`
+- [x] `rejected()`
+- [x] `rejectedWith()`
+- [x] `rejectedWithError()`
+- [x] `resolved()`
+- [x] `resolvedTo()`
+- [x] `string()`
+- [x] `stringIncludes()`
+- [x] `stringIncludesSome()`
+- [x] `stringOfLength()`
+- [x] `stringOfLengthBetween()`
+- [x] `stringType()`
+- [x] `symbol()`
+- [x] `true()`
+- [x] `truthy()`
+- [x] `undefined()`
+
+### `TestingItToBeArrayOf`
+
+Method
+
+- [x] `bigint()`
+- [x] `boolean()`
+- [x] `date()`
+- [x] `defined()`
+- [x] `false()`
+- [x] `null()`
+- [x] `number()`
+- [x] `regExp()`
+- [x] `string()`
+- [x] `symbol()`
+- [x] `true()`
+- [x] `undefined()`
+
+### `TestingItToBeBoolean`
+
+### `TestingItToBeInstanceOf`
+
+### `TestingItToHave`
+
+### `TestingItToHaveBeen`
+
+### `TestingItToHaveBeenCalled`
+
+### `TestingItToThrow`
 
 <br>
 
