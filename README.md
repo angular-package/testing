@@ -294,116 +294,116 @@ import { TestingExpectation } from "@angular-package/testing";
 
 Jasmine matchers in use.
 
-- [x] toBe()
-- [x] toBeCloseTo()
-- [x] toBeDefined()
-- [x] toBeFalse()
-- [x] toBeFalsy()
-- [x] toBeGreaterThan()
-- [x] toBeGreaterThanOrEqual()
-- [x] toBeInstanceOf()
-- [x] toBeLessThan()
-- [x] toBeLessThanOrEqual()
-- [x] toBeNaN()
-- [x] toBeNegativeInfinity()
-- [x] toBeNull()
-- [x] toBePositiveInfinity()
-- [x] toBeTrue()
-- [x] toBeTruthy()
-- [x] toBeUndefined()
-- [x] toContain()
-- [x] toEqual()
-- [x] toHaveBeenCalled()
-- [x] toHaveBeenCalledBefore()
-- [x] toHaveBeenCalledOnceWith()
-- [x] toHaveBeenCalledTimes()
-- [x] toHaveBeenCalledWith()
-- [x] toHaveClass()
-- [x] toHaveSize()
-- [x] toHaveSpyInteractions()
-- [x] toMatch()
-- [x] toThrow()
-- [x] toThrowError()
-- [x] toThrowMatching()
+- [x] `toBe()`
+- [x] `toBeCloseTo()`
+- [x] `toBeDefined()`
+- [x] `toBeFalse()`
+- [x] `toBeFalsy()`
+- [x] `toBeGreaterThan()`
+- [x] `toBeGreaterThanOrEqual()`
+- [x] `toBeInstanceOf()`
+- [x] `toBeLessThan()`
+- [x] `toBeLessThanOrEqual()`
+- [x] `toBeNaN()`
+- [x] `toBeNegativeInfinity()`
+- [x] `toBeNull()`
+- [x] `toBePositiveInfinity()`
+- [x] `toBeTrue()`
+- [x] `toBeTruthy()`
+- [x] `toBeUndefined()`
+- [x] `toContain()`
+- [x] `toEqual()`
+- [x] `toHaveBeenCalled()`
+- [x] `toHaveBeenCalledBefore()`
+- [x] `toHaveBeenCalledOnceWith()`
+- [x] `toHaveBeenCalledTimes()`
+- [x] `toHaveBeenCalledWith()`
+- [x] `toHaveClass()`
+- [x] `toHaveSize()`
+- [x] `toHaveSpyInteractions()`
+- [x] `toMatch()`
+- [x] `toThrow()`
+- [x] `toThrowError()`
+- [x] `toThrowMatching()`
 
 Expectations based on the `instanceOf` matcher of `jasmine`.
 
-- [x] toBeInstanceOfArray()
-- [x] toBeInstanceOfBoolean()
-- [x] toBeInstanceOfDate()
-- [x] toBeInstanceOfError()
-- [x] toBeInstanceOfFunction()
-- [x] toBeInstanceOfMap()
-- [x] toBeInstanceOfNumber()
-- [x] toBeInstanceOfObject()
-- [x] toBeInstanceOfPromise()
-- [x] toBeInstanceOfRangeError()
-- [x] toBeInstanceOfReferenceError()
-- [x] toBeInstanceOfRegExp()
-- [x] toBeInstanceOfSet()
-- [ ] toBeInstanceOfStorage()
-- [x] toBeInstanceOfString()
-- [x] toBeInstanceOfSyntaxError()
-- [x] toBeInstanceOfTypeError()
-- [x] toBeInstanceOfURIError()
-- [x] toBeInstanceOfWeakSet()
+- [x] `toBeInstanceOfArray()`
+- [x] `toBeInstanceOfBoolean()`
+- [x] `toBeInstanceOfDate()`
+- [x] `toBeInstanceOfError()`
+- [x] `toBeInstanceOfFunction()`
+- [x] `toBeInstanceOfMap()`
+- [x] `toBeInstanceOfNumber()`
+- [x] `toBeInstanceOfObject()`
+- [x] `toBeInstanceOfPromise()`
+- [x] `toBeInstanceOfRangeError()`
+- [x] `toBeInstanceOfReferenceError()`
+- [x] `toBeInstanceOfRegExp()`
+- [x] `toBeInstanceOfSet()`
+- [ ] `toBeInstanceOfStorage()`
+- [x] `toBeInstanceOfString()`
+- [x] `toBeInstanceOfSyntaxError()`
+- [x] `toBeInstanceOfTypeError()`
+- [x] `toBeInstanceOfURIError()`
+- [x] `toBeInstanceOfWeakSet()`
 
 Expectations based on the `is` of `@angular-package/type` and `toBe()` matcher of `jasmine`.
 
-- [x] toBeArray()
-- [x] toBeBigInt()
-- [x] toBeBoolean()
-- [x] toBeBooleanType()
-- [x] toBeClass()
-- [x] toBeDate()
-- [x] toBeFunction()
-- [x] toBeInstance()
-- [x] toBeKey()
+- [x] `toBeArray()`
+- [x] `toBeBigInt()`
+- [x] `toBeBoolean()`
+- [x] `toBeBooleanType()`
+- [x] `toBeClass()`
+- [x] `toBeDate()`
+- [x] `toBeFunction()`
+- [x] `toBeInstance()`
+- [x] `toBeKey()`
 
 Number
 
-- [x] toBeNumber()
-- [x] toBeNumberBetween()
-- [x] toBeNumberType()
+- [x] `toBeNumber()`
+- [x] `toBeNumberBetween()`
+- [x] `toBeNumberType()`
 
 Object
 
-- [x] toBeObject()
-- [x] toBeObjectKey()
-- [x] toBeObjectKeyIn()
-- [x] toBeObjectKeys()
-- [x] toBeObjectKeysIn()
-- [x] toBeObjectSomeKeys()
+- [x] `toBeObject()`
+- [x] `toBeObjectKey()`
+- [x] `toBeObjectKeyIn()`
+- [x] `toBeObjectKeys()`
+- [x] `toBeObjectKeysIn()`
+- [x] `toBeObjectSomeKeys()`
 
 String
 
-- [x] toBeString()
-- [x] toBeStringIncludes()
-- [x] toBeStringIncludesSome()
-- [x] toBeStringOfLength()
-- [x] toBeStringOfLengthBetween()
-- [x] toBeStringType()
+- [x] `toBeString()`
+- [x] `toBeStringIncludes()`
+- [x] `toBeStringIncludesSome()`
+- [x] `toBeStringOfLength()`
+- [x] `toBeStringOfLengthBetween()`
+- [x] `toBeStringType()`
 
 Other
 
-- [x] toBeRegExp()
-- [x] toBeSymbol()
-- [x] toBeTypeOf()
+- [x] `toBeRegExp()`
+- [x] `toBeSymbol()`
+- [x] `toBeTypeOf()`
 
 Expectations based on the `are` of `@angular-package/type` and `toBe()` matcher of `jasmine`.
 
-- [x] toBeArrayOfBigInt()
-- [x] toBeArrayOfBoolean()
-- [x] toBeArrayOfDate()
-- [x] toBeArrayOfDefined()
-- [x] toBeArrayOfFalse()
-- [x] toBeArrayOfNull()
-- [x] toBeArrayOfNumber()
-- [x] toBeArrayOfRegExp()
-- [x] toBeArrayOfString()
-- [x] toBeArrayOfSymbol()
-- [x] toBeArrayOfTrue()
-- [x] toBeArrayOfUndefined()
+- [x] `toBeArrayOfBigInt()`
+- [x] `toBeArrayOfBoolean()`
+- [x] `toBeArrayOfDate()`
+- [x] `toBeArrayOfDefined()`
+- [x] `toBeArrayOfFalse()`
+- [x] `toBeArrayOfNull()`
+- [x] `toBeArrayOfNumber()`
+- [x] `toBeArrayOfRegExp()`
+- [x] `toBeArrayOfString()`
+- [x] `toBeArrayOfSymbol()`
+- [x] `toBeArrayOfTrue()`
+- [x] `toBeArrayOfUndefined()`
 
 ### It
 
@@ -806,7 +806,7 @@ Method
 
 ### Standalone
 
-It methods directly accessed by using method names instead of nested structure, but using it.
+`it` methods directly accessed by using method names instead of nested structure, but using it.
 
 <br>
 
