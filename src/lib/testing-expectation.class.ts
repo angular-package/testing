@@ -41,6 +41,8 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.be(actual, expected, expectationFailOutput);
     return this;
   }
+
+  //#region toBeArray
   public toBeArray<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
@@ -145,6 +147,7 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.arrayof.undefined(actual, expected, expectationFailOutput);
     return this;
   }
+  //#endregion
   public toBeBigInt<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
@@ -153,6 +156,7 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.bigint(actual, expected, expectationFailOutput);
     return this;
   }
+  //#region toBeBoolean
   public toBeBoolean<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
@@ -186,7 +190,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.closeTo(actual, expected, precision, expectationFailOutput);
     return this;
   }
-
   public toBeDate<T>(
     actual: ExpectType<T>,
     expected: any,
@@ -195,7 +198,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.date(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeDefined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
@@ -204,7 +206,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.defined(actual, expected, expectationFailOutput);
     return this;
   }
-
   //#region false boolean
   public toBeFalse<T>(
     actual: ExpectType<T>,
@@ -223,7 +224,6 @@ export class TestingExpectation extends Expect {
     return this;
   }
   //#endregion
-
   public toBeFunction<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean>,
@@ -232,7 +232,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.function(actual, expected, expectationFailOutput);
     return this;
   }
-
   //#region toBeGreaterThan
   public toBeGreaterThan<T extends number>(
     actual: ExpectType<T>,
@@ -251,7 +250,6 @@ export class TestingExpectation extends Expect {
     return this;
   }
   //#endregion
-
   public toBeInstance<T, Type>(
     actual: ExpectType<T>,
     constructor: Constructor<Type>,
@@ -477,7 +475,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.null(actual, expected, expectationFailOutput);
     return this;
   }
-
   //#region toBeNumber
   public toBeNumber<T>(
     actual: ExpectType<T>,
@@ -506,7 +503,6 @@ export class TestingExpectation extends Expect {
     return this;
   }
   //#endregion
-
   //#region toBeObject
   public toBeObject<T>(
     actual: ExpectType<T>,
@@ -562,7 +558,6 @@ export class TestingExpectation extends Expect {
     return this;
   }
   //#endregion
-
   public toBePending<T>(
     actual: T | PromiseLike<T>,
     expectationFailOutput?: any
@@ -612,7 +607,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.rejectedWithError(actual, expected, message, expectationFailOutput);
     return this;
   }
-
   //#region toBeResolved
   public toBeResolved<T>(
     actual: T | PromiseLike<T>,
@@ -629,7 +623,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.resolvedTo(actual, expected, expectationFailOutput);
     return this;
   }
-
   //#region toBeString
   public toBeString<T>(
     actual: ExpectType<T>,
@@ -685,7 +678,6 @@ export class TestingExpectation extends Expect {
     return this;
   }
   //#endregion
-
   public toBeSymbol<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
@@ -694,7 +686,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.symbol(actual, expected, expectationFailOutput);
     return this;
   }
-
   //#region true boolean
   public toBeTrue<T>(
     actual: ExpectType<T>,
@@ -704,7 +695,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.be.true(actual, expected, expectationFailOutput);
     return this;
   }
-
   public toBeTruthy<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
@@ -714,7 +704,6 @@ export class TestingExpectation extends Expect {
     return this;
   }
   //#endregion
-
   public toBeTypeOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<string>,
@@ -747,7 +736,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.equal(actual, expected, expectationFailOutput);
     return this;
   }
-
   //#region toHaveBeenCalled
   public toHaveBeenCalled<T extends jasmine.Func>(
     spy: ExpectType<T>,
@@ -787,7 +775,6 @@ export class TestingExpectation extends Expect {
     return this;
   }
   //#endregion
-
   //#region toHave
   public toHaveClass<T>(
     actual: ExpectType<T>,
@@ -814,7 +801,6 @@ export class TestingExpectation extends Expect {
     return this;
   }
   //#endregion
-
   public toMatch<T>(
     actual: ExpectType<T>,
     expected: string | RegExp,
@@ -823,7 +809,6 @@ export class TestingExpectation extends Expect {
     this.#testingTo.match(actual, expected, expectationFailOutput);
     return this;
   }
-
   //#region toThrow
   public toThrow<T>(
     actual: ExpectType<T>,
