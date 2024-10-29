@@ -42,7 +42,7 @@ Jasmine unit testing wrapper with additional custom testing features.
 * [Api](#api)
 * [Usage](#usage)
 * [Jasmine](#jasmine)
-  *[Matchers](#jasmine-matchers)
+  * [Matchers](#jasmine-matchers)
 * [Changelog](#changelog)
 * [Git](#git)
   * [Commit](#commit)
@@ -103,20 +103,74 @@ npm i --save @angular-package/testing
 ## Api
 
 ```typescript
-// Main.
-import {
+/**
+ * Main.
+ */
+export {
   // Class.
   Testing,
-  TestingToBeMatchers,
-} from '@angular-package/testing';
-```
+  TestingActual,
 
-```typescript
-// Helper functions.
-import {
-  // Function.
-  randomNumber,
-  randomString,
+  // Class to handle `describe`, `it`, `expect` of jasmine.
+  TestingCore,
+
+  // Class to customize testing.
+  TestingCustom,
+
+  // Class to handle `describe()` function of jasmine.
+  TestingDescribe,
+
+  // Class to handle `expect()` function of jasmine.
+  TestingExpect,
+
+  // Abstract class to handle executable tests.
+  TestingExecutable,
+
+  // Full named expectations. Methods with `expect()` + jasmine matchers.
+  TestingExpectation,
+
+  // Class to handle `it()` function of jasmine.
+  TestingIt,
+} from '@angular-package/testing';
+
+// Specific expectations.
+export {
+  TestingExpectTo,
+  TestingExpectToBe,
+  TestingExpectToBeArrayOf,
+  TestingExpectToBeInstanceOf,
+  TestingExpectToHave,
+  TestingExpectToHaveBeen,
+  TestingExpectToHaveBeenCalled,
+  TestingExpectToThrow,
+} from '@angular-package/testing';
+
+// Methods with `it()` function of jasmine.
+export {
+  TestingItTo,
+  TestingItToBe,
+  TestingItToBeArrayOf,
+  TestingItToBeInstanceOf,
+  TestingItToHave,
+  TestingItToHaveBeen,
+  TestingItToHaveBeenCalled,
+  TestingItToThrow,
+} from '@angular-package/testing';
+
+// Testing for customization.
+export {
+  TestingTo,
+  TestingToBe,
+  TestingToBeArrayOf,
+  TestingToBeBoolean,
+  TestingToBeGreaterThan,
+  TestingToBeInstanceOf,
+  TestingToBeLessThan,
+  TestingToBeNumber,
+  TestingToBeObject,
+  TestingToBeString,
+  TestingToHave,
+  TestingToThrow,
 } from '@angular-package/testing';
 ```
 
