@@ -31,7 +31,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`date\``
   ): this {
-    are.bigint(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.bigint(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -49,7 +51,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`boolean\``
   ): this {
-    are.boolean(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.boolean(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -67,7 +71,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`date\``
   ): this {
-    are.date(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.date(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -85,7 +91,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of defined`
   ): this {
-    are.defined(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.defined(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -103,7 +111,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`number\``
   ): this {
-    are.number(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.number(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -121,7 +131,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`null\``
   ): this {
-    are.null(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.null(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -139,7 +151,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`false\``
   ): this {
-    are.false(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.false(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -157,7 +171,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`regexp\``
   ): this {
-    are.regexp(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.regexp(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -175,7 +191,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`string\``
   ): this {
-    are.string(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.string(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -193,7 +211,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`symbol\``
   ): this {
-    are.symbol(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.symbol(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -211,7 +231,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`true\``
   ): this {
-    are.true(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.true(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
@@ -229,7 +251,9 @@ export class TestingExpectToBeArrayOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an \`array\` of \`undefined\``
   ): this {
-    are.undefined(...actual as any).every(result => this.toBe(expected, result, expectationFailOutput));
+    are.undefined(...actual as any).every(
+      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+    );
     return this;
   }
 
