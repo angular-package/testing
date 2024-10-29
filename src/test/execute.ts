@@ -1,5 +1,5 @@
 
-export class Execute {
+export class ExecuteSpec {
   static #describe = false;
   static #it = false;
 
