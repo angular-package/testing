@@ -55,12 +55,11 @@ export class TestingExpectToHave extends Expect {
   }
   public spyInteractions<T>(
     actual: ExpectType<T>,
-    expected: jasmine.Expected<typeof actual>,
     expectationFailOutput?: any
   ): this {
     this
       .expect(actual, expectationFailOutput)
-      .toEqual(expected);
+      .toHaveSpyInteractions();
     this.setNot(false);
     return this;
   }
