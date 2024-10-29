@@ -745,8 +745,15 @@ t.describe(`TestingItToBeInstanceOf`, () => t
 
 ### `TestingItToHave`
 
-- [x] `URIError()`
-- [x] `URIError()`
+Nested `It` object under specific getter
+
+- [x] `get been(): TestingItToHaveBeen`
+
+Method
+
+- [x] `class()`
+- [x] `size()`
+- [x] `spyInteractions()`
 
 Example
 
@@ -821,6 +828,159 @@ Method
 ### Standalone
 
 `it` methods directly accessed by using method names instead of nested structure, but using it.
+Standalone tests are designed to mixin them in `TestingCustom` class.
+
+### `TestingToBeArrayOf`
+
+Prepared `it` specs prefixed with `testingToBeArrayOf`.
+
+- [x] `toBeArrayOfBigInt()`
+- [x] `toBeArrayOfDate()`
+- [x] `toBeArrayOfDefined()`
+- [x] `toBeArrayOfFalse()`
+- [x] `toBeArrayOfNull()`
+- [x] `toBeArrayOfRegExp()`
+- [x] `toBeArrayOfString()`
+- [x] `toBeArrayOfSymbol()`
+- [x] `toBeArrayOfTrue()`
+- [x] `toBeArrayOfUndefined()`
+
+### `TestingToBeBoolean`
+
+Prepared `it` specs prefixed with `toBeBoolean`.
+
+- [x] `toBeBoolean()`
+- [x] `toBeBooleanType()`
+
+### `TestingToBeGreaterThan`
+
+Prepared `it` specs prefixed with `toBeGreaterThan`.
+
+- [x] `toBeGreaterThan()`
+- [x] `toBeGreaterThanOrEqual()`
+
+### `TestingToBeInstanceOf`
+
+Prepared `it` specs prefixed with `toBeInstanceOf`.
+
+- [x] `toBeInstanceOfArray()`
+- [x] `toBeInstanceOfBoolean()`
+- [x] `toBeInstanceOfDate()`
+- [x] `toBeInstanceOfError()`
+- [x] `toBeInstanceOfFunction()`
+- [x] `toBeInstanceOfMap()`
+- [x] `toBeInstanceOfNumber()`
+- [x] `toBeInstanceOfObject()`
+- [x] `toBeInstanceOfPromise()`
+- [x] `toBeInstanceOfRangeError()`
+- [x] `toBeInstanceOfReferenceError()`
+- [x] `toBeInstanceOfRegExp()`
+- [x] `toBeInstanceOfSet()`
+- [ ] `toBeInstanceOfStorage()`
+- [x] `toBeInstanceOfString()`
+- [x] `toBeInstanceOfSyntaxError()`
+- [x] `toBeInstanceOfTypeError()`
+- [x] `toBeInstanceOfURIError()`
+- [x] `toBeInstanceOfWeakSet()`
+
+### `TestingToBeLessThan`
+
+Prepared `it` specs prefixed with `toBeLessThan`.
+
+- [x] `toBeLessThan()`
+- [x] `toBeLessThanOrEqual()`
+
+### `TestingToBeNumber`
+
+Prepared `it` specs prefixed with `toBeNumber`.
+
+- [x] `toBeNumber()`
+- [x] `toBeNumberBetween()`
+- [x] `toBeNumberType()`
+
+### `TestingToBeObject`
+
+Prepared `it` specs prefixed with `toBeObject`.
+
+- [x] `toBeObject()`
+- [x] `toBeObjectKey()`
+- [x] `toBeObjectKeyIn()`
+- [x] `toBeObjectKeys()`
+- [x] `toBeObjectKeysIn()`
+- [x] `toBeObjectSomeKeys()`
+
+### `TestingToBeString`
+
+Prepared `it` specs prefixed with `toBeString`.
+
+- [x] `toBeString()`
+- [x] `toBeStringIncludes()`
+- [x] `toBeStringIncludesSome()`
+- [x] `toBeStringOfLength()`
+- [x] `toBeStringOfLengthBetween()`
+- [x] `toBeStringType()`
+
+### `TestingToBe`
+
+Prepared `it` specs prefixed with `toBe`.
+
+- [x] `toBeArray()`
+- [x] `toBeBigInt()`
+- [x] `toBeClass()`
+- [x] `toBeCloseTo()`
+- [x] `toBeDate()`
+- [x] `toBeDefined()`
+- [x] `toBeFalse()`
+- [x] `toBeFalsy()`
+- [x] `toBeFunction()`
+- [x] `toBeInstance()`
+- [x] `toBeInstanceOf()`
+- [x] `toBeKey()`
+- [x] `toBeNaN()`
+- [x] `toBeNegativeInfinity()`
+- [x] `toBeNull()`
+- [x] `toBePending()`
+- [x] `toBePositiveInfinity()`
+- [x] `toBeRegExp()`
+- [x] `toBeRejected()`
+- [x] `toBeRejectedWith()`
+- [x] `toBeRejectedWithError()`
+- [x] `toBeResolved()`
+- [x] `toBeResolvedTo()`
+- [x] `toBeSymbol()`
+- [x] `toBeTrue()`
+- [x] `toBeTruthy()`
+- [x] `toBeUndefined()`
+
+### `TestingToHave`
+
+Prepared `it` specs prefixed with `toHave`.
+
+- [x] `toHaveBeenCalled()`
+- [x] `toHaveBeenCalledBefore()`
+- [x] `toHaveBeenCalledOnceWith()`
+- [x] `toHaveBeenCalledTimes()`
+- [x] `toHaveBeenCalledWith()`
+- [x] `toHaveClass()`
+- [x] `toHaveSize()`
+- [x] `toHaveSpyInteractions()`
+
+### `TestingToThrow`
+
+Prepared `it` specs prefixed with `toThrow`.
+
+- [x] `toThrowError()`
+- [x] `toThrowMatching()`
+
+### `TestingTo`
+
+Prepared `it` specs prefixed with `to`.
+
+- [x] `toBe()`
+- [x] `toContain()`
+- [x] `toEqual()`
+- [x] `toMatch()`
+- [x] `toThrow()`
 
 <br>
 
