@@ -41,7 +41,7 @@ Jasmine unit testing wrapper with additional custom testing features.
 * [Installation](#installation)
 * [Api](#api)
 * [Usage](#usage)
-* [Jasmine](#jasmine)
+* [Features](#features)
   * [Matchers](#jasmine-matchers)
 * [Changelog](#changelog)
 * [Git](#git)
@@ -271,7 +271,7 @@ const t = new TestingCustom(
 
 <br>
 
-## Jasmine
+## Features
 
 ### Jasmine matchers
 
@@ -306,6 +306,86 @@ const t = new TestingCustom(
 - [x] toThrow()
 - [x] toThrowError()
 - [x] toThrowMatching()
+
+### Custom matchers
+
+- [x] toBeInstanceOfArray()
+- [x] toBeInstanceOfBoolean()
+- [x] toBeInstanceOfDate()
+- [x] toBeInstanceOfError()
+- [x] toBeInstanceOfFunction()
+- [x] toBeInstanceOfMap()
+- [x] toBeInstanceOfNumber()
+- [x] toBeInstanceOfObject()
+- [x] toBeInstanceOfPromise()
+- [x] toBeInstanceOfRangeError()
+- [x] toBeInstanceOfReferenceError()
+- [x] toBeInstanceOfRegExp()
+- [x] toBeInstanceOfSet()
+- [ ] toBeInstanceOfStorage()
+- [x] toBeInstanceOfString()
+- [x] toBeInstanceOfSyntaxError()
+- [x] toBeInstanceOfTypeError()
+- [x] toBeInstanceOfURIError()
+- [x] toBeInstanceOfWeakSet()
+
+Matchers that are using `is` of `@angular-package/type`.
+
+- [x] toBeArray()
+- [x] toBeBigInt()
+- [x] toBeBoolean()
+- [x] toBeBooleanType()
+- [x] toBeClass()
+- [x] toBeDate()
+- [x] toBeFunction()
+- [x] toBeInstance()
+- [x] toBeKey()
+
+Number
+
+- [x] toBeNumber()
+- [x] toBeNumberBetween()
+- [x] toBeNumberType()
+
+Object
+
+- [x] toBeObject()
+- [x] toBeObjectKey()
+- [x] toBeObjectKeyIn()
+- [x] toBeObjectKeys()
+- [x] toBeObjectKeysIn()
+- [x] toBeObjectSomeKeys()
+
+
+String
+
+- [x] toBeString()
+- [x] toBeStringIncludes()
+- [x] toBeStringIncludesSome()
+- [x] toBeStringOfLength()
+- [x] toBeStringOfLengthBetween()
+- [x] toBeStringType()
+
+Other
+
+- [x] toBeRegExp()
+- [x] toBeSymbol()
+- [x] toBeTypeOf()
+
+Matchers that are using `are` of `@angular-package/type`.
+
+- [x] toBeArrayOfBigInt()
+- [x] toBeArrayOfBoolean()
+- [x] toBeArrayOfDate()
+- [x] toBeArrayOfDefined()
+- [x] toBeArrayOfFalse()
+- [x] toBeArrayOfNull()
+- [x] toBeArrayOfNumber()
+- [x] toBeArrayOfRegExp()
+- [x] toBeArrayOfString()
+- [x] toBeArrayOfSymbol()
+- [x] toBeArrayOfTrue()
+- [x] toBeArrayOfUndefined()
 
 <br>
 
