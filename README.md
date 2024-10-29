@@ -273,7 +273,15 @@ const t = new TestingCustom(
 
 ## Features
 
-### Jasmine matchers
+### Expectations
+
+Expectation is a method built from `expect()` and `jasmine` matcher.
+
+```typescript
+expect().matcher()
+```
+
+Jasmine matchers in use.
 
 - [x] toBe()
 - [x] toBeCloseTo()
@@ -307,7 +315,7 @@ const t = new TestingCustom(
 - [x] toThrowError()
 - [x] toThrowMatching()
 
-### Custom matchers
+Expectations based on the `instanceOf` matcher of `jasmine`.
 
 - [x] toBeInstanceOfArray()
 - [x] toBeInstanceOfBoolean()
@@ -329,7 +337,7 @@ const t = new TestingCustom(
 - [x] toBeInstanceOfURIError()
 - [x] toBeInstanceOfWeakSet()
 
-Matchers that are using `is` of `@angular-package/type`.
+Expectations based on the `is` of `@angular-package/type` and `toBe()` matcher of `jasmine`.
 
 - [x] toBeArray()
 - [x] toBeBigInt()
