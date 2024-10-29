@@ -1,5 +1,5 @@
 // Example usage.
-import { Testing, TestingExpectToBe } from '../lib';
+import { Testing, TestingCustom, TestingToBe, TestingExpectToBe, TestingDescribe, TestingIt, TestingExpectation } from '../lib';
 // Constant.
 import { TestingClass, TESTING_SYMBOL_NUMBER } from '../lib/constants';
 /**
@@ -7,6 +7,35 @@ import { TestingClass, TESTING_SYMBOL_NUMBER } from '../lib/constants';
  */
 const testing = new Testing();
 const toBe = new TestingExpectToBe();
+
+
+/**
+ * 
+ */
+const t = new TestingCustom(
+  // List of test to use.
+  [
+    TestingToBe
+  ],
+  true, // Describe executable.
+  true, // It executable.
+  { describe: [], it: [] }, // Executable numbers of `describe` and `it`.
+  ['DescribeA'], // Descriptions for `describe`.
+  ['ItA'], // Expectations for `it`.
+  [false, false], // `boolean` or list of [`boolean`, `boolean`]
+  new TestingDescribe(), // Common instance for `TestingDescribe` for `counter` purposes
+  new TestingIt(),  // Common instance for `TestingIt` for `counter` purposes
+  new TestingExpectation() // Common instance for `TestingExpectation`
+);
+
+t.describe(
+  `DescribeA`,
+  () => t.testing
+    .beforeEach(() => {})
+    .toBeDate(new Date())
+    .toBeUndefined(undefined)
+);
+
 /**
  * Tests.
  */
