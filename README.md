@@ -421,7 +421,7 @@ import { TestingItTo } from "@angular-package/testing";
 const t = new TestingItTo();
 
 // `to{Method}`
-t.describe(`TestingItTo`, () => t
+t.describe('TestingItTo', () => t
   .contain(['a', 'b', 'c'], 'b')
   .equal(['27', 37, 47], ['27', 37, 47])
   .match("my string", /string$/)
@@ -429,18 +429,59 @@ t.describe(`TestingItTo`, () => t
 );
 
 // `toBe{Method}`
-t.describe(`TestingItTo.be`, () => t.be
+t.describe('TestingItTo', () => t.be
   .array([27, 37])
   .key(74)
 );
 
+// `toBeArrayOf{Method}`
+t.describe('TestingItTo', () => t.be.arrayof
+  .boolean([false, false])
+  .date([new Date(), new Date()])
+);
+
+// `toBeBoolean{Method}`
+t.describe('TestingItTo', () => t.be.boolean
+  .boolean(false)
+  .type(false)
+);
+
+// `toBeInstanceOf{Method}`
+t.describe('TestingItTo', () => t.be.instanceof
+  .array([27, 37])
+  .map(new Map())
+);
+
 // `toHave{Method}`
-t.describe(`TestingItTo.have`, () => t.have
+t.describe('TestingItTo', () => t.have
   .size([27, 37], 2)
 );
 
+// `toHaveBeenCalled{Method}`
+class ClassA {
+  methodA(value?: any) {
+    return "methodA";
+  }
+  methodB(value?: any) {
+    return "methodB";
+  }
+}
+let classA: ClassA;
+t.describe('TestingItTo', () => t.have.been.called
+  .beforeEach(() => {
+    classA = new ClassA();
+    spyOn(classA, "methodA");
+    classA.methodA();
+    spyOn(classA, "methodB");
+    classA.methodB();
+  })
+  .called(() => classA.methodA)
+  // multiple calls
+  .called(() => [classA.methodA, classA.methodB])
+);
+
 // `toThrow{Method}`
-t.describe(`TestingItTo.throw`, () => t.throw
+t.describe('TestingItTo', () => t.throw
   .error(function() { throw new Error('Error') }, 'Error')
   .matching(function() { throw new Error('nope'); }, function(thrown) { return thrown.message === 'nope'; })
   .throw(function() { throw 'things'; }, 'things')
@@ -463,6 +504,69 @@ Method
 
 ```typescript
 import { TestingItToBe } from "@angular-package/testing";
+
+const t = new TestingItToBe();
+
+t.describe(`TestingItToBe`, () => {
+  t
+    .arrayof
+    .bigint([BigInt(27)])
+
+  t
+    .boolean
+    .boolean([true, false])
+    .type([true, false]);
+
+  t
+    .instanceof
+
+  t
+    .array([27, 37])
+    .bigInt([BigInt(27)])
+    .class(t)
+    .date(new Date())
+    .defined('a')
+    .false(false)
+    .falsy(false)
+    .function(() => {})
+    .greaterThan(37, 27)
+    .greaterThanOrEqual(37, 37)
+    .instance(t, TestingItToBe)
+    .instanceOf(t, TestingItToBe)
+    .key('PropertyKey')
+    .lessThan(37, 47)
+    .lessThanOrEqual(47, 47)
+    .naN(NaN)
+    .negativeInfinity(-Infinity)
+    .null(null)
+    .number(47)
+    .numberBetween(37, 27, 47)
+    .numberType(37)
+    .object({})
+    .objectKey({a: 1}, "a")
+    .objectKeyIn(t, "except")
+
+    .objectKeys({a: 1, b: 2}, ["a", "b"])
+    .objectKeysIn(t, ["except"])
+    // .objectSomeKeys()
+    .pending(new Promise((resolve, reject) => {}))
+
+    .positiveInfinity(Infinity)
+    .regExp(new RegExp(/a/))
+    .rejected(new Promise((resolve, reject) => { reject("a") }))
+    .rejectedWith(new Promise((resolve, reject) => { reject("a")}), "a")
+    .rejectedWithError(new Promise((resolve, reject) => { throw new Error("Error") }), Error, "Error")
+
+    .resolved(new Promise((resolve, reject) => { resolve("a") }))
+    .resolvedTo(new Promise((resolve, reject) => { resolve("a") }), "a")
+
+    .string("a")
+    .stringIncludes("a b c d", ["d"])
+    .stringIncludesSome(" a b  c d ", ["a", "e", "c"])
+    .stringOfLength("a b c d e f g h i j k l m n o p r s", 18)
+    .stringOfLengthBetween("a b c d e f g h i j k l m n o p r s", 17, 18)
+    .stringType("a b c d e f")
+});
 ```
 
 It under specific getter
@@ -526,6 +630,22 @@ Method
 ```typescript
 import { TestingItToBeArrayOf } from "@angular-package/testing";
 
+const t = new TestingItToBeArrayOf();
+
+t.describe(`TestingItToBeArrayOf`, () => t
+  .bigint([BigInt(27), BigInt(37), BigInt(47)])
+  .boolean([false, true, false, false, true])
+  .date([new Date(), new Date(), new Date(), new Date()])
+  .defined(['b', 'c', 'd', 'e'])
+  .false([false, false, false, false, false])
+  .null([null, null, null])
+  .number([27, 37, 47])
+  .regExp([new RegExp('a'), new RegExp(/a/), new RegExp('b')])
+  .string(['a', 'b', 'c'])
+  .symbol([Symbol(27), Symbol('a'), Symbol('b')])
+  .true([true, true, true])
+  .undefined([undefined, undefined, undefined])
+);
 ```
 
 Method
@@ -560,6 +680,28 @@ Method
 ```typescript
 import { TestingItToBeInstanceOf } from "@angular-package/testing";
 
+const t = new TestingItToBeInstanceOf();
+
+t.describe(`TestingItToBeInstanceOf`, () => t
+  .array(['a', 'b', 'c'])
+  .boolean(false)
+  .date(new Date())
+  .error(new Error())
+  .function(function() {})
+  .map(new Map())
+  .number(new Number(27))
+  .object(new Object({}))
+  .promise(new Promise((resolve, reject) => { resolve('a') }))
+  .rangeError(new RangeError('range error'))
+  .referenceError(new ReferenceError('reference'))
+  .regExp(new RegExp('a'))
+  .set(new Set('a'))
+  // .storage()
+  .string('a')
+  .syntaxError(new SyntaxError('syntax error'))
+  .typeError(new TypeError('type error'))
+  .weakSet(new WeakSet())
+);  
 ```
 
 Method
@@ -590,6 +732,27 @@ Method
 ```typescript
 import { TestingItToHave } from "@angular-package/testing";
 
+const t = new TestingItToHave();
+
+const el = document.createElement('div');
+el.className = 'foo bar baz';
+
+class ClassA {
+  public methodA() {
+    return "methodA";
+  }
+}
+const classA = new ClassA();
+
+t.describe('TestingItToHave', () => t
+  .beforeEach(() => {
+    spyOn(classA, "methodA");
+    classA.methodA();
+  })
+  .class(el, 'bar')
+  .size(['a', 'b'], 2)
+  .spyInteractions(classA)
+);
 ```
 
 - [x] `URIError()`
@@ -601,8 +764,6 @@ import { TestingItToHave } from "@angular-package/testing";
 import { TestingItToHaveBeen } from "@angular-package/testing";
 ```
 
-
-
 ### `TestingItToHaveBeenCalled`
 
 Prepared `toThrow` tests.
@@ -610,6 +771,16 @@ Prepared `toThrow` tests.
 ```typescript
 import { TestingItToHaveBeenCalled } from "@angular-package/testing";
 
+const t = new TestingItToThrow();
+
+t.describe('TestingItToThrow', () => t
+  .error(function() { throw new Error('Error') }, 'Error')
+  .matching(
+    function() { throw new Error('nope'); },
+    function(thrown) { return thrown.message === 'nope'; }
+  )
+  .throw(function() { throw 'things'; }, 'things')
+);
 ```
 
 Method
