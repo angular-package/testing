@@ -1,3 +1,4 @@
+import {} from "jasmine";
 // @angular-package/type.
 import { is } from '@angular-package/type';
 // Type.
@@ -45,13 +46,13 @@ export class TestingExpect {
     e = expectationFailOutput
       ? expect(actual).withContext(expectationFailOutput)
       : expect(actual)
-  ): jasmine.Matchers<typeof actual> {
+  ): jasmine.Matchers<ExpectType<T>> {
     return is.true(this.#not) ? e.not : e;
   }
 
   protected expectation<T>(
     actual: ExpectType<T>,
-    callbackfn: (matchers: jasmine.Matchers<typeof actual>) => any,
+    callbackfn: (matchers: jasmine.Matchers<ExpectType<T>>) => any,
     expectationFailOutput?: any,
   ): this {
     callbackfn && callbackfn(this.expect(actual, expectationFailOutput));
