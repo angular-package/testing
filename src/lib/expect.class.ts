@@ -38,12 +38,12 @@ export class Expect {
   public expect<T>(
     actual: ExpectType<T>,
     expectationFailOutput?: any,
-  ): jasmine.Matchers<typeof actual> {
+  ): jasmine.Matchers<ExpectType<T>> {
     return this.#expect.expect(actual, expectationFailOutput);
   }
   protected expectation<T>(
     actual: ExpectType<T>,
-    callbackfn: (matchers: jasmine.Matchers<typeof actual>) => any,
+    callbackfn: (matchers: jasmine.Matchers<ExpectType<T>>) => any,
     expectationFailOutput?: any,
   ): this {
     callbackfn && callbackfn(this.expect(actual, expectationFailOutput));
