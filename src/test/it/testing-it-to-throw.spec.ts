@@ -1,7 +1,7 @@
 // Class.
 import { TestingItToThrow } from "../../lib";
-// Config.
-import { Execute } from "../execute";
+// Execute.
+import { ExecuteSpec } from "../execute";
 
 const execute = true;
 const executeDescribe = true;
@@ -9,13 +9,12 @@ const executeIt = true;
 
 if (execute) {
   const t = new TestingItToThrow(
-    executeDescribe || Execute.describe.it["testing-it-to-throw"],
-    executeIt || Execute.it.it["testing-it-to-throw"]
+    executeDescribe || ExecuteSpec.describe.it["testing-it-to-throw"],
+    executeIt || ExecuteSpec.it.it["testing-it-to-throw"]
   );
-
-  // t.describe('TestingItToThrow', () => t
-  //   // .error(new Error())
-  //   // .matching()
-  //   // .throw()
-  // );  
+  t.describe('TestingItToThrow', () => t
+    .error(function() { throw new Error('Error') }, 'Error')
+    .matching(function() { throw new Error('nope'); }, function(thrown) { return thrown.message === 'nope'; })
+    .throw(function() { throw 'things'; }, 'things')
+  );  
 }

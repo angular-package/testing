@@ -1,5 +1,7 @@
+// Class.
 import { TestingItToBeInstanceOf } from "../../lib";
-import { Execute } from "../execute";
+// Execute.
+import { ExecuteSpec } from "../execute";
 
 const execute = true;
 const executeDescribe = true;
@@ -7,11 +9,10 @@ const executeIt = true;
 
 if (execute) {
   const t = new TestingItToBeInstanceOf(
-    executeDescribe || Execute.describe.it["testing-it-to-be-instanceof"],
-    executeIt || Execute.it.it["testing-it-to-be-instanceof"]
+    executeDescribe || ExecuteSpec.describe.it["testing-it-to-be-instanceof"],
+    executeIt || ExecuteSpec.it.it["testing-it-to-be-instanceof"]
   );
-  
-  t.describe('TestingItToBeInstanceOf', () => t
+  t.describe(`TestingItToBeInstanceOf`, () => t
     .array(['a', 'b', 'c'])
     .boolean(false)
     .date(new Date())
