@@ -130,7 +130,6 @@ export class TestingItToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    // console.log(`expect.array()`, super.expect.getNot(), super.expect.to.be.getNot());
     this.it(
       expectation,
       () => super.expect.to.be.array(actual, expected, expectationFailOutput),
