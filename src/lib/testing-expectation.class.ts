@@ -794,10 +794,9 @@ export class TestingExpectation extends Expect {
   }
   public toHaveSpyInteractions<T>(
     actual: ExpectType<T>,
-    expected: jasmine.Expected<typeof actual>,
     expectationFailOutput?: any
   ): this {
-    this.#testingTo.have.spyInteractions(actual, expected, expectationFailOutput);
+    this.#testingTo.have.spyInteractions(actual, expectationFailOutput);
     return this;
   }
   //#endregion
