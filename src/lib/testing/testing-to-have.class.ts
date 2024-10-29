@@ -212,12 +212,11 @@ export class TestingToHave<
    */
   public toHaveSpyInteractions<T>(
     actual: ExpectType<T>,
-    expected: jasmine.Expected<typeof actual>,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toHave.spyInteractions(actual, expected, expectation, expectationFailOutput, execute);
+    this.toHave.spyInteractions(actual, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
