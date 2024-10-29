@@ -244,6 +244,8 @@ import {
 
 ## Usage
 
+### `Testing`
+
 Use `Testing` class for testing.
 
 ```typescript
@@ -251,6 +253,8 @@ import { Testing } from "@angular-package/testing";
 
 
 ```
+
+### `TestingCustom`
 
 Use `TestingCustom` class for custom testing.
 
@@ -282,7 +286,9 @@ Expectation is a method built from `expect()` and `jasmine` matcher.
 expect(expect).matcher(expected)
 ```
 
-Desc
+```typescript
+import { TestingExpectation } from "@angular-package/testing";
+```
 
 Jasmine matchers in use.
 
@@ -407,6 +413,40 @@ it(description, () => expect(expect).matcher(expected))
 
 ### `TestingItTo`
 
+Prepared `it` tests of `jasmine`.
+
+```typescript
+import { TestingItTo } from "@angular-package/testing";
+
+const t = new TestingItTo();
+
+// `to{Method}`
+t.describe(`TestingItTo`, () => t
+  .contain(['a', 'b', 'c'], 'b')
+  .equal(['27', 37, 47], ['27', 37, 47])
+  .match("my string", /string$/)
+  .match("other string", "ing")
+);
+
+// `toBe{Method}`
+t.describe(`TestingItTo.be`, () => t.be
+  .array([27, 37])
+  .key(74)
+);
+
+// `toHave{Method}`
+t.describe(`TestingItTo.have`, () => t.have
+  .size([27, 37], 2)
+);
+
+// `toThrow{Method}`
+t.describe(`TestingItTo.throw`, () => t.throw
+  .error(function() { throw new Error('Error') }, 'Error')
+  .matching(function() { throw new Error('nope'); }, function(thrown) { return thrown.message === 'nope'; })
+  .throw(function() { throw 'things'; }, 'things')
+);
+```
+
 It under specific getter
 
 - [x] `get be(): TestingItToBe`
@@ -420,6 +460,10 @@ Method
 - [x] `match()`
 
 ### `TestingItToBe`
+
+```typescript
+import { TestingItToBe } from "@angular-package/testing";
+```
 
 It under specific getter
 
@@ -479,6 +523,11 @@ Method
 
 ### `TestingItToBeArrayOf`
 
+```typescript
+import { TestingItToBeArrayOf } from "@angular-package/testing";
+
+```
+
 Method
 
 - [x] `bigint()`
@@ -496,15 +545,87 @@ Method
 
 ### `TestingItToBeBoolean`
 
+```typescript
+import { TestingItToBeBoolean } from "@angular-package/testing";
+
+```
+
+Method
+
+- [x] `boolean()`
+- [x] `type()`
+
 ### `TestingItToBeInstanceOf`
+
+```typescript
+import { TestingItToBeInstanceOf } from "@angular-package/testing";
+
+```
+
+Method
+
+- [x] `array()`
+- [x] `boolean()`
+- [x] `date()`
+- [x] `error()`
+- [x] `function()`
+- [x] `map()`
+- [x] `number()`
+- [x] `object()`
+- [x] `promise()`
+- [x] `rangeError()`
+- [x] `referenceError()`
+- [x] `regExp()`
+- [x] `set()`
+- [ ] `storage()`
+- [x] `string()`
+- [x] `syntaxError()`
+- [x] `typeError()`
+- [x] `URIError()`
+- [x] `weakMap()`
+- [x] `weakSet()`
 
 ### `TestingItToHave`
 
+```typescript
+import { TestingItToHave } from "@angular-package/testing";
+
+```
+
+- [x] `URIError()`
+- [x] `URIError()`
+
 ### `TestingItToHaveBeen`
+
+```typescript
+import { TestingItToHaveBeen } from "@angular-package/testing";
+```
+
+
 
 ### `TestingItToHaveBeenCalled`
 
+Prepared `toThrow` tests.
+
+```typescript
+import { TestingItToHaveBeenCalled } from "@angular-package/testing";
+
+```
+
+Method
+
+- [x] `before()`
+- [x] `called()`
+- [x] `onceWith()`
+- [x] `with()`
+
 ### `TestingItToThrow`
+
+Method
+
+- [x] `error()`
+- [x] `matching()`
+- [x] `throw()`
 
 <br>
 
