@@ -25,5 +25,5 @@ if (execute) {
     .symbol([Symbol(27), Symbol('a'), Symbol('b')])
     .true([true, true, true])
     .undefined([undefined, undefined, undefined])
-  );    
+  );
 }
