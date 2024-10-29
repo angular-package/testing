@@ -44,6 +44,8 @@ Jasmine unit testing wrapper with additional custom testing features.
 * [Features](#features)
   * [Expectations](#expectations)
   * [It](#it)
+    * [Nested](#nested)
+    * [Standalone](#standalone)
 * [Changelog](#changelog)
 * [Git](#git)
   * [Commit](#commit)
@@ -405,11 +407,15 @@ Expectations based on the `are` of `@angular-package/type` and `toBe()` matcher 
 
 ### It
 
-Prepared specs `it` of `jasmine`. Spec is a method built from `it` with expectation - `expect()` and `jasmine` matcher.
+Prepared specs `it` of `jasmine` built. Spec is a method built from `it` with expectation - `expect()` and `jasmine` matcher.
 
 ```typescript
 it(description, () => expect(expect).matcher(expected))
 ```
+
+### Nested
+
+It methods accessed by using nested object structure and method names.
 
 ### `TestingItTo`
 
@@ -797,6 +803,10 @@ Method
 - [x] `error()`
 - [x] `matching()`
 - [x] `throw()`
+
+### Standalone
+
+It methods directly accessed by using method names instead of nested structure, but using it.
 
 <br>
 
