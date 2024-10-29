@@ -415,11 +415,25 @@ it(description, () => expect(expect).matcher(expected))
 
 ### Nested
 
-It methods accessed by using nested object structure and method names.
+`it` methods accessed by using nested object structure and method names.
 
 ### `TestingItTo`
 
 Prepared `it` tests of `jasmine`.
+
+Nested `It` objects under specific getter
+
+- [x] `get be(): TestingItToBe`
+- [x] `get have(): TestingItToHave`
+- [x] `get throw(): TestingItToThrow`
+
+Method
+
+- [x] `contain()`
+- [x] `equal()`
+- [x] `match()`
+
+Example
 
 ```typescript
 import { TestingItTo } from "@angular-package/testing";
@@ -489,24 +503,73 @@ t.describe('TestingItTo', () => t.have.been.called
 // `toThrow{Method}`
 t.describe('TestingItTo', () => t.throw
   .error(function() { throw new Error('Error') }, 'Error')
-  .matching(function() { throw new Error('nope'); }, function(thrown) { return thrown.message === 'nope'; })
+  .matching(
+    function() { throw new Error('nope'); },
+    function(thrown) { return thrown.message === 'nope'; }
+  )
   .throw(function() { throw 'things'; }, 'things')
 );
 ```
 
-It under specific getter
+### `TestingItToBe`
 
-- [x] `get be(): TestingItToBe`
-- [x] `get have(): TestingItToHave`
-- [x] `get throw(): TestingItToThrow`
+Nested `It` objects under specific getter
+
+- [x] `get arrayof(): TestingItToBeArrayOf`
+- [x] `get boolean(): TestingItToBeBoolean`
+- [x] `get instanceof(): TestingItToBeInstanceOf`
 
 Method
 
-- [x] `contain()`
-- [x] `equal()`
-- [x] `match()`
+- [x] `be()`
+- [x] `array()`
+- [x] `bigInt()`
+- [x] `class()`
+- [x] `closeTo()`
+- [x] `date()`
+- [x] `defined()`
+- [x] `false()`
+- [x] `falsy()`
+- [x] `function()`
+- [x] `greaterThan()`
+- [x] `greaterThanOrEqual()`
+- [x] `instance()`
+- [x] `instanceOf()`
+- [x] `key()`
+- [x] `lessThan()`
+- [x] `lessThanOrEqual()`
+- [x] `naN()`
+- [x] `negativeInfinity()`
+- [x] `null()`
+- [x] `number()`
+- [x] `numberBetween()`
+- [x] `numberType()`
+- [x] `object()`
+- [x] `objectKey()`
+- [x] `objectKeyIn()`
+- [x] `objectKeys()`
+- [x] `objectKeysIn()`
+- [x] `objectSomeKeys()`
+- [x] `positiveInfinity()`
+- [x] `regExp()`
+- [x] `pending()`
+- [x] `rejected()`
+- [x] `rejectedWith()`
+- [x] `rejectedWithError()`
+- [x] `resolved()`
+- [x] `resolvedTo()`
+- [x] `string()`
+- [x] `stringIncludes()`
+- [x] `stringIncludesSome()`
+- [x] `stringOfLength()`
+- [x] `stringOfLengthBetween()`
+- [x] `stringType()`
+- [x] `symbol()`
+- [x] `true()`
+- [x] `truthy()`
+- [x] `undefined()`
 
-### `TestingItToBe`
+Example
 
 ```typescript
 import { TestingItToBe } from "@angular-package/testing";
@@ -575,63 +638,24 @@ t.describe(`TestingItToBe`, () => {
 });
 ```
 
-It under specific getter
-
-- [x] `get arrayof(): TestingItToBeArrayOf`
-- [x] `get boolean(): TestingItToBeBoolean`
-- [x] `get instanceof(): TestingItToBeInstanceOf`
+### `TestingItToBeArrayOf`
 
 Method
 
-- [x] `be()`
-- [x] `array()`
-- [x] `bigInt()`
-- [x] `class()`
-- [x] `closeTo()`
+- [x] `bigint()`
+- [x] `boolean()`
 - [x] `date()`
 - [x] `defined()`
 - [x] `false()`
-- [x] `falsy()`
-- [x] `function()`
-- [x] `greaterThan()`
-- [x] `greaterThanOrEqual()`
-- [x] `instance()`
-- [x] `instanceOf()`
-- [x] `key()`
-- [x] `lessThan()`
-- [x] `lessThanOrEqual()`
-- [x] `naN()`
-- [x] `negativeInfinity()`
 - [x] `null()`
 - [x] `number()`
-- [x] `numberBetween()`
-- [x] `numberType()`
-- [x] `object()`
-- [x] `objectKey()`
-- [x] `objectKeyIn()`
-- [x] `objectKeys()`
-- [x] `objectKeysIn()`
-- [x] `objectSomeKeys()`
-- [x] `positiveInfinity()`
 - [x] `regExp()`
-- [x] `pending()`
-- [x] `rejected()`
-- [x] `rejectedWith()`
-- [x] `rejectedWithError()`
-- [x] `resolved()`
-- [x] `resolvedTo()`
 - [x] `string()`
-- [x] `stringIncludes()`
-- [x] `stringIncludesSome()`
-- [x] `stringOfLength()`
-- [x] `stringOfLengthBetween()`
-- [x] `stringType()`
 - [x] `symbol()`
 - [x] `true()`
-- [x] `truthy()`
 - [x] `undefined()`
 
-### `TestingItToBeArrayOf`
+Example
 
 ```typescript
 import { TestingItToBeArrayOf } from "@angular-package/testing";
@@ -654,26 +678,10 @@ t.describe(`TestingItToBeArrayOf`, () => t
 );
 ```
 
-Method
-
-- [x] `bigint()`
-- [x] `boolean()`
-- [x] `date()`
-- [x] `defined()`
-- [x] `false()`
-- [x] `null()`
-- [x] `number()`
-- [x] `regExp()`
-- [x] `string()`
-- [x] `symbol()`
-- [x] `true()`
-- [x] `undefined()`
-
 ### `TestingItToBeBoolean`
 
 ```typescript
 import { TestingItToBeBoolean } from "@angular-package/testing";
-
 ```
 
 Method
@@ -682,6 +690,31 @@ Method
 - [x] `type()`
 
 ### `TestingItToBeInstanceOf`
+
+Method
+
+- [x] `array()`
+- [x] `boolean()`
+- [x] `date()`
+- [x] `error()`
+- [x] `function()`
+- [x] `map()`
+- [x] `number()`
+- [x] `object()`
+- [x] `promise()`
+- [x] `rangeError()`
+- [x] `referenceError()`
+- [x] `regExp()`
+- [x] `set()`
+- [ ] `storage()`
+- [x] `string()`
+- [x] `syntaxError()`
+- [x] `typeError()`
+- [x] `URIError()`
+- [x] `weakMap()`
+- [x] `weakSet()`
+
+Example
 
 ```typescript
 import { TestingItToBeInstanceOf } from "@angular-package/testing";
@@ -710,30 +743,12 @@ t.describe(`TestingItToBeInstanceOf`, () => t
 );  
 ```
 
-Method
-
-- [x] `array()`
-- [x] `boolean()`
-- [x] `date()`
-- [x] `error()`
-- [x] `function()`
-- [x] `map()`
-- [x] `number()`
-- [x] `object()`
-- [x] `promise()`
-- [x] `rangeError()`
-- [x] `referenceError()`
-- [x] `regExp()`
-- [x] `set()`
-- [ ] `storage()`
-- [x] `string()`
-- [x] `syntaxError()`
-- [x] `typeError()`
-- [x] `URIError()`
-- [x] `weakMap()`
-- [x] `weakSet()`
-
 ### `TestingItToHave`
+
+- [x] `URIError()`
+- [x] `URIError()`
+
+Example
 
 ```typescript
 import { TestingItToHave } from "@angular-package/testing";
@@ -761,9 +776,6 @@ t.describe('TestingItToHave', () => t
 );
 ```
 
-- [x] `URIError()`
-- [x] `URIError()`
-
 ### `TestingItToHaveBeen`
 
 ```typescript
@@ -772,7 +784,14 @@ import { TestingItToHaveBeen } from "@angular-package/testing";
 
 ### `TestingItToHaveBeenCalled`
 
-Prepared `toThrow` tests.
+Method
+
+- [x] `before()`
+- [x] `called()`
+- [x] `onceWith()`
+- [x] `with()`
+
+Example
 
 ```typescript
 import { TestingItToHaveBeenCalled } from "@angular-package/testing";
@@ -789,14 +808,9 @@ t.describe('TestingItToThrow', () => t
 );
 ```
 
-Method
-
-- [x] `before()`
-- [x] `called()`
-- [x] `onceWith()`
-- [x] `with()`
-
 ### `TestingItToThrow`
+
+Prepared `toThrow` tests.
 
 Method
 
