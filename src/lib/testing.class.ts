@@ -1,3 +1,4 @@
+import {} from "jasmine";
 // Function.
 import { mixin } from './function';
 // Testing.
