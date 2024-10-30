@@ -53,7 +53,7 @@ export class TextualExpectation {
   public static toBeInstanceOfReferenceError = `The \`actual\` value must be an instance of \`${ReferenceError.name}\`.`;
   public static toBeInstanceOfRegExp = `The \`actual\` value must be an instance of \`${RegExp.name}\`.`;
   public static toBeInstanceOfSet = `The \`actual\` value must be an instance of \`${Set.name}\`.`;
-  public static toBeInstanceOfStorage = `The \`actual\` value must be an instance of \`${Storage.name}\`.`;
+  // public static toBeInstanceOfStorage = `The \`actual\` value must be an instance of \`${Storage.name}\`.`;
   public static toBeInstanceOfString = `The \`actual\` value must be an instance of a \`${String.name}\`.`;
   public static toBeInstanceOfSyntaxError = `The \`actual\` value must be an instance of \`${SyntaxError.name}\`.`;
   public static toBeInstanceOfTypeError = `The \`actual\` value must be an instance of \`${TypeError.name}\`.`;

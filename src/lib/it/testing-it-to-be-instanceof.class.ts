@@ -368,6 +368,7 @@ export class TestingItToBeInstanceOf<
   }
 
   /**
+   * @deprecated
    * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Storage` on the `expected`
    * of `true`.
    * @param actual The value of any type to check.
@@ -382,15 +383,15 @@ export class TestingItToBeInstanceOf<
   public storage<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfStorage,
+    expectation: string = "", // TextualExpectation.toBeInstanceOfStorage,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.it(
-      expectation,
-      () => super.expect.to.be.instanceof.storage(actual, expected, expectationFailOutput),
-      execute
-    );
+    // this.it(
+    //   expectation,
+    //   () => super.expect.to.be.instanceof.storage(actual, expected, expectationFailOutput),
+    //   execute
+    // );
     return this;
   }
 
