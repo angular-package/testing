@@ -9,9 +9,9 @@
     "inlineSources": true,
     "types": [],
     "lib": [
-      "dom",
-      "es2020"
-    ]
+      "ES2020"
+    ],
+    "sourceMap": false
   },
   "exclude": [
     "src/test.ts",
