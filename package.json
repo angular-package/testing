@@ -1,19 +1,40 @@
 {
   "name": "@angular-package/testing",
-  "version": "2.0.0-rc",
-  "description": "Support for testing other packages.",
+  "version": "3.0.0-alpha",
   "author": "Angular Package <angular-package@wvvw.dev> (https://angular-package.dev)",
-  "homepage": "https://docs.angular-package.dev/",
-  "peerDependencies": {
-    "@angular-package/type": "^5.0.0-rc.0",
-    "jasmine": "^3.9.0"
-  },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
+  "homepage": "https://docs.angular-package.dev",
+  "description": "Jasmine unit testing wrapper with additional custom testing features.",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "funding": [
+    {
+      "type": "individual",
+      "url": "https://checkout.revolut.com/pay/048b10a3-0e10-42c8-a917-e3e9cb4c8e29"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/angular-package"
+    },
+    {
+      "type": "individual",
+      "url": "https://docs.angular-package.dev/donate/cryptocurrency"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/angularpackage"
+    }
+  ],
+  "peerDependencies": {
+    "@angular-package/type": "^5.0.0-rc.0",
+    "jasmine": "^5.4.0",
+    "tslib": "^2.3.0"
+  },
+  "scripts": {
+    "prepublishOnly": "npm install rimraf && npm run pkg && npm run clean",
+    "pkg": "npm pkg delete dependencies && npm i tslib@2.3.0 --save-peer",
+    "clean": "./node_modules/rimraf/dist/esm/bin.mjs ./node_modules && npm pkg delete scripts"
   },
   "keywords": [
     "@angular",

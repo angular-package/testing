@@ -1,4 +1,6 @@
+import { AllowItNumber } from "../type";
+
 export interface ExecutableTests {
-  describe?: Array<number>;
-  it?: Array<number>;
+  describe?: AllowItNumber;
+  it?: AllowItNumber;
 }

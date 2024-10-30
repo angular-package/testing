@@ -1,4 +1,3 @@
-import { randomString } from './lib/function/random-string.func';
 /*
  * Public API Surface of testing
  */
@@ -6,15 +5,74 @@ import { randomString } from './lib/function/random-string.func';
  * Main.
  */
 export {
-  // Class.
-  Testing,
-  TestingToBeMatchers,
+  Random,
+
+  Testing, // Main class with all testings.
+  TestingActual, // Initialize testing for `actual`.
+  TestingCustom, // Class to pass custom testings.
+
+  // Full named expectations. Methods with `expect()` + jasmine matchers.
+  TestingExpectation,
+
+  // Class to handle `describe()` function of jasmine.
+  TestingDescribe,
+
+  // Class to handle `it()` function of jasmine.
+  TestingIt,
+
+  // Class to handle `expect()` function of jasmine.
+  TestingExpect,
+
+  // Class to handle `describe`, `it`, `expect` of jasmine.
+  TestingCore,
+
+  // Abstract class to handle `describe` and `it` counter.
+  TestingCounter,
+
+  // Abstract class to handle executable tests.
+  TestingExecutable,
 } from './lib';
 
-/**
- * Function.
- */
-export { randomNumber, randomString } from './lib/function/';
+// Specific expectations.
+export {
+  TestingExpectTo,
+  TestingExpectToBe,
+  TestingExpectToBeArrayOf,
+  TestingExpectToBeInstanceOf,
+  TestingExpectToHave,
+  TestingExpectToHaveBeen,
+  TestingExpectToHaveBeenCalled,
+  TestingExpectToThrow,
+} from './lib/expectation';
+
+// Methods with `it()` function of jasmine.
+export {
+  TestingItTo,
+  TestingItToBe,
+  TestingItToBeArrayOf,
+  TestingItToBeBoolean,
+  TestingItToBeInstanceOf,
+  TestingItToHave,
+  TestingItToHaveBeen,
+  TestingItToHaveBeenCalled,
+  TestingItToThrow,
+} from './lib/it';
+
+// Testing classes for use with `TestingCustom`.
+export {
+  TestingTo,
+  TestingToBe,
+  TestingToBeArrayOf,
+  TestingToBeBoolean,
+  TestingToBeGreaterThan,
+  TestingToBeInstanceOf,
+  TestingToBeLessThan,
+  TestingToBeNumber,
+  TestingToBeObject,
+  TestingToBeString,
+  TestingToHave,
+  TestingToThrow,
+} from './lib/testing';
 
 /**
  * Constant.

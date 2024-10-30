@@ -1,33 +1,22 @@
-# Packages
+# angular-package
 
-| Package                                      | Description                                                       | Status |
-| :------------------------------------------- | :---------------------------------------------------------------- | -----: |
-| [callback][callback-github-readme]           | Manages the callback [`function`][js-function].                   | [![npm version][callback-npm-badge-png]][callback-npm-badge] |
-| [change-detection][cd-github-readme]         | Improves application performance.                                 | [![npm version][cd-npm-badge-png]][cd-npm-badge] |
-| [component-loader][cl-github-readme]         | Handles dynamic loading components.                               | [![npm version][cl-npm-badge-png]][cl-npm-badge] |
-| [core][core-github-readme]                   | Core features.                                                    | [![npm version][core-npm-badge-png]][core-npm-badge] |
-| [error][error-github-readme]                 | Manages an [`Error`][js-error].                                   | [![npm version][error-npm-badge-png]][error-npm-badge] |
-| [name][name-github-readme]                   | The name with prefix and suffix.                                  | [![npm version][name-npm-badge-png]][name-npm-badge] |
-| [preferences][preferences-github-readme]     | Preferences, settings, options, configuration and setup in steps. | [![npm version][preferences-npm-badge-png]][preferences-npm-badge] |
-| [prism][prism-github-readme]                 | [`Prism`][prism-js] highlighter module.                           | [![npm version][prism-npm-badge-png]][prism-npm-badge] |
-| [property][property-github-readme]           | Handles object properties.                                        | [![npm version][property-npm-badge-png]][property-npm-badge] |
-| [range][range-github-readme]                 | The range between a minimum and maximum.                          | [![npm version][range-npm-badge-png]][range-npm-badge] |
-| [reactive][reactive-github-readme]           | Automatize the process of creating some rxjs features.            | [![npm version][reactive-npm-badge-png]][reactive-npm-badge] |
-| [storage][storage-github-readme]             | The storage of data under allowed names.                          | [![npm version][storage-npm-badge-png]][storage-npm-badge] |
-| [tag][tag-github-readme]                     | Any tag with optional attributes.                                 | [![npm version][tag-npm-badge-png]][tag-npm-badge] |
-| **[testing][testing-github-readme]**         | **Support for testing other packages.**                           | [![npm version][testing-npm-badge-png]][testing-npm-badge] |
-| [text][text-github-readme]                   | Text on the template with replaceable tags.                       | [![npm version][text-npm-badge-png]][text-npm-badge] |
-| [type][type-github-readme]                   | Common types, type guards, and type checkers.                     | [![npm version][type-npm-badge-png]][type-npm-badge] |
-| [ui][ui-github-readme]                       | User interface.                                                   | *In Progress* |
-| [wrapper][wrapper-github-readme]             | Wrap the text with the opening and closing chars.                 | [![npm version][wrapper-npm-badge-png]][wrapper-npm-badge] |
+<a href='https://angular-package.dev' target='_blank'>
+  <img align="right"  width="92" height="92" src="https://avatars.githubusercontent.com/u/31412194?s=400&u=c9929aa36826318ccac8f7b84516e1ce3af7e21c&v=4" />
+</a>
 
-Click on the package name to visit its [GitHub](https://github.com/) page.
+The angular-package supports the development process of [angular](https://angular.io)-based applications in varied ways through the thoughtful, reusable, easy-to-use small pieces of code called packages.
 
 <br>
 
-## angular-package/testing
+<a href="https://jasmine.github.io/">
+  <img src="https://raw.githubusercontent.com/angular-package/testing/5f7317739d3e1b678e09a49cb2c3fa6e8b9049b1/logo/Jasmine.svg" width="200" height="122" />
+</a>
 
-Support for testing other packages.
+## Testing
+
+@angular-package/testing
+
+Jasmine unit testing wrapper with additional custom testing features.
 
 [![Gitter][gitter-badge]][gitter-chat]
 [![Discord][discord-badge]][discord-channel]
@@ -51,15 +40,17 @@ Support for testing other packages.
 * [Skeleton](#skeleton)
 * [Installation](#installation)
 * [Api](#api)
-* [Instance of](#instance-of)
-* Testing
-  * [`Testing`](#testing)
-  * [`TestingToBeMatchers`](#testingtobematchers)
-* Helpers
-  * Functions
-    * [`randomNumber()`](#randomnumber)
-    * [`randomString()`](#randomstring)
-  * [Constants](#constants)
+* [Usage](#usage)
+  * [`Testing`](#testing-class)
+  * [`TestingActual`](#testingactual)
+  * [`TestingCustom`](#testingcustom)
+* [Features](#features)
+  * [Expectations](#expectations)
+    * [Nested](#nested-expectations)
+    * [Standalone](#standalone-expectations)
+  * [It](#it)
+    * [Nested](#nested)
+    * [Standalone](#standalone)
 * [Changelog](#changelog)
 * [Git](#git)
   * [Commit](#commit)
@@ -120,21 +111,75 @@ npm i --save @angular-package/testing
 ## Api
 
 ```typescript
-// Main.
-import {
-  // Class.
-  Testing,
-  TestingToBeMatchers,
-} from '@angular-package/testing';
-```
+/**
+ * Main.
+ */
+export {
+  Random,
 
-```typescript
-// Helper functions.
-import {
-  // Function.
-  randomNumber,
-  randomString,
-} from '@angular-package/testing';
+  Testing, // Main class with all testings.
+  TestingActual, // Initialize testing for `actual`.
+  TestingCustom, // Class to pass custom testings.
+
+  // Full named expectations. Methods with `expect()` + jasmine matchers.
+  TestingExpectation,
+
+  // Class to handle `describe()` function of jasmine.
+  TestingDescribe,
+
+  // Class to handle `it()` function of jasmine.
+  TestingIt,
+
+  // Class to handle `expect()` function of jasmine.
+  TestingExpect,
+
+  // Class to handle `describe`, `it`, `expect` of jasmine.
+  TestingCore,
+
+  // Abstract class to handle executable tests.
+  TestingExecutable,
+} from './lib';
+
+// Specific expectations.
+export {
+  TestingExpectTo,
+  TestingExpectToBe,
+  TestingExpectToBeArrayOf,
+  TestingExpectToBeInstanceOf,
+  TestingExpectToHave,
+  TestingExpectToHaveBeen,
+  TestingExpectToHaveBeenCalled,
+  TestingExpectToThrow,
+} from './lib/expectation';
+
+// Methods with `it()` function of jasmine.
+export {
+  TestingItTo,
+  TestingItToBe,
+  TestingItToBeArrayOf,
+  TestingItToBeBoolean,
+  TestingItToBeInstanceOf,
+  TestingItToHave,
+  TestingItToHaveBeen,
+  TestingItToHaveBeenCalled,
+  TestingItToThrow,
+} from './lib/it';
+
+// Testing classes for use with `TestingCustom`.
+export {
+  TestingTo,
+  TestingToBe,
+  TestingToBeArrayOf,
+  TestingToBeBoolean,
+  TestingToBeGreaterThan,
+  TestingToBeInstanceOf,
+  TestingToBeLessThan,
+  TestingToBeNumber,
+  TestingToBeObject,
+  TestingToBeString,
+  TestingToHave,
+  TestingToThrow,
+} from './lib/testing';
 ```
 
 ```typescript
@@ -204,4029 +249,926 @@ import {
 
 <br>
 
-## Instance of
+## Usage
 
-Possible names of javascript objects that can be checked by the [`instanceof`][js-instanceof] operator.
+### `Testing` class
 
-```typescript
-const value: any = new Object({});
-value instanceof Array
-value instanceof ArrayBuffer;
-value instanceof Boolean;
-value instanceof DataView;
-value instanceof Date;
-value instanceof Error;
-value instanceof EvalError;
-value instanceof Int16Array;
-value instanceof Int32Array;
-value instanceof Int8Array;
-value instanceof Map;
-value instanceof Promise;
-value instanceof RangeError
-value instanceof RangeError;
-value instanceof ReferenceError;
-value instanceof RegExp;
-value instanceof Set;
-value instanceof SharedArrayBuffer;
-value instanceof SyntaxError;
-value instanceof Float32Array;
-value instanceof Float64Array;
-value instanceof Function;
-value instanceof Number;
-value instanceof Object;
-value instanceof String;
-value instanceof Storage;
-value instanceof TypeError;
-value instanceof Uint16Array;
-value instanceof Uint32Array;
-value instanceof Uint8Array;
-value instanceof Uint8ClampedArray;
-value instanceof URIError;
-value instanceof WeakMap;
-value instanceof WeakSet;
-```
-
-<br>
-
-## Testing
-
-### `Testing`
-
-Simple [`class`][js-classes] to support testing.
-
-> Methods prefixed with the `toBe` **aren't working** with the [`beforeEach()`][jasmine-beforeeach] function of jasmine.
-
-**Static methods:**
-
-| Testing.                                     | Description |
-| :------------------------------------------- | :---------- |
-| [`defineDescribe()`](#testingdefinedescribe) | Defines the wrapper [`function`][js-function] of the [`describe()`][jasmine-describe] function of jasmine with the ability to **decide** its execution. |
-| [`defineIt()`](#testingdefineit)             | Defines the wrapper [`function`][js-function] of the [`it()`][jasmine-it] function of jasmine with the ability to **decide** its execution. |
-
-**Constructor:**
-
-| Testing                             | Description |
-| :---------------------------------- | :---------- |
-| [constructor](#testing-constructor) | Creates an instance with setting for global allow executing of the [`describe()`](#testingprototypedescribe) and [`it()`](#testingprototypeit) methods, and optionally sets the list of allowed executable tests (those that execute even on the disallowed state). |
-
-**Instance public methods:**
-
-| Testing.prototype.                                                                | Description |
-| :-------------------------------------------------------------------------------- | :---------- |
-| [`describe()`](#testingprototypedescribe)                                         | Executes defined [`describe()`][jasmine-describe] function of jasmine on a state `true` from the `execute`. |
-| [`it()`](#testingprototypeit)                                                     | Executes defined [`it()`][jasmine-it] function of jasmine on a state `true` from the `execute`. |
-
-| Testing.prototype.                                                                | Executes the spec on a state `true` from the `execute` expecting the provided `value` to |
-| :-------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- |
-| [`toBe()`](#testingprototypetobe)                                                 | be the given `expected` value. |
-| [`toBeBigInt()`](#testingprototypetobebigint)                                     | be a [`bigint`][js-bigint] type on the given `expected` state of `true`. |
-| [`toBeBooleanType()`](#testingprototypetobebooleantype)                           | be of a [`boolean`][js-boolean] type on the given `expected` state of `true`. |
-| [`toBeClass()`](#testingprototypetobeclass)                                       | be a `class` on the given `expected` state of `true`. |
-| [`toBeInstanceOfArray()`](#testingprototypetobeinstanceofarray)                   | be an instance of an [`Array`][js-array] on the given `expected` state of `true`. |
-| [`toBeInstanceOfBoolean()`](#testingprototypetobeinstanceofboolean)               | be an instance of [`Boolean`][js-boolean] on the given `expected` state of `true`. |
-| [`toBeInstanceOfDate()`](#testingprototypetobeinstanceofdate)                     | be an instance of [`Date`][js-date] on the given `expected` state of `true`. |
-| [`toBeInstanceOfError()`](#testingprototypetobeinstanceoferror)                   | be an instance of an [`Error`][js-error] on the given `expected` state of `true`. |
-| [`toBeInstanceOfFunction()`](#testingprototypetobeinstanceoffunction)             | be an instance of a [`Function`][js-function] on the given `expected` state of `true`. |
-| [`toBeInstanceOfMap()`](#testingprototypetobeinstanceofmap)                       | be an instance of a [`Map`][js-map] on the given `expected` state of `true`. |
-| [`toBeInstanceOfNumber()`](#testingprototypetobeinstanceofnumber)                 | be an instance of a [`Number`][js-number] on the given `expected` state of `true`. |
-| [`toBeInstanceOfObject()`](#testingprototypetobeinstanceofobject)                 | be an instance of an [`Object`][js-object] on the given `expected` state of `true`. |
-| [`toBeInstanceOfPromise()`](#testingprototypetobeinstanceofpromise)               | be an instance of [`Promise`][js-promise] on the given `expected` state of `true`. |
-| [`toBeInstanceOfRangeError()`](#testingprototypetobeinstanceofrangeerror)         | be an instance of [`RangeError`][js-rangeerror] on the given `expected` state of `true`. |
-| [`toBeInstanceOfReferenceError()`](#testingprototypetobeinstanceofreferenceerror) | be an instance of [`ReferenceError`][js-referenceerror] on the given `expected` state of `true`. |
-| [`toBeInstanceOfRegExp()`](#testingprototypetobeinstanceofregexp)                 | be an instance of [`RegExp`][js-regexp] on the given `expected` state of `true`. |
-| [`toBeInstanceOfSet()`](#testingprototypetobeinstanceofset)                       | be an instance of [`Set`][js-set] on the given `expected` state of `true`. |
-| [`toBeInstanceOfStorage()`](#testingprototypetobeinstanceofstorage)               | be an instance of [`Storage`][js-storage] on the given `expected` state of `true`. |
-| [`toBeInstanceOfString()`](#testingprototypetobeinstanceofstring)                 | be an instance of a [`String`][js-string] on the given `expected` state of `true`. |
-| [`toBeInstanceOfSyntaxError()`](#testingprototypetobeinstanceofsyntaxerror)       | be an instance of [`SyntaxError`][js-syntaxerror] on the given `expected` state of `true`. |
-| [`toBeInstanceOfTypeError()`](#testingprototypetobeinstanceoftypeerror)           | be an instance of [`TypeError`][js-typeerror] on the given `expected` state of `true`. |
-| [`toBeInstanceOfURIError()`](#testingprototypetobeinstanceofurierror)             | be an instance of [`URIError`][js-urlerror] on the given `expected` state of `true`. |
-| [`toBeInstanceOfWeakSet()`](#testingprototypetobeinstanceofweakset)               | be an instance of a [`WeakSet`][js-weakset] on the given `expected` state of `true`. |
-| [`toBeNull()`](#testingprototypetobenull)                                         | be [`null`][js-null] on the given `expected` state of `true`. |
-| [`toBeNumberType()`](#testingprototypetobenumbertype)                             | be of a [`number`][js-number] type on the given `expected` state of `true`. |
-| [`toBeStringType()`](#testingprototypetobestringtype)                             | be of a [`string`][js-string] type on the given `expected` state of `true`. |
-| [`toEqual()`](#testingprototypetoequal)                                           | be equal to the given `expected`. |
-
-<br>
-
-### `Testing` static methods
-
-#### `Testing.defineDescribe()`
-
-Defines the wrapper [`function`][js-function] of the [`describe()`][jasmine-describe] function of jasmine with the ability to **decide** its execution.
+Main class for testing.
 
 ```typescript
-static defineDescribe(
-  description: string,
-  specDefinitions: () => void
-): (execute: boolean) => void {
-  return TestingDescribe.define(description, specDefinitions);
-}
-```
+import { Testing } from "@angular-package/testing";
 
-**Parameters:**
+const t = new Testing();
 
-| Name: type                    | Description |
-| :---------------------------- | :---------- |
-| `description: string`         | *"Textual description of the group"* - jasmine. |
-| `specDefinitions: () => void` | *"Function for Jasmine to invoke that will define"* - jasmine. |
-
-**Returns:**
-
-The **return value** is a [`function`][js-function] that contains the [`describe()`][jasmine-describe] function of jasmine with the ability to **decide** its execution.
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Object.
-import { is } from '@angular-package/type';
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * Tests.
- */
-const testingDescribe = Testing.defineDescribe('Primitives values', () => {
-  const numberSpec = Testing.defineIt('The value must be a number type', () => {
-    expect(is.number(5)).toBeTruthy();
-  }, 3000);
-  numberSpec(false); // Do not execute.
-  numberSpec(true); // Execute.
-});
-
-testingDescribe(false); // Do not execute.
-testingDescribe(true); // Execute.
-```
-
-<br>
-
-#### `Testing.defineIt()`
-
-Defines the wrapper [`function`][js-function] of the [`it()`][jasmine-it] function of jasmine with the ability to **decide** its execution.
-
-```typescript
-static defineIt(
-  expectation: string,
-  assertion: jasmine.ImplementationCallback,
-  timeout?: number | undefined,
-): (execute: boolean) => void {
-  return TestingIt.define(expectation, assertion, timeout);
-}
-```
-
-**Parameters:**
-
-| Name: type                    | Description |
-| :---------------------------- | :---------- |
-| `description: string`         | *"Textual description of the group"* - jasmine. |
-| `specDefinitions: () => void` | "Function for Jasmine to invoke that will define" - jasmine. |
-
-**Returns:**
-
-The **return value** is a `function` that contains the [`describe()`][jasmine-describe] function of jasmine with the ability to **decide** its execution.
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Object.
-import { is } from '@angular-package/type';
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * defineIt().
- */
-testing.describe('defineIt()', () => {
-  const numberSpec = Testing.defineIt('The value must be a number type', () => {
-    expect(is.number(5)).toBeTruthy();
-  }, 3000);
-  numberSpec(false); // Do not execute.
-  numberSpec(true); // Execute.
+// Describe.
+t.describe(`Describe`, () => {
+  // Prepared `it` spec.
+  t.toBeBigInt(BigInt(37));
+  // Prepared expectation.
+  t.it(`It`, () => t.expect.toBeBigInt(BigInt(27)));
 });
 ```
 
-<br>
+### `TestingActual`
 
-<br>
+Class to set `actual` value and use multiple testing `it` methods. It can be used through the `actual()` or `spy()` methods of `Testing`.
 
-### `Testing` constructor
-
-Creates an instance with setting for global allow executing of the [`describe()`](#testingprototypedescribe) and [`it()`](#testingprototypeit) methods, and optionally sets the list of allowed executable tests (those that execute even on the disallowed state).
+Example
 
 ```typescript
-constructor(
-  allowDescribe: boolean,
-  allowIt: boolean,
-  executable?: ExecutableTests
-) {
-  super(allowDescribe, allowIt, executable);
-}
-```
+import { TestingActual } from "@angular-package/testing";
 
-**Parameters:**
+const t = new TestingActual();
 
-| Name: type                     | Description |
-| :----------------------------- | :---------- |
-| `allowDescribe: boolean`       | Allow executing [`describe()`](#testingprototypedescribe) methods. |
-| `allowIt: boolean`             | Allow executing [`it()`](testingprototypeit) methods. |
-| `executable?: ExecutableTests` | An optional [`object`][js-object] with **unique numbers** of executable tests for [`describe()`](#testingprototypedescribe) and [`it()`](testingprototypeit) method. |
-
-**Returns:**
-
-The **return value** is new instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(
-  true, // Allows executing the `describe()` method globally.
-  true, // Allows executing the `it()` method globally.
-  {
-    describe: [], // Executable unique numbers of `describe()` methods to execute when global executing is disallowed.
-    it: [], // Executable unique numbers of `it()` methods to execute when global executing is disallowed.
+class ClassA {
+  public methodA(value?: any) {
+    return "methodA";
   }
+
+  public methodB(value?: any) {
+    return "methodB";
+  }
+}
+
+const classA = new ClassA();
+
+t.describe('TestingActual', () => {
+
+  // 
+  t
+    .actual('a b c d e f g h i j k l m n o p r s')
+    .toBeString()
+    .stringIncludes(['f'])
+    .stringIncludesSome(['f', 'z'])
+    .stringOfLengthBetween(27, 47)
+    .toBeStringType()
+  
+  t
+    .beforeEach(() => {
+      spyOn(classA, "methodA");
+      classA.methodA({test: 27});
+    })
+    .spy(() => classA.methodA)
+    .toHaveBeenCalled()
+    .toHaveBeenCalledWith({test: 27})
+    .toHaveBeenCalledTimes(1)
+    .toHaveBeenCalledOnceWith({test: 27})
+});
+```
+
+### `TestingCustom`
+
+Use `TestingCustom` class for custom testing. Access to the included tests is through the `testing` getter.
+
+```typescript
+import {
+  TestingCustom,
+  TestingDescribe,
+  TestingExpectation,
+  TestingIt,
+  TestingToBe,
+} from "@angular-package/testing";
+
+const t = new TestingCustom(
+  // List of test to use.
+  [
+    TestingToBe
+  ],
+  true, // Describe executable.
+  true, // It executable.
+  { describe: [], it: [] }, // Executable numbers of `describe` and `it`.
+  ['DescribeA'], // Descriptions for `describe`.
+  ['ItA'], // Expectations for `it`.
+  [false, false], // `boolean` or list of [`boolean`, `boolean`]
+  new TestingDescribe(), // Common instance for `TestingDescribe` for `counter` purposes
+  new TestingIt(),  // Common instance for `TestingIt` for `counter` purposes
+  new TestingExpectation() // Common instance for `TestingExpectation`
+);
+
+t.describe(
+  `DescribeA`,
+  () => t.testing // testing getter
+    .beforeEach(() => {})
+    .toBeDate(new Date())
+    .toBeUndefined(undefined)
 );
 ```
 
-Example of using allow.
+<br>
+
+## Features
+
+### Expectations
+
+Expectation is a method built from `expect()` and `jasmine` matcher.
 
 ```typescript
-/**
- * Initialize testing.
- */
-const testing = new Testing(
-  false, // Disallows executing the `describe()` method globally.
-  false, // Disallows executing the `it()` method globally.
-  {
-    describe: [1, 2, 3, 5], // Executable unique numbers of `describe()` methods to execute when global executing is disallowed.
-    it: [1], // Executable unique numbers of `it()` methods inside the `describe()` to execute when global executing is disallowed.
-  }
-);
+public expectation(actual, expected) {
+  expect(actual).matcher(expected);
+  return this;
+}
+```
 
-testing.describe('[counter] First describe', () => {
-  testing
-    .it('[counter] First it() in first describe 1-1', () =>
-      expect(false).toBeFalse()
-    )
-    .it('[counter] Second it() in first describe 1-2', () =>
-      expect(true).toBeTrue()
-    )
-    .it('[counter] Second it() in first describe 1-3', () =>
-      expect(true).toBeTrue()
-    )
-    .it('[counter] Fourth it() in first describe() 1-4', () =>
-      expect(true).toBeTrue()
-    )
-    .describe('[counter] Second describe()', () => {
-      testing.it('[counter] First it() in second describe() 2-1', () =>
-        expect(true).toBeTrue()
-      );
-    })
-    .describe('[counter] Third describe()', () => {
-      testing.it('[counter] First it() in third describe() 3-1', () =>
-        expect(true).toBeTrue()
-      );
-    })
-    .describe('[counter] Fourth describe()', () => {
-      testing.it('[counter] First it() in fourth describe() 3-1', () =>
-        expect(true).toBeTrue()
-      );
-    });
-});
-testing.describe('[counter] Fifth describe', () =>
-  testing.it('[counter] First it() in fifth describe 5-1', () =>
-    expect(false).toBeFalse()
+### Nested expectations
+
+Expectation methods are accessed in `TestingExpectTo` by using nested object structure and method names.
+
+Example
+
+```typescript
+import { Testing, TestingExpectTo } from "@angular-package/testing";
+
+const t = new Testing();
+const to = new TestingExpectTo();
+
+t.describe(`TestingExpectTo`, () => t
+  .it(`it`, () => to
+    .contain(['a', 'b', 'c'], 'c')
+    .contain('string number', 'ber')
+    .equal({a: 2}, {a: 2})
+    .match("my string", /string$/)
+    .match('number', 'ber')
+
+    .not.contain(['a', 'b', 'c'], 'h')
+    .contain(['a', 'b', 'c'], 'a')
+
+    .be.not.bigint('a')
   )
 );
-/*
-  Karma returns
-  1 First describe
-      1 First it() in first describe 1-1
-    3 Third describe()
-      1 First it() in third describe() 3-1
-    2 Second describe()
-      1 First it() in second describe() 2-1
-  5 Fifth describe
-    1 First it() in fifth describe 5-1 
-*/
 ```
 
-<br>
+### Standalone expectations
 
-### `Testing` instance methods
+Expectation methods are directly accessed in `TestingExpectation` by using method names instead of nested structure, but using it through the `TestingExpectTo`.
 
-#### `Testing.prototype.describe()`
-
-Executes defined [`describe()`][jasmine-describe] function of jasmine on provided state `true` from the `execute`, and resets the counter to `0`.
+Example expectation method with `actual` param.
 
 ```typescript
-public describe(
-  description: string,
-  specDefinitions: () => void,
-  execute?: boolean
+public toBeTypeOf<T>(
+  actual: ExpectType<T>,
+  expected: jasmine.Expected<string>,
+  expectationFailOutput?: any
 ): this {
-  this.#testingIt.resetCounter();
-  this.#testingDescribe.describe(description, specDefinitions, execute);
+  this.#testingTo.be.typeOf(actual, expected, expectationFailOutput);
   return this;
 }
 ```
 
-**Parameters:**
-
-| Name: type                    | Description |
-| :---------------------------- | :---------- |
-| `description: string`         | *"Textual description of the group"* with an optional its unique number inside the describe when adding `[counter]`.  |
-| `specDefinitions: () => void` | *"Function for Jasmine to invoke that will define inner suites a specs".* |
-| `execute: boolean`            | A [`boolean`][js-boolean] type value to **decide** whether or not **execute** defined [`describe()`][jasmine-describe] of jasmine function. |
-
-**Returns:**
-
-The **return value** is an instance of [`Testing`](#testing).
-
-**Usage:**
+Example expectation method with `spy` param.
 
 ```typescript
-// Example usage.
-// Object.
-import { is } from '@angular-package/type';
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * describe().
- */
-testing.describe(
-  '[counter] describe()',
-  () => {},
-  true // Whether or not execute suite
+public toHaveBeenCalled<T extends jasmine.Func>(
+  spy: ExpectType<T>,
+  expectationFailOutput?: any
+): this {
+  this.#testingTo.have.been.called.called(spy, expectationFailOutput);
+  return this;
+}
+```
+
+Jasmine matchers in use.
+
+- [x] `toBe()`
+- [x] `toBeCloseTo()`
+- [x] `toBeDefined()`
+- [x] `toBeFalse()`
+- [x] `toBeFalsy()`
+- [x] `toBeGreaterThan()`
+- [x] `toBeGreaterThanOrEqual()`
+- [x] `toBeInstanceOf()`
+- [x] `toBeLessThan()`
+- [x] `toBeLessThanOrEqual()`
+- [x] `toBeNaN()`
+- [x] `toBeNegativeInfinity()`
+- [x] `toBeNull()`
+- [x] `toBePositiveInfinity()`
+- [x] `toBeTrue()`
+- [x] `toBeTruthy()`
+- [x] `toBeUndefined()`
+- [x] `toContain()`
+- [x] `toEqual()`
+- [x] `toHaveBeenCalled()`
+- [x] `toHaveBeenCalledBefore()`
+- [x] `toHaveBeenCalledOnceWith()`
+- [x] `toHaveBeenCalledTimes()`
+- [x] `toHaveBeenCalledWith()`
+- [x] `toHaveClass()`
+- [x] `toHaveSize()`
+- [x] `toHaveSpyInteractions()`
+- [x] `toMatch()`
+- [x] `toThrow()`
+- [x] `toThrowError()`
+- [x] `toThrowMatching()`
+
+Expectations based on the `instanceOf` matcher of `jasmine`.
+
+- [x] `toBeInstanceOfArray()`
+- [x] `toBeInstanceOfBoolean()`
+- [x] `toBeInstanceOfDate()`
+- [x] `toBeInstanceOfError()`
+- [x] `toBeInstanceOfFunction()`
+- [x] `toBeInstanceOfMap()`
+- [x] `toBeInstanceOfNumber()`
+- [x] `toBeInstanceOfObject()`
+- [x] `toBeInstanceOfPromise()`
+- [x] `toBeInstanceOfRangeError()`
+- [x] `toBeInstanceOfReferenceError()`
+- [x] `toBeInstanceOfRegExp()`
+- [x] `toBeInstanceOfSet()`
+- [ ] `toBeInstanceOfStorage()`
+- [x] `toBeInstanceOfString()`
+- [x] `toBeInstanceOfSyntaxError()`
+- [x] `toBeInstanceOfTypeError()`
+- [x] `toBeInstanceOfURIError()`
+- [x] `toBeInstanceOfWeakSet()`
+
+Expectations based on the `is` of `@angular-package/type` and `toBe()` matcher of `jasmine`.
+
+- [x] `toBeArray()`
+- [x] `toBeBigInt()`
+- [x] `toBeBoolean()`
+- [x] `toBeBooleanType()`
+- [x] `toBeClass()`
+- [x] `toBeDate()`
+- [x] `toBeFunction()`
+- [x] `toBeInstance()`
+- [x] `toBeKey()`
+
+Number
+
+- [x] `toBeNumber()`
+- [x] `toBeNumberBetween()`
+- [x] `toBeNumberType()`
+
+Object
+
+- [x] `toBeObject()`
+- [x] `toBeObjectKey()`
+- [x] `toBeObjectKeyIn()`
+- [x] `toBeObjectKeys()`
+- [x] `toBeObjectKeysIn()`
+- [x] `toBeObjectSomeKeys()`
+
+String
+
+- [x] `toBeString()`
+- [x] `toBeStringIncludes()`
+- [x] `toBeStringIncludesSome()`
+- [x] `toBeStringOfLength()`
+- [x] `toBeStringOfLengthBetween()`
+- [x] `toBeStringType()`
+
+Other
+
+- [x] `toBeRegExp()`
+- [x] `toBeSymbol()`
+- [x] `toBeTypeOf()`
+
+Expectations based on the `are` of `@angular-package/type` and `toBe()` matcher of `jasmine`.
+
+- [x] `toBeArrayOfBigInt()`
+- [x] `toBeArrayOfBoolean()`
+- [x] `toBeArrayOfDate()`
+- [x] `toBeArrayOfDefined()`
+- [x] `toBeArrayOfFalse()`
+- [x] `toBeArrayOfNull()`
+- [x] `toBeArrayOfNumber()`
+- [x] `toBeArrayOfRegExp()`
+- [x] `toBeArrayOfString()`
+- [x] `toBeArrayOfSymbol()`
+- [x] `toBeArrayOfTrue()`
+- [x] `toBeArrayOfUndefined()`
+
+Example
+
+```typescript
+import { Testing, TestingExpectation } from "@angular-package/testing";
+
+const t = new Testing();
+const to = new TestingExpectation();  
+
+t.describe(`TestingExpectation`, () => t
+  .spec(e => e.toBeArrayOfNull([null, null]))
+  .it(`it`, () => to
+    .toContain(['a', 'b', 'c'], 'c')
+    .toContain('string number', 'ber')
+    .toEqual({a: 2}, {a: 2})
+    .toMatch("my string", /string$/)
+    .toMatch('number', 'ber')
+
+    .not.toContain(['a', 'b', 'c'], 'h')
+    .toContain(['a', 'b', 'c'], 'a')
+
+    .not.toBeBigInt('a')
+  )
 );
 ```
 
-<br>
+### It
 
-#### `Testing.prototype.it()`
-
-Executes defined [`it()`][jasmine-it] function of jasmine on provided state `true` from the `execute`.
+Prepared specs `it` of `jasmine` built. Spec is a method built from `it` with expectation - `expect()` and `jasmine` matcher.
 
 ```typescript
-public it(
-  expectation: string,
-  assertion: jasmine.ImplementationCallback,
-  execute?: boolean
-): this {
-  this.#testingIt.it(expectation, assertion, execute);
-  return this;
-}
+it(description, () => expect(expect).matcher(expected))
 ```
 
-**Parameters:**
+### Nested
 
-| Name: type                    | Description |
-| :---------------------------- | :---------- |
-| `description: string`         | *"Textual description of what this spec is checking"* with an optional its unique [`number`][js-number] when adding `[counter]`. |
-| `specDefinitions: () => void` | *"Function that contains the code of your test. If not provided the test will be pending."*. |
-| `execute: boolean`            | A [`boolean`][js-boolean] type value to **decide** whether or not **execute** defined [`it()`][jasmine-it] of jasmine function. |
+`it` methods are accessed by using nested object structure and method names.
 
-**Returns:**
+### `TestingItTo`
 
-The **return value** is an instance of [`Testing`](#testing).
+Prepared `it` tests of `jasmine`.
 
-**Usage:**
+Nested `It` objects under specific getter
+
+- [x] `get be(): TestingItToBe`
+- [x] `get have(): TestingItToHave`
+- [x] `get throw(): TestingItToThrow`
+
+Method
+
+- [x] `contain()`
+- [x] `equal()`
+- [x] `match()`
+
+Example
 
 ```typescript
-// Example usage.
-// Object.
-import { is } from '@angular-package/type';
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * it().
- */
-testing.describe(
-  '[counter] describe()',
-  () => testing.it('[counter] it()', () => {
-      expect(true).toBeTruthy();
-    },
-    true // Whether or not execute spec.
-  ),
-  true // Whether or not execute suite.
+import { TestingItTo } from "@angular-package/testing";
+
+const t = new TestingItTo();
+
+// `to{Method}`
+t.describe('TestingItTo', () => t
+  .contain(['a', 'b', 'c'], 'b')
+  .equal(['27', 37, 47], ['27', 37, 47])
+  .match("my string", /string$/)
+  .match("other string", "ing")
+);
+
+// `toBe{Method}`
+t.describe('TestingItTo', () => t.be
+  .array([27, 37])
+  .key(74)
+);
+
+// `toBeArrayOf{Method}`
+t.describe('TestingItTo', () => t.be.arrayof
+  .boolean([false, false])
+  .date([new Date(), new Date()])
+);
+
+// `toBeBoolean{Method}`
+t.describe('TestingItTo', () => t.be.boolean
+  .boolean(false)
+  .type(false)
+);
+
+// `toBeInstanceOf{Method}`
+t.describe('TestingItTo', () => t.be.instanceof
+  .array([27, 37])
+  .map(new Map())
+);
+
+// `toHave{Method}`
+t.describe('TestingItTo', () => t.have
+  .size([27, 37], 2)
+);
+
+// `toHaveBeenCalled{Method}`
+class ClassA {
+  methodA(value?: any) {
+    return "methodA";
+  }
+  methodB(value?: any) {
+    return "methodB";
+  }
+}
+let classA: ClassA;
+t.describe('TestingItTo', () => t.have.been.called
+  .beforeEach(() => {
+    classA = new ClassA();
+    spyOn(classA, "methodA");
+    classA.methodA();
+    spyOn(classA, "methodB");
+    classA.methodB();
+  })
+  .called(() => classA.methodA)
+  // multiple calls
+  .called(() => [classA.methodA, classA.methodB])
+);
+
+// `toThrow{Method}`
+t.describe('TestingItTo', () => t.throw
+  .error(function() { throw new Error('Error') }, 'Error')
+  .matching(
+    function() { throw new Error('nope'); },
+    function(thrown) { return thrown.message === 'nope'; }
+  )
+  .throw(function() { throw 'things'; }, 'things')
 );
 ```
 
-<br>
+### `TestingItToBe`
 
-#### `Testing.prototype.toBe()`
+Nested `It` objects under specific getter
 
-[![update]][testing-github-changelog]
+- [x] `get arrayof(): TestingItToBeArrayOf`
+- [x] `get boolean(): TestingItToBeBoolean`
+- [x] `get instanceof(): TestingItToBeInstanceOf`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value. The `execute` parameter is **optional** because, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor).
+Method
+
+- [x] `be()`
+- [x] `array()`
+- [x] `bigInt()`
+- [x] `class()`
+- [x] `closeTo()`
+- [x] `date()`
+- [x] `defined()`
+- [x] `false()`
+- [x] `falsy()`
+- [x] `function()`
+- [x] `greaterThan()`
+- [x] `greaterThanOrEqual()`
+- [x] `instance()`
+- [x] `instanceOf()`
+- [x] `key()`
+- [x] `lessThan()`
+- [x] `lessThanOrEqual()`
+- [x] `naN()`
+- [x] `negativeInfinity()`
+- [x] `null()`
+- [x] `number()`
+- [x] `numberBetween()`
+- [x] `numberType()`
+- [x] `object()`
+- [x] `objectKey()`
+- [x] `objectKeyIn()`
+- [x] `objectKeys()`
+- [x] `objectKeysIn()`
+- [x] `objectSomeKeys()`
+- [x] `positiveInfinity()`
+- [x] `regExp()`
+- [x] `pending()`
+- [x] `rejected()`
+- [x] `rejectedWith()`
+- [x] `rejectedWithError()`
+- [x] `resolved()`
+- [x] `resolvedTo()`
+- [x] `string()`
+- [x] `stringIncludes()`
+- [x] `stringIncludesSome()`
+- [x] `stringOfLength()`
+- [x] `stringOfLengthBetween()`
+- [x] `stringType()`
+- [x] `symbol()`
+- [x] `true()`
+- [x] `truthy()`
+- [x] `undefined()`
+
+Example
 
 ```typescript
-public toBe<Value>(
-  expectation: string,
-  value: Value,
-  expected: any,
-  execute?: boolean
-): this {
-  this.it(expectation, () => expect(value).toBe(expected), execute);
-  return this;
-}
-```
+import { TestingItToBe } from "@angular-package/testing";
 
-**Parameters:**
+const t = new TestingItToBe();
 
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `expectation: string` | *"Textual description of what this spec is checking"* with an optional its unique [`number`][js-number] when adding `[counter]`. |
-| `value: Value`        | The value of any type passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: any`       | The value of any type passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**. By default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
+t.describe(`TestingItToBe`, () => {
+  t
+    .arrayof
+    .bigint([BigInt(27)])
 
-**Returns:**
+  t
+    .boolean
+    .boolean([true, false])
+    .type([true, false]);
 
-The **return value** is an instance of a [`Testing`](#testing).
+  t
+    .instanceof
 
-**Usage:**
+  t
+    .array([27, 37])
+    .bigInt([BigInt(27)])
+    .class(t)
+    .date(new Date())
+    .defined('a')
+    .false(false)
+    .falsy(false)
+    .function(() => {})
+    .greaterThan(37, 27)
+    .greaterThanOrEqual(37, 37)
+    .instance(t, TestingItToBe)
+    .instanceOf(t, TestingItToBe)
+    .key('PropertyKey')
+    .lessThan(37, 47)
+    .lessThanOrEqual(47, 47)
+    .naN(NaN)
+    .negativeInfinity(-Infinity)
+    .null(null)
+    .number(47)
+    .numberBetween(37, 27, 47)
+    .numberType(37)
+    .object({})
+    .objectKey({a: 1}, "a")
+    .objectKeyIn(t, "except")
 
-```typescript
-// Example usage.
-// Object.
-import { is } from '@angular-package/type';
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(
-  true,
-  false // Execute `it()` method globally is off.
-);
-/**
- * toBe().
- */
-testing.describe('string', () => {
-  testing.toBe(
-    `Checks the value against the string`,
-    is.stringType('my name'),
-    true,
-    true  // Even if globally executing the method `it()` is off, `execute` parameter as `true` executes this spec.
-  );
+    .objectKeys({a: 1, b: 2}, ["a", "b"])
+    .objectKeysIn(t, ["except"])
+    // .objectSomeKeys()
+    .pending(new Promise((resolve, reject) => {}))
+
+    .positiveInfinity(Infinity)
+    .regExp(new RegExp(/a/))
+    .rejected(new Promise((resolve, reject) => { reject("a") }))
+    .rejectedWith(new Promise((resolve, reject) => { reject("a")}), "a")
+    .rejectedWithError(new Promise((resolve, reject) => { throw new Error("Error") }), Error, "Error")
+
+    .resolved(new Promise((resolve, reject) => { resolve("a") }))
+    .resolvedTo(new Promise((resolve, reject) => { resolve("a") }), "a")
+
+    .string("a")
+    .stringIncludes("a b c d", ["d"])
+    .stringIncludesSome(" a b  c d ", ["a", "e", "c"])
+    .stringOfLength("a b c d e f g h i j k l m n o p r s", 18)
+    .stringOfLengthBetween("a b c d e f g h i j k l m n o p r s", 17, 18)
+    .stringType("a b c d e f")
 });
 ```
 
-<br>
+### `TestingItToBeArrayOf`
 
-#### `Testing.prototype.toBeBigInt()`
+Method
 
-[![update]][testing-github-changelog]
+- [x] `bigint()`
+- [x] `boolean()`
+- [x] `date()`
+- [x] `defined()`
+- [x] `false()`
+- [x] `null()`
+- [x] `number()`
+- [x] `regExp()`
+- [x] `string()`
+- [x] `symbol()`
+- [x] `true()`
+- [x] `undefined()`
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a [`bigint`][js-bigint] type on the `expected` of `true`. The method uses [`isBigInt()`](https://docs.angular-package.dev/v/type/is/isbigint) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeBigInt<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be a \`bigint\` type`,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.bigint(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be a bigint type'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
+Example
 
 ```typescript
-// Example usage.
-// Object.
-import { is } from '@angular-package/type';
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeBigInt().
- */
-testing.describe('bigint', () => testing.toBeBigInt(1n));
-```
-
-<br>
-
-#### `Testing.prototype.toBeBooleanType()`
-
-[![update]][testing-github-changelog]
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`boolean`][js-boolean] type on the `expected` of `true`. The method uses [`isBooleanType()`](https://docs.angular-package.dev/v/type/is/isbooleantype) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeBooleanType<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be of a \`boolean\` type`,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.booleanType(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be of a boolean type'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeBooleanType().
- */
-testing.describe('boolean', () => testing.toBeBooleanType(false));
-```
-
-<br>
-
-#### `Testing.prototype.toBeClass()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a [`class`][js-classes] on the `expected` of `true`. The method uses [`isClass()`](https://docs.angular-package.dev/v/type/is/isclass) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeClass<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be a \`class\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.class(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be a class'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeClass().
- */
-testing.describe('class Person', () => {
-  class Person {}
-  testing.toBeClass(Person);
-});
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfArray()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Array`][js-array] on the `expected` of `true`. The method uses [`isArray()`](https://docs.angular-package.dev/v/type/is/isarray) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeInstanceOfArray<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of an \`${Array.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.array(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of an Array'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfArray().
- */
-testing.describe('Array', () => testing.toBeInstanceOfArray(['1']));
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfBoolean()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Boolean`][js-boolean] on the `expected` of `true`. The method uses [`isBooleanObject()`](https://docs.angular-package.dev/v/type/is/isbooleanobject) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeInstanceOfBoolean<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of \`${Boolean.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.booleanObject(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of an Boolean'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfBoolean().
- */
-testing.describe('Boolean', () => testing.toBeInstanceOfBoolean(new Boolean()));
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfDate()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Date`][js-date] on the `expected` of `true`. The method uses [`isDate()`](https://docs.angular-package.dev/v/type/is/isdate) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeInstanceOfDate<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of \`${Date.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.date(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of Date'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfDate().
- */
-testing.describe('Date', () => testing.toBeInstanceOfDate(new Date()));
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfError()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Error`][js-error]  the `expected` of `true`.
-
-```typescript
-public toBeInstanceOfError<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of an \`${Error.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, value instanceof Error, expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of an Error'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfError().
- */
-testing.describe('Error', () => {
-  try {
-    throw new Error();
-  } catch (e) {
-    testing.toBeInstanceOfError(e);
-  }
-});
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfFunction()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`Function`][js-function] on the `expected` of `true`.
-
-```typescript
-public toBeInstanceOfFunction<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of a \`${Function.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, value instanceof Function, expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of a Function'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfFunction().
- */
-testing.describe(`Function`, () => testing.toBeInstanceOfFunction(() => {}));
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfMap()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`Map`][js-map] on the `expected` of `true`.
-
-```typescript
-public toBeInstanceOfMap<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of a \`${Map.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, value instanceof Map, expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of a Map'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfMap().
- */
-testing.describe(`Map`, () => testing.toBeInstanceOfMap(new Map()));
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfNumber()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`Number`][js-number] on the `expected` of `true`. The method uses [`isNumberObject()`](https://docs.angular-package.dev/v/type/is/isnumberobject) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeInstanceOfNumber<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of a \`${Number.name}\``,
-  expected: boolean = true,
-): this {
-  this.toBe(expectation, is.numberObject(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of a Number'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * Tests.
- */
-testing.describe(`Number`, () =>
-  testing.toBeInstanceOfNumber(new Number(27))
+import { TestingItToBeArrayOf } from "@angular-package/testing";
+
+const t = new TestingItToBeArrayOf();
+
+t.describe(`TestingItToBeArrayOf`, () => t
+  .bigint([BigInt(27), BigInt(37), BigInt(47)])
+  .boolean([false, true, false, false, true])
+  .date([new Date(), new Date(), new Date(), new Date()])
+  .defined(['b', 'c', 'd', 'e'])
+  .false([false, false, false, false, false])
+  .null([null, null, null])
+  .number([27, 37, 47])
+  .regExp([new RegExp('a'), new RegExp(/a/), new RegExp('b')])
+  .string(['a', 'b', 'c'])
+  .symbol([Symbol(27), Symbol('a'), Symbol('b')])
+  .true([true, true, true])
+  .undefined([undefined, undefined, undefined])
 );
 ```
 
-<br>
-
-#### `Testing.prototype.toBeInstanceOfObject()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an [`Object`][js-object] on the `expected` of `true`. The method uses [`isObject()`](https://docs.angular-package.dev/v/type/is/isobject) function of [`@angular-package/type`][type-github-readme].
+### `TestingItToBeBoolean`
 
 ```typescript
-public toBeInstanceOfObject<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of an \`${Object.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.object(value), expected, execute);
-  return this;
-}
+import { TestingItToBeBoolean } from "@angular-package/testing";
 ```
 
-**Parameters:**
+Method
 
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of an Object'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
+- [x] `boolean()`
+- [x] `type()`
 
-**Returns:**
+### `TestingItToBeInstanceOf`
 
-The **return value** is an instance of a [`Testing`](#testing).
+Method
 
-**Usage:**
+- [x] `array()`
+- [x] `boolean()`
+- [x] `date()`
+- [x] `error()`
+- [x] `function()`
+- [x] `map()`
+- [x] `number()`
+- [x] `object()`
+- [x] `promise()`
+- [x] `rangeError()`
+- [x] `referenceError()`
+- [x] `regExp()`
+- [x] `set()`
+- [ ] `storage()`
+- [x] `string()`
+- [x] `syntaxError()`
+- [x] `typeError()`
+- [x] `URIError()`
+- [x] `weakMap()`
+- [x] `weakSet()`
+
+Example
 
 ```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfObject()
- */
-testing.describe(`Object`, () =>
-  testing
-    .toBeInstanceOfObject(new Object({}))
-    .toBeInstanceOfObject({})
+import { TestingItToBeInstanceOf } from "@angular-package/testing";
+
+const t = new TestingItToBeInstanceOf();
+
+t.describe(`TestingItToBeInstanceOf`, () => t
+  .array(['a', 'b', 'c'])
+  .boolean(false)
+  .date(new Date())
+  .error(new Error())
+  .function(function() {})
+  .map(new Map())
+  .number(new Number(27))
+  .object(new Object({}))
+  .promise(new Promise((resolve, reject) => { resolve('a') }))
+  .rangeError(new RangeError('range error'))
+  .referenceError(new ReferenceError('reference'))
+  .regExp(new RegExp('a'))
+  .set(new Set('a'))
+  // .storage()
+  .string('a')
+  .syntaxError(new SyntaxError('syntax error'))
+  .typeError(new TypeError('type error'))
+  .weakSet(new WeakSet())
+);  
+```
+
+### `TestingItToHave`
+
+Nested `It` object under specific getter
+
+- [x] `get been(): TestingItToHaveBeen`
+
+Method
+
+- [x] `class()`
+- [x] `size()`
+- [x] `spyInteractions()`
+
+Example
+
+```typescript
+import { TestingItToHave } from "@angular-package/testing";
+
+const t = new TestingItToHave();
+
+const el = document.createElement('div');
+el.className = 'foo bar baz';
+
+class ClassA {
+  public methodA() {
+    return "methodA";
+  }
+}
+const classA = new ClassA();
+
+t.describe('TestingItToHave', () => t
+  .beforeEach(() => {
+    spyOn(classA, "methodA");
+    classA.methodA();
+  })
+  .class(el, 'bar')
+  .size(['a', 'b'], 2)
+  .spyInteractions(classA)
 );
 ```
 
-<br>
-
-#### `Testing.prototype.toBeInstanceOfPromise()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Promise`][js-promise] on the `expected` of `true`.
+### `TestingItToHaveBeen`
 
 ```typescript
-public toBeInstanceOfPromise<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of \`${Promise.name}\``,
-  expected: boolean = true,
-): this {
-  this.toBe(expectation, value instanceof Promise, expected, execute);
-  return this;
-}
+import { TestingItToHaveBeen } from "@angular-package/testing";
 ```
 
-**Parameters:**
+### `TestingItToHaveBeenCalled`
 
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of Promise'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
+Method
 
-**Returns:**
+- [x] `before()`
+- [x] `called()`
+- [x] `onceWith()`
+- [x] `with()`
 
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
+Example
 
 ```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfPromise()
- */
-const myPromise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve('foo');
-    // reject('foo');
-  }, 300);
-});
-testing.describe(`Promise`, () => testing.toBeInstanceOfPromise(myPromise));
-```
+import { TestingItToHaveBeenCalled } from "@angular-package/testing";
 
-<br>
+const t = new TestingItToThrow();
 
-#### `Testing.prototype.toBeInstanceOfRangeError()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`RangeError`][js-rangeerror] on the `expected` state.
-
-```typescript
-public toBeInstanceOfRangeError<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of \`${RangeError.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, value instanceof RangeError, expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of RangeError'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfRangeError()
- */
-testing.describe('RangeError', () => {
-  try {
-    throw new RangeError();
-  } catch (e) {
-    testing.toBeInstanceOfRangeError(e);
-  }
-});
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfReferenceError()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`ReferenceError`][js-referenceerror] on the `expected` of `true`.
-
-```typescript
-public toBeInstanceOfReferenceError<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of \`${ReferenceError.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, value instanceof ReferenceError, expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of ReferenceError'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfRangeError()
- */
-testing.describe('RangeError', () => {
-  try {
-    throw new RangeError();
-  } catch (e) {
-    testing.toBeInstanceOfRangeError(e);
-  }
-});
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfRegExp()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`RegExp`][js-regexp] on the `expected` of `true`. The method uses [`isRegExp()`](https://docs.angular-package.dev/v/type/is/isregexp) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeInstanceOfRegExp<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of \`${RegExp.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.regexp(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of RegExp'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfRegExp()
- */
-testing.describe(`RegExp`, () =>
-  testing.toBeInstanceOfRegExp(new RegExp(/[]/g))
+t.describe('TestingItToThrow', () => t
+  .error(function() { throw new Error('Error') }, 'Error')
+  .matching(
+    function() { throw new Error('nope'); },
+    function(thrown) { return thrown.message === 'nope'; }
+  )
+  .throw(function() { throw 'things'; }, 'things')
 );
 ```
 
-<br>
+### `TestingItToThrow`
 
-#### `Testing.prototype.toBeInstanceOfSet()`
+Prepared `toThrow` tests.
 
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Set`][js-set] on the `expected` of `true`.
+Method
+
+- [x] `error()`
+- [x] `matching()`
+- [x] `throw()`
+
+### Standalone
+
+`it` methods are directly accessed by using method names instead of nested structure, but using it.
+Standalone tests are designed to mixin them in `TestingCustom` class.
+
+Example `it` method with `actual` param.
 
 ```typescript
-public toBeInstanceOfSet<Value>(
-  value: Value,
+public toEqual<T>(
+  actual: ExpectType<T>,
+  expected: jasmine.Expected<typeof actual>,
+  expectation?: string,
+  expectationFailOutput?: any,
   execute?: boolean,
-  expectation: string = `The value must be an instance of \`${Set.name}\``,
-  expected: boolean = true
 ): this {
-  this.toBe(expectation, value instanceof Set, expected, execute);
+  this.to.equal(actual, expected, expectation, expectationFailOutput, execute);
   return this;
 }
 ```
 
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of Set'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
+Example `it` method with `spy` param.
 
 ```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfSet()
- */
-testing.describe(`Promise`, () => testing.toBeInstanceOfSet(new Set()));
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfStorage()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`Storage`][js-storage] on the `expected` of `true`.
-
-```typescript
-public toBeInstanceOfStorage<Value>(
-  value: Value,
+public toHaveBeenCalled<T extends jasmine.Func>(
+  spy: () => ExpectType<T> | ExpectType<T>[],
+  expectation?: string,
+  expectationFailOutput?: any,
   execute?: boolean,
-  expectation: string = `The value must be an instance of \`${Storage.name}\``,
-  expected: boolean = true
 ): this {
-  this.toBe(expectation, value instanceof Storage, expected, execute);
+  this.toHave.been.called.called(spy, expectation, expectationFailOutput, execute);
   return this;
 }
 ```
 
-**Parameters:**
+### `TestingToBeArrayOf`
 
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of Storage'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
+Prepared `it` specs prefixed with `testingToBeArrayOf`.
 
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfStorage()
- */
-testing.describe(`Storage`, () => testing.toBeInstanceOfStorage(window.sessionStorage));
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfString()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`String`][js-string] on the `expected` of `true`. The method uses [`isStringObject()`](https://docs.angular-package.dev/v/type/is/isstringobject) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeInstanceOfString<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of a \`${String.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.stringObject(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of a String'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfString()
- */
-testing.describe(`String`, () => testing.toBeInstanceOfString(new String()));
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfSyntaxError()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`SyntaxError`][js-syntaxerror] on the `expected` of `true`.
-
-```typescript
-public toBeInstanceOfSyntaxError<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of \`${SyntaxError.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, value instanceof SyntaxError, expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of SyntaxError'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfSyntaxError()
- */
-testing.describe('SyntaxError', () => {
-  try {
-    throw new SyntaxError();
-  } catch (e) {
-    testing.toBeInstanceOfSyntaxError(e);
-  }
-});
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfTypeError()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`TypeError`][js-typeerror] on the `expected` of `true`.
-
-```typescript
-public toBeInstanceOfTypeError<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of \`${TypeError.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, value instanceof TypeError, expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of SyntaxError'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfTypeError()
- */
-testing.describe('TypeError', () => {
-  try {
-    throw new TypeError();
-  } catch (e) {
-    testing.toBeInstanceOfTypeError(e);
-  }
-});
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfURIError()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of [`URIError`][js-urlerror] on the `expected` of `true`.
-
-```typescript
-public toBeInstanceOfURIError<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of \`${URIError.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, value instanceof URIError, expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of URIError'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfURIError()
- */
-testing.describe('URIError', () => {
-  try {
-    throw new URIError();
-  } catch (e) {
-    testing.toBeInstanceOfURIError(e);
-  }
-});
-```
-
-<br>
-
-#### `Testing.prototype.toBeInstanceOfWeakSet()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of a [`WeakSet`][js-weakset] on the `expected` of `true`.
-
-```typescript
-public toBeInstanceOfWeakSet<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be an instance of a \`${WeakSet.name}\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, value instanceof WeakSet, expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be an instance of WeakSet'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeInstanceOfWeakSet()
- */
-testing.describe(`WeakSet`, () => testing.toBeInstanceOfWeakSet(new WeakSet()));
-```
-
-<br>
-
-#### `Testing.prototype.toBeNull()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be [`null`][js-null] on the `expected` of `true`. The method uses [`isNull()`](https://docs.angular-package.dev/v/type/is/isnull) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeNull<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be \`null\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.null(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be null'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeNull()
- */
-testing.describe(`null`, () => testing.toBeNull(null));
-```
-
-<br>
-
-#### `Testing.prototype.toBeNumberType()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`number`][js-number] type on the `expected` of `true`. The method uses [`isNumberType()`](https://docs.angular-package.dev/v/type/is/isnumbertype) function of [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeNull<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be \`null\``,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.null(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be of a number type'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeNumberType()
- */
-testing.describe(`number`, () => testing.toBeNumberType(5));
-```
-
-<br>
-
-#### `Testing.prototype.toBeStringType()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to be of a [`string`][js-string] type on the `expected` of `true`. The method uses [`isStringType()`](https://docs.angular-package.dev/v/type/is/isstringtype) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public toBeStringType<Value>(
-  value: Value,
-  execute?: boolean,
-  expectation: string = `The value must be of a \`string\` type`,
-  expected: boolean = true
-): this {
-  this.toBe(expectation, is.stringType(value), expected, execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `value: Value`        | The value of any type to check. |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-| `expectation: string` | The message for the [karma][karma], which by default is set to `'The value must be of a string type'`. |
-| `expected: boolean`   | Expects the result of the expectation to be `true` or `false`, by default it's `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toBeStringType()
- */
-testing.describe(`string`, () => testing.toBeStringType('my name'));
-```
-
-<br>
-
-#### `Testing.prototype.toEqual()`
-
-Executes the spec on a state `true` from the `execute` expecting the provided `value` to equal to the given `expected`.
-
-> *"Expect the actual `value` to be equal to the `expected`, using deep equality comparison."*
-
-```typescript
-public toEqual<Value>(
-  expectation: string,
-  value: Value,
-  expected: any,
-  execute?: boolean
-): this {
-  this.it(expectation, () => expect(value).toEqual(expected), execute);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type            | Description |
-| :-------------------- | :---------- |
-| `expectation: string` | *"Textual description of what this spec is checking"* with an optional its unique number when adding `[counter]`. |
-| `value: Value`        | The value of any type passed to the [`expect()`][jasmine-expect] function of [jasmine][jasmine]. |
-| `expected: any`       | The value of any type passed to the `toEqual()` method of [`jasmine.Matchers`][jasmine-matchers]. *"The expected value to compare against."* |
-| `execute?: boolean`   | An optional parameter that specifies whether the spec is to be **executed**, by default it takes its value from the global `allowIt` parameter specified in the [`constructor`](#testing-constructor). |
-
-**Returns:**
-
-The **return value** is an instance of a [`Testing`](#testing).
-
-**Usage:**
-
-```typescript
-// Example usage.
-// Class.
-import { Testing } from '@angular-package/testing';
-/**
- * Initialize testing.
- */
-const testing = new Testing(true, true);
-/**
- * toEqual()
- */
-const firstName = 'My name';
-testing.describe(`toEqual`, () => testing.toEqual('Expects `firstName` to equal to `My name`', firstName, 'My name'));
-```
-
-<br>
-
-### `TestingToBeMatchers`
-
-Matchers that use the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers].
-
-**Instance public methods:**
-
-| TestingToBeMatchers.prototype.                                                  | Expects provided `value` to be |
-| :------------------------------------------------------------------------------ | :----------------------------- |
-| [`array()`](#testingtobematchersprototypearray)                                 | an [`array`][js-array]. |
-| [`bigint()`](#testingtobematchersprototypebigint)                               | a [`bigint`][js-bigint] type. |
-| [`boolean()`](#testingtobematchersprototypeboolean)                             | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean]. |
-| [`class()`](#testingtobematchersprototypeclass)                                 | a [`class`][js-classes]. |
-| [`date()`](#testingtobematchersprototypedate)                                   | a [`Date`][js-date]. |
-| [`defined()`](#testingtobematchersprototypedefined)                             | **defined**. |
-| [`false()`](#testingtobematchersprototypefalse)                                 | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `false`. |
-| [`function()`](#testingtobematchersprototypefunction)                           | [`function`][js-function]. |
-| [`instance()`](#testingtobematchersprototypeinstance)                           | an instance of a [`class`][js-classes] from the given `constructor`. |
-| [`key()`](#testingtobematchersprototypekey)                                     | a property key. |
-| [`null()`](#testingtobematchersprototypenull)                                   | [`null`][js-null]. |
-| [`number()`](#testingtobematchersprototypenumber)                               | a [`number`][js-number] type or an instance of a [`Number`][js-number]. |
-| [`numberBetween()`](#testingtobematchersprototypenumberbetween)                 | a [`number`][js-number] type or an instance of a [`Number`][js-number] between the **range** of **minimum** and **maximum**. |
-| [`object()`](#testingtobematchersprototypeobject)                               | an [`object`][js-object]. |
-| [`objectKey()`](#testingtobematchersprototypeobjectkey)                         | an [`object`][js-object] with a given `key` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. |
-| [`objectKeyIn()`](#testingtobematchersprototypeobjectkeyin)                     | an [`object`][js-object] with a given `key` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
-| [`objectKeys()`](#testingtobematchersprototypeobjectkeys)                       | an [`object`][js-object] with given `keys` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. |
-| [`objectKeysIn()`](#testingtobematchersprototypeobjectkeysin)                   | an [`object`][js-object] with given `keys` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. |
-| [`objectSomeKeys()`](#testingtobematchersprototypeobjectsomekeys)               | an [`object`][js-object] with **some** of its keys or **some groups** of its keys of the `PropertyKey` type. |
-| [`regexp()`](#testingtobematchersprototyperegexp)                               | [`RegExp`][js-regexp]. |
-| [`string()`](#testingtobematchersprototypestring)                               | a [`string`][js-string] type or an instance of a [`String`][js-string]. |
-| [`stringIncludes()`](#testingtobematchersprototypestringincludes)               | a [`string`][js-string] type or an instance of a [`String`][js-string] that **includes** the specified **words/sentences**. |
-| [`stringIncludesSome()`](#testingtobematchersprototypestringincludessome)       | a [`string`][js-string] type or an instance of a [`String`][js-string] that **includes some** of the specified **words/sentences**. |
-| [`stringOfLength()`](#testingtobematchersprototypestringoflength)               | a [`string`][js-string] type or an instance of a [`String`][js-string] of the specified **length**. |
-| [`stringOfLengthBetween()`](#testingtobematchersprototypestringoflengthbetween) | a [`string`][js-string] type or an instance of a [`String`][js-string] of the **length** between the given **minimum** and **maximum**. |
-| [`symbol()`](#testingtobematchersprototypesymbol)                               | a [`symbol`][js-symbol]. |
-| [`true()`](#testingtobematchersprototypetrue)                                   | a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `true`. |
-| [`undefined()`](#testingtobematchersprototypeundefined)                         | [`undefined`][js-undefined]. |
-
-<br>
-
-#### `TestingToBeMatchers.prototype.array()`
-
-Expects provided `value` to be an [`array`][js-array]. The method uses [`isArray()`](https://docs.angular-package.dev/v/type/is/isarray) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public array(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be an \`array\``
-): this {
-  this.toBe(is.array(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against the [`array`][js-array] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the value should be (or not) an [`array`][js-array]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let testArray: any;
-  beforeEach(() => (testArray = [1, 'two', 3]));
-
-  testing.describe('to be or not', () => {
-    testing.it('an array', () =>
-      toBe.array(testArray).
-      not.array(2));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.bigint()`
-
-Expects provided `value` to be a [`bigint`][js-bigint] type. The method uses [`isBigInt()`](https://docs.angular-package.dev/v/type/is/isbigint) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public bigint(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be \`bigint\``
-): this {
-  this.toBe(is.bigint(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                             | Description |
-| :------------------------------------- | :---------- |
-| `value: any`                           | The `value` of any type that is checked against [`bigint`][js-bigint] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>`  | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`           | An additional message when the matcher fails, by default, states the `value` should be (or not) [`bigint`][js-bigint].  |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isBigint: any;
-  beforeEach(() => (isBigint = 12n));
-  testing.describe('to be or not', () => {
-    testing.it('bigint', () =>
-      toBe.bigint(isBigint).
-      not.bigint(2));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.boolean()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean]. The method uses [`isBoolean()`](https://docs.angular-package.dev/v/type/is/isboolean) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public boolean(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`boolean\` type or an instance of \`Boolean\``
-): this {
-  this.toBe(is.boolean(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                             | Description |
-| :------------------------------------- | :---------- |
-| `value: any`                           | The `value` of any type that is checked against a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>`  | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`           | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isBoolean: any;
-  beforeEach(() => (isBoolean = false));
-
-  testing.describe('to be or not to be the type of', () => {
-    testing.it('boolean', () => toBe.boolean(isBoolean).not.boolean(3));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.class()`
-
-Expects provided `value` to be [`class`][js-classes]. The method uses [`isClass()`](https://docs.angular-package.dev/v/type/is/isclass) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public class(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be \`class\``
-): this {
-  this.toBe(is.class(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                             | Description |
-| :------------------------------------- | :---------- |
-| `value: any`                           | The `value` of any type that is checked against [`class`][js-classes] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>`  | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`           | An additional message when the matcher fails, by default, states the `value` should be (or not) [`class`][js-classes]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isClass: any;
-  beforeEach(() => (isClass = class TestingClass {}));
-  testing.describe('to be or not to be', () => {
-    testing.it('class', () =>
-      toBe.class(isClass).
-      not.class('TestingClass'));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.date()`
-
-Expects provided `value` to be a [`date`][js-date]. The method uses [`isDate()`](https://docs.angular-package.dev/v/type/is/isdate) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public date(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`date\``
-): this {
-  this.toBe(is.date(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against [`date`][js-date] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`date`][js-date]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isDate: any;
-  beforeEach(() => (isDate = new Date()));
-  testing.describe('to be or not to be the type of', () => {
-    testing.it('date', () =>
-      toBe.date(isDate).
-      not.date(false));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.defined()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be **defined**. The method uses [`isDefined()`](https://docs.angular-package.dev/v/type/is/isdefined) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public defined(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be defined`
-): this {
-  this.toBe(is.defined(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against defined and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) **defined**. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isDefined: any;
-  testing.describe('to be or not to be', () => {
-    testing.it('defined', () => toBe.defined('Defined').not.defined(isDefined));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.false()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `false`. The method uses [`isFalse()`](https://docs.angular-package.dev/v/type/is/isfalse) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public false(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`boolean\` type or an instance of \`Boolean\` equal to \`false\``
-): this {
-  this.toBe(is.false(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `false` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `false`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isFalse: any;
-  beforeEach(() => (isFalse = false));
-  testing.describe('to be or not to be', () => {
-    testing.it('`false`', () =>
-      toBe.false(isFalse).not.false(true));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.function()`
-
-Expects provided `value` to be [`function`][js-function]. The method uses [`isFunction()`](https://docs.angular-package.dev/v/type/is/isfunction) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public function(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be \`function\``
-): this {
-  this.toBe(is.function(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against [`function`][js-function] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) [`function`][js-function]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isFunction: any;
-  beforeEach(() => (isFunction = () => {}));
-  testing.describe('to be or not to be', () => {
-    testing.it('`function`', () => toBe.function(isFunction).not.function(true));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.instance()`
-
-Expects provided `value` to be an instance of a `class` from the given `constructor`. The method uses [`isInstance()`](https://docs.angular-package.dev/v/type/is/isinstance) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public instance<Type>(
-  value: any,
-  constructor: Constructor<Type>,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be an instance of ${constructor.name}`
-): this {
-  this.toBe(is.instance(value, constructor), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Generic type variables:**
-
-| Name   | Description  |
-| :----- | :----------- |
-| `Type` | A generic type variable by default of value captured from a given `constructor`. |
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against an instance of a `class` from the given `constructor` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `constructor: Constructor<Type>`      | A [`class`][js-classes] or [`function`][js-function] that specifies the type of the `constructor`. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) an instance of the given `constructor`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers, TestingClass } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isInstance: any;
-  beforeEach(() => isInstance = new TestingClass());
-  testing.describe('to be or not to be', () => {
-    testing.it(`an instance of \`TestingClass\``, () =>
-      toBe.instance(isInstance, TestingClass).
-      not.instance(isInstance, class Person {}));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.key()`
-
-Expects provided `value` to be property key. The method uses [`isKey()`](https://docs.angular-package.dev/v/type/is/iskey) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public key(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be the property key`
-): this {
-  this.toBe(is.key(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against the property key and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) property key. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isKey: any;
-  beforeEach(() => (isKey = 'firstName'));
-  testing.describe('to be or not to be', () => {
-    testing.it('`key`', () => toBe.key(isKey).not.key(true));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.null()`
-
-Expects provided `value` to be [`null`][js-null]. The method uses [`isNull()`](https://docs.angular-package.dev/v/type/is/isnull) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public null(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be \`null\``
-): this {
-  this.toBe(is.null(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against [`null`][js-null] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) [`null`][js-null]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isNull: any;
-  beforeEach(() => (isNull = null));
-  testing.describe('to be or not to be', () => {
-    testing.it('`null`', () => toBe.null(isNull).not.null(undefined));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.number()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be a [`number`][js-number] type or an instance of a [`Number`][js-number]. The method uses [`isNumber()`](https://docs.angular-package.dev/v/type/is/isnumber) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public number(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`number\` type or an instance of a \`Number\``
-): this {
-  this.toBe(is.number(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`number`][js-number] type or an instance of a [`Number`][js-number] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`number`][js-number] type or an instance of a [`Number`][js-number]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isNumber: any;
-  beforeEach(() => (isNumber = 27));
-  testing.describe('to be', () =>
-    testing.it('`number`', () =>
-      toBe.number(isNumber)))
-  .describe('not to be', () =>
-    testing.it('`number`', () =>
-      toBe.not.number(undefined)));
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.numberBetween()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be a [`number`][js-number] type or an instance of a [`Number`][js-number] between the `range` of **minimum** and **maximum**. The method uses [`isNumberBetween()`](https://docs.angular-package.dev/v/type/is/isnumberbetween) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public numberBetween<Min extends number, Max extends number>(
-  value: any,
-  min: Min,
-  max: Max,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`number\` type or an instance of a \`Number\` between the range of ${min} and ${max}`
-): this {
-  this.toBe(
-    is.numberBetween(value, min, max),
-    expected,
-    expectationFailOutput
-  );
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`number`][js-number] type or an instance of a [`Number`][js-number] within the specified **range** and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `min: Min`                            | The **minimum** range of generic type variable `Min` of the given `value`. |
-| `max: Max`                            | The **maximum** range of generic type variable `Max` of the given `value`. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`number`][js-number] type or an instance of a [`Number`][js-number] between the range of **minimum** and **maximum**. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isNumberBetween: any;
-  let min: any;
-  let max: any;
-  beforeEach(() => {
-    isNumberBetween = 27;
-    min = 26;
-    max = 28;
-  });
-
-  testing.describe('to be', () =>
-    testing.it(`\`number\` between 26 to 28`, () =>
-      toBe.numberBetween(isNumberBetween, min, max)))
-  .describe('not to be', () =>
-    testing.it(`\`number\` between 26 to 28`, () =>
-      toBe.not.numberBetween(127, min, max)));
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.object()`
-
-Expects provided `value` to be an [`object`][js-object]. The method uses [`isObject()`](https://docs.angular-package.dev/v/type/is/isobject) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public object(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be an \`object\``
-): this {
-  this.toBe(is.object(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against an [`object`][js-object] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingClass, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let TESTING_CLASS: any;
-  beforeEach(() => TESTING_CLASS = new TestingClass());
-  testing.describe('to be or not to be', () => {
-    testing.it(`an \`object\``, () =>
-      toBe.object(TESTING_CLASS).
-      not.object(undefined));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.objectKey()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be an [`object`][js-object] with a given `key` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. The method uses [`isObjectKey()`](https://docs.angular-package.dev/v/type/is/isobjectkey) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public objectKey(
-  value: any,
-  key: PropertyKey,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be an \`object\` with a given \`key\``
-): this {
-  this.toBe(is.objectKey(value, key), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The value of any type that is checked against an [`object`][js-object] that contains a given `key` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `key: PropertyKey`                    | Property name of `PropertyKey` type of potential [`object`][js-object] from the provided `value`. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with a given `key`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingClass, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let TESTING_CLASS: any;
-  beforeEach(() => TESTING_CLASS = new TestingClass());
-  testing.describe('to be or not to be', () => {
-    testing.it(`an \`object\` with a given key`, () =>
-      toBe.objectKey(TESTING_CLASS, 'firstName').
-      not.objectKey(TESTING_CLASS, 'noFirstName'));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.objectKeyIn()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be an [`object`][js-object] with a given `key` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. The method uses [`isObjectKeyIn()`](https://docs.angular-package.dev/v/type/is/isobjectkeyin) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public objectKeyIn(
-  value: any,
-  key: PropertyKey,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be an \`object\` with a given \`key\` in it(or its prototype chain).`
-): this {
-  this.toBe(is.objectKeyIn(value, key), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against the [`object`][js-object] that contains a given `key` in it(or its prototype chain) and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `key: PropertyKey`                    | Property name of `PropertyKey` type of potential [`object`][js-object] from the provided `value`. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with a given `key` in it(or its prototype chain). |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingClass, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let TESTING_CLASS: any;
-  beforeEach(() => TESTING_CLASS = new TestingClass());
-  testing.describe('to be or not to be', () =>
-    testing.it(`an \`object\` with a given key in it(or its prototype chain)`, () =>
-      toBe.objectKeyIn(TESTING_CLASS, 'firstName').
-      not.objectKeyIn(TESTING_CLASS, 103040501)));
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.objectKeys()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be an [`object`][js-object] with given `keys` by using the [`hasOwnProperty()`][js-hasownproperty] method of the [`Object`][js-object]. The method uses [`isObjectKeys()`](https://docs.angular-package.dev/v/type/is/isobjectkeys) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public objectKeys(
-  value: any,
-  keys: PropertyKey[],
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be an \`object\` with given \`keys\``
-): this {
-  this.toBe(is.objectKeys(value, keys), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against an [`object`][js-object] that contains given `keys` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `keys: PropertyKey[]`                 | An [`array`][js-array] of property names of the `PropertyKey` type of potential [`object`][js-object] from the provided `value`. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with given `keys`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingClass, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let TESTING_CLASS: any;
-  beforeEach(() => TESTING_CLASS = new TestingClass());
-  testing.describe('to be or not to be', () =>
-    testing.it(`an \`object\` with some given keys`, () =>
-      toBe.objectKeys(TESTING_CLASS, ['firstName', 'surname']).
-      not.objectKeys(TESTING_CLASS, [10304050])));
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.objectKeysIn()`
-
-[![new]][testing-github-changelog]
-
-Expects provided `value` to be an [`object`][js-object] with given `keys` in it(or its prototype chain) by using the [`in`][js-in-operator] operator. The method uses [`isObjectKeysIn()`](https://docs.angular-package.dev/v/type/is/isobjectkeysin) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public objectKeysIn(
-  value: any,
-  keys: PropertyKey[],
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be an \`object\` with given \`keys\` in it(or its prototype chain)`
-): this {
-  this.toBe(is.objectKeysIn(value, keys), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against an [`object`][js-object] that contains given `keys` in it(or its prototype chain) and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `keys: PropertyKey[]`                 | An [`array`][js-array] of property names of the `PropertyKey` type of potential [`object`][js-object] from the provided `value`. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with given `keys` in it(or its prototype chain). |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingClass, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let TESTING_CLASS: any;
-  beforeEach(() => TESTING_CLASS = new TestingClass());
-  testing.describe('to be or not to be', () =>
-    testing.it(`an \`object\` with some given keys`, () =>
-      toBe.objectKeysIn(TESTING_CLASS, ['firstName', 'surname', 10304050]).
-      not.objectKeysIn(TESTING_CLASS, ['noFirstName'])));
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.objectSomeKeys()`
-
-[![new]][testing-github-changelog]
-
-Expects provided `value` to be an [`object`][js-object] with **some** of its keys or **some groups** of its keys of the `PropertyKey` type. The method uses [`isObjectSomeKeys()`](https://docs.angular-package.dev/v/type/is/isobjectsomekeys) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public objectSomeKeys(
-  value: any,
-  keys: (PropertyKey | PropertyKey[])[],
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be an \`object\` with some of its keys or some groups of its keys from given \`keys\``
-): this {
-  this.toBe(is.objectSomeKeys(value, keys), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                               | Description |
-| :--------------------------------------- | :---------- |
-| `value: any`                             | The `value` of any type to check against an [`object`][js-object] that contains **some** of its keys or **some groups** of its keys from given `keys` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `keys: (PropertyKey \| PropertyKey[])[]` | An [`array`][js-array] of property names or a two-dimensional `array` of property names to check if the given `value` contains **some** of them or **some groups** of them. |
-| `expected: jasmine.Expected<boolean>`    | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`             | An additional message when the matcher fails, by default, states the `value` should be (or not) an [`object`][js-object] with **some** of its keys or **some groups** of its keys from given `keys`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingClass, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let TESTING_CLASS: any;
-  beforeEach(() => TESTING_CLASS = new TestingClass());
-  testing.describe('to be or not to be', () =>
-    testing.it(`an \`object\` with some given keys`, () =>
-      toBe.objectSomeKeys(TESTING_CLASS, ['firstName', 'surname', [1030405027, 5]]).
-      not.objectSomeKeys(TESTING_CLASS, [10304050, ['firstName', 10304050]])));
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.regexp()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be [`RegExp`][js-regexp]. The method uses [`isRegExp()`](https://docs.angular-package.dev/v/type/is/isregexp) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public regexp(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be \`regexp\``
-): this {
-  this.toBe(is.regexp(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against [`RegExp`][js-regexp] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) [`RegExp`][js-regexp]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let regexp: any;
-  beforeEach(() => regexp = /[]/g);
-  testing.describe('to be or not to be', () =>
-    testing.it(`\`RegExp\``, () =>
-      toBe.regexp(regexp).not.regexp(undefined)));
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.string()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string]. The method uses [`isString()`](https://docs.angular-package.dev/v/type/is/isstring) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public string(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`string\` type or an instance of a \`String\``
-): this {
-  this.toBe(is.string(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`string`][js-string] type or an instance of a [`String`][js-string] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`string`][js-string] type or an instance of a [`String`][js-string]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let string: any;
-  beforeEach(() => string = 'My new string');
-  testing.describe('to be or not to be', () => {
-    testing.it(`\`string\``, () => toBe.string(string).not.string(undefined));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.stringIncludes()`
-
-[![new]][testing-github-changelog]
-
-Expects provided value to be a [`string`][js-string] type or an instance of a [`String`][js-string] that includes the specified **words/sentences**. The method uses [`isStringIncludes()`](https://docs.angular-package.dev/v/type/is/isstringincludes) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public stringIncludes(
-  value: any,
-  includes: string[],
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`string\` type or an instance of \`String\` that includes the specified words/sentences from a given \`includes\``
-): this {
-  this.toBe(
-    is.stringIncludes(value, includes),
-    expected,
-    expectationFailOutput
-  );
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type to check against a [`string`][js-string] type or an instance of a [`String`][js-string] that contains **words/sentences** from a given `includes` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `includes: string[]`                  | An [`Array`][js-array] of strings as **words/sentences** to be **case-sensitive** searched for within the given `value`. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`string`][js-string] type or an instance of a [`String`][js-string] that includes the specified **words/sentences** from a given `includes`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let string: any;
-  beforeEach(() => string = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-  when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-  It has survived not only five centuries, but also the leap into electronic typesetting,
-  remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-  sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-  like Aldus PageMaker including versions of Lorem Ipsum.` as string);
-  testing.describe('to be or not to be', () => {
-    testing.it(`\`string\``, () =>
-      toBe.stringIncludes(string, ['Lorem', 'galley', 'It was popularised in the 1960s'])
-      .not.stringIncludes(null, ['Lorem', 'galley', 'It was popularised in the 1960s'])
-      .not.stringIncludes(string, ['Lorem', 'galley1', 'It was popularised in the 1960s'])
-    );
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.stringIncludesSome()`
-
-[![new]][testing-github-changelog]
-
-Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string] that includes **some** of the specified **words/sentences**.  The method uses [`isStringIncludesSome()`](https://docs.angular-package.dev/v/type/is/isstringincludessome) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public stringIncludesSome(
-  value: any,
-  includes: string[],
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`string\` type or an instance of \`String\` that includes some of the specified words/sentences from a given \`includes\``
-): this {
-  this.toBe(
-    is.stringIncludesSome(value, includes),
-    expected,
-    expectationFailOutput
-  );
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type to check against a [`string`][js-string] type or an instance of a [`String`][js-string] that contains **some** of the  **words/sentences** from a given `includes` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `includes: string[]`                  | An [`Array`][js-array] of strings as **words/sentences** to be **case-sensitive** searched for within the given `value`. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`string`][js-string] type or an instance of a [`String`][js-string] that includes **some** of the specified **words/sentences** from a given `includes`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let string: any;
-  beforeEach(() => string = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-  when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-  It has survived not only five centuries, but also the leap into electronic typesetting,
-  remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-  sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-  like Aldus PageMaker including versions of Lorem Ipsum.` as string);
-  testing.describe('to be or not to be', () => {
-    testing.it(`\`string\``, () =>
-      toBe.stringIncludesSome(string, ['Lorem', 'galley', 'It was popularised in the 1960s'])
-      .not.stringIncludesSome(null, ['Lorem', 'galley', 'It was popularised in the 1960s'])
-      .not.stringIncludesSome(string, ['Lorem1', 'galley1', 'It was popularised in the 1960s1'])
-    );
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.stringOfLength()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string] of the given **length**. The method uses [`isStringLength()`](https://docs.angular-package.dev/v/type/is/isstringlength) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public stringOfLength<Length extends number>(
-  value: any,
-  length: Length,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`string\` type or an instance of a \`String\` of the specified \`length\` equal to ${length}`
-): this {
-  this.toBe(is.stringLength(value, length), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`string`][js-string] type or an instance of a [`String`][js-string] of the given **length** and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `length: Length`                      | The **length** of generic type variable `Length` for the given `value`, |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`string`][js-string] type or an instance of a [`String`][js-string] of the specified **length**. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let string: any;
-  let length: any;
-  beforeEach(() => {
-    string = 'My new string, My new string';
-    length = 28;
-  });
-  testing.describe('to be or not to be', () => {
-    testing.it(`a \`string\` of the given length`, () =>
-      toBe.stringOfLength(string, length).
-      not.stringOfLength(undefined, length-10));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.stringOfLengthBetween()`
-
-[![new]][testing-github-changelog]
-
-Expects provided `value` to be a [`string`][js-string] type or an instance of a [`String`][js-string] of the **length** between the given **minimum** and **maximum**. The method uses [`isStringLengthBetween()`](https://docs.angular-package.dev/v/type/is/isstringlengthbetween) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public stringOfLengthBetween<Min extends number, Max extends number>(
-  value: any,
-  min: Min,
-  max: Max,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`string\` type or an instance of a \`String\` of the \`length\` between the given ${min} and ${max}`
-): this {
-  this.toBe(
-    is.stringLengthBetween(value, min, max),
-    expected,
-    expectationFailOutput
-  );
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`string`][js-string] type or an instance of a [`String`][js-string] of the given **min** and **max** and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `min: Min`                            | The **minimum** length of generic type variable `Min` of a given `value`. |
-| `max: Max`                            | The **maximum** length of generic type variable `Max` of a given `value`. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`string`][js-string] type or an instance of a [`String`][js-string] of the **length** between the given **minimum** and **maximum**. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let string: any;
-  let min: any;
-  let max: any;
-  beforeEach(() => {
-    string = 'My new string, My new string';
-    min = 26;
-    max = 28;
-  });
-  testing.describe('to be or not to be', () => {
-    testing.it(`a \`string\` between the given min and max.`, () =>
-      toBe.stringOfLengthBetween(string, min, max).
-      not.stringOfLengthBetween(undefined, min, max));
-  });
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.symbol()`
-
-Expects provided `value` to be [`symbol`][js-symbol]. The method uses [`isSymbol()`](https://docs.angular-package.dev/v/type/is/issymbol) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public symbol(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`symbol\``
-): this {
-  this.toBe(is.symbol(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`symbol`][js-symbol] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`symbol`][js-symbol]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isSymbol: any;
-  beforeEach(() => isSymbol = Symbol('firstName'));
-  testing.describe('to be or not to be', () => 
-    testing.it(`a \`symbol\``, () => toBe.symbol(isSymbol).not.symbol(undefined)));
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.true()`
-
-[![update]][testing-github-changelog]
-
-Expects provided `value` to be a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `true`. The method uses [`isTrue()`](https://docs.angular-package.dev/v/type/is/istrue) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public true(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be a \`boolean\` type or an instance of \`Boolean\` equal to \`true\``
-): this {
-  this.toBe(is.true(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `true` and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) a [`boolean`][js-boolean] type or an instance of [`Boolean`][js-boolean] equal to `true`. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isTrue: any;
-  beforeEach(() => isTrue = true);
-  testing.describe('to be or not to be', () =>
-    testing.it(`\`true\``, () => toBe.true(isTrue).not.true(false)));
-});
-```
-
-<br>
-
-#### `TestingToBeMatchers.prototype.undefined()`
-
-Expects provided `value` to be [`undefined`][js-undefined]. The method uses [`isUndefined()`](https://docs.angular-package.dev/v/type/is/isundefined) function from the [`@angular-package/type`][type-github-readme].
-
-```typescript
-public undefined(
-  value: any,
-  expected: jasmine.Expected<boolean> = true,
-  expectationFailOutput: any = `${this.expectationFailOutput} ${
-    this.getNot() === true ? `not` : ``
-  } be \`undefined\``
-): this {
-  this.toBe(is.undefined(value), expected, expectationFailOutput);
-  return this;
-}
-```
-
-**Parameters:**
-
-| Name: type                            | Description |
-| :------------------------------------ | :---------- |
-| `value: any`                          | The `value` of any type that is checked against [`undefined`][js-undefined] and the result of its check is passed to the [`expect()`][jasmine-expect] function of jasmine. |
-| `expected: jasmine.Expected<boolean>` | The expected value of a [`boolean`][js-boolean] to compare against the result of the `value` check that is passed to the `toBe()` method of [`jasmine.Matchers`][jasmine-matchers]. |
-| `expectationFailOutput: any`          | An additional message when the matcher fails, by default, states the `value` should be (or not) [`undefined`][js-undefined]. |
-
-**Returns:**
-
-The **return value** is an instance of a [`TestingToBeMatchers`](#testingtobematchers).
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { Testing, TestingToBeMatchers } from '@angular-package/testing';
-/**
- * Create `Testing` instance.
- */
-const testing = new Testing(true, true);
-const toBe = new TestingToBeMatchers();
-/**
- * Tests.
- */
-testing.describe('Expects provided value', () => {
-  let isUndefined: any;
-  beforeEach(() => isUndefined = undefined);
-  testing.describe('to be or not to be', () => 
-    testing.it(`\`undefined\``, () => toBe.undefined(isUndefined).not.undefined(null)));
-});
-```
-
-<br>
-
-## Helpers
-
-### Functions
-
-#### `randomNumber()`
-
-The [`function`][js-function] generates a random [`number`][js-number] between 0 and declared `max`.
-
-```typescript
-const randomNumber = <Max extends number>(
-  max: Max
-): NumberBetween<0, Max> => Math.floor(Math.random() * max);
-```
-
-**Generic type variables:**
-
-| Name  | Default value           | Description |
-| :-----| :---------------------: | :---------- |
-| `Max` | Captured from the `max` | A generic type variable `Max` indicates the maximum value of generic type `NumberBetween` via the return type `NumberBetween<0, Max>`. |
-
-**Parameters:**
-
-| Name: type   | Description |
-| :----------- | :---------- |
-| `max: Max`   | The **maximum** value of a generated [`number`][js-number]. |
-
-**Returns:**
-
-The **return value** is a random [`number`][js-number].
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { randomNumber } from '@angular-package/testing';
-
-// Returns a randomly generated maximum number equal to 27 of type `NumberBetween<0, 27, number>`.
-randomNumber(27);
-```
-
-<br>
-
-### `randomString()`
-
-The [`function`][js-function] generates a random [`string`][js-string] of declared length.
-
-```typescript
-const randomString = <Length extends number>(
-  length: Length,
-  chars = '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-): StringOfLength<0, Length>  => {
-  let randomStringOfLength = '';
-  for (let i = 0; i <= length; i++) {
-    const randomNumber = Math.floor(Math.random() * chars.length);
-    randomStringOfLength += chars.substring(randomNumber, randomNumber + 1);
-  }
-  return randomStringOfLength.slice(0, -1);
-};
-```
-
-**Generic type variables:**
-
-| Name     | Default value              | Description |
-| :------- | :------------------------: | :---------- |
-| `Length` | Captured from the `length` | A generic type variable `Length` indicates the maximum length of generic type `StringOfLength` via the return type `StringOfLength<0, Length>`. |
-
-**Parameters:**
-
-| Name: type       | Description |
-| :--------------- | :---------- |
-| `length: Length` | The **maximum** `length` of the generated random [`string`][js-string]. |
-| `chars: string`  | The chars to generate a random string. |
-
-**Returns:**
-
-The **return value** is a random [`string`][js-string] of declared `length`.
-
-**Usage:**
-
-```typescript
-// Example usage.
-import { randomString } from '@angular-package/testing';
-
-// Returns a randomly generated string of maximum length equal to 27 of type `StringOfLength<0, 27, string>`.
-randomString(27);
-```
-
-<br>
-
-### Constants
-
-Constants prepared for testing purposes.
-
-### `Array`
-
-```typescript
-/**
- * An `Array` of `bigint`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_BIGINT = [
-  TESTING_BIGINT,
-  TESTING_BIGINT_CONSTRUCTOR,
-  9007199254740991n,
-];
-
-/**
- * An `Array` of `boolean`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_BOOLEAN = [
-  true,
-  false,
-  TESTING_TRUE_INSTANCE,
-  TESTING_FALSE_INSTANCE,
-  false,
-  TESTING_FALSE,
-  TESTING_TRUE,
-];
-
-/**
- * An `Array` of `class`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_CLASS = [
-  new TestingClass(),
-  new TestingClass(),
-];
-
-/**
- * An `Array` of `function`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_FUNCTION = [
-  TESTING_FUNCTION,
-  TESTING_FUNCTION_CONSTRUCTOR,
-  TESTING_FUNCTION_CONSTRUCTOR_PERSON,
-  (x: number, y: string): any => x,
-];
-
-/**
- * An `Array` of `null`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_NULL = [
-  null,
-  null,
-  null,
-  TESTING_NULL,
-  TESTING_NULL,
-];
-
-/**
- * An `Array` of `number`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_NUMBER = [
-  1,
-  2,
-  3,
-  4,
-  7,
-  10,
-  1000,
-  3000,
-  151233,
-  TESTING_NUMBER,
-  TESTING_NUMBER_CONSTRUCTOR,
-  TESTING_NUMBER_INSTANCE,
-];
-
-/**
- * An `Array` of `object`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_OBJECT_ONE: Array<TestingObjectOne> = [
-  { [TESTING_NUMBER]: 'my number', x: 3000 },
-  { [TESTING_NUMBER]: 'my number', x: 1 },
-];
-
-/**
- * An `Array` of `string`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_STRING = [
-  TESTING_STRING,
-  TESTING_STRING_CONSTRUCTOR,
-  TESTING_STRING_INSTANCE,
-  '!@#$%^&*()Company',
-];
-
-/**
- * An `Array` of `symbol`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_SYMBOL_NUMBER = [
-  TESTING_SYMBOL_NUMBER,
-  Symbol(1005),
-  Symbol(1002),
-  Symbol(15),
-  Symbol(1),
-];
-
-/**
- * An `Array` of `symbol`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_SYMBOL_STRING = new Array([
-  TESTING_SYMBOL_STRING,
-  Symbol('String Symbol'),
-  Symbol('String Symbol'),
-  Symbol('String Symbol One'),
-  Symbol('String Symbol Two'),
-]);
-
-/**
- * An `Array` of `undefined`.
- * Array: true
- * Object: true
- * typeOf(): "array"
- * typeof: "object"
- */
-const TESTING_ARRAY_UNDEFINED: Array<undefined | unknown> = [
-  undefined,
-  undefined,
-  undefined,
-  TESTING_UNDEFINED,
-  TESTING_NOT_DEFINED,
-];
-
-```
-
-### `BigInt`
-
-```typescript
-/**
- * typeOf(): "bigint"
- * typeof: "bigint"
- */
-const TESTING_BIGINT = BigInt('9007199254740991');
-```
-
-### `Boolean`
-
-```typescript
-/**
- * typeOf(): "boolean"
- * typeof: "boolean"
- */
-const TESTING_FALSE = false;
-
-/**
- * typeOf(): "boolean"
- * typeof: "boolean"
- */
-const TESTING_TRUE = true;
-
-/**
- * Boolean: true
- * Object: true
- * typeOf(): "boolean"
- * typeof: "object"
- */
-// tslint:disable-next-line: ban-types no-construct
-const TESTING_FALSE_INSTANCE = new Boolean(TESTING_FALSE);
-
-/**
- * Boolean: true
- * Object: true
- * typeOf(): "boolean"
- * typeof: "object"
- */
-// tslint:disable-next-line: ban-types no-construct
-const TESTING_TRUE_INSTANCE = new Boolean(TESTING_TRUE);
-```
-
-### `Class`
-
-```typescript
-/**
- * Function: true
- * Object: true
- * class: true
- * typeOf(): "function"
- * typeof: "function"
- */
-class TestingClass {
-
-  /**
-   * Property as `number` of a `string` type.
-   */
-  1030405027 = 'my new number';
-
-  /**
-   * Property as `number` of a `number` type.
-   */
-  5 = 27;
-
-  /**
-   * Property as `string` of a `string` type.
-   */
-  firstName = 'My name';
-
-  /**
-   * Property as `number` of a `string` type.
-   */
-  surname = 'Surname';
-
-  /**
-   * Property as `number` of a `number` type.
-   */
-  age = TESTING_NUMBER;
-
-  /**
-   * Property as `string` of a `string` type.
-   */
-  city = TESTING_STRING;
-
-  /**
-   * Getter as `number` of a `number` type.
-   */
-  get [TESTING_NUMBER](): number {
-    return this.age;
-  }
-
-  /**
-   * Getter as `string` of a `string` type.
-   */
-  get [TESTING_STRING](): string {
-    return this.city;
-  }
-
-  /**
-   * Getter as `symbol number` of a `number` type.
-   */
-  get [TESTING_SYMBOL_NUMBER](): number {
-    return this.age;
-  }
-
-  /**
-   * Getter as `symbol string` of a `string` type.
-   */
-  get [TESTING_SYMBOL_STRING](): string {
-    return this.city;
-  }
-}
-
-/**
- * Object: true
- * typeOf(): "object"
- * typeof: "object"
- */
-const TESTING_CLASS = new TestingClass();
-```
-
-### `Date`
-
-```typescript
-/**
- * Date: true
- * Object: true
- * typeOf(): "date"
- * typeof: "object"
- */
-const TESTING_DATE = new Date(1995, 11, 17, 3, 24, 0);
-```
-
-### `Function`
-
-```typescript
-/**
- * Function: true
- * Object: true
- * function: true
- * typeOf(): "function"
- * typeof: "function"
- */
-const TESTING_FUNCTION = (x: number, y: string): any => x + y;
-
-/**
- * Function: true
- * Object: true
- * function: true
- * typeOf(): "function"
- * typeof: "function"
- */
-const TESTING_FUNCTION_CONSTRUCTOR = function(
-  this: any,
-  ...args: any[]
-): any {
-  if (args) {
-    args.forEach((arg, index: number) => (this[index] = arg[index]));
-  }
-  return this;
-};
-
-/**
- * Function: true
- * Object: true
- * function: true
- * typeOf(): "function"
- * typeof: "function"
- */
-const TESTING_FUNCTION_CONSTRUCTOR_PERSON = function(
-  this: TestingPerson,
-  ...args: any[]
-): TestingPerson {
-  if (args) {
-    this.firstName = args[0];
-    this.surname = args[1];
-    this.age = args[2];
-  }
-  return this;
-};
-```
-
-### `null`
-
-```typescript
-/**
- * typeOf(): "null"
- * typeof: "object"
- */
-const TESTING_NULL = null;
-```
-
-### `Number`
-
-```typescript
-/**
- * typeOf(): "number"
- * typeof: "number"
- */
-const TESTING_NUMBER = 10304050;
-
-/**
- * typeOf(): "number"
- * typeof: "number"
- */
-const TESTING_NUMBER_CONSTRUCTOR = Number(TESTING_NUMBER);
-
-/**
- * Number: true
- * Object: true
- * typeOf(): "number"
- * typeof: "object"
- */
-// tslint:disable-next-line: ban-types no-construct
-const TESTING_NUMBER_INSTANCE: Number = new Number(
-  TESTING_NUMBER
-);
-```
-
-### `Object`
-
-```typescript
-/**
- * Object: true,
- * typeOf(): "object",
- * typeof: "object"
- */
-const TESTING_OBJECT_ONE: TestingObjectOne = {
-  'key as string': true,
-  1030405027: 'key is number',
-  5: 'key is also number',
-  [TESTING_NUMBER]: 'key is number',
-  [TESTING_STRING]: 'key is string',
-  [TESTING_SYMBOL_NUMBER]: 'key is symbol number',
-  [TESTING_SYMBOL_STRING]: 6,
-  x: 3000,
-};
-
-/**
- * Object: true,
- * typeOf(): "object",
- * typeof: "object"
- */
-const TESTING_OBJECT_ONE_NEW = new Object(TESTING_OBJECT_ONE);
-```
-
-### `RegExp`
-
-```typescript
-/**
- * RegExp: true,
- * Object: true,
- * typeOf(): "regexp",
- * typeof: "object"
- */
-const TESTING_PATTERN = /[^a-zA-Z0-9]/g;
-```
-
-### `String`
-
-```typescript
-/**
- * typeOf(): "string"
- * typeof: "string"
- */
-const TESTING_STRING = '!@#$%^&*()Company';
-
-/**
- * typeOf(): "string"
- * typeof: "string"
- */
-const TESTING_STRING_CONSTRUCTOR = String(TESTING_STRING);
-
-/**
- * Object: true
- * String: true
- * typeOf(): "string"
- * typeof: "object"
- */
-// tslint:disable-next-line: ban-types no-construct
-const TESTING_STRING_INSTANCE = new String(
-  TESTING_STRING
-);
-
-```
-
-### `Symbol`
-
-```typescript
-/**
- * typeOf(): "symbol"
- * typeof: "symbol"
- */
-const TESTING_SYMBOL_NUMBER: unique symbol = Symbol(
-  TESTING_NUMBER
-);
-
-/**
- * typeOf(): "symbol"
- * typeof: "symbol"
- */
-const TESTING_SYMBOL_STRING: unique symbol = Symbol(
-  TESTING_STRING
-);
-```
-
-### `undefined`
-
-```typescript
-/**
- * typeOf(): "undefined"
- * typeof: "undefined"
- */
-const TESTING_UNDEFINED = undefined;
-```
+- [x] `toBeArrayOfBigInt()`
+- [x] `toBeArrayOfDate()`
+- [x] `toBeArrayOfDefined()`
+- [x] `toBeArrayOfFalse()`
+- [x] `toBeArrayOfNull()`
+- [x] `toBeArrayOfRegExp()`
+- [x] `toBeArrayOfString()`
+- [x] `toBeArrayOfSymbol()`
+- [x] `toBeArrayOfTrue()`
+- [x] `toBeArrayOfUndefined()`
+
+### `TestingToBeBoolean`
+
+Prepared `it` specs prefixed with `toBeBoolean`.
+
+- [x] `toBeBoolean()`
+- [x] `toBeBooleanType()`
+
+### `TestingToBeGreaterThan`
+
+Prepared `it` specs prefixed with `toBeGreaterThan`.
+
+- [x] `toBeGreaterThan()`
+- [x] `toBeGreaterThanOrEqual()`
+
+### `TestingToBeInstanceOf`
+
+Prepared `it` specs prefixed with `toBeInstanceOf`.
+
+- [x] `toBeInstanceOfArray()`
+- [x] `toBeInstanceOfBoolean()`
+- [x] `toBeInstanceOfDate()`
+- [x] `toBeInstanceOfError()`
+- [x] `toBeInstanceOfFunction()`
+- [x] `toBeInstanceOfMap()`
+- [x] `toBeInstanceOfNumber()`
+- [x] `toBeInstanceOfObject()`
+- [x] `toBeInstanceOfPromise()`
+- [x] `toBeInstanceOfRangeError()`
+- [x] `toBeInstanceOfReferenceError()`
+- [x] `toBeInstanceOfRegExp()`
+- [x] `toBeInstanceOfSet()`
+- [ ] `toBeInstanceOfStorage()`
+- [x] `toBeInstanceOfString()`
+- [x] `toBeInstanceOfSyntaxError()`
+- [x] `toBeInstanceOfTypeError()`
+- [x] `toBeInstanceOfURIError()`
+- [x] `toBeInstanceOfWeakSet()`
+
+### `TestingToBeLessThan`
+
+Prepared `it` specs prefixed with `toBeLessThan`.
+
+- [x] `toBeLessThan()`
+- [x] `toBeLessThanOrEqual()`
+
+### `TestingToBeNumber`
+
+Prepared `it` specs prefixed with `toBeNumber`.
+
+- [x] `toBeNumber()`
+- [x] `toBeNumberBetween()`
+- [x] `toBeNumberType()`
+
+### `TestingToBeObject`
+
+Prepared `it` specs prefixed with `toBeObject`.
+
+- [x] `toBeObject()`
+- [x] `toBeObjectKey()`
+- [x] `toBeObjectKeyIn()`
+- [x] `toBeObjectKeys()`
+- [x] `toBeObjectKeysIn()`
+- [x] `toBeObjectSomeKeys()`
+
+### `TestingToBeString`
+
+Prepared `it` specs prefixed with `toBeString`.
+
+- [x] `toBeString()`
+- [x] `toBeStringIncludes()`
+- [x] `toBeStringIncludesSome()`
+- [x] `toBeStringOfLength()`
+- [x] `toBeStringOfLengthBetween()`
+- [x] `toBeStringType()`
+
+### `TestingToBe`
+
+Prepared `it` specs prefixed with `toBe`.
+
+- [x] `toBeArray()`
+- [x] `toBeBigInt()`
+- [x] `toBeClass()`
+- [x] `toBeCloseTo()`
+- [x] `toBeDate()`
+- [x] `toBeDefined()`
+- [x] `toBeFalse()`
+- [x] `toBeFalsy()`
+- [x] `toBeFunction()`
+- [x] `toBeInstance()`
+- [x] `toBeInstanceOf()`
+- [x] `toBeKey()`
+- [x] `toBeNaN()`
+- [x] `toBeNegativeInfinity()`
+- [x] `toBeNull()`
+- [x] `toBePending()`
+- [x] `toBePositiveInfinity()`
+- [x] `toBeRegExp()`
+- [x] `toBeRejected()`
+- [x] `toBeRejectedWith()`
+- [x] `toBeRejectedWithError()`
+- [x] `toBeResolved()`
+- [x] `toBeResolvedTo()`
+- [x] `toBeSymbol()`
+- [x] `toBeTrue()`
+- [x] `toBeTruthy()`
+- [x] `toBeUndefined()`
+
+### `TestingToHave`
+
+Prepared `it` specs prefixed with `toHave`.
+
+- [x] `toHaveBeenCalled()`
+- [x] `toHaveBeenCalledBefore()`
+- [x] `toHaveBeenCalledOnceWith()`
+- [x] `toHaveBeenCalledTimes()`
+- [x] `toHaveBeenCalledWith()`
+- [x] `toHaveClass()`
+- [x] `toHaveSize()`
+- [x] `toHaveSpyInteractions()`
+
+### `TestingToThrow`
+
+Prepared `it` specs prefixed with `toThrow`.
+
+- [x] `toThrowError()`
+- [x] `toThrowMatching()`
+
+### `TestingTo`
+
+Prepared `it` specs prefixed with `to`.
+
+- [x] `toBe()`
+- [x] `toContain()`
+- [x] `toEqual()`
+- [x] `toMatch()`
+- [x] `toThrow()`
 
 <br>
 
@@ -4271,6 +1213,38 @@ How do I know when to release 1.0.0?
 
 MIT © angular-package ([license][testing-license])
 
+## Packages
+
+Useful and simple packages.
+
+| Package                                      | Description                                                       | Status |
+| :------------------------------------------- | :---------------------------------------------------------------- | -----: |
+| [callback][callback-github-readme]           | Manages the callback [`function`][js-function].                   | [![npm version][callback-npm-badge-png]][callback-npm-badge] |
+| [change-detection][cd-github-readme]         | Improves application performance.                                 | [![npm version][cd-npm-badge-png]][cd-npm-badge] |
+| [component-loader][cl-github-readme]         | Handles dynamic loading components.                               | [![npm version][cl-npm-badge-png]][cl-npm-badge] |
+| [core][core-github-readme]                   | Core features.                                                    | [![npm version][core-npm-badge-png]][core-npm-badge] |
+| [error][error-github-readme]                 | Manages an [`Error`][js-error].                                   | [![npm version][error-npm-badge-png]][error-npm-badge] |
+| [indexeddb][indexeddb-github-readme]         | Wrapper to IndexedDB client-side storage.                         | [![npm version][indexeddb-npm-badge-png]][indexeddb-npm-badge] |
+| name                                         | The name with prefix and suffix.                                  | ![inprogress] |
+| preferences                                  | Preferences, settings, options, configuration and setup in steps. | ![inprogress] |
+| [prism][prism-github-readme]                 | [`Prism`][prism-js] highlighter module.                           | [![npm version][prism-npm-badge-png]][prism-npm-badge] |
+| [property][property-github-readme]           | Handles object properties.                                        | [![npm version][property-npm-badge-png]][property-npm-badge] |
+| [range][range-github-readme]                 | The range between a minimum and maximum.                          | [![npm version][range-npm-badge-png]][range-npm-badge] |
+| [reactive][reactive-github-readme]           | Automatize the process of creating some rxjs features.            | [![npm version][reactive-npm-badge-png]][reactive-npm-badge] |
+| [sass][sass-github-readme]                   | Extension for sass modules and new modules.                       | [![npm version][sass-npm-badge-png]][sass-npm-badge] |
+| [sass-list][sass-list-github-readme]         | Modified list Sass module.                                        | [![npm version][sass-list-npm-badge-png]][sass-list-npm-badge] |
+| [sass-string][sass-string-github-readme]     | Modified string Sass module.                                      | [![npm version][sass-string-npm-badge-png]][sass-string-npm-badge] |
+| [spectre.css][spectrecss-github-readme]      | Modified Spectre.css - a lightweight, responsive, and modern CSS framework originally designed by Yan Zhu. | [![npm version][spectrecss-npm-badge-png]][spectrecss-npm-badge] |
+| storage                                      | The storage of data under allowed names.                          | ![inprogress] |
+| tag                                          | Any tag with optional attributes.                                 | ![inprogress] |
+| [testing][testing-github-readme]             | Support for testing other packages.                               | [![npm version][testing-npm-badge-png]][testing-npm-badge] |
+| text                                         | Text on the template with replaceable tags.                       | ![inprogress] |
+| [type][type-github-readme]                   | Common types, type guards, and type checkers.                     | [![npm version][type-npm-badge-png]][type-npm-badge] |
+| [ui][ui-github-readme]                       | User interface.                                                   | [![npm version][ui-npm-badge-png]][ui-npm-badge] |
+| [wrapper][wrapper-github-readme]             | Wrap the text with the opening and closing chars.                 | [![npm version][wrapper-npm-badge-png]][wrapper-npm-badge] |
+
+Click on the package name to visit its [GitHub](https://github.com/) page.
+
 <!-- Funding -->
 [github-badge-sponsor]: https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/angular-package
 [github-sponsor-link]: https://github.com/sponsors/angular-package
@@ -4281,10 +1255,13 @@ MIT © angular-package ([license][testing-license])
 [skeleton]: https://github.com/angular-package/skeleton
 
 <!-- Update status -->
-[experimental]: https://img.shields.io/badge/-experimental-orange
+[experimental]: https://img.shields.io/badge/-Experimental-orange
 [fix]: https://img.shields.io/badge/-fix-red
 [new]: https://img.shields.io/badge/-new-green
 [update]: https://img.shields.io/badge/-update-red
+[inprogress]: https://img.shields.io/badge/-In%20progress-gray
+[documentation]: https://img.shields.io/badge/-Documentation-informational
+[demonstration]: https://img.shields.io/badge/-Demonstration-green
 
 <!-- Discord -->
 [discord-badge]: https://img.shields.io/discord/925168966098386944
@@ -4371,6 +1348,16 @@ MIT © angular-package ([license][testing-license])
   <!-- GitHub -->
   [error-github-readme]: https://github.com/angular-package/error#readme
 
+<!-- Package: indexeddb -->
+  <!-- npm -->
+  [indexeddb-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Findexeddb.svg
+  [indexeddb-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Findexeddb.png
+  [indexeddb-npm-badge]: https://badge.fury.io/js/%40angular-package%2Findexeddb
+  [indexeddb-npm-readme]: https://www.npmjs.com/package/@angular-package/indexeddb#readme
+
+  <!-- GitHub -->
+  [indexeddb-github-readme]: https://github.com/angular-package/indexeddb#readme
+
 <!-- Package: name -->
   <!-- npm -->
   [name-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fname.svg
@@ -4430,6 +1417,46 @@ MIT © angular-package ([license][testing-license])
 
   <!-- GitHub -->
   [reactive-github-readme]: https://github.com/angular-package/reactive#readme
+
+<!-- Package: sass -->
+  <!-- npm -->
+  [sass-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fsass.svg
+  [sass-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fsass.png
+  [sass-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fsass
+  [sass-npm-readme]: https://www.npmjs.com/package/@angular-package/sass#readme
+
+  <!-- GitHub -->
+  [sass-github-readme]: https://github.com/angular-package/sass#readme
+
+<!-- Package: sass-list -->
+  <!-- npm -->
+  [sass-list-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fsass-list.svg
+  [sass-list-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fsass-list.png
+  [sass-list-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fsass-list
+  [sass-list-npm-readme]: https://www.npmjs.com/package/@angular-package/sass-list#readme
+
+  <!-- GitHub -->
+  [sass-list-github-readme]: https://github.com/angular-package/sass-string#readme
+
+<!-- Package: sass-string -->
+  <!-- npm -->
+  [sass-string-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fsass-string.svg
+  [sass-string-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fsass-string.png
+  [sass-string-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fsass-string
+  [sass-string-npm-readme]: https://www.npmjs.com/package/@angular-package/sass-string#readme
+
+  <!-- GitHub -->
+  [sass-string-github-readme]: https://github.com/angular-package/sass-string#readme
+
+<!-- Package: spectre.css -->
+  <!-- npm -->
+  [spectrecss-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fspectrecss.svg
+  [spectrecss-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fspectrecss.png
+  [spectrecss-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fspectre.css
+  [spectrecss-npm-readme]: https://www.npmjs.com/package/@angular-package/spectre.css#readme
+
+  <!-- GitHub -->
+  [spectrecss-github-readme]: https://github.com/angular-package/spectre.css#readme
 
 <!-- Package: storage -->
   <!-- npm -->
@@ -4492,7 +1519,7 @@ MIT © angular-package ([license][testing-license])
 <!-- Package: ui -->
   <!-- npm -->
   [ui-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fui.svg
-  [ui-npm-badge-svg]: https://badge.fury.io/js/%40angular-package%2Fui.svg
+  [ui-npm-badge-png]: https://badge.fury.io/js/%40angular-package%2Fui.png
   [ui-npm-badge]: https://badge.fury.io/js/%40angular-package%2Fui
   [ui-npm-readme]: https://www.npmjs.com/package/@angular-package/ui#readme
 

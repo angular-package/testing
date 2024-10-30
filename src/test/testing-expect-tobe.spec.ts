@@ -1,6 +1,6 @@
 // Class.
 import { Testing } from '../lib/testing.class';
-import { TestingToBeMatchers } from '../lib/testing-tobe-matchers.class';
+import { TestingExpectToBe } from '../lib/expectation/testing-expect-to-be.class';
 // Constants.
 import { TESTING_ARRAY_BIGINT } from '../lib/constants/array.const';
 import { TESTING_BIGINT } from '../lib/constants/big-int.const';
@@ -19,17 +19,18 @@ import { TESTING_UNDEFINED } from '../lib/constants/undefined.const';
 /**
  * Create `Testing` instance.
  */
-const testing = new Testing(true, true);
+const t = new Testing();
+
 /**
  * Tests.
  */
-testing.describe('Expects', () => {
-  const toBe = new TestingToBeMatchers();
-  testing
+t.describe(`TestingExpectToBe`, () => {
+  const toBe = new TestingExpectToBe();
+  t
     .it('toBe.array',                 () => toBe.array(TESTING_ARRAY_BIGINT))
     .it('toBe.bigint',                () => toBe.bigint(TESTING_BIGINT))
     .it('toBe.boolean',               () => toBe.boolean(TESTING_TRUE))
-    .it('toBe.class',                 () => toBe.class(TestingToBeMatchers))
+    .it('toBe.class',                 () => toBe.class(TestingExpectToBe))
     .it('toBe.date',                  () => toBe.date(new Date()))
     .it('toBe.false',                 () => toBe.false(TESTING_FALSE))
     .it('toBe.function',              () => toBe.function(TESTING_FUNCTION))
@@ -54,7 +55,7 @@ testing.describe('Expects', () => {
     .it('toBe.true',                  () => toBe.true(TESTING_TRUE))
     .it('toBe.undefined',             () => toBe.undefined(TESTING_UNDEFINED))
     ;
-  testing
+  t
     .it('toBe.not.array',                 () => toBe.not.array(TESTING_BIGINT))
     .it('toBe.not.bigint',                () => toBe.not.bigint(TESTING_ARRAY_BIGINT))
     .it('toBe.not.boolean',               () => toBe.not.boolean(TESTING_NOT_DEFINED))
@@ -81,6 +82,9 @@ testing.describe('Expects', () => {
     .it('toBe.not.stringOfLengthBetween', () => toBe.not.stringOfLengthBetween(TESTING_STRING, 0, 1))
     .it('toBe.not.symbol',                () => toBe.not.symbol(TESTING_DATE))
     .it('toBe.not.true',                  () => toBe.not.true(TESTING_NUMBER))
-    .it('toBe.not.undefined',             () => toBe.not.undefined(TESTING_REGEXP))
-    ;
+    .it('toBe.not.undefined',             () => toBe.not.undefined(TESTING_REGEXP));
 });
+
+
+
+

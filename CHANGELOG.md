@@ -6,6 +6,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.0-alpha] - 2024-10-30
+
+### [3.0.0-alpha] Added
+
+- Added `TestingActual` to initialize multiple tests on `actual` or `spy` param.
+- Added `TestingCustom` to include tests on initialization.
+- Added `TestingExpectation` class with methods directly accessed by using method names instead of nested structure, but using it through the `TestingExpectTo`.
+- Added `expectations` directory with classes where methods are accessed by using nested object structure and method names.
+- Added `it` directory with classes with methods are accessed by using nested object structure and method names.
+- Added `testing` directory with classes where methods are directly accessed by using method names instead of nested structure, but using it.
+- Added `asyncExpect` and jasmine matchers.
+
+### [3.0.0-alpha] Updated
+
+- Updated `Testing` to mixin tests from `testing` directory.
+
 ## [2.0.0-rc] - 2022-01-30
 
 ### [2.0.0-rc] Added
