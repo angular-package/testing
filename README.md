@@ -271,7 +271,7 @@ t.describe(`Describe`, () => {
 
 ### `TestingActual`
 
-Class to set `actual` value and use multiple testing `it` methods. It can be used through the `actual()` or `spy()` method of `Testing`.
+Class to set `actual` value and use multiple testing `it` methods. It can be used through the `actual()` or `spy()` methods of `Testing`.
 
 Example
 
@@ -318,7 +318,7 @@ t.describe('TestingActual', () => {
 
 ### `TestingCustom`
 
-Use `TestingCustom` class for custom testing. Access to the included tests are through the `testing` getter.
+Use `TestingCustom` class for custom testing. Access to the included tests is through the `testing` getter.
 
 ```typescript
 import {
