@@ -41,6 +41,9 @@ Jasmine unit testing wrapper with additional custom testing features.
 * [Installation](#installation)
 * [Api](#api)
 * [Usage](#usage)
+  * [`Testing`](#testing-class)
+  * [`TestingActual`](#testingactual)
+  * [`TestingCustom`](#testingcustom)
 * [Features](#features)
   * [Expectations](#expectations)
     * [Nested](#nested-expectations)
@@ -248,9 +251,9 @@ import {
 
 ## Usage
 
-### `Testing`
+### `Testing` class
 
-Use `Testing` class for testing.
+Main class for testing.
 
 ```typescript
 import { Testing } from "@angular-package/testing";
@@ -263,6 +266,53 @@ t.describe(`Describe`, () => {
   t.toBeBigInt(BigInt(37));
   // Prepared expectation.
   t.it(`It`, () => t.expect.toBeBigInt(BigInt(27)));
+});
+```
+
+### `TestingActual`
+
+Class to set `actual` value and use multiple testing `it` methods. It can be used through the `actual()` or `spy()` method of `Testing`.
+
+Example
+
+```typescript
+import { TestingActual } from "@angular-package/testing";
+
+const t = new TestingActual();
+
+class ClassA {
+  public methodA(value?: any) {
+    return "methodA";
+  }
+
+  public methodB(value?: any) {
+    return "methodB";
+  }
+}
+
+const classA = new ClassA();
+
+t.describe('TestingActual', () => {
+
+  // 
+  t
+    .actual('a b c d e f g h i j k l m n o p r s')
+    .toBeString()
+    .stringIncludes(['f'])
+    .stringIncludesSome(['f', 'z'])
+    .stringOfLengthBetween(27, 47)
+    .toBeStringType()
+  
+  t
+    .beforeEach(() => {
+      spyOn(classA, "methodA");
+      classA.methodA({test: 27});
+    })
+    .spy(() => classA.methodA)
+    .toHaveBeenCalled()
+    .toHaveBeenCalledWith({test: 27})
+    .toHaveBeenCalledTimes(1)
+    .toHaveBeenCalledOnceWith({test: 27})
 });
 ```
 
