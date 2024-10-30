@@ -1,3 +1,3 @@
 // Interface.
-export { TestingObject } from './object.interface';
-export { TestingPersonShape } from './person-shape.interface';
+export type { TestingObject } from './object.interface.js';
+export type { TestingPersonShape } from './person-shape.interface.js';

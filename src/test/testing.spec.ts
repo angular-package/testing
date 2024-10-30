@@ -177,9 +177,9 @@ t.describe(`Set`, () => t.toBeInstanceOfSet(new Set()));
 /**
  * toBeInstanceOfStorage()
  */
-t.describe(`Storage`, () =>
-  t.toBeInstanceOfStorage(window.sessionStorage)
-);
+// t.describe(`Storage`, () =>
+//   t.toBeInstanceOfStorage(window.sessionStorage)
+// );
 
 /**
  * toBeInstanceOfString()

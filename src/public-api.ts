@@ -133,4 +133,4 @@ export {
 /**
  * Interface.
  */
-export { TestingObject, TestingPersonShape } from './interface';
+export type { TestingObject, TestingPersonShape } from './interface';

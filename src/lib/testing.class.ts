@@ -77,7 +77,7 @@ export class Testing<
   /**
    * @description
    */
-  public get expect() {
+  public override get expect() {
     return this.testingCore.expect;
   }
 
@@ -147,7 +147,7 @@ export class Testing<
    * @param timeout 
    * @returns 
    */
-  public afterAll(
+  public override afterAll(
     action: jasmine.ImplementationCallback,
     timeout?: number,
     execute: boolean = true
@@ -162,7 +162,7 @@ export class Testing<
    * @param timeout 
    * @returns 
    */
-  public afterEach(
+  public override afterEach(
     action: jasmine.ImplementationCallback,
     timeout?: number,
     execute: boolean = true
@@ -177,7 +177,7 @@ export class Testing<
    * @param timeout 
    * @returns 
    */
-  public beforeAll(
+  public override beforeAll(
     action: jasmine.ImplementationCallback,
     timeout?: number,
     execute: boolean = true
@@ -192,7 +192,7 @@ export class Testing<
    * @param timeout 
    * @returns 
    */
-  public beforeEach(
+  public override beforeEach(
     action: jasmine.ImplementationCallback,
     timeout?: number,
     execute: boolean = true
@@ -209,7 +209,7 @@ export class Testing<
    * @param execute A `boolean` type value to decide whether or not execute defined `describe()` of jasmine function.
    * @returns The return value is an instance of a child class.
    */
-  public describe<Description extends string>(
+  public override describe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => any,
     execute?: boolean
@@ -218,7 +218,7 @@ export class Testing<
     return this;
   }
 
-  public fdescribe<Description extends string>(
+  public override fdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => any,
   ): this {
@@ -233,7 +233,7 @@ export class Testing<
    * @param execute A `boolean` type value to decide whether or not execute defined `it()` of jasmine function.
    * @returns The return value is an instance of a child class.
    */
-  public it<Expectation extends string>(
+  public override it<Expectation extends string>(
     expectation: Expectations | Expectation,
     assertion: jasmine.ImplementationCallback,
     execute?: boolean
@@ -248,7 +248,7 @@ export class Testing<
    * @param value 
    * @returns 
    */
-  public setSpecProperty(key: string, value: unknown) {
+  public override setSpecProperty(key: string, value: unknown) {
     this.testingCore.setSpecProperty(key, value);
     return this;
   }
@@ -259,7 +259,7 @@ export class Testing<
    * @param value 
    * @returns 
    */
-  public setSuiteProperty(key: string, value: unknown) {
+  public override setSuiteProperty(key: string, value: unknown) {
     this.testingCore.setSuiteProperty(key, value);
     return this;
   }
@@ -271,7 +271,7 @@ export class Testing<
    * @param execute 
    * @returns 
    */
-  public spec<T>(
+  public override spec<T>(
     assertion: (expectation: TestingExpectation) => any,
     description: string = '',
     execute?: boolean,
@@ -304,7 +304,7 @@ export class Testing<
    * @param specDefinitions 
    * @returns 
    */
-  public xdescribe<Description extends string>(
+  public override xdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => any,
   ): this {

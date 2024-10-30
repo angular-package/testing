@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.0-alpha.1] - 2024-10-31
+
+- Added `type` and `override` .
+- Removed `Storage` from tests.
+
+## [3.0.0-alpha.0] - 2024-10-30
+
+- Removed `Storage`.
+
 ## [3.0.0-alpha] - 2024-10-30
 
 ### [3.0.0-alpha] Added
