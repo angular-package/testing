@@ -1,6 +1,6 @@
 {
   "name": "@angular-package/testing",
-  "version": "3.0.0-alpha",
+  "version": "3.0.0-alpha.0",
   "author": "Angular Package <angular-package@wvvw.dev> (https://angular-package.dev)",
   "homepage": "https://docs.angular-package.dev",
   "description": "Jasmine unit testing wrapper with additional custom testing features.",
@@ -32,7 +32,7 @@
     "tslib": "^2.3.0"
   },
   "scripts": {
-    "prepublishOnly": "npm install rimraf && npm run pkg && npm run clean",
+    "prepublishOnly": "npm i rimraf && npm run pkg && npm run clean",
     "pkg": "npm pkg delete dependencies && npm i tslib@2.3.0 --save-peer",
     "clean": "./node_modules/rimraf/dist/esm/bin.mjs ./node_modules && npm pkg delete scripts"
   },

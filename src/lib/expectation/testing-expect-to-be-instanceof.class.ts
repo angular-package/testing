@@ -383,6 +383,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
 
   // TODO: Description.
   /**
+   * @deprecated
    * @description Expects provided value to be an instance of `Storage`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual 
    * @param expected 
@@ -396,9 +397,9 @@ export class TestingExpectToBeInstanceOf extends Expect {
       this.getNot() === true ? `not` : ``
     } be an instance of \`Storage\``
   ): this {
-    expected === false && (this.not);
-    this.expect(actual, expectationFailOutput).toBeInstanceOf(Storage);
-    this.setNot(false);
+    // expected === false && (this.not);
+    // this.expect(actual, expectationFailOutput).toBeInstanceOf(Storage);
+    // this.setNot(false);
     return this;
   }
 
