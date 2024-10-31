@@ -27,13 +27,11 @@
     }
   ],
   "peerDependencies": {
-    "@angular-package/type": "^5.0.0-rc.0",
-    "jasmine": "^5.4.0",
-    "tslib": "^2.3.0"
+    "@angular-package/type": "^5.0.0-rc.0"
   },
   "scripts": {
     "prepublishOnly": "npm i rimraf && npm run pkg && npm run clean",
-    "pkg": "npm pkg delete dependencies && npm i tslib@2.3.0 --save-peer",
+    "pkg": "npm pkg delete dependencies",
     "clean": "./node_modules/rimraf/dist/esm/bin.mjs ./node_modules && npm pkg delete scripts"
   },
   "keywords": [
