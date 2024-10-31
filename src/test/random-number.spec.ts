@@ -1,7 +1,7 @@
 // Function.
 import { randomNumber } from '../lib/function/random-number.func';
 // Class.
-import { Testing } from '../lib/testing.class';
+import { Testing } from "./main";
 // Constant.
 import { ExecuteSpec } from './execute';
 /**

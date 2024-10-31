@@ -1,4 +1,4 @@
-import { TestingToBeBoolean } from "../../lib";
+import { TestingToBeBoolean } from "../main";
 
 const execute = true;
 const executeDescribe = true;

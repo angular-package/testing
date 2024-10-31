@@ -1,4 +1,4 @@
-import { TestingToBeObject } from "../../lib";
+import { TestingToBeObject } from "../main";
 
 const execute = true;
 const executeDescribe = true;

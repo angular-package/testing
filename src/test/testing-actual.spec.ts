@@ -1,4 +1,4 @@
-import { TestingActual } from "../lib";
+import { TestingActual } from "./main";
 
 const t = new TestingActual();
 

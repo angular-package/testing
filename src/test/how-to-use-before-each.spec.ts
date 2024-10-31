@@ -2,7 +2,7 @@
 import { ExecuteSpec } from "./execute";
 
 // Class.
-import { Testing } from "../lib";
+import { Testing } from "./main";
 
 const execute = false;
 const executeDescribe = true;

@@ -1,4 +1,4 @@
-import { TestingToHave } from "../../lib";
+import { TestingToHave } from "../main";
 
 const execute = true;
 const executeDescribe = true;

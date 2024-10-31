@@ -1,4 +1,4 @@
-import { TestingToBeString } from "../../lib";
+import { TestingToBeString } from "../main";
 
 const execute = true;
 const executeDescribe = true;

@@ -1,6 +1,4 @@
-import { Testing } from "../lib";
-
-import { TestingExpectToBe } from '../lib/expectation/testing-expect-to-be.class';
+import { Testing, TestingExpectToBe } from "./main";
 import { ExecuteSpec } from "./execute";
 
 const execute = false;

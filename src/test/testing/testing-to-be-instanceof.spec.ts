@@ -1,4 +1,4 @@
-import { TestingToBeInstanceOf } from "../../lib";
+import { TestingToBeInstanceOf } from "../main";
 
 const execute = true;
 const executeDescribe = true;
