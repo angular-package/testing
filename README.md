@@ -106,6 +106,13 @@ Install `@angular-package/testing` package with command:
 npm i --save @angular-package/testing
 ```
 
+Dependencies
+
+```bash
+npm i tslib
+npm i jasmine
+```
+
 <br>
 
 ## Api
