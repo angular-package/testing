@@ -1,4 +1,4 @@
-import { TestingDescribe } from "../lib";
+import { TestingDescribe } from "./main";
 import { ExecuteSpec } from "./execute";
 
 const execute = false;

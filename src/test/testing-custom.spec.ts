@@ -1,6 +1,5 @@
 // TestingCustom
-import { TestingDescribe, TestingExpectation, TestingIt } from "../lib";
-import { TestingCustom } from "../lib/testing-custom.class";
+import { TestingDescribe, TestingCustom, TestingExpectation, TestingIt } from "./main";
 
 // Selected.
 import { TestingToBe } from "../lib/testing/testing-to-be.class";

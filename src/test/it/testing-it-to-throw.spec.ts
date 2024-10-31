@@ -1,5 +1,6 @@
 // Class.
-import { TestingItToThrow } from "../../lib";
+import { TestingItToThrow } from '../main';
+
 // Execute.
 import { ExecuteSpec } from "../execute";
 

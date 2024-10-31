@@ -1,6 +1,5 @@
 // Class.
-import { Testing } from '../lib/testing.class';
-import { TestingExpectToBe } from '../lib/expectation/testing-expect-to-be.class';
+import { Testing, TestingExpectToBe } from "./main";
 // Constants.
 import { TESTING_ARRAY_BIGINT } from '../lib/constants/array.const';
 import { TESTING_BIGINT } from '../lib/constants/big-int.const';

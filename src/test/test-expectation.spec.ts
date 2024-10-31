@@ -1,5 +1,5 @@
 // Class.
-import { Testing, TestingExpectation } from "../lib";
+import { Testing, TestingExpectation } from "./main";
 // Execute.
 import { ExecuteSpec } from "./execute";
 

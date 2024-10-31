@@ -1,4 +1,4 @@
-import { TestingToBeNumber } from "../../lib";
+import { TestingToBeNumber } from "../main";
 
 const execute = true;
 const executeDescribe = true;

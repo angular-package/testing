@@ -1,7 +1,7 @@
 // Function.
 import { randomString } from '../lib/function/random-string.func';
 // Class.
-import { Testing } from '../lib/testing.class';
+import { Testing } from "./main";
 import { ExecuteSpec } from './execute';
 
 import { TestingExpectToBe } from '../lib/expectation/testing-expect-to-be.class';

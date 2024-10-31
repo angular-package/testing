@@ -1,5 +1,5 @@
 // Example usage.
-import { Testing, TestingCustom, TestingToBe, TestingExpectToBe, TestingDescribe, TestingIt, TestingExpectation } from '../lib';
+import { Testing, TestingCustom, TestingToBe, TestingExpectToBe, TestingDescribe, TestingIt, TestingExpectation } from './main';
 // Constant.
 import { TestingClass, TESTING_SYMBOL_NUMBER } from '../lib/constants';
 /**

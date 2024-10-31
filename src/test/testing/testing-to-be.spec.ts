@@ -1,4 +1,4 @@
-import { TestingToBe } from "../../lib";
+import { TestingToBe } from "../main";
 
 // TODO:
 const execute = true;

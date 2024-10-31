@@ -1,6 +1,5 @@
 // Class.
-import { Testing, TestingIt } from "../../lib";
-import { TestingToBeArrayOf } from "../../lib/testing";
+import { Testing, TestingIt, TestingToBeArrayOf } from "../main";
 // Execute.
 import { ExecuteSpec } from "../execute";
 

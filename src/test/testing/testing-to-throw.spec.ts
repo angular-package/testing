@@ -1,4 +1,4 @@
-import { TestingToThrow } from "../../lib";
+import { TestingToThrow } from "../main";
 
 const execute = true;
 const executeDescribe = true;

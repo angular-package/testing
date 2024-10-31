@@ -1,5 +1,6 @@
 // Class.
-import { TestingItToHaveBeen } from "../../lib";
+import { TestingItToHaveBeen } from '../main';
+
 // Execute.
 import { ExecuteSpec } from "../execute";
 

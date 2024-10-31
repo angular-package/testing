@@ -1,4 +1,4 @@
-import { TestingToBeLessThan } from "../../lib";
+import { TestingToBeLessThan } from "../main";
 
 const execute = true;
 const executeDescribe = true;

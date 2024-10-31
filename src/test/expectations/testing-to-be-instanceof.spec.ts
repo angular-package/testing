@@ -1,5 +1,5 @@
 // Class.
-import { Testing, TestingExpectToBeInstanceOf } from "../../lib";
+import { Testing, TestingExpectToBeInstanceOf } from '../main';
 // Execute.
 import { ExecuteSpec } from "../execute";
 

@@ -1,6 +1,6 @@
 import { is } from '@angular-package/type';
 // Class.
-import { Testing } from '../lib/testing.class';
+import { Testing } from "./main";
 /**
  * Initialize testing.
  */
