@@ -22,7 +22,7 @@ export class TestingToBe<
   /**
    * 
    */
-  protected toBe: TestingItToBe;
+  protected _toBe: TestingItToBe;
 
   /**
    * Simple `class` to support testing.
@@ -46,7 +46,7 @@ export class TestingToBe<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this.toBe = new TestingItToBe(
+    this._toBe = new TestingItToBe(
       allowDescribe,
       allowIt,
       executable,
@@ -57,7 +57,7 @@ export class TestingToBe<
     );
   }
 
-  //#region toBe
+  //#region _toBe
   /**
    * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `array` type or an instance of `Array` on the `expected` of
    * `true`. The method uses `isArray()` function of `@angular-package/type`.
@@ -77,7 +77,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.array(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.array(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -100,7 +100,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.bigInt(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.bigInt(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -123,7 +123,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.class(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.class(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -146,7 +146,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.closeTo(actual, expected, precision, expectation, expectationFailOutput, execute);
+    this._toBe.closeTo(actual, expected, precision, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -167,7 +167,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.date(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.date(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -188,7 +188,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.defined(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.defined(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -210,7 +210,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.false(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.false(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -231,7 +231,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.falsy(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.falsy(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -252,7 +252,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.function(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.function(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -275,7 +275,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.instance(actual, constructor, expected, expectation, expectationFailOutput, execute);
+    this._toBe.instance(actual, constructor, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -296,7 +296,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean
   ): this {
-    this.toBe.instanceOf(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.instanceOf(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -317,7 +317,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.key(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.key(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -338,7 +338,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.naN(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.naN(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -359,7 +359,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.negativeInfinity(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.negativeInfinity(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -382,7 +382,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.null(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.null(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -393,7 +393,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.pending(actual, expectation, expectationFailOutput, execute);
+    this._toBe.pending(actual, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -414,7 +414,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.positiveInfinity(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.positiveInfinity(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -435,7 +435,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.regExp(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.regExp(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -455,7 +455,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.rejected(actual, expectation, expectationFailOutput, execute);
+    this._toBe.rejected(actual, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -475,7 +475,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.rejectedWith(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.rejectedWith(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -498,7 +498,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.rejectedWithError(actual, expected, message, expectation, expectationFailOutput, execute);
+    this._toBe.rejectedWithError(actual, expected, message, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -519,7 +519,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.resolved(actual, expectation, expectationFailOutput, execute);
+    this._toBe.resolved(actual, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -539,7 +539,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.resolvedTo(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.resolvedTo(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -563,7 +563,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.symbol(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.symbol(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -585,7 +585,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.true(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.true(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -606,7 +606,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.truthy(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.truthy(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -627,7 +627,7 @@ export class TestingToBe<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.undefined(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.undefined(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 }

@@ -21,7 +21,7 @@ export class TestingToBeObject<
   /**
    * 
    */
-  protected toBe: TestingItToBe;
+  protected _toBe: TestingItToBe;
 
   /**
    * Simple `class` to support testing.
@@ -45,7 +45,7 @@ export class TestingToBeObject<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this.toBe = new TestingItToBe(
+    this._toBe = new TestingItToBe(
       allowDescribe,
       allowIt,
       executable,
@@ -74,7 +74,7 @@ export class TestingToBeObject<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.object(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.object(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -97,7 +97,7 @@ export class TestingToBeObject<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.objectKey(actual, key, expected, expectation, expectationFailOutput, execute);
+    this._toBe.objectKey(actual, key, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -120,7 +120,7 @@ export class TestingToBeObject<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.objectKeyIn(actual, key, expected, expectation, expectationFailOutput, execute);
+    this._toBe.objectKeyIn(actual, key, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -143,7 +143,7 @@ export class TestingToBeObject<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.objectKeys(actual, keys, expected, expectation, expectationFailOutput, execute);
+    this._toBe.objectKeys(actual, keys, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -166,7 +166,7 @@ export class TestingToBeObject<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.objectKeysIn(actual, keys, expected, expectation, expectationFailOutput, execute);
+    this._toBe.objectKeysIn(actual, keys, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -189,7 +189,7 @@ export class TestingToBeObject<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.objectSomeKeys(actual, keys, expected, expectation, expectationFailOutput, execute);
+    this._toBe.objectSomeKeys(actual, keys, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

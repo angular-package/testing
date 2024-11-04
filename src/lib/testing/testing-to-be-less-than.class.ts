@@ -21,7 +21,7 @@ export class TestingToBeLessThan<
   /**
    * 
    */
-  protected toBe: TestingItToBe;
+  protected _toBe: TestingItToBe;
 
   /**
    * Simple `class` to support testing.
@@ -45,7 +45,7 @@ export class TestingToBeLessThan<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this.toBe = new TestingItToBe(
+    this._toBe = new TestingItToBe(
       allowDescribe,
       allowIt,
       executable,
@@ -74,7 +74,7 @@ export class TestingToBeLessThan<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.lessThan(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.lessThan(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -95,7 +95,7 @@ export class TestingToBeLessThan<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.lessThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.lessThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

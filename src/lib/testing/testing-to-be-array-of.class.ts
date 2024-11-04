@@ -22,7 +22,7 @@ export class TestingToBeArrayOf<
   /**
    * @description
    */
-  protected toBeArrayOf: TestingItToBeArrayOf;
+  protected _toBeArrayOf: TestingItToBeArrayOf;
 
   /**
    * @description Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -45,7 +45,7 @@ export class TestingToBeArrayOf<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this.toBeArrayOf = new TestingItToBeArrayOf(
+    this._toBeArrayOf = new TestingItToBeArrayOf(
       allowDescribe,
       allowIt,
       executable,
@@ -64,7 +64,7 @@ export class TestingToBeArrayOf<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBeArrayOf.bigint(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeArrayOf.bigint(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   public toBeArrayOfDate<T>(
@@ -74,7 +74,7 @@ export class TestingToBeArrayOf<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBeArrayOf.date(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeArrayOf.date(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   public toBeArrayOfDefined<T>(
@@ -84,7 +84,7 @@ export class TestingToBeArrayOf<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBeArrayOf.defined(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeArrayOf.defined(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   public toBeArrayOfFalse<T>(
@@ -94,7 +94,7 @@ export class TestingToBeArrayOf<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBeArrayOf.false(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeArrayOf.false(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   public toBeArrayOfNull<T>(
@@ -104,7 +104,7 @@ export class TestingToBeArrayOf<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBeArrayOf.null(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeArrayOf.null(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   public toBeArrayOfRegExp<T>(
@@ -114,7 +114,7 @@ export class TestingToBeArrayOf<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBeArrayOf.regExp(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeArrayOf.regExp(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   public toBeArrayOfString<T>(
@@ -124,7 +124,7 @@ export class TestingToBeArrayOf<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBeArrayOf.string(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeArrayOf.string(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   public toBeArrayOfSymbol<T>(
@@ -134,7 +134,7 @@ export class TestingToBeArrayOf<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBeArrayOf.symbol(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeArrayOf.symbol(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   public toBeArrayOfTrue<T>(
@@ -144,7 +144,7 @@ export class TestingToBeArrayOf<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBeArrayOf.true(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeArrayOf.true(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   public toBeArrayOfUndefined<T>(
@@ -154,7 +154,7 @@ export class TestingToBeArrayOf<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBeArrayOf.undefined(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeArrayOf.undefined(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

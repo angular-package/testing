@@ -21,7 +21,7 @@ export class TestingToBeNumber<
   /**
    * 
    */
-  protected toBe: TestingItToBe;
+  protected _toBe: TestingItToBe;
 
   /**
    * Simple `class` to support testing.
@@ -45,7 +45,7 @@ export class TestingToBeNumber<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this.toBe = new TestingItToBe(
+    this._toBe = new TestingItToBe(
       allowDescribe,
       allowIt,
       executable,
@@ -76,7 +76,7 @@ export class TestingToBeNumber<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.number(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.number(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -103,7 +103,7 @@ export class TestingToBeNumber<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.numberBetween(actual, min, max, expected, expectation, expectationFailOutput, execute);
+    this._toBe.numberBetween(actual, min, max, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -126,7 +126,7 @@ export class TestingToBeNumber<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.numberType(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.numberType(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

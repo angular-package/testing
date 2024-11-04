@@ -21,7 +21,7 @@ export class TestingToBeString<
   /**
    * 
    */
-  protected toBe: TestingItToBe;
+  protected _toBe: TestingItToBe;
 
   /**
    * Simple `class` to support testing.
@@ -45,7 +45,7 @@ export class TestingToBeString<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this.toBe = new TestingItToBe(
+    this._toBe = new TestingItToBe(
       allowDescribe,
       allowIt,
       executable,
@@ -76,7 +76,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.string(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.string(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -101,7 +101,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.stringIncludes(actual, includes, expected, expectation, expectationFailOutput, execute);
+    this._toBe.stringIncludes(actual, includes, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -126,7 +126,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.stringIncludesSome(actual, includes, expected, expectation, expectationFailOutput, execute);
+    this._toBe.stringIncludesSome(actual, includes, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -151,7 +151,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.stringOfLength(actual, length, expected, expectation, expectationFailOutput, execute);
+    this._toBe.stringOfLength(actual, length, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -176,7 +176,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.stringOfLengthBetween(actual, min, max, expected, expectation, expectationFailOutput, execute);
+    this._toBe.stringOfLengthBetween(actual, min, max, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -199,7 +199,7 @@ export class TestingToBeString<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toBe.stringType(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.stringType(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

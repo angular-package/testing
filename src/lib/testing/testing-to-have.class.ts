@@ -22,7 +22,7 @@ export class TestingToHave<
   /**
    * 
    */
-  protected toHave: TestingItToHave;
+  protected _toHave: TestingItToHave;
 
   /**
    * Simple `class` to support testing.
@@ -46,7 +46,7 @@ export class TestingToHave<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this.toHave = new TestingItToHave(
+    this._toHave = new TestingItToHave(
       allowDescribe,
       allowIt,
       executable,
@@ -74,7 +74,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toHave.been.called.called(spy, expectation, expectationFailOutput, execute);
+    this._toHave.been.called.called(spy, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -92,7 +92,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toHave.been.called.before(spyExpected, expectation, expectationFailOutput, execute);
+    this._toHave.been.called.before(spyExpected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -109,7 +109,7 @@ export class TestingToHave<
     spy: ExpectType<Actual>,
     ...params: any[]
   ): this {
-    this.toHave.been.called.onceWith(expectation, spy, ...params);
+    this._toHave.been.called.onceWith(expectation, spy, ...params);
     return this;
   }
 
@@ -130,7 +130,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toHave.been.called.times(spy, expected, expectation, expectationFailOutput, execute);
+    this._toHave.been.called.times(spy, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -151,13 +151,13 @@ export class TestingToHave<
     // expectationFailOutput?: any,
     // execute?: boolean,
   ): this {
-    this.toHave.been.called.with(expectation, spy, ...params);
+    this._toHave.been.called.with(expectation, spy, ...params);
     return this;
   }
   //#endregion
 
 
-  //#region toHave
+  //#region _toHave
   /**
    * 
    * @param actual 
@@ -175,7 +175,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toHave.class(actual, expected, expectation, expectationFailOutput, execute);
+    this._toHave.class(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -196,7 +196,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toHave.size(actual, expected, expectation, expectationFailOutput, execute);
+    this._toHave.size(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -216,7 +216,7 @@ export class TestingToHave<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toHave.spyInteractions(actual, expectation, expectationFailOutput, execute);
+    this._toHave.spyInteractions(actual, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

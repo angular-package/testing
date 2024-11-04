@@ -96,7 +96,7 @@ export class TestingTo<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.to.contain(actual, expected, expectation, expectationFailOutput, execute);
+    this.to.contain(actual, expected, false, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -119,7 +119,7 @@ export class TestingTo<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.to.equal(actual, expected, expectation, expectationFailOutput, execute);
+    this.to.equal(actual, expected, false, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -140,7 +140,7 @@ export class TestingTo<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.to.match(actual, expected, expectation, expectationFailOutput, execute);
+    this.to.match(actual, expected, false, expectation, expectationFailOutput, execute);
     return this;
   }
 

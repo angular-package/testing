@@ -21,7 +21,7 @@ export class TestingToBeBoolean<
   /**
    * 
    */
-  protected itToBeBoolean: TestingItToBeBoolean;
+  protected _toBeBoolean: TestingItToBeBoolean;
 
   /**
    * Simple `class` to support testing.
@@ -44,7 +44,7 @@ export class TestingToBeBoolean<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this.itToBeBoolean = new TestingItToBeBoolean(
+    this._toBeBoolean = new TestingItToBeBoolean(
       allowDescribe,
       allowIt,
       executable,
@@ -74,7 +74,7 @@ export class TestingToBeBoolean<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.itToBeBoolean.boolean(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeBoolean.boolean(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -97,7 +97,7 @@ export class TestingToBeBoolean<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.itToBeBoolean.type(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBeBoolean.type(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

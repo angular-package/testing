@@ -21,7 +21,7 @@ export class TestingToThrow<
   /**
    * 
    */
-  protected toThrow: TestingItToThrow;
+  protected _toThrow: TestingItToThrow;
 
   /**
    * Simple `class` to support testing.
@@ -45,7 +45,7 @@ export class TestingToThrow<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this.toThrow = new TestingItToThrow(
+    this._toThrow = new TestingItToThrow(
       allowDescribe,
       allowIt,
       executable,
@@ -56,7 +56,7 @@ export class TestingToThrow<
     );
   }
 
-  //#region toThrow
+  //#region _toThrow
   /**
    * 
    * @param actual 
@@ -74,7 +74,7 @@ export class TestingToThrow<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toThrow.error(actual, message, expectation, expectationFailOutput, execute);
+    this._toThrow.error(actual, message, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -95,7 +95,7 @@ export class TestingToThrow<
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.toThrow.matching(actual, predicate, expectation, expectationFailOutput, execute);
+    this._toThrow.matching(actual, predicate, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
