@@ -54,11 +54,11 @@ export class TestingExpectToHave extends Expect {
     return this;
   }
   public spyInteractions<T>(
-    actual: ExpectType<T>,
+    spy: ExpectType<T>,
     expectationFailOutput?: any
   ): this {
     this
-      .expect(actual, expectationFailOutput)
+      .expect(spy, expectationFailOutput)
       .toHaveSpyInteractions();
     this.setNot(false);
     return this;
