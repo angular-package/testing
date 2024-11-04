@@ -55,13 +55,14 @@ export class TestingItToHave<
   public class<T>(
     actual: ExpectType<T>,
     expected: string,
+    not: boolean = false,
     expectation: string = TextualExpectation.toHaveClass, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.have.class(actual, expected, expectationFailOutput),
+      () => (not ? super.expect.to.have.not : super.expect.to.have).class(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -69,26 +70,33 @@ export class TestingItToHave<
   public size<T>(
     actual: ExpectType<T>,
     expected: number,
+    not: boolean = false,
     expectation: string = TextualExpectation.toHaveSize, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.have.size(actual, expected, expectationFailOutput),
+      () => (not ? super.expect.to.have.not : super.expect.to.have).size(actual, expected, expectationFailOutput),
       execute
     );
     return this;
   }
   public spyInteractions<T>(
-    actual: ExpectType<T>,
+    spy: T extends any[] ? () => ExpectType<T[number]>[] : () => ExpectType<T>,
+    not: boolean = false,
     expectation: string = TextualExpectation.toHaveSpyInteractions,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.have.spyInteractions(actual, expectationFailOutput),
+      () => {
+        let spies = spy();
+        ((!Array.isArray(spies)) ? [spies] : spies).forEach(
+          spy => (not ? super.expect.to.have.not : super.expect.to.have).spyInteractions(spy as ExpectType<T>, expectationFailOutput)
+        );
+      },
       execute
     );
     return this;

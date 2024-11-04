@@ -90,6 +90,7 @@ export class TestingItToBe<
    * "Expect the actual value to be === to the expected value."
    * @param actual The value of any type passed to the `expect()` function of jasmine.
    * @param expected The value of any type passed to the `toBe()` method of jasmine. "The expected value to compare against."
+   * @param not
    * @param expectation "Textual description of what this spec is checking" with an optional its unique `number` when adding `[counter]`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed. By default it takes its value from the global
@@ -99,13 +100,14 @@ export class TestingItToBe<
   public be<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
+    not: boolean = false,
     expectation: string,
     expectationFailOutput?: any,
     execute?: boolean
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.be(actual, expected, expectationFailOutput),
+      () => (not ? super.expect.to.be.not : super.expect.to.be).be(actual, expected, expectationFailOutput),
       execute
     );
     return this;

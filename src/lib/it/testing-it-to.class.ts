@@ -89,6 +89,7 @@ export class TestingItTo<
    * @description 
    * @param actual 
    * @param expected 
+   * @param not
    * @param expectation 
    * @param expectationFailOutput 
    * @param execute 
@@ -97,13 +98,14 @@ export class TestingItTo<
   public contain<T>(
     actual: ExpectType<T>,
     expected: any,
+    not: boolean = false,
     expectation: string = TextualExpectation.toContain,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.contain(actual, expected, expectationFailOutput),
+      () => (not ? super.expect.to.not : super.expect.to).contain(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -114,6 +116,7 @@ export class TestingItTo<
    * "Expect the actual `value` to be equal to the `expected`, using deep equality comparison."
    * @param actual The value of any type passed to the `expect()` function of jasmine.
    * @param expected The value of any type passed to the `toEqual()` method of jasmine. "The expected value to compare against."
+   * @param not
    * @param expectation "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
@@ -123,13 +126,14 @@ export class TestingItTo<
   public equal<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
+    not: boolean = false,
     expectation: string = TextualExpectation.toEqual,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.equal(actual, expected, expectationFailOutput),
+      () => (not ? super.expect.to.not : super.expect.to).equal(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -139,6 +143,7 @@ export class TestingItTo<
    * @description 
    * @param actual 
    * @param expected 
+   * @param not
    * @param expectation 
    * @param expectationFailOutput 
    * @param execute 
@@ -147,13 +152,14 @@ export class TestingItTo<
   public match<T>(
     actual: ExpectType<T>,
     expected: string | RegExp,
+    not: boolean = false,
     expectation: string = TextualExpectation.toMatch, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.match(actual, expected, expectationFailOutput),
+      () => (not ? super.expect.to.not : super.expect.to).match(actual, expected, expectationFailOutput),
       execute
     );
     return this;
