@@ -1,6 +1,6 @@
 {
   "name": "@angular-package/testing",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "author": "Angular Package <angular-package@wvvw.dev> (https://angular-package.dev)",
   "homepage": "https://docs.angular-package.dev",
   "description": "Jasmine unit testing wrapper with additional custom testing features.",
