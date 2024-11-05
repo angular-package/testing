@@ -61,6 +61,7 @@ export class TestingToBeGreaterThan<
    * 
    * @param actual 
    * @param expected 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value to be greater than the `expected` value.
    * @param expectationFailOutput 
@@ -70,11 +71,12 @@ export class TestingToBeGreaterThan<
   public toBeGreaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.greaterThan(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.greaterThan(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -82,6 +84,7 @@ export class TestingToBeGreaterThan<
    * 
    * @param actual 
    * @param expected 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value to be greater than or equal to the `expected` value.
    * @param expectationFailOutput 
@@ -91,11 +94,12 @@ export class TestingToBeGreaterThan<
   public toBeGreaterThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.greaterThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.greaterThanOrEqual(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

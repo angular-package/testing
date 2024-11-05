@@ -142,11 +142,12 @@ export class TestingToBe<
     actual: ExpectType<T>,
     expected: number,
     precision?: any,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.closeTo(actual, expected, precision, expectation, expectationFailOutput, execute);
+    this._toBe.closeTo(actual, expected, precision, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -184,11 +185,12 @@ export class TestingToBe<
   public toBeDefined<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.defined(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.defined(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -292,11 +294,12 @@ export class TestingToBe<
   public toBeInstanceOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Constructor,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean
   ): this {
-    this._toBe.instanceOf(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.instanceOf(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -389,11 +392,12 @@ export class TestingToBe<
   // Mark a spec as pending, expectation results will be ignored.
   public toBePending<T>(
     actual: T | PromiseLike<T>,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.pending(actual, expectation, expectationFailOutput, execute);
+    this._toBe.pending(actual, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -451,11 +455,12 @@ export class TestingToBe<
    */
   public toBeRejected<T>(
     actual: T | PromiseLike<T>,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.rejected(actual, expectation, expectationFailOutput, execute);
+    this._toBe.rejected(actual, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -471,11 +476,12 @@ export class TestingToBe<
   public toBeRejectedWith<T, U>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<U>,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.rejectedWith(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.rejectedWith(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -494,11 +500,12 @@ export class TestingToBe<
     actual: T | PromiseLike<T>,
     expected?: new (...args: any[]) => Error,
     message?: string | RegExp,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.rejectedWithError(actual, expected, message, expectation, expectationFailOutput, execute);
+    this._toBe.rejectedWithError(actual, expected, message, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -515,11 +522,12 @@ export class TestingToBe<
    */
   public toBeResolved<T>(
     actual: T | PromiseLike<T>,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.resolved(actual, expectation, expectationFailOutput, execute);
+    this._toBe.resolved(actual, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -535,11 +543,12 @@ export class TestingToBe<
   public toBeResolvedTo<T>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<T>, 
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.resolvedTo(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.resolvedTo(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -559,6 +568,7 @@ export class TestingToBe<
   public toBeSymbol<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,

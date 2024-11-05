@@ -70,11 +70,12 @@ export class TestingToBeLessThan<
   public toBeLessThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.lessThan(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.lessThan(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -91,11 +92,12 @@ export class TestingToBeLessThan<
   public toBeLessThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.lessThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
+    this._toBe.lessThanOrEqual(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

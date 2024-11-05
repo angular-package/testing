@@ -61,6 +61,7 @@ export class TestingToThrow<
    * 
    * @param actual 
    * @param message 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value a function to throw an Error.
    * @param expectationFailOutput 
@@ -70,11 +71,12 @@ export class TestingToThrow<
   public toThrowError<T extends jasmine.Func>(
     actual: ExpectType<T>,
     message?: string | RegExp,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toThrow.error(actual, message, expectation, expectationFailOutput, execute);
+    this._toThrow.error(actual, message, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -82,6 +84,7 @@ export class TestingToThrow<
    * 
    * @param actual 
    * @param predicate 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value a function to throw something matching a predicate.
    * @param expectationFailOutput 
@@ -91,11 +94,12 @@ export class TestingToThrow<
   public toThrowMatching<T>(
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toThrow.matching(actual, predicate, expectation, expectationFailOutput, execute);
+    this._toThrow.matching(actual, predicate, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion

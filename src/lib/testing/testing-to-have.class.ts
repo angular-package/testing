@@ -4,11 +4,10 @@ import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToHave } from '../it';
-import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
-import { ExecutableTests } from '../../interface/executable-tests.interface';
+import { ExecutableTests, TestingOptions } from '../../interface';
 /**
  * Prepared simple tests.
  */
@@ -62,6 +61,7 @@ export class TestingToHave<
    * ! Spy parameter 
    * @description
    * @param spy 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value (a Spy) to have been called.
    * @param expectationFailOutput 
@@ -70,16 +70,18 @@ export class TestingToHave<
    */
   public toHaveBeenCalled<T extends jasmine.Func>(
     spy: () => ExpectType<T> | ExpectType<T>[],
+    not = false,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.been.called.called(spy, expectation, expectationFailOutput, execute);
+    this._toHave.been.called.called(spy, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
    * @param spyExpected
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value (a Spy) to have been called before another Spy.
    * @param expectationFailOutput 
@@ -88,28 +90,31 @@ export class TestingToHave<
    */
   public toHaveBeenCalledBefore<T extends jasmine.Func>(
     spyExpected: () => [ExpectType<T>, jasmine.Func],
+    not = false,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.been.called.before(spyExpected, expectation, expectationFailOutput, execute);
+    this._toHave.been.called.before(spyExpected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
    * TODO: spyOn problem
+   * @param spy 
+   * @param expected
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value (a Spy) to have been called exactly once, and exactly with the particular arguments.
-   * @param spy 
    * @param params 
    * @returns 
    */
   public toHaveBeenCalledOnceWith<Actual extends jasmine.Func>(
-    expectation: string = TextualExpectation.toHaveBeenCalledOnceWith,
     spy: ExpectType<Actual>,
+    options: TestingOptions,
     ...params: any[]
   ): this {
-    this._toHave.been.called.onceWith(expectation, spy, ...params);
+    this._toHave.been.called.onceWith(spy, options, ...params);
     return this;
   }
 
@@ -117,6 +122,7 @@ export class TestingToHave<
    * TODO: spyOn problem
    * @param spy 
    * @param expected 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value (a Spy) to have been called the specified number of times.
    * @param expectationFailOutput 
@@ -126,11 +132,12 @@ export class TestingToHave<
   public toHaveBeenCalledTimes<T extends jasmine.Func>(
     spy: () => ExpectType<T>,
     expected: number,
+    not = false,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.been.called.times(spy, expected, expectation, expectationFailOutput, execute);
+    this._toHave.been.called.times(spy, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -145,13 +152,11 @@ export class TestingToHave<
    * @returns 
    */
   public toHaveBeenCalledWith<T extends jasmine.Func>(
-    expectation: string = TextualExpectation.toHaveBeenCalledWith,
     spy: () => ExpectType<T>,
+    options: TestingOptions,
     ...params: any[]
-    // expectationFailOutput?: any,
-    // execute?: boolean,
   ): this {
-    this._toHave.been.called.with(expectation, spy, ...params);
+    this._toHave.been.called.with(spy, options, ...params);
     return this;
   }
   //#endregion
@@ -162,6 +167,7 @@ export class TestingToHave<
    * 
    * @param actual 
    * @param expected 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value to be a DOM element that has the expected class.
    * @param expectationFailOutput 
@@ -171,11 +177,12 @@ export class TestingToHave<
   public toHaveClass<T>(
     actual: ExpectType<T>,
     expected: string,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.class(actual, expected, expectation, expectationFailOutput, execute);
+    this._toHave.class(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -183,6 +190,7 @@ export class TestingToHave<
    * 
    * @param actual 
    * @param expected 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` size to be equal to the expected, using array-like length or object keys size.
    * @param expectationFailOutput 
@@ -192,18 +200,20 @@ export class TestingToHave<
   public toHaveSize<T>(
     actual: ExpectType<T>,
     expected: number,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.size(actual, expected, expectation, expectationFailOutput, execute);
+    this._toHave.size(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
    * 
-   * @param actual 
+   * @param spy 
    * @param expected 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value (a SpyObj) spies to have been called.
    * @param expectationFailOutput 
@@ -211,12 +221,13 @@ export class TestingToHave<
    * @returns 
    */
   public toHaveSpyInteractions<T>(
-    actual: ExpectType<T>,
+    spy: T extends Array<any> ? () => ExpectType<T[number]>[] : () => ExpectType<T>,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.spyInteractions(actual, expectation, expectationFailOutput, execute);
+    this._toHave.spyInteractions(spy, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
