@@ -34,7 +34,7 @@ export class TestingExpectToHave extends Expect {
   public class<T>(
     actual: ExpectType<T>,
     expected: string,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toHaveClass')
   ): this {
     this
       .expect(actual, expectationFailOutput)
@@ -45,7 +45,7 @@ export class TestingExpectToHave extends Expect {
   public size<T>(
     actual: ExpectType<T>,
     expected: number,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toHaveSize')
   ): this {
     this
       .expect(actual, expectationFailOutput)
@@ -55,7 +55,7 @@ export class TestingExpectToHave extends Expect {
   }
   public spyInteractions<T>(
     spy: ExpectType<T>,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toHaveSpyInteractions')
   ): this {
     this
       .expect(spy, expectationFailOutput)

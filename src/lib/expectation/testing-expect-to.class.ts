@@ -65,7 +65,7 @@ export class TestingExpectTo extends Expect {
   public contain<T>(
     actual: ExpectType<T>,
     expected: any,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toContain')
   ): this {
     this
       .expectation(actual, e => e.toContain(expected), expectationFailOutput)
@@ -75,7 +75,7 @@ export class TestingExpectTo extends Expect {
   public equal<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toEqual')
   ): this {
     this
       .expectation(actual, e => e.toEqual(expected), expectationFailOutput)
@@ -85,7 +85,7 @@ export class TestingExpectTo extends Expect {
   public match<T>(
     actual: ExpectType<T>,
     expected: string | RegExp,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toMatch')
   ): this {
     this
       .expectation(actual, e => e.toMatch(expected), expectationFailOutput)

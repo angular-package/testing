@@ -38,11 +38,6 @@ export class TestingExpectToBe extends Expect {
    */
   private toBeInstanceOf;
 
-  /**
-   * @description The Default message for the expectation fails.
-   */
-  private expectationFailOutput = `The expected value should`;
-
   constructor(expect: TestingExpect = new TestingExpect()) {
     super(expect);
     this.toBeArrayOf = new TestingExpectToBeArrayOf(expect);
@@ -62,9 +57,7 @@ export class TestingExpectToBe extends Expect {
   public array<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an \`array\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeArray')
   ): this {
     this.be(is.array(actual), expected, expectationFailOutput);
     return this;
@@ -82,9 +75,7 @@ export class TestingExpectToBe extends Expect {
   public be<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be \`expected\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBe')
   ): this {
     this.expect(actual, expectationFailOutput).toBe(expected);
     this.setNot(false);
@@ -103,9 +94,7 @@ export class TestingExpectToBe extends Expect {
   public bigint<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be \`bigint\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeBigInt')
   ): this {
     this.be(is.bigint(actual), expected, expectationFailOutput);
     return this;
@@ -124,9 +113,7 @@ export class TestingExpectToBe extends Expect {
   public boolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`boolean\` type or an instance of \`Boolean\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeBoolean')
   ): this {
     this.be(is.boolean(actual), expected, expectationFailOutput);
     return this;
@@ -134,9 +121,7 @@ export class TestingExpectToBe extends Expect {
   public booleanType<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`boolean\` type`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeBooleanType')
   ): this {
     this.be(is.booleanType(actual), expected, expectationFailOutput);
     return this;
@@ -154,9 +139,7 @@ export class TestingExpectToBe extends Expect {
   public class<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be \`class\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeClass')
   ): this {
     this.be(is.class(actual), expected, expectationFailOutput);
     return this;
@@ -167,9 +150,7 @@ export class TestingExpectToBe extends Expect {
     actual: ExpectType<T>,
     expected: number,
     precision?: any,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be close to \`expected\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeCloseTo')
   ): this {
     this.expect(actual, expectationFailOutput).toBeCloseTo(expected, precision);
     this.setNot(false);
@@ -188,9 +169,7 @@ export class TestingExpectToBe extends Expect {
   public date<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`date\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeDate')
   ): this {
     this.be(is.date(actual), expected, expectationFailOutput);
     return this;
@@ -208,9 +187,7 @@ export class TestingExpectToBe extends Expect {
   public defined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be defined`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeDefined')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeDefined();
@@ -232,9 +209,7 @@ export class TestingExpectToBe extends Expect {
   public false<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be equal to \`false\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeFalse')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeFalse();
@@ -246,9 +221,7 @@ export class TestingExpectToBe extends Expect {
   public falsy<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be falsy`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeFalsy')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeFalsy();
@@ -270,9 +243,7 @@ export class TestingExpectToBe extends Expect {
   public function<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be \`function\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeFunction')
   ): this {
     this.be(is.function(actual), expected, expectationFailOutput);
     return this;
@@ -283,9 +254,7 @@ export class TestingExpectToBe extends Expect {
   public greaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be greater than \`expected\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeGreaterThan')
   ): this {
     this.expect(actual, expectationFailOutput).toBeGreaterThan(expected);
     this.setNot(false);
@@ -296,9 +265,7 @@ export class TestingExpectToBe extends Expect {
   public greaterThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be greater or equal than \`expected\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeGreaterThanOrEqual')
   ): this {
     this.expect(actual, expectationFailOutput).toBeGreaterThanOrEqual(expected);
     this.setNot(false);
@@ -323,9 +290,7 @@ export class TestingExpectToBe extends Expect {
     actual: ExpectType<T>,
     constructor: Constructor<Type>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of ${constructor.name}`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstance')
   ): this {
     this.be(is.instance(actual, constructor), expected, expectationFailOutput);    
     return this;
@@ -334,9 +299,7 @@ export class TestingExpectToBe extends Expect {
   public instanceOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Constructor,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`expected\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOf')
   ): this {
     this.expect(actual, expectationFailOutput).toBeInstanceOf(expected);
     this.setNot(false);
@@ -357,9 +320,7 @@ export class TestingExpectToBe extends Expect {
   public key<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be the property key`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeKey')
   ): this {
     this.be(is.key(actual), expected, expectationFailOutput);
     return this;
@@ -370,9 +331,7 @@ export class TestingExpectToBe extends Expect {
   public lessThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be less than \`expected\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeLessThan')
   ): this {
     this.expect(actual, expectationFailOutput).toBeLessThan(expected);
     this.setNot(false);
@@ -383,9 +342,7 @@ export class TestingExpectToBe extends Expect {
   public lessThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be less or equal than \`expected\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeLessThanOrEqual')
   ): this {
     this.expect(actual, expectationFailOutput).toBeLessThanOrEqual(expected);
     this.setNot(false);
@@ -397,7 +354,7 @@ export class TestingExpectToBe extends Expect {
   public naN<T extends number>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeNaN')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeNaN();
@@ -409,7 +366,7 @@ export class TestingExpectToBe extends Expect {
   public negativeInfinity<T extends number>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeNegativeInfinity')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeNegativeInfinity();
@@ -429,9 +386,7 @@ export class TestingExpectToBe extends Expect {
   public null<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be \`null\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeNull')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeNull();
@@ -454,9 +409,7 @@ export class TestingExpectToBe extends Expect {
   public number<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`number\` type or an instance of a \`Number\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeNumber')
   ): this {
     this.be(is.number(actual), expected, expectationFailOutput);
     return this;
@@ -480,9 +433,7 @@ export class TestingExpectToBe extends Expect {
     min: Min,
     max: Max,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`number\` type or an instance of a \`Number\` between the range of ${min} and ${max}`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeNumberBetween')
   ): this {
     this.be(
       is.numberBetween(actual, min, max),
@@ -495,9 +446,7 @@ export class TestingExpectToBe extends Expect {
   public numberType<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`number\` type`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeNumberType')
   ): this {
     this.be(is.numberType(actual), expected, expectationFailOutput);
     return this;
@@ -518,9 +467,7 @@ export class TestingExpectToBe extends Expect {
   public object<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an \`object\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeObject')
   ): this {
     this.be(is.object(actual), expected, expectationFailOutput);
     return this;
@@ -541,9 +488,7 @@ export class TestingExpectToBe extends Expect {
     actual: ExpectType<T>,
     key: PropertyKey,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an \`object\` with a given \`key\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeObjectKey')
   ): this {
     this.be(is.objectKey(actual, key), expected, expectationFailOutput);
     return this;
@@ -565,9 +510,7 @@ export class TestingExpectToBe extends Expect {
     actual: ExpectType<T>,
     key: PropertyKey,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an \`object\` with a given \`key\` in it(or its prototype chain)`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeObjectKeyIn')
   ): this {
     this.be(is.objectKeyIn(actual, key), expected, expectationFailOutput);
     return this;
@@ -588,9 +531,7 @@ export class TestingExpectToBe extends Expect {
     actual: ExpectType<T>,
     keys: PropertyKey[],
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an \`object\` with given \`keys\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeObjectKeys')
   ): this {
     this.be(is.objectKeys(actual, keys), expected, expectationFailOutput);
     return this;
@@ -612,9 +553,7 @@ export class TestingExpectToBe extends Expect {
     actual: ExpectType<T>,
     keys: PropertyKey[],
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an \`object\` with given \`keys\` in it(or its prototype chain)`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeObjectKeysIn')
   ): this {
     this.be(is.objectKeysIn(actual, keys), expected, expectationFailOutput);
     return this;
@@ -637,9 +576,7 @@ export class TestingExpectToBe extends Expect {
     actual: ExpectType<T>,
     keys: (PropertyKey | PropertyKey[])[],
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an \`object\` with some of its keys or some groups of its keys from given \`keys\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeObjectSomeKeys')
   ): this {
     this.be(is.objectSomeKeys(actual, keys), expected, expectationFailOutput);
     return this;
@@ -659,7 +596,7 @@ export class TestingExpectToBe extends Expect {
   public positiveInfinity<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toBePositiveInfinity')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBePositiveInfinity();
@@ -679,9 +616,7 @@ export class TestingExpectToBe extends Expect {
   public regexp<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be \`RegExp\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeRegExp')
   ): this {
     this.be(is.regexp(actual), expected, expectationFailOutput);
     return this;
@@ -690,9 +625,7 @@ export class TestingExpectToBe extends Expect {
   //#region rejected
   public rejected<T>(
     actual: T | PromiseLike<T>,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be rejected`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeRejected')
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeRejected();
     this.setAlready(false).setNot(false);
@@ -702,9 +635,7 @@ export class TestingExpectToBe extends Expect {
   public rejectedWith<T, U>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<U>,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be rejected with \`expected\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeRejectedWith')
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeRejectedWith(expected);
     this.setAlready(false).setNot(false);
@@ -715,9 +646,7 @@ export class TestingExpectToBe extends Expect {
     actual: T | PromiseLike<T>,
     expected?: new (...args: any[]) => Error,
     message?: string | RegExp,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be resolved with error`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeRejectedWithError')
   ): this {
     this.expectAsync<T, U>(actual, expectationFailOutput).toBeRejectedWithError(expected, message)
     this.setAlready(false).setNot(false);
@@ -726,9 +655,7 @@ export class TestingExpectToBe extends Expect {
 
   public resolved<T>(
     actual: T | PromiseLike<T>,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be resolved`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeResolved')
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeResolved();
     this.setAlready(false).setNot(false);
@@ -738,7 +665,7 @@ export class TestingExpectToBe extends Expect {
   public resolvedTo<T>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<T>,
-    expectationFailOutput?: any,
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeResolvedTo')
   ): this {
     this.expectAsync(actual, expectationFailOutput).toBeResolvedTo(expected);
     this.setAlready(false).setNot(false);
@@ -762,9 +689,7 @@ export class TestingExpectToBe extends Expect {
   public string<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`string\` type or an instance of a \`String\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeString')
   ): this {
     this.be(is.string(actual), expected, expectationFailOutput);
     return this;
@@ -787,9 +712,7 @@ export class TestingExpectToBe extends Expect {
     actual: ExpectType<T>,
     includes: string[],
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`string\` type or an instance of \`String\` that includes the specified words/sentences from a given \`includes\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeStringIncludes')
   ): this {
     this.be(
       is.stringIncludes(actual, includes),
@@ -816,9 +739,7 @@ export class TestingExpectToBe extends Expect {
     actual: ExpectType<T>,
     includes: string[],
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`string\` type or an instance of \`String\` that includes some of the specified words/sentences from a given \`includes\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeStringIncludesSome')
   ): this {
     this.be(
       is.stringIncludesSome(actual, includes),
@@ -844,9 +765,7 @@ export class TestingExpectToBe extends Expect {
     actual: ExpectType<T>,
     length: Length,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`string\` type or an instance of a \`String\` of the specified \`length\` equal to ${length}`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeStringOfLength')
   ): this {
     this.be(is.stringLength(actual, length), expected, expectationFailOutput);
     return this;
@@ -870,9 +789,7 @@ export class TestingExpectToBe extends Expect {
     min: Min,
     max: Max,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`string\` type or an instance of a \`String\` of the \`length\` between the given ${min} and ${max}`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeStringOfLengthBetween')
   ): this {
     this.be(
       is.stringLengthBetween(actual, min, max),
@@ -885,9 +802,7 @@ export class TestingExpectToBe extends Expect {
   public stringType<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`string\` type`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeStringType')
   ): this {
     this.be(is.stringType(actual), expected, expectationFailOutput);
     return this;
@@ -906,9 +821,7 @@ export class TestingExpectToBe extends Expect {
   public symbol<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be a \`symbol\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeSymbol')
   ): this {
     this.be(is.symbol(actual), expected, expectationFailOutput);
     return this;
@@ -929,9 +842,7 @@ export class TestingExpectToBe extends Expect {
   public true<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be equal to \`true\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeTrue')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeTrue();
@@ -942,9 +853,7 @@ export class TestingExpectToBe extends Expect {
   public truthy<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be truthy`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeTruthy')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeTruthy();
@@ -956,9 +865,7 @@ export class TestingExpectToBe extends Expect {
   public typeOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<string>,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be typeOf`
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeTypeOf')
   ): this {
     this.expect(typeOf(actual) === expected, expectationFailOutput).toBeTrue();
     this.setNot(false);
@@ -977,9 +884,7 @@ export class TestingExpectToBe extends Expect {
   public undefined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be \`undefined\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeUndefined')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeUndefined();

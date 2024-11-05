@@ -10,11 +10,6 @@ import { ExpectType } from '../../type';
  */
 export class TestingExpectToBeInstanceOf extends Expect {
   /**
-   * The Default message for the expectation fails.
-   */
-  private expectationFailOutput = `The expected value should`;
-
-  /**
    * @description Expects provided value to be an instance of `array`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual The value of any type that is checked against the `array` and the result of its check is passed to the `expect()`
    * function of jasmine.
@@ -27,9 +22,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public array<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`Array\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfArray')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Array);
@@ -50,9 +43,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public boolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`Boolean\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfBoolean')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Boolean);
@@ -71,9 +62,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public dataView<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`DataView\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfDataView')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(DataView);
@@ -93,9 +82,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public date<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`Date\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfDate')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Date);
@@ -110,9 +97,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public error<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`Error\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfError')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Error);
@@ -131,9 +116,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public evalError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`EvalError\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfEvalError')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(EvalError);
@@ -154,9 +137,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public function<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`Function\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfFunction')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Function);
@@ -174,9 +155,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public map<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`Map\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfMap')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Map);
@@ -197,9 +176,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public number<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of a \`Number\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeNumber')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Number);
@@ -220,9 +197,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public object<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`Object\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeObject')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Object);
@@ -241,9 +216,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public promise<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`Promise\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfPromise')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Promise);
@@ -262,9 +235,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public rangeError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`RangeError\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfRangeError')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(RangeError);
@@ -283,9 +254,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public referenceError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`ReferenceError\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfReferenceError')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(ReferenceError);
@@ -305,9 +274,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public regexp<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`RegExp\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfRegExp')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(RegExp);
@@ -326,9 +293,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public set<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`Set\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfSet')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(Set);
@@ -347,9 +312,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public syntaxError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`SyntaxError\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfSyntaxError')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(SyntaxError);
@@ -371,9 +334,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public string<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of a \`String\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfString')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(String);
@@ -393,9 +354,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public storage<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`Storage\``
+    expectationFailOutput: any
   ): this {
     // expected === false && (this.not);
     // this.expect(actual, expectationFailOutput).toBeInstanceOf(Storage);
@@ -414,9 +373,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public typeError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`TypeError\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfTypeError')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(TypeError);
@@ -436,9 +393,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public URIError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`URIError\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfURIError')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(URIError);
@@ -453,9 +408,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public weakMap<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`WeakMap\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfWeakMap')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(WeakMap);
@@ -474,9 +427,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   public weakSet<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any = `${this.expectationFailOutput} ${
-      this.getNot() === true ? `not` : ``
-    } be an instance of \`WeakSet\``
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfWeakSet')
   ): this {
     expected === false && (this.not);
     this.expect(actual, expectationFailOutput).toBeInstanceOf(WeakSet);

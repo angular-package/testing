@@ -12,7 +12,7 @@ export class TestingExpectToThrow extends Expect {
   public error<T extends jasmine.Func>(
     actual: ExpectType<T>,
     message?: string | RegExp,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toThrowError')
   ): this {
     this.expect(actual, expectationFailOutput).toThrowError(message);
     this.setNot(false);
@@ -21,7 +21,7 @@ export class TestingExpectToThrow extends Expect {
   public matching<T>(
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toThrowMatching')
   ): this {
     this.expect(actual, expectationFailOutput).toThrowMatching(predicate);
     this.setNot(false);
@@ -30,7 +30,7 @@ export class TestingExpectToThrow extends Expect {
   public throw<T>(
     actual: ExpectType<T>,
     expected?: any,
-    expectationFailOutput?: any
+    expectationFailOutput: any = this.getExpectationFailOutput('toThrow')
   ): this {
     this.expect(actual, expectationFailOutput).toThrow(expected);
     this.setNot(false);
