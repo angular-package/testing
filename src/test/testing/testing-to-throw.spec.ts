@@ -12,6 +12,6 @@ if (execute) {
   t.describe(`TestingToThrow`, () => 
     t
       .toThrowError(() => { throw new Error('Error') }, 'Error')
-      // .toThrowMatching()
+      .toThrowMatching(function() { throw new Error('nope'); }, function(thrown) { return thrown.message === 'nope'; })
   );
 }

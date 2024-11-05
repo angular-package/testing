@@ -59,6 +59,7 @@ t.describe('string', () => {
   t.toBe(
     is.stringType('my name'),
     true,
+    undefined,
     `Checks the value against the string`,
   );
 });
@@ -243,7 +244,7 @@ t.describe(`string`, () => t.toBeStringType('my name'));
  * toEqual()
  */
 const firstName = 'My name';
-t.describe(`toEqual`, () => t.toEqual(firstName, 'My name', 'Expects `firstName` to equal to `My name`'), true);
+t.describe(`toEqual`, () => t.toEqual(firstName, 'My name', undefined, 'Expects `firstName` to equal to `My name`'), true);
 
 export class ClassA {
   public propertyA = "A";
@@ -268,7 +269,7 @@ el.className = 'foo bar baz';
 
 t.describe(`All methods`, () => {
   t
-    .toBe("a", "a", "a")
+    .toBe("a", "a", undefined, "a")
     .toBeArray(["a", "b"])
 
     // toBeArrayOf
@@ -402,13 +403,14 @@ t.describe(`All methods`, () => {
     // Spy multiple methods.
     .toHaveBeenCalled(() => [classA.methodA, classA.methodB])
     .toHaveBeenCalledBefore(() => [classA.methodB, classA.methodA])
-    .toHaveBeenCalledOnceWith(`toHaveBeenCalledOnceWith`, () => classA.methodC, {test: 37})
-    .toHaveBeenCalledWith(`toHaveBeenCalledWith`, () => classA.methodA, {test: 27})
+    .toHaveBeenCalledOnceWith(() => classA.methodC, {expectation: `toHaveBeenCalledOnceWith`}, {test: 37})
+    .toHaveBeenCalledWith(() => classA.methodA, {expectation: `toHaveBeenCalledWith`}, {test: 27})
 
     // toHave
     .toHaveClass(el, 'baz')
     .toHaveSize([27, 37, 47], 3)
-    // .toHaveSpyInteractions()
+    .toHaveSpyInteractions(() => classA)
+    .toHaveSpyInteractions(() => [classA, classA])
 
     .toMatch("my string", /string$/)
     .toMatch("other string", "ing")

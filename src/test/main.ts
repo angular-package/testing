@@ -1,3 +1,3 @@
-export * from '@angular-package/testing';
-// export * from "../lib";
+// export * from '@angular-package/testing';
+export * from "../lib";
 

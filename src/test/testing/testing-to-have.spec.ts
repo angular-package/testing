@@ -43,11 +43,13 @@ if (execute) {
       // Spy multiple methods.
       .toHaveBeenCalled(() => [classA.methodA, classA.methodB])
       .toHaveBeenCalledBefore(() => [classA.methodB, classA.methodA])
-      .toHaveBeenCalledOnceWith(`toHaveBeenCalledOnceWith`, () => classA.methodC, {test: 37})
-      .toHaveBeenCalledWith(`toHaveBeenCalledWith`, () => classA.methodA, {test: 27})
+      .toHaveBeenCalledOnceWith(() => classA.methodC, {expectation: `toHaveBeenCalledOnceWith`}, {test: 37})
+      .toHaveBeenCalledWith(() => classA.methodA, {expectation: `toHaveBeenCalledWith`}, {test: 27})
+
       .toHaveClass(el, 'baz')
       .toHaveSize([27, 37, 47], 3)
 
-      // .toHaveSpyInteractions()
+      .toHaveSpyInteractions(() => classA)
+      .toHaveSpyInteractions(() => [classA, classA])
   });  
 }

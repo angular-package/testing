@@ -31,6 +31,7 @@ if (execute) {
     })
     .class(el, 'bar')
     .size(['a', 'b'], 2)
-    .spyInteractions(classA)
+    .spyInteractions(() => classA)
+    .spyInteractions(() => [classA, classA])
   );  
 }
