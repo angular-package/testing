@@ -89,7 +89,7 @@ export class TestingItTo<
    * @description 
    * @param actual 
    * @param expected 
-   * @param not
+   * @param not Invert the matcher following this expectation
    * @param expectation 
    * @param expectationFailOutput 
    * @param execute 
@@ -105,7 +105,7 @@ export class TestingItTo<
   ): this {
     this.it(
       expectation,
-      () => (not ? super.expect.to.not : super.expect.to).contain(actual, expected, expectationFailOutput),
+      () => this.#expectTo(not).contain(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -116,7 +116,7 @@ export class TestingItTo<
    * "Expect the actual `value` to be equal to the `expected`, using deep equality comparison."
    * @param actual The value of any type passed to the `expect()` function of jasmine.
    * @param expected The value of any type passed to the `toEqual()` method of jasmine. "The expected value to compare against."
-   * @param not
+   * @param not Invert the matcher following this expectation
    * @param expectation "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
@@ -133,7 +133,7 @@ export class TestingItTo<
   ): this {
     this.it(
       expectation,
-      () => (not ? super.expect.to.not : super.expect.to).equal(actual, expected, expectationFailOutput),
+      () => this.#expectTo(not).equal(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -143,7 +143,7 @@ export class TestingItTo<
    * @description 
    * @param actual 
    * @param expected 
-   * @param not
+   * @param not Invert the matcher following this expectation
    * @param expectation 
    * @param expectationFailOutput 
    * @param execute 
@@ -159,9 +159,14 @@ export class TestingItTo<
   ): this {
     this.it(
       expectation,
-      () => (not ? super.expect.to.not : super.expect.to).match(actual, expected, expectationFailOutput),
+      () => this.#expectTo(not).match(actual, expected, expectationFailOutput),
       execute
     );
     return this;
+  }
+
+  // Private.
+  #expectTo(not: boolean = false) {
+    return (not ? this.expect.to.not : this.expect.to);
   }
 }

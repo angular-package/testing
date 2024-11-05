@@ -62,7 +62,7 @@ export class TestingItToHave<
   ): this {
     this.it(
       expectation,
-      () => (not ? super.expect.to.have.not : super.expect.to.have).class(actual, expected, expectationFailOutput),
+      () => this.#expectToHave(not).class(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -77,7 +77,7 @@ export class TestingItToHave<
   ): this {
     this.it(
       expectation,
-      () => (not ? super.expect.to.have.not : super.expect.to.have).size(actual, expected, expectationFailOutput),
+      () => this.#expectToHave(not).size(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -94,11 +94,16 @@ export class TestingItToHave<
       () => {
         let spies = spy();
         ((!Array.isArray(spies)) ? [spies] : spies).forEach(
-          spy => (not ? super.expect.to.have.not : super.expect.to.have).spyInteractions(spy as ExpectType<T>, expectationFailOutput)
+          spy => this.#expectToHave(not).spyInteractions(spy as ExpectType<T>, expectationFailOutput)
         );
       },
       execute
     );
     return this;
+  }
+
+  // Private.
+  #expectToHave(not: boolean = false) {
+    return (not ? this.expect.to.have.not : this.expect.to.have);
   }
 }

@@ -90,7 +90,7 @@ export class TestingItToBe<
    * "Expect the actual value to be === to the expected value."
    * @param actual The value of any type passed to the `expect()` function of jasmine.
    * @param expected The value of any type passed to the `toBe()` method of jasmine. "The expected value to compare against."
-   * @param not
+   * @param not Invert the matcher following this expectation.
    * @param expectation "Textual description of what this spec is checking" with an optional its unique `number` when adding `[counter]`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed. By default it takes its value from the global
@@ -107,7 +107,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => (not ? super.expect.to.be.not : super.expect.to.be).be(actual, expected, expectationFailOutput),
+      () => this.#expectToBe(not).be(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -134,7 +134,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.array(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().array(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -161,7 +161,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.bigint(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().bigint(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -188,7 +188,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.class(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().class(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -208,13 +208,14 @@ export class TestingItToBe<
     actual: ExpectType<T>,
     expected: number,
     precision?: any,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeCloseTo,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.closeTo(actual, expected, precision, expectationFailOutput),
+      () => this.#expectToBe(not).closeTo(actual, expected, precision, expectationFailOutput),
       execute
     );
     return this;
@@ -241,7 +242,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.date(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().date(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -250,13 +251,14 @@ export class TestingItToBe<
   public defined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeDefined,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.defined(actual, expected, expectationFailOutput),
+      () => this.#expectToBe(not).defined(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -271,7 +273,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.false(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().false(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -286,7 +288,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.falsy(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().falsy(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -313,7 +315,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.function(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().function(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -324,13 +326,14 @@ export class TestingItToBe<
   public greaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeGreaterThan, 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.greaterThan(actual, expected, expectationFailOutput),
+      () => this.#expectToBe(not).greaterThan(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -340,13 +343,14 @@ export class TestingItToBe<
   public greaterThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeGreaterThanOrEqual,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.greaterThanOrEqual(actual, expected, expectationFailOutput),
+      () => this.#expectToBe(not).greaterThanOrEqual(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -376,7 +380,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.instance(actual, constructor, expected, expectationFailOutput),
+      () => this.#expectToBe().instance(actual, constructor, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -396,13 +400,14 @@ export class TestingItToBe<
   public instanceOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Constructor,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeInstanceOf,
     expectationFailOutput?: any,
     execute?: boolean
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.instanceOf(actual, expected, expectationFailOutput),
+      () => this.#expectToBe(not).instanceOf(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -430,7 +435,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.key(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().key(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -440,13 +445,14 @@ export class TestingItToBe<
   public lessThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeLessThan,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.lessThan(actual, expected, expectationFailOutput),
+      () => this.#expectToBe(not).lessThan(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -455,13 +461,14 @@ export class TestingItToBe<
   public lessThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeLessThanOrEqual,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.lessThanOrEqual(actual, expected, expectationFailOutput),
+      () => this.#expectToBe(not).lessThanOrEqual(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -477,7 +484,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.naN(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().naN(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -492,7 +499,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.negativeInfinity(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().negativeInfinity(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -519,7 +526,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.null(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().null(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -546,7 +553,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.number(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().number(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -577,7 +584,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.numberBetween(actual, min, max, expected, expectationFailOutput),
+      () => this.#expectToBe().numberBetween(actual, min, max, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -604,7 +611,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.numberType(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().numberType(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -631,7 +638,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.object(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().object(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -660,7 +667,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.objectKey(actual, key, expected, expectationFailOutput),
+      () => this.#expectToBe().objectKey(actual, key, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -689,7 +696,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.objectKeyIn(actual, key, expected, expectationFailOutput),
+      () => this.#expectToBe().objectKeyIn(actual, key, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -718,7 +725,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.objectKeys(actual, keys, expected, expectationFailOutput),
+      () => this.#expectToBe().objectKeys(actual, keys, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -749,7 +756,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.objectKeysIn(actual, keys, expected, expectationFailOutput),
+      () => this.#expectToBe().objectKeysIn(actual, keys, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -779,7 +786,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.objectSomeKeys(actual, keys, expected, expectationFailOutput),
+      () => this.#expectToBe().objectSomeKeys(actual, keys, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -796,7 +803,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.positiveInfinity(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().positiveInfinity(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -822,7 +829,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.regexp(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().regexp(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -831,13 +838,14 @@ export class TestingItToBe<
   // Mark a spec as pending, expectation results will be ignored.
   public pending<T>(
     actual: T | PromiseLike<T>,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBePending,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.pending(actual, expectationFailOutput),
+      () => this.#expectToBe(not).pending(actual, expectationFailOutput),
       execute
     );
     return this;
@@ -846,13 +854,14 @@ export class TestingItToBe<
   // Expect a promise to be rejected.
   public rejected<T>(
     actual: T | PromiseLike<T>,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeRejected,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      done => { super.expect.to.be.rejected(actual, expectationFailOutput), done() },
+      done => { this.#expectToBe(not).rejected(actual, expectationFailOutput), done() },
       execute
     );
     return this;
@@ -862,13 +871,14 @@ export class TestingItToBe<
   public rejectedWith<T, U>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<U>,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeRejectedWith,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      done => { super.expect.to.be.rejectedWith(actual, expected, expectationFailOutput), done() },
+      done => { this.#expectToBe(not).rejectedWith(actual, expected, expectationFailOutput), done() },
       execute
     );
     return this;
@@ -879,13 +889,14 @@ export class TestingItToBe<
     actual: T | PromiseLike<T>,
     expected?: new (...args: any[]) => Error,
     message?: string | RegExp,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeRejectedWith,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      done => { super.expect.to.be.rejectedWithError(actual, expected, message, expectationFailOutput), done() },
+      done => { this.#expectToBe(not).rejectedWithError(actual, expected, message, expectationFailOutput), done() },
       execute
     );
     return this;
@@ -894,13 +905,14 @@ export class TestingItToBe<
   // Expect a promise to be resolved.
   public resolved<T>(
     actual: T | PromiseLike<T>,
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeResolved,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      done => { super.expect.to.be.resolved(actual, expectationFailOutput), done() },
+      done => { this.#expectToBe(not).resolved(actual, expectationFailOutput), done() },
       execute
     );
     return this;
@@ -910,13 +922,14 @@ export class TestingItToBe<
   public resolvedTo<T>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<T>, 
+    not: boolean = false,
     expectation: string = TextualExpectation.toBeResolvedTo,
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
     this.it(
       expectation,
-      done => { super.expect.to.be.resolvedTo(actual, expected, expectationFailOutput), done() },
+      done => { this.#expectToBe(not).resolvedTo(actual, expected, expectationFailOutput), done() },
       execute
     );
     return this;
@@ -943,7 +956,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.string(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().string(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -972,7 +985,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.stringIncludes(actual, includes, expected, expectationFailOutput),
+      () => this.#expectToBe().stringIncludes(actual, includes, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -1001,7 +1014,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.stringIncludesSome(actual, includes, expected, expectationFailOutput),
+      () => this.#expectToBe().stringIncludesSome(actual, includes, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -1030,7 +1043,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.stringOfLength(actual, length, expected, expectationFailOutput),
+      () => this.#expectToBe().stringOfLength(actual, length, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -1059,7 +1072,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.stringOfLengthBetween(actual, min, max, expected, expectationFailOutput),
+      () => this.#expectToBe().stringOfLengthBetween(actual, min, max, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -1086,7 +1099,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.stringType(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().stringType(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -1113,7 +1126,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.symbol(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().symbol(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -1140,7 +1153,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.true(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().true(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -1155,7 +1168,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.truthy(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().truthy(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -1181,10 +1194,15 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.be.undefined(actual, expected, expectationFailOutput),
+      () => this.#expectToBe().undefined(actual, expected, expectationFailOutput),
       execute
     );
     return this;
   }
   //#endregion
+
+  // Private.
+  #expectToBe(not: boolean = false) {
+    return (not ? this.expect.to.be.not : this.expect.to.be);
+  }
 }

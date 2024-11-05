@@ -25,7 +25,7 @@ export class TestingItToThrow<
   ): this {
     this.it(
       expectation,
-      () => (not ? super.expect.to.throw.not : super.expect.to.throw).error(actual, message, expectationFailOutput),
+      () => this.#expectToThrow(not).error(actual, message, expectationFailOutput),
       execute
     );
     return this;
@@ -40,7 +40,7 @@ export class TestingItToThrow<
   ): this {
     this.it(
       expectation,
-      () => (not ? super.expect.to.throw.not : super.expect.to.throw).matching(actual, predicate, expectationFailOutput),
+      () => this.#expectToThrow(not).matching(actual, predicate, expectationFailOutput),
       execute
     );
     return this;
@@ -55,9 +55,14 @@ export class TestingItToThrow<
   ): this {
     this.it(
       expectation,
-      () => (not ? super.expect.to.throw.not : super.expect.to.throw).throw(actual, expected, expectationFailOutput),
+      () => this.#expectToThrow(not).throw(actual, expected, expectationFailOutput),
       execute
     );
     return this;
+  }
+
+  // Private.
+  #expectToThrow(not: boolean = false) {
+    return (not ? this.expect.to.throw.not : this.expect.to.throw);
   }
 }
