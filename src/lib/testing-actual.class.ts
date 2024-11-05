@@ -60,8 +60,12 @@ export class TestingActual<
    * @param actual 
    * @returns 
    */
-  public actual<T>(actual: ExpectType<T>): this {
+  public actual<T>(
+    actual: ExpectType<T>,
+    specDefinitions?: (testing: TestingActual) => void
+  ): this {
     this.#actual = actual;
+    specDefinitions && specDefinitions(new TestingActual().actual(this.#actual));
     return this;
   }
 
@@ -70,8 +74,17 @@ export class TestingActual<
    * @param spy 
    * @returns 
    */
-  public spy<T extends jasmine.Func>(spy: () => ExpectType<T>): this {
+  public spy<T extends jasmine.Func>(
+    spy: () => ExpectType<T>,
+    beforeEachAction?: jasmine.ImplementationCallback,
+    specDefinitions?: (testing: TestingActual) => void
+  ): this {
     this.#spy = spy;
+    specDefinitions && specDefinitions((
+      beforeEachAction
+      ?  new TestingActual().beforeEach(beforeEachAction)
+      : new TestingActual()
+    ).spy(this.#spy));
     return this;
   }
 
@@ -80,6 +93,7 @@ export class TestingActual<
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be the given `expected` value.
    * "Expect the actual value to be === to the expected value."
    * @param expected The value of any type passed to the `toBe()` method of jasmine. "The expected value to compare against."
+   * @param not Invert the matcher following this expectation.
    * @param expectation "Textual description of what this spec is checking" with an optional its unique `number` when adding `[counter]`.
    * @param expectationFailOutput
    * @param execute An optional parameter that specifies whether the spec is to be executed. By default it takes its value from the global
@@ -89,12 +103,13 @@ export class TestingActual<
    */
   public toBe<T>(
     expected: jasmine.Expected<typeof actual>,
-    expectation: string,
+    not?: boolean,
+    expectation: string = TextualExpectation.get('toBe'),
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.be.be(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.be.be(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -111,7 +126,7 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeArray<T>(
-    expected: jasmine.Expected<boolean> = true,
+    expected?: jasmine.Expected<boolean>,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
@@ -134,7 +149,7 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeBigInt<T>(
-    expected: jasmine.Expected<boolean> = true,
+    expected?: jasmine.Expected<boolean>,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
@@ -157,11 +172,11 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestToBe`.
    */
   public toBeBoolean<T>(
-    actual: ExpectType<T>,
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeBoolean,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
+    actual: ExpectType<T> = this.#actual
   ): this {
     this.#to.be.boolean.boolean(actual, expected, expectation, expectationFailOutput, execute);
     return this;
@@ -180,8 +195,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeBooleanType<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeBooleanType,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -203,8 +218,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeClass<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeClass,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -217,6 +232,7 @@ export class TestingActual<
    * 
    * @param expected 
    * @param precision 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value must be within a specified `precision` of the `expected` actual.
    * @param expectationFailOutput 
@@ -227,12 +243,13 @@ export class TestingActual<
   public toBeCloseTo<T extends number>(
     expected: number,
     precision?: any,
-    expectation?: string, //toBeCloseTo,
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.be.closeTo(actual, expected, precision, expectation, expectationFailOutput, execute);
+    this.#to.be.closeTo(actual, expected, precision, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -247,8 +264,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeDate<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeDate,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -268,13 +285,14 @@ export class TestingActual<
    * @returns 
    */
   public toBeDefined<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeDefined,
+    expected?: jasmine.Expected<boolean>,
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.be.defined(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.be.defined(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -289,8 +307,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeFalse<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeFalse,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -310,8 +328,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeFalsy<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeFalsy,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -331,8 +349,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeFunction<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeFunction,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -354,12 +372,13 @@ export class TestingActual<
    */
   public toBeGreaterThan<T extends number>(
     expected: number,
-    expectation?: string, //toBeGreaterThan, 
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.be.greaterThan(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.be.greaterThan(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -375,12 +394,13 @@ export class TestingActual<
    */
   public toBeGreaterThanOrEqual<T extends number>(
     expected: number,
-    expectation?: string, //toBeGreaterThanOrEqual,
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.be.greaterThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.be.greaterThanOrEqual(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -397,8 +417,8 @@ export class TestingActual<
    */
   public toBeInstance<T, Type>(
     constructor: Constructor<Type>,
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstance,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual
@@ -420,12 +440,13 @@ export class TestingActual<
    */
   public toBeInstanceOf<T>(
     expected: jasmine.Constructor,
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.be.instanceOf(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.be.instanceOf(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -442,8 +463,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfArray<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfArray,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -465,8 +486,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfBoolean<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfBoolean,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -488,8 +509,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfDate<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfDate,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -511,8 +532,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfError<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfError,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -534,8 +555,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfFunction<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfFunction,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -557,8 +578,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfMap<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfMap,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -580,8 +601,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfNumber<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfNumber,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -603,8 +624,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfObject<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfObject,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -626,8 +647,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfPromise<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfPromise,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -649,8 +670,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfRangeError<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfRangeError,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -672,8 +693,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfReferenceError<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfReferenceError,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -695,8 +716,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfRegExp<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfRegExp,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -718,8 +739,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfSet<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfSet,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -729,6 +750,7 @@ export class TestingActual<
   }
 
   /**
+   * @deprecated
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Storage` on the `expected`
    * of `true`.
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
@@ -741,13 +763,13 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfStorage<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfStorage,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.be.instanceof.storage(actual, expected, expectation, expectationFailOutput, execute);
+    // this.#to.be.instanceof.storage(actual, expected, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -764,8 +786,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfString<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfString,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -787,8 +809,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfSyntaxError<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfSyntaxError,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -810,8 +832,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfTypeError<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfTypeError,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -833,8 +855,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfURIError<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfURIError,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -856,8 +878,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeInstanceOfWeakSet<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeInstanceOfWeakSet,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -878,8 +900,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeKey<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeKey,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -892,6 +914,7 @@ export class TestingActual<
   /**
    * 
    * @param expected 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value to be less than the `expected` value.
    * @param expectationFailOutput 
@@ -901,18 +924,20 @@ export class TestingActual<
    */
   public toBeLessThan<T extends number>(
     expected: number,
-    expectation?: string, //toBeLessThan,
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.be.lessThan(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.be.lessThan(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
    * 
    * @param expected 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value to be less than or equal to the `expected` value.
    * @param expectationFailOutput 
@@ -922,12 +947,13 @@ export class TestingActual<
    */
   public toBeLessThanOrEqual<T extends number>(
     expected: number,
-    expectation?: string, //toBeLessThanOrEqual,
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.be.lessThanOrEqual(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.be.lessThanOrEqual(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -942,8 +968,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeNaN<T extends number>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeNaN,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -963,8 +989,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeNegativeInfinity<T extends number>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeNegativeInfinity,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -986,8 +1012,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeNull<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeNull,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -1009,8 +1035,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestToBe`.
    */
   public toBeNumber<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeNumber,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual
@@ -1036,8 +1062,8 @@ export class TestingActual<
   public toBeNumberBetween<T, Min extends number, Max extends number>(
     min: Min,
     max: Max,
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeNumberBetween,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -1059,8 +1085,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeNumberType<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeNumberType,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -1080,8 +1106,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeObject<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeObject,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual
@@ -1103,8 +1129,8 @@ export class TestingActual<
    */
   public toBeObjectKey<T>(
     key: PropertyKey,
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeObjectKey,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual
@@ -1126,8 +1152,8 @@ export class TestingActual<
    */
   public toBeObjectKeyIn<T>(
     key: PropertyKey,
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeObjectKeyIn,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual
@@ -1148,12 +1174,12 @@ export class TestingActual<
    * @returns 
    */
   public toBeObjectKeys<T>(
-    actual: ExpectType<T>,
     keys: PropertyKey[],
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeObjectKeyIn,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
+    actual: ExpectType<T> = this.#actual
   ): this {
     this.#to.be.objectKeys(actual, keys, expected, expectation, expectationFailOutput, execute);
     return this;
@@ -1172,8 +1198,8 @@ export class TestingActual<
    */
   public objectKeysIn<T>(
     keys: PropertyKey[],
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeObjectKeyIn,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual
@@ -1196,8 +1222,8 @@ export class TestingActual<
    */
   public objectSomeKeys<T>(
     keys: PropertyKey[],
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeObjectKeyIn,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual
@@ -1217,8 +1243,8 @@ export class TestingActual<
    * @returns 
    */
   public toBePositiveInfinity<T extends number>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBePositiveInfinity,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -1238,8 +1264,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeRegExp<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeRegExp,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual
@@ -1250,21 +1276,22 @@ export class TestingActual<
 
 
   /**
-   * 
-   * @param actual 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * Expect the `actual` value a promise to be rejected.
    * @param expectationFailOutput 
    * @param execute 
+   * @param actual 
    * @returns 
    */
   public toBeRejected<T>(
-    expectation?: string, //toBeRejected,
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: T | PromiseLike<T> = this.#actual
   ): this {
-    this.#to.be.rejected(actual, expectation, expectationFailOutput, execute);
+    this.#to.be.rejected(actual, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1277,13 +1304,15 @@ export class TestingActual<
    * @param actual 
    * @returns 
    */
-  public toBeRejectedWith<T>(
-    expectation?: string, //toBeRejectedWith,
+  public toBeRejectedWith<T, U>(
+    expected: jasmine.Expected<U>,
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: T | PromiseLike<T> = this.#actual
   ): this {
-    this.#to.be.rejectedWith(actual, expectation, expectationFailOutput, execute);
+    this.#to.be.rejectedWith(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1291,6 +1320,7 @@ export class TestingActual<
    * 
    * @param expected 
    * @param message 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * Expect the `actual` value a promise to be rejected with a value matched to the expected.
    * @param expectationFailOutput 
@@ -1301,18 +1331,19 @@ export class TestingActual<
   public toBeRejectedWithError<T>(
     expected?: new (...args: any[]) => Error,
     message?: string | RegExp,
-    expectation?: string, //toBeRejectedWithError,
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: T | PromiseLike<T> = this.#actual
   ): this {
-    this.#to.be.rejectedWithError(actual, expected, message, expectation, expectationFailOutput, execute);
+    this.#to.be.rejectedWithError(actual, expected, message, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
 
   /**
-   * 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * Expect the `actual` value a promise to be resolved.
    * @param expectationFailOutput 
@@ -1321,17 +1352,19 @@ export class TestingActual<
    * @returns 
    */
   public toBeResolved<T>(
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: T | PromiseLike<T> = this.#actual,
   ): this {
-    this.#to.be.resolved(actual, expectation, expectationFailOutput, execute);
+    this.#to.be.resolved(actual, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
-   * 
+   * @param expected
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * Expect the `actual` value a promise to be resolved to a value equal to the expected, using deep equality comparison.
    * @param expectationFailOutput 
@@ -1341,12 +1374,13 @@ export class TestingActual<
    */
   public toBeResolvedTo<T>(
     expected: jasmine.Expected<T>, 
+    not?: boolean,
     expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: T | PromiseLike<T> = this.#actual,
   ): this {
-    this.#to.be.resolvedTo(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.be.resolvedTo(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1363,8 +1397,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeString<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeString,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual
@@ -1487,8 +1521,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestActual`.
    */
   public toBeStringType<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeStringType,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -1510,8 +1544,8 @@ export class TestingActual<
    * @returns The return value is an instance of a `TestingTestToBe`.
    */
   public toBeSymbol<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeSymbol,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual
@@ -1531,8 +1565,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeTrue<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeTrue,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -1552,8 +1586,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeTruthy<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeTruthy, 
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -1573,8 +1607,8 @@ export class TestingActual<
    * @returns 
    */
   public toBeUndefined<T>(
-    expected: jasmine.Expected<boolean> = true,
-    expectation?: string, //toBeUndefined,
+    expected?: jasmine.Expected<boolean>,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
@@ -1587,6 +1621,7 @@ export class TestingActual<
   /**
    * 
    * @param expected 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value to contain a specific value.
    * @param expectationFailOutput 
@@ -1596,12 +1631,13 @@ export class TestingActual<
    */
   public toContain<T>(
     expected: any,
-    expectation?: string, //toContain,
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.contain(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.contain(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1609,6 +1645,7 @@ export class TestingActual<
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to equal to the given `expected`.
    * "Expect the actual `value` to be equal to the `expected`, using deep equality comparison."
    * @param expected The value of any type passed to the `toEqual()` method of jasmine. "The expected value to compare against."
+   * @param not Invert the matcher following this expectation.
    * @param expectation "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]`.
    * The `actual` value to be equal to the `expected`, using deep equality comparison.
    * @param expectationFailOutput
@@ -1619,19 +1656,20 @@ export class TestingActual<
    */
   public toEqual<T>(
     expected: jasmine.Expected<typeof actual>,
-    expectation?: string, //toEqual,
+    not?: boolean,
+    expectation?: string,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.equal(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.equal(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
 
   //#region toHaveBeenCalled
   /**
-   * 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value (a Spy) to have been called.
    * @param expectationFailOutput 
@@ -1640,14 +1678,19 @@ export class TestingActual<
    * @returns 
    */
   public toHaveBeenCalled<T extends jasmine.Func>(
-    expectation: string = TextualExpectation.toHaveBeenCalled,
+    not?: boolean,
+    expectation: string = TextualExpectation.get('toHaveBeenCalled'),
     expectationFailOutput?: any,
     execute?: boolean,
     spy: () => ExpectType<T> = this.#spy
   ): this {    
     this.it(
       expectation,
-      () => super.expect.to.have.been.called.called(spy(), expectationFailOutput),
+      () => (
+        not
+          ? super.expect.to.have.been.called.not
+          : super.expect.to.have.been.called
+        ).called(spy(), expectationFailOutput),
       execute
     );
     return this;
@@ -1656,6 +1699,7 @@ export class TestingActual<
   /**
    * 
    * @param expected 
+   * @param not Invert the matcher following this expectation.
    * @param expectation 
    * The `actual` value (a Spy) to have been called before another Spy.
    * @param expectationFailOutput 
@@ -1665,14 +1709,19 @@ export class TestingActual<
    */
   public toHaveBeenCalledBefore<T extends jasmine.Func>(
     expected: jasmine.Func,
-    expectation: string = TextualExpectation.toHaveBeenCalledBefore,
+    not?: boolean,
+    expectation: string = TextualExpectation.get('toHaveBeenCalledBefore'),
     expectationFailOutput?: any,
     execute?: boolean,
     spy: () => ExpectType<T> = this.#spy
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.have.been.called.before(spy(), expected, expectationFailOutput),
+      () => (
+        not
+          ? super.expect.to.have.been.called.not
+          : super.expect.to.have.been.called
+        ).before(spy(), expected, expectationFailOutput),
       execute
     );
     return this;
@@ -1690,7 +1739,7 @@ export class TestingActual<
     ...params: any[]
   ): this {
     this.it(
-      TextualExpectation.toHaveBeenCalledOnceWith,
+      TextualExpectation.get('toHaveBeenCalledOnceWith'),
       () => super.expect.to.have.been.called.onceWith(this.#spy(), ...params),
       true
     );
@@ -1701,6 +1750,7 @@ export class TestingActual<
    * 
    * @param expected 
    * @param expectation 
+   * @param not Invert the matcher following this expectation.
    * The `actual` value (a Spy) to have been called the specified number of times.
    * @param expectationFailOutput 
    * @param execute 
@@ -1709,14 +1759,19 @@ export class TestingActual<
    */
   public toHaveBeenCalledTimes<T extends jasmine.Func>(
     expected: number,
-    expectation: string = TextualExpectation.toHaveBeenCalledTimes,
+    not?: boolean,
+    expectation: string = TextualExpectation.get('toHaveBeenCalledTimes'),
     expectationFailOutput?: any,
     execute?: boolean,
     spy: () => ExpectType<T> = this.#spy
   ): this {
     this.it(
       expectation,
-      () => super.expect.to.have.been.called.times(spy(), expected, expectationFailOutput),
+      () => (
+        not
+          ? super.expect.to.have.been.called.not
+          : super.expect.to.have.been.called
+        ).times(spy(), expected, expectationFailOutput),
       execute
     );
     return this;
@@ -1736,7 +1791,7 @@ export class TestingActual<
     ...params: any[]
   ): this {
     this.it(
-      TextualExpectation.toHaveBeenCalledWith,
+      TextualExpectation.get('toHaveBeenCalledWith'),
       () => super.expect.to.have.been.called.with(this.#spy(), ...params),
       true
     );
@@ -1757,12 +1812,13 @@ export class TestingActual<
    */
   public toHaveClass<T>(
     expected: string,
+    not?: boolean,
     expectation?: string, //toHaveClass, 
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.have.class(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.have.class(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1778,12 +1834,13 @@ export class TestingActual<
    */
   public toHaveSize<T>(
     expected: number,
+    not?: boolean,
     expectation?: string, //toHaveSize, 
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.have.size(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.have.size(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
@@ -1794,16 +1851,17 @@ export class TestingActual<
    * The `actual` value (a SpyObj) spies to have been called.
    * @param expectationFailOutput 
    * @param execute 
-   * @param actual 
+   * @param spy 
    * @returns 
    */
   public toHaveSpyInteractions<T>(
+    not?: boolean,
     expectation?: string, //toHaveSpyInteractions,
     expectationFailOutput?: any,
     execute?: boolean,
-    actual: ExpectType<T> = this.#actual,
+    spy: T extends Array<any> ? () => ExpectType<T[number]>[] : () => ExpectType<T> = this.#spy,
   ): this {
-    this.#to.have.spyInteractions(actual, expectation, expectationFailOutput, execute);
+    this.#to.have.spyInteractions(spy, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -1812,6 +1870,7 @@ export class TestingActual<
   /**
    * 
    * @param expected 
+   * @param not
    * @param expectation 
    * The `actual` value to match a regular expression.
    * @param expectationFailOutput 
@@ -1821,12 +1880,13 @@ export class TestingActual<
    */
   public toMatch<T>(
     expected: string | RegExp,
+    not?: boolean,
     expectation?: string, //toMatch, 
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.match(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.match(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
@@ -1835,6 +1895,7 @@ export class TestingActual<
   /**
    * 
    * @param expected 
+   * @param not
    * @param expectation 
    * The `actual` value a function to throw something.
    * @param expectationFailOutput 
@@ -1844,18 +1905,20 @@ export class TestingActual<
    */
   public toThrow<T>(
     expected?: any,
+    not?: boolean,
     expectation?: string, //toThrow,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.throw.throw(actual, expected, expectation, expectationFailOutput, execute);
+    this.#to.throw.throw(actual, expected, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
    * 
    * @param message 
+   * @param not
    * @param expectation 
    * The `actual` value a function to throw an Error.
    * @param expectationFailOutput 
@@ -1865,18 +1928,20 @@ export class TestingActual<
    */
   public toThrowError<T extends jasmine.Func>(
     message?: string | RegExp,
+    not?: boolean,
     expectation?: string, //toThrowError,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.throw.error(actual, message, expectation, expectationFailOutput, execute);
+    this.#to.throw.error(actual, message, not, expectation, expectationFailOutput, execute);
     return this;
   }
 
   /**
    * 
    * @param predicate 
+   * @param not
    * @param expectation 
    * The `actual` value a function to throw something matching a predicate.
    * @param expectationFailOutput 
@@ -1886,12 +1951,13 @@ export class TestingActual<
    */
   public toThrowMatching<T>(
     predicate: (thrown: any) => boolean,
+    not?: boolean,
     expectation?: string, //toThrowMatching,
     expectationFailOutput?: any,
     execute?: boolean,
     actual: ExpectType<T> = this.#actual,
   ): this {
-    this.#to.throw.matching(actual, predicate, expectation, expectationFailOutput, execute);
+    this.#to.throw.matching(actual, predicate, not, expectation, expectationFailOutput, execute);
     return this;
   }
   //#endregion
