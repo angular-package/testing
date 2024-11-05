@@ -12,7 +12,7 @@ export abstract class TextualExpectation {
     method: keyof typeof TextualExpectation.message,
     not: boolean,
   ) {
-    return `${this.expectationFailOutput} ${not === true ? `not` : ``} ${TextualExpectation.message[method].fail}`;
+    return `${this.expectationFailOutput} ${not === true ? `not` : ``}${TextualExpectation.message[method].fail}`;
   }
 
   public static get(method: keyof typeof TextualExpectation.message) {
@@ -31,27 +31,27 @@ export abstract class TextualExpectation {
    * 
    */
   public static message = {
-    toBe: { ok: "The `actual` value to be `===` to the `expected` value.", fail: "be the `expected` value." },
+    toBe: { ok: "The `actual` value to be `===` to the `expected` value.", fail: "be the `expected` value" },
   
     // toBeArray
-    toBeArray: { ok: "The `actual` value must be `array` type or an instance of `Array`.", fail: "be an `array`." },
+    toBeArray: { ok: "The `actual` value must be `array` type or an instance of `Array`.", fail: "be an `array`" },
 
     //#region toBeArrayOf
-    toBeArrayOfBigInt: { ok: "The `actual` value must be `array` type or an instance of `Array` of `bigint`.", fail: "be an `array` of `bigint`." },
-    toBeArrayOfBoolean: { ok: "The `actual` value must be `array` type or an instance of `Array` of `boolean`.", fail: "be an `array` of `boolean`." },
-    toBeArrayOfDate: { ok: "The `actual` value must be `array` type or an instance of `Array` of `date`.", fail: "be an `array` of `date`." },
-    toBeArrayOfDefined: { ok: "The `actual` value must be `array` type or an instance of `Array` of defined.", fail: "be an `array` of defined." },
-    toBeArrayOfFalse: { ok: "The `actual` value must be `array` type or an instance of `Array` of `false`.", fail: "be an `array` of `false`." },
-    toBeArrayOfNull: { ok: "The `actual` value must be `array` type or an instance of `Array` of `null`.",  fail: "be an `array` of `null`."},
-    toBeArrayOfNumber: { ok: "The `actual` value must be `array` type or an instance of `Array` of `number`.", fail: "be an `array` of `number`." },
-    toBeArrayOfRegExp: { ok: "The `actual` value must be `array` type or an instance of `Array` of `regexp`.", fail: "be an `array` of `regexp`." },
-    toBeArrayOfString: { ok: "The `actual` value must be `array` type or an instance of `Array` of `string`.", fail: "be an `array` of `string`." },
-    toBeArrayOfSymbol: { ok: "The `actual` value must be `array` type or an instance of `Array` of `symbol`.", fail: "be an `array` of `symbol`." },
-    toBeArrayOfTrue: { ok: "The `actual` value must be `array` type or an instance of `Array` of `true`.", fail: "be an `array` of `true`." },
-    toBeArrayOfUndefined: { ok: "The `actual` value must be `array` type or an instance of `Array` of `undefined`.", fail: "be an `array` of `undefined`." },    
+    toBeArrayOfBigInt: { ok: "The `actual` value must be `array` type or an instance of `Array` of `bigint`.", fail: "be an `array` of `bigint`" },
+    toBeArrayOfBoolean: { ok: "The `actual` value must be `array` type or an instance of `Array` of `boolean`.", fail: "be an `array` of `boolean`" },
+    toBeArrayOfDate: { ok: "The `actual` value must be `array` type or an instance of `Array` of `date`.", fail: "be an `array` of `date`" },
+    toBeArrayOfDefined: { ok: "The `actual` value must be `array` type or an instance of `Array` of defined.", fail: "be an `array` of defined" },
+    toBeArrayOfFalse: { ok: "The `actual` value must be `array` type or an instance of `Array` of `false`.", fail: "be an `array` of `false`" },
+    toBeArrayOfNull: { ok: "The `actual` value must be `array` type or an instance of `Array` of `null`.",  fail: "be an `array` of `null`"},
+    toBeArrayOfNumber: { ok: "The `actual` value must be `array` type or an instance of `Array` of `number`.", fail: "be an `array` of `number`" },
+    toBeArrayOfRegExp: { ok: "The `actual` value must be `array` type or an instance of `Array` of `regexp`.", fail: "be an `array` of `regexp`" },
+    toBeArrayOfString: { ok: "The `actual` value must be `array` type or an instance of `Array` of `string`.", fail: "be an `array` of `string`" },
+    toBeArrayOfSymbol: { ok: "The `actual` value must be `array` type or an instance of `Array` of `symbol`.", fail: "be an `array` of `symbol`" },
+    toBeArrayOfTrue: { ok: "The `actual` value must be `array` type or an instance of `Array` of `true`.", fail: "be an `array` of `true`" },
+    toBeArrayOfUndefined: { ok: "The `actual` value must be `array` type or an instance of `Array` of `undefined`.", fail: "be an `array` of `undefined`" },    
     
     //#region Single value types
-    toBeBigInt: { ok: "The `actual` value must be a `bigint` type.", fail: "be a `bigint`." },
+    toBeBigInt: { ok: "The `actual` value must be a `bigint` type.", fail: "be a `bigint`" },
     toBeBoolean: { ok: "The `actual` value must be of a `boolean` type or an instance of `Boolean`.", fail: "" },
     toBeBooleanType: { ok: "The `actual` value must be of a `boolean` type.", fail: "" },
 
@@ -73,29 +73,29 @@ export abstract class TextualExpectation {
     toBeGreaterThanOrEqual: { ok: "The `actual` value to be greater than or equal to the `expected` value.", fail: "" },
 
     //#region Instance checks
-    toBeInstance: { ok: "The 'actual' value to be an instance of 'constructor'.", fail: "be an instance of `constructor`." },
-    toBeInstanceOf: { ok: "The `actual` value must be an instance of `expected`.", fail: "be an instance of `expected`." },
-    toBeInstanceOfArray: { ok: "The `actual` value must be an instance of an `Array`.", fail: "be an instance of `Array`." },
-    toBeInstanceOfBoolean: { ok: "The `actual` value must be an instance of `Boolean`.", fail: "be an instance of `Boolean`." },
-    toBeInstanceOfDate: { ok: "The `actual` value must be an instance of `DataView`.", fail: "be an instance of `DataView`." },
-    toBeInstanceOfDataView: { ok: "The `actual` value must be an instance of `Date`.", fail: "be an instance of `Date`." },
+    toBeInstance: { ok: "The 'actual' value to be an instance of 'constructor'.", fail: "be an instance of `constructor`" },
+    toBeInstanceOf: { ok: "The `actual` value must be an instance of `expected`.", fail: "be an instance of `expected`" },
+    toBeInstanceOfArray: { ok: "The `actual` value must be an instance of an `Array`.", fail: "be an instance of `Array`" },
+    toBeInstanceOfBoolean: { ok: "The `actual` value must be an instance of `Boolean`.", fail: "be an instance of `Boolean`" },
+    toBeInstanceOfDate: { ok: "The `actual` value must be an instance of `DataView`.", fail: "be an instance of `DataView`" },
+    toBeInstanceOfDataView: { ok: "The `actual` value must be an instance of `Date`.", fail: "be an instance of `Date`" },
     toBeInstanceOfError: { ok: "The `actual` value must be an instance of an `Error`.", fail: "be an instance of `Error`." },
-    toBeInstanceOfEvalError: { ok: "The `actual` value must be an instance of an `EvalError`.", fail: "be an instance of `EvalError`." },
-    toBeInstanceOfFunction: { ok: "The `actual` value must be an instance of a `Function`.", fail: "be an instance of `Function`." },
-    toBeInstanceOfMap: { ok: "The `actual` value must be an instance of a `Map`.", fail: "be an instance of `Map`." },
-    toBeInstanceOfNumber: { ok: "The `actual` value must be an instance of a `Number`.", fail: "be an instance of `Number`." },
-    toBeInstanceOfObject: { ok: "The `actual` value must be an instance of an `Object`.", fail: "be an instance of `Object`." },
-    toBeInstanceOfPromise: { ok: "The `actual` value must be an instance of `Promise`.", fail: "be an instance of `Promise`." },
-    toBeInstanceOfRangeError: { ok: "The 'actual' value must be an instance of 'RangeError'.", fail: "be an instance of `RangeError`." },
-    toBeInstanceOfReferenceError: { ok: "The 'actual' value must be an instance of 'ReferenceError'.", fail: "be an instance of `ReferenceError`." },
-    toBeInstanceOfRegExp: { ok: "The 'actual' value must be an instance of 'RegExp'.", fail: "be an instance of `RegExp`." },
-    toBeInstanceOfSet: { ok: "The 'actual' value must be an instance of 'Set'.", fail: "be an instance of `Set`." },
-    toBeInstanceOfString: { ok: "The 'actual' value must be an instance of a 'String'.", fail: "be an instance of `String`." },
-    toBeInstanceOfSyntaxError: { ok: "The 'actual' value must be an instance of 'SyntaxError'.", fail: "be an instance of `SyntaxError`." },
-    toBeInstanceOfTypeError: { ok: "The 'actual' value must be an instance of 'TypeError'.", fail: "be an instance of `TypeError`." },
-    toBeInstanceOfURIError: { ok: "The 'actual' value must be an instance of 'URIError'.", fail: "be an instance of `URIError`." },
-    toBeInstanceOfWeakMap: { ok: "The 'actual' value must be an instance of a 'WeakMap'.", fail: "be an instance of `WeakMap`." },
-    toBeInstanceOfWeakSet: { ok: "The 'actual' value must be an instance of a 'WeakSet'.", fail: "be an instance of `WeakSet`." },
+    toBeInstanceOfEvalError: { ok: "The `actual` value must be an instance of an `EvalError`.", fail: "be an instance of `EvalError`" },
+    toBeInstanceOfFunction: { ok: "The `actual` value must be an instance of a `Function`.", fail: "be an instance of `Function`" },
+    toBeInstanceOfMap: { ok: "The `actual` value must be an instance of a `Map`.", fail: "be an instance of `Map`" },
+    toBeInstanceOfNumber: { ok: "The `actual` value must be an instance of a `Number`.", fail: "be an instance of `Number`" },
+    toBeInstanceOfObject: { ok: "The `actual` value must be an instance of an `Object`.", fail: "be an instance of `Object`" },
+    toBeInstanceOfPromise: { ok: "The `actual` value must be an instance of `Promise`.", fail: "be an instance of `Promise`" },
+    toBeInstanceOfRangeError: { ok: "The 'actual' value must be an instance of 'RangeError'.", fail: "be an instance of `RangeError`" },
+    toBeInstanceOfReferenceError: { ok: "The 'actual' value must be an instance of 'ReferenceError'.", fail: "be an instance of `ReferenceError`" },
+    toBeInstanceOfRegExp: { ok: "The 'actual' value must be an instance of 'RegExp'.", fail: "be an instance of `RegExp`" },
+    toBeInstanceOfSet: { ok: "The 'actual' value must be an instance of 'Set'.", fail: "be an instance of `Set`" },
+    toBeInstanceOfString: { ok: "The 'actual' value must be an instance of a 'String'.", fail: "be an instance of `String`" },
+    toBeInstanceOfSyntaxError: { ok: "The 'actual' value must be an instance of 'SyntaxError'.", fail: "be an instance of `SyntaxError`" },
+    toBeInstanceOfTypeError: { ok: "The 'actual' value must be an instance of 'TypeError'.", fail: "be an instance of `TypeError`" },
+    toBeInstanceOfURIError: { ok: "The 'actual' value must be an instance of 'URIError'.", fail: "be an instance of `URIError`" },
+    toBeInstanceOfWeakMap: { ok: "The 'actual' value must be an instance of a 'WeakMap'.", fail: "be an instance of `WeakMap`" },
+    toBeInstanceOfWeakSet: { ok: "The 'actual' value must be an instance of a 'WeakSet'.", fail: "be an instance of `WeakSet`" },
 
     //
     toBeKey: { ok: "The 'actual' value to be a 'PropertyKey'.", fail: "" },
