@@ -1,5 +1,6 @@
 // Class.
 import { TestingExpect } from "./testing-expect.class";
+import { TextualExpectation } from "./textual-expectation.abstract";
 // Type.
 import { ExpectType } from "../type";
 /**
@@ -7,6 +8,14 @@ import { ExpectType } from "../type";
  * @classdesc Contains instance of the `TestingExpect`.
  */
 export class Expect {
+  /**
+   * @description
+   * @param method 
+   * @returns 
+   */
+  public getExpectationFailOutput(method: keyof typeof TextualExpectation.message) {
+    return TextualExpectation.getFail(method, this.getNot());
+  }
   /**
    * @description Fail as soon as possible if the actual is pending. Otherwise evaluate the matcher.
    */
@@ -88,6 +97,14 @@ export class Expect {
    */
   public setNot(not: boolean): this {
     this.#expect.setNot(not);
+    return this;
+  }
+
+  /**
+   * @param message 
+   */
+  public withContext(message: string) {
+    message && this.#expect.withContext(message);
     return this;
   }
 }
