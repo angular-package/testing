@@ -845,7 +845,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      () => this.#expectToBe(not).pending(actual, expectationFailOutput),
+      done => (this.#expectToBe(not).pending(actual, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -861,7 +861,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      done => { this.#expectToBe(not).rejected(actual, expectationFailOutput), done() },
+      done => (this.#expectToBe(not).rejected(actual, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -878,7 +878,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      done => { this.#expectToBe(not).rejectedWith(actual, expected, expectationFailOutput), done() },
+      done => (this.#expectToBe(not).rejectedWith(actual, expected, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -896,7 +896,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      done => { this.#expectToBe(not).rejectedWithError(actual, expected, message, expectationFailOutput), done() },
+      done => (this.#expectToBe(not).rejectedWithError(actual, expected, message, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -912,7 +912,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      done => { this.#expectToBe(not).resolved(actual, expectationFailOutput), done() },
+      done => (this.#expectToBe(not).resolved(actual, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -929,7 +929,7 @@ export class TestingItToBe<
   ): this {
     this.it(
       expectation,
-      done => { this.#expectToBe(not).resolvedTo(actual, expected, expectationFailOutput), done() },
+      done => (this.#expectToBe(not).resolvedTo(actual, expected, expectationFailOutput), done()),
       execute
     );
     return this;
