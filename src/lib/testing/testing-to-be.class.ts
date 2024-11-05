@@ -258,16 +258,19 @@ export class TestingToBe<
     return this;
   }
 
+
   /**
-   * 
-   * @param actual 
-   * @param constructor 
-   * @param expected 
-   * @param expectation 
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a instance of `constructor`
+   * on the `expected` of `true`. The method uses `isInstance()` function of `@angular-package/type`.
+   * @param actual The value of any type to check.
+   * @param constructor The class to check whether `actual` is an instance of it.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to
    * The `actual` value to be an instance of `constructor`.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @returns The return value is an instance of a `TestingTestToBe`.
    */
   public toBeInstance<T, Type>(
     actual: ExpectType<T>,
