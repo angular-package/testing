@@ -34,6 +34,9 @@ export class TestingExpect {
    */
   #not = false;
 
+  // Additional context to show when the matcher fails.
+  #expectationFailOutput?: string;
+
   /**
    * @description Wrapper method for the `expect()` function of jasmine.
    * @param actual The value of a type captured from the `actual` that is passed to the `expect()` function of jasmine.
@@ -42,7 +45,7 @@ export class TestingExpect {
    */
   public expect<T>(
     actual: ExpectType<T>,
-    expectationFailOutput?: any,
+    expectationFailOutput = this.#expectationFailOutput,
     e = expectationFailOutput
       ? expect(actual).withContext(expectationFailOutput)
       : expect(actual)
@@ -61,7 +64,7 @@ export class TestingExpect {
 
   public expectAsync<T, U>(
     actual: T | PromiseLike<T>,
-    expectationFailOutput?: any,
+    expectationFailOutput = this.#expectationFailOutput,
     not?: boolean,
     already?: boolean,
     e = expectationFailOutput
@@ -104,6 +107,14 @@ export class TestingExpect {
    */
   public setNot(not: boolean): this {
     is.boolean(not) && (this.#not = not);
+    return this;
+  }
+
+  /**
+   * @param message 
+   */
+  public withContext(message: string) {
+    message && (this.#expectationFailOutput = message);
     return this;
   }
 }
