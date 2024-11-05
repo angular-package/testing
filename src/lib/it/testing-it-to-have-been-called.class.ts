@@ -20,7 +20,7 @@ export class TestingItToHaveBeenCalled<
   public before<T extends jasmine.Func>(
     spyExpected: () => [ExpectType<T>, jasmine.Func],
     not: boolean = false,
-    expectation: string = TextualExpectation.toHaveBeenCalledBefore,
+    expectation: string = TextualExpectation.get('toHaveBeenCalledBefore'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -34,7 +34,7 @@ export class TestingItToHaveBeenCalled<
   public called<T extends jasmine.Func>(
     spy: () => ExpectType<T> | ExpectType<T>[],
     not: boolean = false,
-    expectation: string = TextualExpectation.toHaveBeenCalled,
+    expectation: string = TextualExpectation.get('toHaveBeenCalled'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {    
@@ -55,7 +55,7 @@ export class TestingItToHaveBeenCalled<
     options: TestingOptions,
     ...params: any[]
   ): this {
-    const { not, expectation = TextualExpectation.toHaveBeenCalledOnceWith, expectationFailOutput, execute } = options;
+    const { not, expectation = TextualExpectation.get('toHaveBeenCalledOnceWith'), expectationFailOutput, execute } = options;
     this.it(
       expectation,
       () => this.#toHaveBeenCalled(not).withContext(expectationFailOutput).onceWith(spy(), ...params),
@@ -67,7 +67,7 @@ export class TestingItToHaveBeenCalled<
     spy: () => ExpectType<T>,
     expected: number,
     not: boolean = false,
-    expectation: string = TextualExpectation.toHaveBeenCalledTimes,
+    expectation: string = TextualExpectation.get('toHaveBeenCalledTimes'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -83,7 +83,7 @@ export class TestingItToHaveBeenCalled<
     options: TestingOptions,
     ...params: any[]
   ): this {
-    const { not, expectation = TextualExpectation.toHaveBeenCalledWith, expectationFailOutput, execute } = options;
+    const { not, expectation = TextualExpectation.get('toHaveBeenCalledWith'), expectationFailOutput, execute } = options;
     this.it(
       expectation,
       () => this.#toHaveBeenCalled(not).withContext(expectationFailOutput).with(spy(), ...params),

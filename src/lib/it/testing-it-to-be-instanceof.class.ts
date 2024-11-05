@@ -31,7 +31,7 @@ export class TestingItToBeInstanceOf<
   public array<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeArray,
+    expectation: string = TextualExpectation.get('toBeArray'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -58,7 +58,7 @@ export class TestingItToBeInstanceOf<
   public boolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfBoolean,
+    expectation: string = TextualExpectation.get('toBeInstanceOfBoolean'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -85,7 +85,7 @@ export class TestingItToBeInstanceOf<
   public date<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfDate,
+    expectation: string = TextualExpectation.get('toBeInstanceOfDate'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -112,7 +112,7 @@ export class TestingItToBeInstanceOf<
   public error<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfError,
+    expectation: string = TextualExpectation.get('toBeInstanceOfError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -139,7 +139,7 @@ export class TestingItToBeInstanceOf<
   public function<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfFunction,
+    expectation: string = TextualExpectation.get('toBeInstanceOfFunction'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -166,7 +166,7 @@ export class TestingItToBeInstanceOf<
   public map<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfMap,
+    expectation: string = TextualExpectation.get('toBeInstanceOfMap'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -193,7 +193,7 @@ export class TestingItToBeInstanceOf<
   public number<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfNumber,
+    expectation: string = TextualExpectation.get('toBeInstanceOfNumber'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -220,7 +220,7 @@ export class TestingItToBeInstanceOf<
   public object<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfObject,
+    expectation: string = TextualExpectation.get('toBeInstanceOfObject'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -247,7 +247,7 @@ export class TestingItToBeInstanceOf<
   public promise<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfPromise,
+    expectation: string = TextualExpectation.get('toBeInstanceOfPromise'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -274,7 +274,7 @@ export class TestingItToBeInstanceOf<
   public rangeError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfRangeError,
+    expectation: string = TextualExpectation.get('toBeInstanceOfRangeError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -301,7 +301,7 @@ export class TestingItToBeInstanceOf<
   public referenceError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfReferenceError,
+    expectation: string = TextualExpectation.get('toBeInstanceOfReferenceError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -328,7 +328,7 @@ export class TestingItToBeInstanceOf<
   public regExp<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfRegExp,
+    expectation: string = TextualExpectation.get('toBeInstanceOfRegExp'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -355,7 +355,7 @@ export class TestingItToBeInstanceOf<
   public set<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfSet,
+    expectation: string = TextualExpectation.get('toBeInstanceOfSet'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -410,7 +410,7 @@ export class TestingItToBeInstanceOf<
   public string<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfString,
+    expectation: string = TextualExpectation.get('toBeInstanceOfString'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -437,7 +437,7 @@ export class TestingItToBeInstanceOf<
   public syntaxError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfSyntaxError,
+    expectation: string = TextualExpectation.get('toBeInstanceOfSyntaxError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -464,7 +464,7 @@ export class TestingItToBeInstanceOf<
   public typeError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfTypeError,
+    expectation: string = TextualExpectation.get('toBeInstanceOfTypeError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -491,7 +491,7 @@ export class TestingItToBeInstanceOf<
   public URIError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfURIError,
+    expectation: string = TextualExpectation.get('toBeInstanceOfURIError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -515,7 +515,7 @@ export class TestingItToBeInstanceOf<
   public weakMap<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfWeakMap,
+    expectation: string = TextualExpectation.get('toBeInstanceOfWeakMap'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -542,7 +542,7 @@ export class TestingItToBeInstanceOf<
   public weakSet<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeInstanceOfWeakSet,
+    expectation: string = TextualExpectation.get('toBeInstanceOfWeakSet'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {

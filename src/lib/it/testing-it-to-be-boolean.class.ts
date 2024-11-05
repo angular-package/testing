@@ -30,7 +30,7 @@ export class TestingItToBeBoolean<
   public boolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeBoolean,
+    expectation: string = TextualExpectation.get('toBeBoolean'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -57,7 +57,7 @@ export class TestingItToBeBoolean<
   public type<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    expectation: string = TextualExpectation.toBeBooleanType,
+    expectation: string = TextualExpectation.get('toBeBooleanType'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {

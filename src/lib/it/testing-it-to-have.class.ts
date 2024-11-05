@@ -56,7 +56,7 @@ export class TestingItToHave<
     actual: ExpectType<T>,
     expected: string,
     not: boolean = false,
-    expectation: string = TextualExpectation.toHaveClass, 
+    expectation: string = TextualExpectation.get('toHaveClass'), 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -71,7 +71,7 @@ export class TestingItToHave<
     actual: ExpectType<T>,
     expected: number,
     not: boolean = false,
-    expectation: string = TextualExpectation.toHaveSize, 
+    expectation: string = TextualExpectation.get('toHaveSize'), 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -85,7 +85,7 @@ export class TestingItToHave<
   public spyInteractions<T>(
     spy: T extends any[] ? () => ExpectType<T[number]>[] : () => ExpectType<T>,
     not: boolean = false,
-    expectation: string = TextualExpectation.toHaveSpyInteractions,
+    expectation: string = TextualExpectation.get('toHaveSpyInteractions'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {

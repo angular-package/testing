@@ -19,7 +19,7 @@ export class TestingItToThrow<
     actual: ExpectType<T>,
     message?: string | RegExp,
     not: boolean = false,
-    expectation: string = TextualExpectation.toThrowError,
+    expectation: string = TextualExpectation.get('toThrowError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -34,7 +34,7 @@ export class TestingItToThrow<
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
     not: boolean = false,
-    expectation: string = TextualExpectation.toThrowMatching,
+    expectation: string = TextualExpectation.get('toThrowMatching'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -49,7 +49,7 @@ export class TestingItToThrow<
     actual: ExpectType<T>,
     expected?: any,
     not: boolean = false,
-    expectation: string = TextualExpectation.toThrow,
+    expectation: string = TextualExpectation.get('toThrow'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {

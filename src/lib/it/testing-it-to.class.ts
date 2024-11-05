@@ -99,7 +99,7 @@ export class TestingItTo<
     actual: ExpectType<T>,
     expected: any,
     not: boolean = false,
-    expectation: string = TextualExpectation.toContain,
+    expectation: string = TextualExpectation.get('toContain'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -127,7 +127,7 @@ export class TestingItTo<
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
     not: boolean = false,
-    expectation: string = TextualExpectation.toEqual,
+    expectation: string = TextualExpectation.get('toEqual'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
@@ -153,7 +153,7 @@ export class TestingItTo<
     actual: ExpectType<T>,
     expected: string | RegExp,
     not: boolean = false,
-    expectation: string = TextualExpectation.toMatch, 
+    expectation: string = TextualExpectation.get('toMatch'), 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
