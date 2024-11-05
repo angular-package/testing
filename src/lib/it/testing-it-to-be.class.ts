@@ -208,7 +208,7 @@ export class TestingItToBe<
     actual: ExpectType<T>,
     expected: number,
     precision?: any,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeCloseTo'),
     expectationFailOutput?: any,
     execute?: boolean,
@@ -251,7 +251,7 @@ export class TestingItToBe<
   public defined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeDefined'),
     expectationFailOutput?: any,
     execute?: boolean,
@@ -326,7 +326,7 @@ export class TestingItToBe<
   public greaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeGreaterThan'), 
     expectationFailOutput?: any,
     execute?: boolean,
@@ -343,7 +343,7 @@ export class TestingItToBe<
   public greaterThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeGreaterThanOrEqual'),
     expectationFailOutput?: any,
     execute?: boolean,
@@ -361,7 +361,7 @@ export class TestingItToBe<
    * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a instance of `constructor`
    * on the `expected` of `true`. The method uses `isInstance()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
-   * @param constructor Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param constructor 
    * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
    * @param expectation The message for the karma, which by default is set to
    * The `actual` value to be an instance of `constructor`.
@@ -394,13 +394,13 @@ export class TestingItToBe<
    * @param expectation 
    * The `actual` value must be an instance of `expected`.
    * @param expectationFailOutput 
-   * @param execute 
+   * @param execute
    * @returns 
    */
   public instanceOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Constructor,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeInstanceOf'),
     expectationFailOutput?: any,
     execute?: boolean
@@ -445,7 +445,7 @@ export class TestingItToBe<
   public lessThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeLessThan'),
     expectationFailOutput?: any,
     execute?: boolean,
@@ -461,7 +461,7 @@ export class TestingItToBe<
   public lessThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeLessThanOrEqual'),
     expectationFailOutput?: any,
     execute?: boolean,
@@ -838,7 +838,7 @@ export class TestingItToBe<
   // Mark a spec as pending, expectation results will be ignored.
   public pending<T>(
     actual: T | PromiseLike<T>,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBePending'),
     expectationFailOutput?: any,
     execute?: boolean,
@@ -854,7 +854,7 @@ export class TestingItToBe<
   // Expect a promise to be rejected.
   public rejected<T>(
     actual: T | PromiseLike<T>,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeRejected'),
     expectationFailOutput?: any,
     execute?: boolean,
@@ -871,7 +871,7 @@ export class TestingItToBe<
   public rejectedWith<T, U>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<U>,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeRejectedWith'),
     expectationFailOutput?: any,
     execute?: boolean,
@@ -889,7 +889,7 @@ export class TestingItToBe<
     actual: T | PromiseLike<T>,
     expected?: new (...args: any[]) => Error,
     message?: string | RegExp,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeRejectedWithError'),
     expectationFailOutput?: any,
     execute?: boolean,
@@ -905,7 +905,7 @@ export class TestingItToBe<
   // Expect a promise to be resolved.
   public resolved<T>(
     actual: T | PromiseLike<T>,
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeResolved'),
     expectationFailOutput?: any,
     execute?: boolean,
@@ -922,7 +922,7 @@ export class TestingItToBe<
   public resolvedTo<T>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<T>, 
-    not: boolean = false,
+    not?: boolean,
     expectation: string = TextualExpectation.get('toBeResolvedTo'),
     expectationFailOutput?: any,
     execute?: boolean,
