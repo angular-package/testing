@@ -19,7 +19,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * `array`.
    * @returns The return value is an instance of `TestingToBeMatchers`.
    */
-  public array<T>(
+  public toBeInstanceOfArray<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfArray')
@@ -40,7 +40,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * `boolean`.
    * @returns The return value is an instance of `TestingToBeMatchers`.
    */
-  public boolean<T>(
+  public toBeInstanceOfBoolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfBoolean')
@@ -59,7 +59,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public dataView<T>(
+  public toBeInstanceOfDataView<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfDataView')
@@ -79,7 +79,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) a `Date`.
    * @returns The return value is an instance of `TestingToBeMatchers`.
    */
-  public date<T>(
+  public toBeInstanceOfDate<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfDate')
@@ -94,7 +94,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   /**
    * @description Expects provided value to be an instance of `Error`. Tested by `toBeInstanceOf()` of jasmine.
    */
-  public error<T>(
+  public toBeInstanceOfError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfError')
@@ -113,7 +113,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public evalError<T>(
+  public toBeInstanceOfEvalError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfEvalError')
@@ -134,7 +134,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * `function`.
    * @returns The return value is an instance of `TestingToBeMatchers`.
    */
-  public function<T>(
+  public toBeInstanceOfFunction<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfFunction')
@@ -152,7 +152,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public map<T>(
+  public toBeInstanceOfMap<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfMap')
@@ -173,7 +173,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * `number` type or an instance of a `Number`.
    * @returns The return value is an instance of `TestingToBeMatchers`.
    */
-  public number<T>(
+  public toBeInstanceOfNumber<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeNumber')
@@ -194,7 +194,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * `object`.
    * @returns The return value is an instance of `TestingToBeMatchers`.
    */
-  public object<T>(
+  public toBeInstanceOfObject<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeObject')
@@ -213,7 +213,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public promise<T>(
+  public toBeInstanceOfPromise<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfPromise')
@@ -232,7 +232,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public rangeError<T>(
+  public toBeInstanceOfRangeError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfRangeError')
@@ -251,7 +251,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public referenceError<T>(
+  public toBeInstanceOfReferenceError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfReferenceError')
@@ -271,7 +271,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) `RegExp`.
    * @returns The return value is an instance of `TestingToBeMatchers`.
    */
-  public regexp<T>(
+  public toBeInstanceOfRegExp<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfRegExp')
@@ -290,7 +290,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public set<T>(
+  public toBeInstanceOfSet<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfSet')
@@ -309,7 +309,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public syntaxError<T>(
+  public toBeInstanceOfSyntaxError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfSyntaxError')
@@ -331,7 +331,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @returns The return value is an instance of `TestingToBeMatchers`.
    * @angularpackage
    */
-  public string<T>(
+  public toBeInstanceOfString<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfString')
@@ -370,7 +370,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public typeError<T>(
+  public toBeInstanceOfTypeError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfTypeError')
@@ -390,7 +390,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public URIError<T>(
+  public toBeInstanceOfURIError<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfURIError')
@@ -405,7 +405,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
   /**
    * @description Expects provided value to be an instance of `WeakMap`. Tested by `toBeInstanceOf()` of jasmine.
    */
-  public weakMap<T>(
+  public toBeInstanceOfWeakMap<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfWeakMap')
@@ -424,7 +424,7 @@ export class TestingExpectToBeInstanceOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public weakSet<T>(
+  public toBeInstanceOfWeakSet<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOfWeakSet')

@@ -1,10 +1,8 @@
 // @angular-package/type.
-import { is, Constructor, typeOf } from '@angular-package/type';
+import { is, Constructor, typeOf, are } from '@angular-package/type';
 // Class.
 import { Expect } from '../expect.class';
 import { TestingExpect } from '../testing-expect.class';
-import { TestingExpectToBeArrayOf } from './testing-expect-to-be-arrayof.class';
-import { TestingExpectToBeInstanceOf } from './testing-expect-to-be-instanceof.class';
 // Type.
 import { ExpectType } from '../../type';
 /**
@@ -15,36 +13,6 @@ import { ExpectType } from '../../type';
  */
 export class TestingExpectToBe extends Expect {
   /**
-   * @description
-   */
-  public get arrayof() {
-    return this.toBeArrayOf;
-  }
-
-  /**
-   * @description
-   */
-  public get instanceof() {
-    return this.toBeInstanceOf;
-  }
-
-  /**
-   * @description
-   */
-  private toBeArrayOf;
-
-  /**
-   * @description
-   */
-  private toBeInstanceOf;
-
-  constructor(expect: TestingExpect = new TestingExpect()) {
-    super(expect);
-    this.toBeArrayOf = new TestingExpectToBeArrayOf(expect);
-    this.toBeInstanceOf = new TestingExpectToBeInstanceOf(expect);
-  }
-
-  /**
    * @description Expects provided value to be an `array`. The method uses `isArray()` function from the `@angular-package/type`.
    * @param actual The value of any type that is checked against the `array` and the result of its check is passed to the `expect()`
    * function of jasmine.
@@ -54,15 +22,29 @@ export class TestingExpectToBe extends Expect {
    * `array`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public array<T>(
+  public toBeArray<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArray')
   ): this {
-    this.be(is.array(actual), expected, expectationFailOutput);
+    this.toBe(is.array(actual), expected, expectationFailOutput);
     return this;
   }
 
+  public toBeArrayOf<T, U>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<U>,
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOf')
+  ): this {
+    // are.defined(...actual as any).every(
+    //   result => (
+    //     this.expect(result && Array.isArray(actual) && actual.length > 0, expectationFailOutput).toBe(expected),
+    //     this.setNot(false),
+    //     result
+    //   )
+    // );
+    return this;
+  }
   /**
    * @description Expects provided value to be the given `expected`.
    * @param actual The value of a generic `Value` type captured from the given `value` and passed to the `expect()` function of
@@ -72,7 +54,7 @@ export class TestingExpectToBe extends Expect {
    * specific from the method type.
    * @returns The return value is an instance of a `TestingMatchers`.
    */
-  public be<T>(
+  public toBe<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
     expectationFailOutput: any = this.getExpectationFailOutput('toBe')
@@ -91,12 +73,12 @@ export class TestingExpectToBe extends Expect {
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) `bigint`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public bigint<T>(
+  public toBeBigInt<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeBigInt')
   ): this {
-    this.be(is.bigint(actual), expected, expectationFailOutput);
+    this.toBe(is.bigint(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -110,20 +92,20 @@ export class TestingExpectToBe extends Expect {
    * `boolean`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public boolean<T>(
+  public toBeBoolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeBoolean')
   ): this {
-    this.be(is.boolean(actual), expected, expectationFailOutput);
+    this.toBe(is.boolean(actual), expected, expectationFailOutput);
     return this;
   }
-  public booleanType<T>(
+  public toBeBooleanType<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeBooleanType')
   ): this {
-    this.be(is.booleanType(actual), expected, expectationFailOutput);
+    this.toBe(is.booleanType(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -136,17 +118,17 @@ export class TestingExpectToBe extends Expect {
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) `class`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public class<T>(
+  public toBeClass<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeClass')
   ): this {
-    this.be(is.class(actual), expected, expectationFailOutput);
+    this.toBe(is.class(actual), expected, expectationFailOutput);
     return this;
   }
 
   // TODO: Description.
-  public closeTo<T extends number>(
+  public toBeCloseTo<T extends number>(
     actual: ExpectType<T>,
     expected: number,
     precision?: any,
@@ -166,12 +148,12 @@ export class TestingExpectToBe extends Expect {
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) a `Date`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public date<T>(
+  public toBeDate<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeDate')
   ): this {
-    this.be(is.date(actual), expected, expectationFailOutput);
+    this.toBe(is.date(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -184,7 +166,7 @@ export class TestingExpectToBe extends Expect {
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) defined.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public defined<T>(
+  public toBeDefined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeDefined')
@@ -206,7 +188,7 @@ export class TestingExpectToBe extends Expect {
    * `boolean` type or an instance of `Boolean` equal to `false`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public false<T>(
+  public toBeFalse<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeFalse')
@@ -218,7 +200,7 @@ export class TestingExpectToBe extends Expect {
   }
 
   // TODO: Description.
-  public falsy<T>(
+  public toBeFalsy<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeFalsy')
@@ -240,18 +222,18 @@ export class TestingExpectToBe extends Expect {
    * `function`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public function<T>(
+  public toBeFunction<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeFunction')
   ): this {
-    this.be(is.function(actual), expected, expectationFailOutput);
+    this.toBe(is.function(actual), expected, expectationFailOutput);
     return this;
   }
 
   //#region greaterThan
   // TODO: Description.
-  public greaterThan<T extends number>(
+  public toBeGreaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeGreaterThan')
@@ -262,7 +244,7 @@ export class TestingExpectToBe extends Expect {
   }
 
   // TODO: Description.
-  public greaterThanOrEqual<T extends number>(
+  public toBeGreaterThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeGreaterThanOrEqual')
@@ -286,20 +268,20 @@ export class TestingExpectToBe extends Expect {
    * instance of `class` from the given `constructor`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public instance<T, Type>(
+  public toBeInstance<T, Type>(
     actual: ExpectType<T>,
     constructor: Constructor<Type>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeInstance')
   ): this {
-    this.be(is.instance(actual, constructor), expected, expectationFailOutput);    
+    this.toBe(is.instance(actual, constructor), expected, expectationFailOutput);    
     return this;
   }
 
-  public instanceOf<T>(
+  public toBeInstanceOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Constructor,
-    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOf')
+    expectationFailOutput: any = this.getExpectationFailOutput('toBeInstanceOf', actual, expected)
   ): this {
     this.expect(actual, expectationFailOutput).toBeInstanceOf(expected);
     this.setNot(false);
@@ -317,18 +299,18 @@ export class TestingExpectToBe extends Expect {
    * property key.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public key<T>(
+  public toBeKey<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeKey')
   ): this {
-    this.be(is.key(actual), expected, expectationFailOutput);
+    this.toBe(is.key(actual), expected, expectationFailOutput);
     return this;
   }
 
   //#region lessThan
   // TODO: Description.
-  public lessThan<T extends number>(
+  public toBeLessThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeLessThan')
@@ -339,7 +321,7 @@ export class TestingExpectToBe extends Expect {
   }
 
   // TODO: Description.
-  public lessThanOrEqual<T extends number>(
+  public toBeLessThanOrEqual<T extends number>(
     actual: ExpectType<T>,
     expected: number,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeLessThanOrEqual')
@@ -351,7 +333,7 @@ export class TestingExpectToBe extends Expect {
   //#endregion
 
   // TODO: Description.
-  public naN<T extends number>(
+  public toBeNaN<T extends number>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeNaN')
@@ -363,7 +345,7 @@ export class TestingExpectToBe extends Expect {
   }
 
   // TODO: Description.
-  public negativeInfinity<T extends number>(
+  public toBeNegativeInfinity<T extends number>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeNegativeInfinity')
@@ -383,7 +365,7 @@ export class TestingExpectToBe extends Expect {
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) `null`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public null<T>(
+  public toBeNull<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeNull')
@@ -406,12 +388,12 @@ export class TestingExpectToBe extends Expect {
    * `number` type or an instance of a `Number`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public number<T>(
+  public toBeNumber<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeNumber')
   ): this {
-    this.be(is.number(actual), expected, expectationFailOutput);
+    this.toBe(is.number(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -428,14 +410,14 @@ export class TestingExpectToBe extends Expect {
    * type or an instance of a `Number` between the `range` of minimum and maximum.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public numberBetween<T, Min extends number, Max extends number>(
+  public toBeNumberBetween<T, Min extends number, Max extends number>(
     actual: ExpectType<T>,
     min: Min,
     max: Max,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeNumberBetween')
   ): this {
-    this.be(
+    this.toBe(
       is.numberBetween(actual, min, max),
       expected,
       expectationFailOutput
@@ -443,12 +425,12 @@ export class TestingExpectToBe extends Expect {
     return this;
   }
 
-  public numberType<T>(
+  public toBeNumberType<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeNumberType')
   ): this {
-    this.be(is.numberType(actual), expected, expectationFailOutput);
+    this.toBe(is.numberType(actual), expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -464,12 +446,12 @@ export class TestingExpectToBe extends Expect {
    * `object`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public object<T>(
+  public toBeObject<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeObject')
   ): this {
-    this.be(is.object(actual), expected, expectationFailOutput);
+    this.toBe(is.object(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -484,13 +466,13 @@ export class TestingExpectToBe extends Expect {
    * `object` with a given `key`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public objectKey<T>(
+  public toBeObjectKey<T>(
     actual: ExpectType<T>,
     key: PropertyKey,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeObjectKey')
   ): this {
-    this.be(is.objectKey(actual, key), expected, expectationFailOutput);
+    this.toBe(is.objectKey(actual, key), expected, expectationFailOutput);
     return this;
   }
 
@@ -506,13 +488,13 @@ export class TestingExpectToBe extends Expect {
    * `object` with a given `key` in it(or its prototype chain).
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public objectKeyIn<T>(
+  public toBeObjectKeyIn<T>(
     actual: ExpectType<T>,
     key: PropertyKey,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeObjectKeyIn')
   ): this {
-    this.be(is.objectKeyIn(actual, key), expected, expectationFailOutput);
+    this.toBe(is.objectKeyIn(actual, key), expected, expectationFailOutput);
     return this;
   }
 
@@ -527,13 +509,13 @@ export class TestingExpectToBe extends Expect {
    * `object` with given `keys`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public objectKeys<T>(
+  public toBeObjectKeys<T>(
     actual: ExpectType<T>,
     keys: PropertyKey[],
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeObjectKeys')
   ): this {
-    this.be(is.objectKeys(actual, keys), expected, expectationFailOutput);
+    this.toBe(is.objectKeys(actual, keys), expected, expectationFailOutput);
     return this;
   }
 
@@ -549,13 +531,13 @@ export class TestingExpectToBe extends Expect {
    * `object` with given `keys` in it(or its prototype chain).
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public objectKeysIn<T>(
+  public toBeObjectKeysIn<T>(
     actual: ExpectType<T>,
     keys: PropertyKey[],
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeObjectKeysIn')
   ): this {
-    this.be(is.objectKeysIn(actual, keys), expected, expectationFailOutput);
+    this.toBe(is.objectKeysIn(actual, keys), expected, expectationFailOutput);
     return this;
   }
 
@@ -572,18 +554,18 @@ export class TestingExpectToBe extends Expect {
    * `object` with some given keys.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public objectSomeKeys<T>(
+  public toBeObjectSomeKeys<T>(
     actual: ExpectType<T>,
     keys: (PropertyKey | PropertyKey[])[],
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeObjectSomeKeys')
   ): this {
-    this.be(is.objectSomeKeys(actual, keys), expected, expectationFailOutput);
+    this.toBe(is.objectSomeKeys(actual, keys), expected, expectationFailOutput);
     return this;
   }
   //#endregion
 
-  public pending<T>(
+  public toBePending<T>(
     actual: T | PromiseLike<T>,
     expectationFailOutput?: any,
   ): this {
@@ -593,7 +575,7 @@ export class TestingExpectToBe extends Expect {
   }
 
   // TODO: Description.
-  public positiveInfinity<T>(
+  public toBePositiveInfinity<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBePositiveInfinity')
@@ -613,17 +595,17 @@ export class TestingExpectToBe extends Expect {
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the `value` should be (or not) `RegExp`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public regexp<T>(
+  public toBeRegexp<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeRegExp')
   ): this {
-    this.be(is.regexp(actual), expected, expectationFailOutput);
+    this.toBe(is.regexp(actual), expected, expectationFailOutput);
     return this;
   }
 
   //#region rejected
-  public rejected<T>(
+  public toBeRejected<T>(
     actual: T | PromiseLike<T>,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeRejected')
   ): this {
@@ -632,7 +614,7 @@ export class TestingExpectToBe extends Expect {
     return this;
   }
 
-  public rejectedWith<T, U>(
+  public toBeRejectedWith<T, U>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<U>,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeRejectedWith')
@@ -642,7 +624,7 @@ export class TestingExpectToBe extends Expect {
     return this;
   }
 
-  public rejectedWithError<T, U>(
+  public toBeRejectedWithError<T, U>(
     actual: T | PromiseLike<T>,
     expected?: new (...args: any[]) => Error,
     message?: string | RegExp,
@@ -653,7 +635,7 @@ export class TestingExpectToBe extends Expect {
     return this;
   }
 
-  public resolved<T>(
+  public toBeResolved<T>(
     actual: T | PromiseLike<T>,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeResolved')
   ): this {
@@ -662,7 +644,7 @@ export class TestingExpectToBe extends Expect {
     return this;
   }
 
-  public resolvedTo<T>(
+  public toBeResolvedTo<T>(
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<T>,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeResolvedTo')
@@ -686,12 +668,12 @@ export class TestingExpectToBe extends Expect {
    * @returns The return value is an instance of `TestingToBe`.
    * @angularpackage
    */
-  public string<T>(
+  public toBeString<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeString')
   ): this {
-    this.be(is.string(actual), expected, expectationFailOutput);
+    this.toBe(is.string(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -708,13 +690,13 @@ export class TestingExpectToBe extends Expect {
    * @returns The return value is an instance of `TestingToBe`.
    * @angularpackage
    */
-  public stringIncludes<T>(
+  public toBeStringIncludes<T>(
     actual: ExpectType<T>,
     includes: string[],
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeStringIncludes')
   ): this {
-    this.be(
+    this.toBe(
       is.stringIncludes(actual, includes),
       expected,
       expectationFailOutput
@@ -735,13 +717,13 @@ export class TestingExpectToBe extends Expect {
    * @returns The return value is an instance of `TestingToBe`.
    * @angularpackage
    */
-  public stringIncludesSome<T>(
+  public toBeStringIncludesSome<T>(
     actual: ExpectType<T>,
     includes: string[],
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeStringIncludesSome')
   ): this {
-    this.be(
+    this.toBe(
       is.stringIncludesSome(actual, includes),
       expected,
       expectationFailOutput
@@ -761,13 +743,13 @@ export class TestingExpectToBe extends Expect {
    * type or an instance of a `String` of the specified `length`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public stringOfLength<T, Length extends number>(
+  public toBeStringOfLength<T, Length extends number>(
     actual: ExpectType<T>,
     length: Length,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeStringOfLength')
   ): this {
-    this.be(is.stringLength(actual, length), expected, expectationFailOutput);
+    this.toBe(is.stringLength(actual, length), expected, expectationFailOutput);
     return this;
   }
 
@@ -784,14 +766,14 @@ export class TestingExpectToBe extends Expect {
    * type or an instance of a `String` of the `length` between the given minimum and maximum.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public stringOfLengthBetween<T, Min extends number, Max extends number>(
+  public toBeStringOfLengthBetween<T, Min extends number, Max extends number>(
     actual: ExpectType<T>,
     min: Min,
     max: Max,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeStringOfLengthBetween')
   ): this {
-    this.be(
+    this.toBe(
       is.stringLengthBetween(actual, min, max),
       expected,
       expectationFailOutput
@@ -799,12 +781,12 @@ export class TestingExpectToBe extends Expect {
     return this;
   }
 
-  public stringType<T>(
+  public toBeStringType<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeStringType')
   ): this {
-    this.be(is.stringType(actual), expected, expectationFailOutput);
+    this.toBe(is.stringType(actual), expected, expectationFailOutput);
     return this;
   }
   //#endregion
@@ -818,12 +800,12 @@ export class TestingExpectToBe extends Expect {
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) a `symbol`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public symbol<T>(
+  public toBeSymbol<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeSymbol')
   ): this {
-    this.be(is.symbol(actual), expected, expectationFailOutput);
+    this.toBe(is.symbol(actual), expected, expectationFailOutput);
     return this;
   }
 
@@ -839,7 +821,7 @@ export class TestingExpectToBe extends Expect {
    * type or an instance of `Boolean` equal to `true`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public true<T>(
+  public toBeTrue<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeTrue')
@@ -850,7 +832,7 @@ export class TestingExpectToBe extends Expect {
     return this;
   }
 
-  public truthy<T>(
+  public toBeTruthy<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeTruthy')
@@ -862,7 +844,7 @@ export class TestingExpectToBe extends Expect {
   }
   //#endregion
 
-  public typeOf<T>(
+  public toBeTypeOf<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<string>,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeTypeOf')
@@ -881,7 +863,7 @@ export class TestingExpectToBe extends Expect {
    * @param expectationFailOutput An additional message when the matcher fails, by default, states the value should be (or not) `undefined`.
    * @returns The return value is an instance of `TestingToBe`.
    */
-  public undefined<T>(
+  public toBeUndefined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeUndefined')

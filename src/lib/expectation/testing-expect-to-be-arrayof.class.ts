@@ -18,13 +18,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public bigint<T>(
+  public toBeArrayOfBigInt<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfBigInt')
   ): this {
     are.bigint(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -36,13 +36,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public boolean<T>(
+  public toBeArrayOfBoolean<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfBoolean')
   ): this {
     are.boolean(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -54,13 +54,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public date<T>(
+  public toBeArrayOfDate<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfDate')
   ): this {
     are.date(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -72,13 +72,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public defined<T>(
+  public toBeArrayOfDefined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfDefined')
   ): this {
     are.defined(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -90,13 +90,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public number<T>(
+  public toBeArrayOfNumber<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfNumber')
   ): this {
     are.number(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -108,13 +108,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public null<T>(
+  public toBeArrayOfNull<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfNull')
   ): this {
     are.null(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -126,13 +126,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public false<T>(
+  public toBeArrayOfFalse<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfFalse')
   ): this {
     are.false(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -144,13 +144,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public regExp<T>(
+  public toBeArrayOfRegExp<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfRegExp')
   ): this {
     are.regexp(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -162,13 +162,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public string<T>(
+  public toBeArrayOfString<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfString')
   ): this {
     are.string(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected,result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -180,13 +180,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public symbol<T>(
+  public toBeArrayOfSymbol<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfSymbol')
   ): this {
     are.symbol(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -198,13 +198,13 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public true<T>(
+  public toBeArrayOfTrue<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfTrue')
   ): this {
     are.true(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
@@ -216,18 +216,18 @@ export class TestingExpectToBeArrayOf extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public undefined<T>(
+  public toBeArrayOfUndefined<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<boolean> = true,
     expectationFailOutput: any = this.getExpectationFailOutput('toBeArrayOfUndefined')
   ): this {
     are.undefined(...actual as any).every(
-      result => this.toBe(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
+      result => this._toBeTrue(expected, result && Array.isArray(actual) && actual.length > 0, expectationFailOutput)
     );
     return this;
   }
 
-  private toBe(
+  private _toBeTrue(
     expected: jasmine.Expected<boolean> = true,
     result: boolean,
     expectationFailOutput?: any

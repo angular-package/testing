@@ -16,7 +16,7 @@ export class TestingExpectToHaveBeenCalled extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public before<T extends jasmine.Func>(
+  public toHaveBeenCalledBefore<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: jasmine.Func,
     expectationFailOutput: any = this.getExpectationFailOutput('toHaveBeenCalledBefore')
@@ -32,7 +32,7 @@ export class TestingExpectToHaveBeenCalled extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public called<T extends jasmine.Func>(
+  public toHaveBeenCalled<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expectationFailOutput: any = this.getExpectationFailOutput('toHaveBeenCalled')
   ): this {
@@ -47,7 +47,7 @@ export class TestingExpectToHaveBeenCalled extends Expect {
    * @param params 
    * @returns 
    */
-  public onceWith<T extends jasmine.Func>(
+  public toHaveBeenCalledOnceWith<T extends jasmine.Func>(
     spy: ExpectType<T>,
     ...params: any[]
   ): this {
@@ -65,7 +65,7 @@ export class TestingExpectToHaveBeenCalled extends Expect {
    * @param expectationFailOutput 
    * @returns 
    */
-  public times<T extends jasmine.Func>(
+  public toHaveBeenCalledTimes<T extends jasmine.Func>(
     spy: ExpectType<T>,
     expected: number,
     expectationFailOutput: any = this.getExpectationFailOutput('toHaveBeenCalledTimes')
@@ -81,7 +81,7 @@ export class TestingExpectToHaveBeenCalled extends Expect {
    * @param params 
    * @returns 
    */
-  public with<T extends jasmine.Func>(
+  public toHaveBeenCalledWith<T extends jasmine.Func>(
     spy: ExpectType<T>,
     ...params: any[]
   ): this {

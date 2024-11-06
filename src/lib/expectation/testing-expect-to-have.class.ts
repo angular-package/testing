@@ -1,7 +1,6 @@
 // Class.
 import { Expect } from '../expect.class';
 import { TestingExpect } from '../testing-expect.class';
-import { TestingExpectToHaveBeen } from './testing-expect-to-have-been.class';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
 /**
@@ -11,27 +10,7 @@ import { ExpectType } from '../../type/expect-type.type';
  * @license MIT
  */
 export class TestingExpectToHave extends Expect {
-  /**
-   * @description
-   */
-  public get been() {
-    return this.toHaveBeen;
-  }
-
-  /**
-   * @description
-   */
-  private toHaveBeen;
-
-  /**
-   * @description
-   * @param expect 
-   */
-  constructor(expect: TestingExpect = new TestingExpect()) {
-    super(expect);
-    this.toHaveBeen = new TestingExpectToHaveBeen(expect);
-  }
-  public class<T>(
+  public toHaveClass<T>(
     actual: ExpectType<T>,
     expected: string,
     expectationFailOutput: any = this.getExpectationFailOutput('toHaveClass')
@@ -42,7 +21,7 @@ export class TestingExpectToHave extends Expect {
     this.setNot(false);
     return this;
   }
-  public size<T>(
+  public toHaveSize<T>(
     actual: ExpectType<T>,
     expected: number,
     expectationFailOutput: any = this.getExpectationFailOutput('toHaveSize')
@@ -53,7 +32,7 @@ export class TestingExpectToHave extends Expect {
     this.setNot(false);
     return this;
   }
-  public spyInteractions<T>(
+  public toHaveSpyInteractions<T>(
     spy: ExpectType<T>,
     expectationFailOutput: any = this.getExpectationFailOutput('toHaveSpyInteractions')
   ): this {

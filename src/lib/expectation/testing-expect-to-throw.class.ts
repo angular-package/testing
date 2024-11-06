@@ -9,7 +9,7 @@ import { ExpectType } from '../../type/expect-type.type';
  * @license MIT
  */
 export class TestingExpectToThrow extends Expect {
-  public error<T extends jasmine.Func>(
+  public toThrowError<T extends jasmine.Func>(
     actual: ExpectType<T>,
     message?: string | RegExp,
     expectationFailOutput: any = this.getExpectationFailOutput('toThrowError')
@@ -18,7 +18,7 @@ export class TestingExpectToThrow extends Expect {
     this.setNot(false);
     return this;
   }
-  public matching<T>(
+  public toThrowMatching<T>(
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
     expectationFailOutput: any = this.getExpectationFailOutput('toThrowMatching')
@@ -27,7 +27,7 @@ export class TestingExpectToThrow extends Expect {
     this.setNot(false);
     return this;
   }
-  public throw<T>(
+  public toThrow<T>(
     actual: ExpectType<T>,
     expected?: any,
     expectationFailOutput: any = this.getExpectationFailOutput('toThrow')

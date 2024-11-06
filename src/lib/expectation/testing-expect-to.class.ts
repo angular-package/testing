@@ -1,9 +1,5 @@
 // Class.
 import { Expect } from '../expect.class';
-import { TestingExpect } from '../testing-expect.class';
-import { TestingExpectToBe } from './testing-expect-to-be.class';
-import { TestingExpectToHave } from './testing-expect-to-have.class';
-import { TestingExpectToThrow } from './testing-expect-to-throw.class';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
 /**
@@ -13,56 +9,7 @@ import { ExpectType } from '../../type/expect-type.type';
  * @license MIT
  */
 export class TestingExpectTo extends Expect {
-  /**
-   * @public
-   * @description
-   */
-  public get be() {
-    return this.toBe;
-  }
-
-  /**
-   * @public
-   * @description
-   */
-  public get have() {
-    return this.toHave;
-  }
-
-  /**
-   * @public
-   * @description
-   */
-  public get throw() {
-    return this.toThrow;
-  }
-
-  /**
-   * @description
-   */
-  private toBe;
-
-  /**
-   * @description
-   */
-  private toHave;
-
-  /**
-   * @description
-   */
-  private toThrow;
-
-  /**
-   * @description
-   * @param expect 
-   */
-  constructor(expect: TestingExpect = new TestingExpect()) {
-    super(expect);
-    this.toBe = new TestingExpectToBe(expect);
-    this.toHave = new TestingExpectToHave(expect);
-    this.toThrow = new TestingExpectToThrow(expect);
-  }
-  public contain<T>(
+  public toContain<T>(
     actual: ExpectType<T>,
     expected: any,
     expectationFailOutput: any = this.getExpectationFailOutput('toContain')
@@ -72,7 +19,7 @@ export class TestingExpectTo extends Expect {
       .setNot(false);
     return this;
   }
-  public equal<T>(
+  public toEqual<T>(
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
     expectationFailOutput: any = this.getExpectationFailOutput('toEqual')
@@ -82,7 +29,7 @@ export class TestingExpectTo extends Expect {
       .setNot(false);
     return this;
   }
-  public match<T>(
+  public toMatch<T>(
     actual: ExpectType<T>,
     expected: string | RegExp,
     expectationFailOutput: any = this.getExpectationFailOutput('toMatch')
