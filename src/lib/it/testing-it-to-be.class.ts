@@ -1174,6 +1174,22 @@ export class TestingItToBe<
     return this;
   }
 
+  public typeOf<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<string>,
+    not?: boolean,
+    expectation: string = TextualExpectation.get('toBeTruthy'), 
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.it(
+      expectation,
+      () => this.#expectToBe(not).typeOf(actual, expected, expectationFailOutput),
+      execute
+    );
+    return this;
+  }
+
   /**
    * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `undefined` on the `expected` of `true`. The method uses `isUndefined()` function of `@angular-package/type`.
    * @param actual The value of any type to check.
