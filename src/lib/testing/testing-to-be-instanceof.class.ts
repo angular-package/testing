@@ -3,7 +3,7 @@ import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
-import { TestingItToBeInstanceOf } from '../it';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
@@ -18,11 +18,6 @@ export class TestingToBeInstanceOf<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  protected _toBeInstanceOf: TestingItToBeInstanceOf;
-
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -45,15 +40,6 @@ export class TestingToBeInstanceOf<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this._toBeInstanceOf = new TestingItToBeInstanceOf(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   //#region _toBeInstanceOf
@@ -72,11 +58,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfArray<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfArray'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.array(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfArray(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -95,11 +85,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfBoolean<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfBoolean'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.boolean(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfBoolean(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -118,13 +112,28 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfDate<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfDate'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.date(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfDate(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
+
+  // public toBeInstanceOfDataView<T>(
+  //   actual: ExpectType<T>,
+  //   expected?: jasmine.Expected<boolean>,
+  //   expectation: string = TextualExpectation.get(''),
+  //   expectationFailOutput?: any,
+  //   execute?: boolean,
+  // ): this {
+  //   this._toBeInstanceOf.data(actual, expected, expectation, expectationFailOutput, execute);
+  //   return this;
+  // }
 
   /**
    * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of an `Error` on the
@@ -141,11 +150,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfError<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.error(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfError(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -164,11 +177,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfFunction<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfFunction'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.function(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfFunction(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -187,11 +204,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfMap<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfMap'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.map(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfMap(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -210,11 +231,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfNumber<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfNumber'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.number(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfNumber(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -233,11 +258,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfObject<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfObject'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.object(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfObject(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -256,11 +285,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfPromise<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfPromise'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.promise(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfPromise(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -279,11 +312,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfRangeError<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfRangeError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.rangeError(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfRangeError(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -302,11 +339,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfReferenceError<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfReferenceError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.referenceError(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfReferenceError(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -325,11 +366,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfRegExp<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfRegExp'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.regExp(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfRegExp(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -348,35 +393,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfSet<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfSet'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.set(actual, expected, expectation, expectationFailOutput, execute);
-    return this;
-  }
-
-  /**
-   * @deprecated
-   * Executes the spec on a state `true` from the `execute` expecting the provided `value` to be an instance of `Storage` on the `expected`
-   * of `true`.
-   * @param actual The value of any type to check.
-   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
-   * @param expectation The message for the karma, which by default is set to
-   * The `actual` value must be an instance of `${Storage.name}`.
-   * @param expectationFailOutput
-   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
-   * `allowIt` parameter specified in the `constructor`.
-   * @returns The return value is an instance of a `TestingTests`.
-   */
-  public toBeInstanceOfStorage<T>(
-    actual: ExpectType<T>,
-    expected?: jasmine.Expected<boolean>,
-    expectation?: string,
-    expectationFailOutput?: any,
-    execute?: boolean,
-  ): this {
-    // this._toBeInstanceOf.storage(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfSet(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -395,11 +420,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfString<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfString'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.string(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfString(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -418,11 +447,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfSyntaxError<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfSyntaxError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.syntaxError(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfSyntaxError(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -441,11 +474,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfTypeError<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfTypeError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.typeError(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfTypeError(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -464,11 +501,30 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfURIError<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfURIError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.URIError(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfURIError(actual, expected, expectationFailOutput),
+      execute
+    );
+    return this;
+  }
+
+  public toBeInstanceOfWeakMap<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation: string = TextualExpectation.get('toBeInstanceOfWeakMap'),
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfWeakMap(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -487,11 +543,15 @@ export class TestingToBeInstanceOf<
   public toBeInstanceOfWeakSet<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOfWeakSet'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeInstanceOf.weakSet(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeInstanceOfWeakSet(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   //#endregion

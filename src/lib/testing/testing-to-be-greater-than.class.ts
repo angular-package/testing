@@ -3,7 +3,7 @@ import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
-import { TestingItToBe } from '../it';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
@@ -18,11 +18,6 @@ export class TestingToBeGreaterThan<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  protected _toBe: TestingItToBe;
-
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -45,15 +40,6 @@ export class TestingToBeGreaterThan<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this._toBe = new TestingItToBe(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   //#region toBeGreaterThan
@@ -68,15 +54,20 @@ export class TestingToBeGreaterThan<
    * @param execute 
    * @returns 
    */
+  
   public toBeGreaterThan<T extends number>(
     actual: ExpectType<T>,
     expected: number,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeGreaterThan'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.greaterThan(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toBeGreaterThan(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -95,11 +86,15 @@ export class TestingToBeGreaterThan<
     actual: ExpectType<T>,
     expected: number,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeGreaterThanOrEqual'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.greaterThanOrEqual(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toBeGreaterThanOrEqual(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   //#endregion

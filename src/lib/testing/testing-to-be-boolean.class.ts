@@ -2,8 +2,8 @@
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
+import { TextualExpectation } from '../textual-expectation.abstract';
 import { TestingIt } from '../testing-it.class';
-import { TestingItToBeBoolean } from '../it/testing-it-to-be-boolean.class';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
@@ -18,11 +18,6 @@ export class TestingToBeBoolean<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  protected _toBeBoolean: TestingItToBeBoolean;
-
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -44,15 +39,6 @@ export class TestingToBeBoolean<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this._toBeBoolean = new TestingItToBeBoolean(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   /**
@@ -70,11 +56,15 @@ export class TestingToBeBoolean<
   public toBeBoolean<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeBoolean'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeBoolean.boolean(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeBoolean(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -93,11 +83,15 @@ export class TestingToBeBoolean<
   public toBeBooleanType<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeBooleanType'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeBoolean.type(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeBooleanType(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   //#endregion

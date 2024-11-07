@@ -3,7 +3,7 @@ import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
-import { TestingItToBe } from '../it';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
@@ -18,11 +18,6 @@ export class TestingToBeNumber<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  protected _toBe: TestingItToBe;
-
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -45,15 +40,6 @@ export class TestingToBeNumber<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this._toBe = new TestingItToBe(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   //#region toBeNumber
@@ -72,11 +58,15 @@ export class TestingToBeNumber<
   public toBeNumber<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeNumber'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.number(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeNumber(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -99,11 +89,15 @@ export class TestingToBeNumber<
     min: Min,
     max: Max,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeNumberBetween'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.numberBetween(actual, min, max, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeNumberBetween(actual, min, max, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -122,11 +116,15 @@ export class TestingToBeNumber<
   public toBeNumberType<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeNumberType'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.numberType(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeNumberType(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   //#endregion

@@ -2,8 +2,8 @@
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
+import { TextualExpectation } from '../textual-expectation.abstract';
 import { TestingIt } from '../testing-it.class';
-import { TestingItToThrow } from '../it';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
@@ -18,11 +18,6 @@ export class TestingToThrow<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  protected _toThrow: TestingItToThrow;
-
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -45,15 +40,6 @@ export class TestingToThrow<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this._toThrow = new TestingItToThrow(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   //#region _toThrow
@@ -72,11 +58,15 @@ export class TestingToThrow<
     actual: ExpectType<T>,
     message?: string | RegExp,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toThrowError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toThrow.error(actual, message, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toThrowError(actual, message, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -95,11 +85,15 @@ export class TestingToThrow<
     actual: ExpectType<T>,
     predicate: (thrown: any) => boolean,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toThrowMatching'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toThrow.matching(actual, predicate, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toThrowMatching(actual, predicate, expectationFailOutput),
+      execute
+    );
     return this;
   }
   //#endregion

@@ -3,7 +3,6 @@ import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
-import { TestingItTo } from '../it';
 import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
@@ -19,11 +18,6 @@ export class TestingTo<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  public to: TestingItTo;
-
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -46,15 +40,6 @@ export class TestingTo<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this.to = new TestingItTo(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   //#region to
@@ -78,7 +63,11 @@ export class TestingTo<
     expectationFailOutput?: any,
     execute?: boolean
   ): this {
-    this.to.be.be(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toBe(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -97,11 +86,15 @@ export class TestingTo<
     actual: ExpectType<T>,
     expected: any,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toContain'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.to.contain(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toContain(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -122,11 +115,15 @@ export class TestingTo<
     actual: ExpectType<T>,
     expected: jasmine.Expected<typeof actual>,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toEqual'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.to.equal(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toEqual(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -145,11 +142,15 @@ export class TestingTo<
     actual: ExpectType<T>,
     expected: string | RegExp,
     not?: boolean,
-    expectation?: string, 
+    expectation: string = TextualExpectation.get('toMatch'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.to.match(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toMatch(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -168,11 +169,15 @@ export class TestingTo<
     actual: ExpectType<T>,
     expected?: any,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toThrow'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this.to.throw.throw(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toThrow(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 }

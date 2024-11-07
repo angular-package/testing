@@ -2,8 +2,8 @@
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
+import { TextualExpectation } from '../textual-expectation.abstract';
 import { TestingIt } from '../testing-it.class';
-import { TestingItToBe } from '../it';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
@@ -18,11 +18,6 @@ export class TestingToBeString<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  protected _toBe: TestingItToBe;
-
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -45,15 +40,6 @@ export class TestingToBeString<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this._toBe = new TestingItToBe(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   //#region toBeString
@@ -72,11 +58,15 @@ export class TestingToBeString<
   public toBeString<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeString'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.string(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeString(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -97,11 +87,15 @@ export class TestingToBeString<
     actual: ExpectType<T>,
     includes: string[],
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeStringIncludes'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.stringIncludes(actual, includes, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeStringIncludes(actual, includes, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -122,11 +116,15 @@ export class TestingToBeString<
     actual: ExpectType<T>,
     includes: string[],
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeStringIncludesSome'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.stringIncludesSome(actual, includes, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeStringIncludesSome(actual, includes, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -147,11 +145,15 @@ export class TestingToBeString<
     actual: ExpectType<T>,
     length: Length,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeStringOfLength'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.stringOfLength(actual, length, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeStringOfLength(actual, length, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -172,11 +174,15 @@ export class TestingToBeString<
     min: Min,
     max: Max,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeStringOfLengthBetween'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.stringOfLengthBetween(actual, min, max, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeStringOfLengthBetween(actual, min, max, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -195,11 +201,15 @@ export class TestingToBeString<
   public toBeStringType<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeStringType'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.stringType(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeStringType(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   //#endregion

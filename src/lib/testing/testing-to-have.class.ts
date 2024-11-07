@@ -4,6 +4,7 @@ import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
 import { TestingItToHave } from '../it';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
@@ -18,11 +19,6 @@ export class TestingToHave<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  protected _toHave: TestingItToHave;
-
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -45,15 +41,6 @@ export class TestingToHave<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this._toHave = new TestingItToHave(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   //#region toHaveBeenCalled
@@ -71,11 +58,20 @@ export class TestingToHave<
   public toHaveBeenCalled<T extends jasmine.Func>(
     spy: () => ExpectType<T> | ExpectType<T>[],
     not = false,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toHaveBeenCalled'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.been.called.called(spy, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => {
+        let spies = spy();
+        ((!Array.isArray(spies)) ? [spies] : spies).forEach(
+          spy => this.expect.invert(not).toHaveBeenCalled(spy, expectationFailOutput)
+        );
+      },
+      execute
+    );
     return this;
   }
 
@@ -91,11 +87,15 @@ export class TestingToHave<
   public toHaveBeenCalledBefore<T extends jasmine.Func>(
     spyExpected: () => [ExpectType<T>, jasmine.Func],
     not = false,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toHaveBeenCalledBefore'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.been.called.before(spyExpected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toHaveBeenCalledBefore(spyExpected()[0], spyExpected()[1], expectationFailOutput),
+      execute
+    ); 
     return this;
   }
 
@@ -114,7 +114,12 @@ export class TestingToHave<
     options: TestingOptions,
     ...params: any[]
   ): this {
-    this._toHave.been.called.onceWith(spy, options, ...params);
+    const { not, expectation = TextualExpectation.get('toHaveBeenCalledOnceWith'), expectationFailOutput, execute } = options;
+    this.it(
+      expectation,
+      () => this.expect.invert(not).withContext(expectationFailOutput).toHaveBeenCalledOnceWith(spy(), ...params),
+      execute
+    );
     return this;
   }
 
@@ -133,11 +138,15 @@ export class TestingToHave<
     spy: () => ExpectType<T>,
     expected: number,
     not = false,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toHaveBeenCalledTimes'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.been.called.times(spy, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toHaveBeenCalledTimes(spy(), expected, expectationFailOutput),
+      execute
+    ); 
     return this;
   }
 
@@ -156,7 +165,12 @@ export class TestingToHave<
     options: TestingOptions,
     ...params: any[]
   ): this {
-    this._toHave.been.called.with(spy, options, ...params);
+    const { not, expectation = TextualExpectation.get('toHaveBeenCalledWith'), expectationFailOutput, execute } = options;
+    this.it(
+      expectation,
+      () => this.expect.invert(not).withContext(expectationFailOutput).toHaveBeenCalledWith(spy(), ...params),
+      execute
+    ); 
     return this;
   }
   //#endregion
@@ -178,11 +192,15 @@ export class TestingToHave<
     actual: ExpectType<T>,
     expected: string,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toHaveClass'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.class(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toHaveClass(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -201,11 +219,15 @@ export class TestingToHave<
     actual: ExpectType<T>,
     expected: number,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toHaveSize'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.size(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toHaveSize(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -223,11 +245,20 @@ export class TestingToHave<
   public toHaveSpyInteractions<T>(
     spy: T extends Array<any> ? () => ExpectType<T[number]>[] : () => ExpectType<T>,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toHaveSpyInteractions'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toHave.spyInteractions(spy, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => {
+        let spies = spy();
+        ((!Array.isArray(spies)) ? [spies] : spies).forEach(
+          spy => this.expect.invert(not).toHaveSpyInteractions(spy as ExpectType<T>, expectationFailOutput)
+        );
+      },
+      execute
+    );
     return this;
   }
   //#endregion

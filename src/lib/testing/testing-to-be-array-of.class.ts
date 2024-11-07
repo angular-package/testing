@@ -2,8 +2,8 @@
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
+import { TextualExpectation } from '../textual-expectation.abstract';
 import { TestingIt } from '../testing-it.class';
-import { TestingItToBeArrayOf } from '../it';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
@@ -19,11 +19,6 @@ export class TestingToBeArrayOf<
   Descriptions,
   Expectations
 > {
-  /**
-   * @description
-   */
-  protected _toBeArrayOf: TestingItToBeArrayOf;
-
   /**
    * @description Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
    * and optionally sets the list of allowed executable tests (those that execute even on the disallowed state).
@@ -45,116 +40,161 @@ export class TestingToBeArrayOf<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this._toBeArrayOf = new TestingItToBeArrayOf(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   //#region TestingToBeArrayOf
   public toBeArrayOfBigInt<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArrayOfBigInt'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeArrayOf.bigint(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfBigInt(actual, expected, expectationFailOutput),
+      execute
+    );
+    return this;
+  }
+  public toBeArrayOfBoolean<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation: string = TextualExpectation.get('toBeArrayOfBoolean'),
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfBoolean(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   public toBeArrayOfDate<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArrayOfDate'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeArrayOf.date(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfDate(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   public toBeArrayOfDefined<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArrayOfDefined'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeArrayOf.defined(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfDefined(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   public toBeArrayOfFalse<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArrayOfFalse'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeArrayOf.false(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfFalse(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   public toBeArrayOfNull<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArrayOfNull'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeArrayOf.null(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfNull(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   public toBeArrayOfRegExp<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArrayOfRegExp'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeArrayOf.regExp(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfRegExp(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   public toBeArrayOfString<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArrayOfString'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeArrayOf.string(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfString(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   public toBeArrayOfSymbol<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArrayOfSymbol'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeArrayOf.symbol(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfSymbol(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   public toBeArrayOfTrue<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArrayOfTrue'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeArrayOf.true(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfTrue(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   public toBeArrayOfUndefined<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArrayOfUndefined'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBeArrayOf.undefined(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => super.expect.toBeArrayOfUndefined(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   //#endregion

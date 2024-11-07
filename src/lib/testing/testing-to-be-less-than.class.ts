@@ -3,7 +3,7 @@ import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
-import { TestingItToBe } from '../it';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
@@ -18,11 +18,6 @@ export class TestingToBeLessThan<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  protected _toBe: TestingItToBe;
-
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -45,15 +40,6 @@ export class TestingToBeLessThan<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this._toBe = new TestingItToBe(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   //#region toBeLessThan
@@ -71,11 +57,15 @@ export class TestingToBeLessThan<
     actual: ExpectType<T>,
     expected: number,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeLessThan'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.lessThan(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toBeLessThan(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -93,11 +83,15 @@ export class TestingToBeLessThan<
     actual: ExpectType<T>,
     expected: number,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeLessThanOrEqual'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.lessThanOrEqual(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toBeLessThanOrEqual(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
   //#endregion

@@ -2,8 +2,8 @@
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpectation } from '../testing-expectation.class';
+import { TextualExpectation } from '../textual-expectation.abstract';
 import { TestingIt } from '../testing-it.class';
-import { TestingItToBe } from '../it';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { CounterConfig, ExpectType } from '../../type';
@@ -19,11 +19,6 @@ export class TestingToBe<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  protected _toBe: TestingItToBe;
-
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -46,15 +41,6 @@ export class TestingToBe<
     testingExpectation: TestingExpectation = new TestingExpectation()
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
-    this._toBe = new TestingItToBe(
-      allowDescribe,
-      allowIt,
-      executable,
-      counter,
-      testingDescribe,
-      testingIt,
-      testingExpectation
-    );
   }
 
   //#region _toBe
@@ -73,11 +59,15 @@ export class TestingToBe<
   public toBeArray<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeArray'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.array(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeArray(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -96,11 +86,15 @@ export class TestingToBe<
   public toBeBigInt<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeBigInt'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.bigInt(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeBigInt(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -119,11 +113,15 @@ export class TestingToBe<
   public toBeClass<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeBigInt'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.class(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeClass(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -143,32 +141,42 @@ export class TestingToBe<
     expected: number,
     precision?: any,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeCloseTo'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.closeTo(actual, expected, precision, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toBeCloseTo(actual, expected, precision, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
   /**
-   * @description
-   * @param actual 
-   * @param expected 
-   * @param expectation 
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `date`
+   * on the `expected` of `true`. The method uses `isDate()` function of `@angular-package/type`.
+   * @param actual The value of any type to check.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to
    * The `actual` value to be a `date`.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @returns The return value is an instance of a `TestingTestToBe`.
    */
   public toBeDate<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeDate'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.date(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeDate(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -186,11 +194,15 @@ export class TestingToBe<
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeDefined'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.defined(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toBeDefined(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -208,11 +220,15 @@ export class TestingToBe<
   public toBeFalse<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeFalse'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.false(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeFalse(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -229,32 +245,42 @@ export class TestingToBe<
   public toBeFalsy<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeFalsy'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.falsy(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeFalsy(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
   /**
-   * 
-   * @param actual 
-   * @param expected 
-   * @param expectation 
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `function`
+   * on the `expected` of `true`. The method uses `isFunction()` function of `@angular-package/type`.
+   * @param actual The value of any type to check.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to
    * The `actual` value must be `function`.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @returns The return value is an instance of a `TestingTestToBe`.
    */
   public toBeFunction<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeFunction'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.function(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeFunction(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -276,11 +302,15 @@ export class TestingToBe<
     actual: ExpectType<T>,
     constructor: Constructor<Type>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstance'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.instance(actual, constructor, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeInstance(actual, constructor, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -298,32 +328,42 @@ export class TestingToBe<
     actual: ExpectType<T>,
     expected: jasmine.Constructor,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeInstanceOf'),
     expectationFailOutput?: any,
     execute?: boolean
   ): this {
-    this._toBe.instanceOf(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toBeInstanceOf(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
   /**
-   * 
-   * @param actual 
-   * @param expected 
-   * @param expectation 
+   * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be a `PropertyKey`
+   * on the `expected` of `true`. The method uses `isKey()` function of `@angular-package/type`.
+   * @param actual The value of any type to check.
+   * @param expected Expects the result of the expectation to be `true` or `false`, by default it's `true`.
+   * @param expectation The message for the karma, which by default is set to
    * The `actual` value to be a `PropertyKey`.
-   * @param expectationFailOutput 
-   * @param execute 
-   * @returns 
+   * @param expectationFailOutput
+   * @param execute An optional parameter that specifies whether the spec is to be executed, by default it takes its value from the global
+   * `allowIt` parameter specified in the `constructor`.
+   * @returns The return value is an instance of a `TestingTestToBe`.
    */
   public toBeKey<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeKey'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.key(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeKey(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -340,11 +380,15 @@ export class TestingToBe<
   public toBeNaN<T extends number>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeNaN'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.naN(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeNaN(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -361,11 +405,15 @@ export class TestingToBe<
   public toBeNegativeInfinity<T extends number>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeNegativeInfinity'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.negativeInfinity(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeNegativeInfinity(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -384,11 +432,15 @@ export class TestingToBe<
   public toBeNull<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeNull'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.null(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeNull(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -396,11 +448,15 @@ export class TestingToBe<
   public toBePending<T>(
     actual: T | PromiseLike<T>,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBePending'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.pending(actual, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      done => (this.expect.invert(not).toBePending(actual, expectationFailOutput), done()),
+      execute
+    );
     return this;
   }
 
@@ -417,11 +473,15 @@ export class TestingToBe<
   public toBePositiveInfinity<T extends number>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBePositiveInfinity'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.positiveInfinity(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBePositiveInfinity(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -438,11 +498,15 @@ export class TestingToBe<
   public toBeRegExp<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeRegExp'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.regExp(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeRegexp(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -459,11 +523,15 @@ export class TestingToBe<
   public toBeRejected<T>(
     actual: T | PromiseLike<T>,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeRejected'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.rejected(actual, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      done => (this.expect.invert(not).toBeRejected(actual, expectationFailOutput), done()),
+      execute
+    );
     return this;
   }
 
@@ -480,11 +548,15 @@ export class TestingToBe<
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<U>,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeRejectedWith'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.rejectedWith(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      done => (this.expect.invert(not).toBeRejectedWith(actual, expected, expectationFailOutput), done()),
+      execute
+    );
     return this;
   }
 
@@ -504,11 +576,15 @@ export class TestingToBe<
     expected?: new (...args: any[]) => Error,
     message?: string | RegExp,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeRejectedWithError'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.rejectedWithError(actual, expected, message, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      done => (this.expect.invert(not).toBeRejectedWithError(actual, expected, message, expectationFailOutput), done()),
+      execute
+    );
     return this;
   }
   //#endregion
@@ -526,11 +602,15 @@ export class TestingToBe<
   public toBeResolved<T>(
     actual: T | PromiseLike<T>,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeResolved'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.resolved(actual, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      done => (this.expect.invert(not).toBeResolved(actual, expectationFailOutput), done()),
+      execute
+    );
     return this;
   }
 
@@ -547,11 +627,15 @@ export class TestingToBe<
     actual: T | PromiseLike<T>,
     expected: jasmine.Expected<T>, 
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeResolvedTo'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.resolvedTo(actual, expected, not, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      done => (this.expect.invert(not).toBeResolvedTo(actual, expected, expectationFailOutput), done()),
+      execute
+    );
     return this;
   }
   //#endregion
@@ -572,11 +656,15 @@ export class TestingToBe<
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
     not?: boolean,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeSymbol'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.symbol(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toBeSymbol(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -594,11 +682,15 @@ export class TestingToBe<
   public toBeTrue<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeTrue'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.true(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeTrue(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -615,11 +707,41 @@ export class TestingToBe<
   public toBeTruthy<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string, 
+    expectation: string = TextualExpectation.get('toBeTruthy'), 
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.truthy(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeTruthy(actual, expected, expectationFailOutput),
+      execute
+    );
+    return this;
+  }
+
+  /**
+   * 
+   * @param actual 
+   * @param expected 
+   * @param not 
+   * @param expectation 
+   * @param expectationFailOutput 
+   * @param execute 
+   * @returns 
+   */
+  public toBeTypeOf<T>(
+    actual: ExpectType<T>,
+    expected: jasmine.Expected<string>,
+    not?: boolean,
+    expectation: string = TextualExpectation.get('toBeTypeOf'), 
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.it(
+      expectation,
+      () => this.expect.invert(not).toBeTypeOf(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 
@@ -636,11 +758,15 @@ export class TestingToBe<
   public toBeUndefined<T>(
     actual: ExpectType<T>,
     expected?: jasmine.Expected<boolean>,
-    expectation?: string,
+    expectation: string = TextualExpectation.get('toBeUndefined'),
     expectationFailOutput?: any,
     execute?: boolean,
   ): this {
-    this._toBe.undefined(actual, expected, expectation, expectationFailOutput, execute);
+    this.it(
+      expectation,
+      () => this.expect.toBeUndefined(actual, expected, expectationFailOutput),
+      execute
+    );
     return this;
   }
 }
