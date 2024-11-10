@@ -6,8 +6,8 @@ import { InstanceTypes } from '../type';
 /**
  * 
  */
-export interface TestingInterface {
+export interface TestingInterface extends Omit<typeof TestingProxy, "prototype"> {
   new <T extends Constructor<any>[]>(
     testing: [...T],
-  ): TestingProxy<T> & typeof TestingProxy & InstanceTypes<T>;
+  ): TestingProxy<T> & InstanceTypes<T>;
 }
