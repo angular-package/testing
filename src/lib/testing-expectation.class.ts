@@ -1,41 +1,46 @@
 // Class.
 import { Expect } from './expect.class';
 import { TestingExpect } from './testing-expect.class';
-import {
-  TestingExpectTo,
-  TestingExpectToBe,
-  TestingExpectToBeArrayOf,
-  TestingExpectToHave,
-  TestingExpectToHaveBeen,
-  TestingExpectToHaveBeenCalled,
-  TestingExpectToThrow,
-} from './expectation';
-// Functions.
+// Function.
 import { mixin } from './function';
 // Type.
 import { Constructor } from '@angular-package/type';
-import { ExpectType } from '../type';
+import { InstanceTypes } from '../type/instance-types.type';
+// Interface.
+import { TestingExpectationInterface } from '../interface';
 /**
- * Testing expectation.
+ * Creates an instance of `TestingExpectationProxy`.
  * @class
- * @classdesc
+ * @classdesc Testing expectation.
  */
-export class TestingExpectation extends mixin(
-  TestingExpectTo,
-  TestingExpectToBe,
-  TestingExpectToBeArrayOf,
-  TestingExpectToHave,
-  TestingExpectToHaveBeen,
-  TestingExpectToHaveBeenCalled,
-  TestingExpectToThrow
-) {
+export class TestingExpectationProxy<
+  T extends Constructor<any>[] = [],
+> extends Expect {
+  /**
+   * 
+   */
+  private $expectation;
+
   /**
    * @description
-   * @param expect 
+   * @param testingExpect 
    */
-  constructor(expect: TestingExpect = new TestingExpect()) {
-    super(expect);
+  constructor(
+    expectation: T,
+    testingExpect: TestingExpect = new TestingExpect()
+  ) {
+    super(testingExpect);
+
+    // Tests.
+    this.$expectation = new (mixin(...expectation))(testingExpect) as InstanceTypes<T>;
+
+    // Proxy to delegate method calls to $expectation
+    return new Proxy(this as this & InstanceTypes<T>, {
+      get(target: TestingExpectationProxy<T> & InstanceTypes<T>, prop: PropertyKey) {
+        return prop in target ? (target as any)[prop] : (target as any).$expectation[prop];
+      },
+    }) as this & InstanceTypes<T>;
   }
-
-
 }
+
+export const TestingExpectation = TestingExpectationProxy as unknown as TestingExpectationInterface;
