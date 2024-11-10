@@ -1,51 +1,26 @@
-import {} from "jasmine";
+// Abstract.
+import { TestingCore } from "./testing-core.abstract";
+// Class.
+import { TestingActual } from "./testing-actual.class";
+import { TestingDescribe } from "./testing-describe.class";
+import { TestingExpect } from "./testing-expect.class";
+import { TestingIt } from "./testing-it.class";
 // Function.
-import { mixin } from './function';
-// Testing.
-import {
-  TestingToBeArrayOf,
-  TestingToBeBoolean,
-  TestingToBeGreaterThan,
-  TestingToBeInstanceOf,
-  TestingToBeLessThan,
-  TestingToBeNumber,
-  TestingToBeObject,
-  TestingToBeString,
-  TestingToBe,
-  TestingToHave,
-  TestingToThrow,
-  TestingTo,
-} from './testing';
-import { TestingActual } from './testing-actual.class';
-import { TestingCore } from './testing-core.abstract';
-import { TestingDescribe } from './testing-describe.class';
-import { TestingExpectation } from './testing-expectation.class';
-import { TestingIt } from './testing-it.class';
-// Interface.
-import { ExecutableTests } from '../interface/executable-tests.interface';
+import { mixin } from "./function";
 // Type.
-import { CounterConfig, ExpectType } from '../type';
+import { Constructor } from "@angular-package/type";
+import { CounterConfig, ExpectType, InstanceTypes } from "../type";
+// Interface.
+import { ExecutableTests, TestingInterface } from "../interface";
 /**
  * @class
  * @classdesc
  */
-export class Testing<
+export class TestingProxy<
+  T extends Constructor<any>[] = [],
   Descriptions extends string = string,
-  Expectations extends string = string
-> extends mixin(
-  TestingToBeArrayOf,
-  TestingToBeBoolean,
-  TestingToBeGreaterThan,
-  TestingToBeInstanceOf,
-  TestingToBeLessThan,
-  TestingToBeNumber,
-  TestingToBeObject,
-  TestingToBeString,
-  TestingToBe,
-  TestingToHave,
-  TestingToThrow,
-  TestingTo
-) {
+  Expectations extends string = string,
+> {
   /**
    * @description Defines the wrapper function of the `describe()` function of jasmine with the ability to decide its execution.
    * @param description "Textual description of the group"
@@ -77,39 +52,107 @@ export class Testing<
   /**
    * @description
    */
-  public override get expect() {
-    return this.testingCore.expect;
+  public get descriptions() {
+    return this.$descriptions;
   }
 
   /**
-   * 
+   * @description
    */
-  protected allowDescribe: boolean;
-  protected allowIt: boolean;
-  protected executable?: ExecutableTests;
-  protected testingCore;
+  public get expect() {
+    return (this.$testing as any).expectation.e;
+  }
 
   /**
    * @description
+   */
+  public get expectations() {
+    return this.$expectations;
+  }
+
+  /**
+   * @description
+   */
+  public get test() {
+    return this.$testing;
+  }
+
+  /**
+   * @protected
+   */
+  protected allowDescribe: boolean;
+
+  /**
+   * @protected
+   */
+  protected allowIt: boolean;
+
+  /**
+   * @protected
+   */
+  protected executable?: ExecutableTests;
+
+  /**
+   * @protected
+   */
+  protected testingCore;
+
+  /**
+   * @protected
+   */
+  private $testing;
+
+  /**
+   * @private
+   */
+  private $descriptions: Descriptions[];
+
+  /**
+   * @private
+   */
+  private $expectations: Expectations[];
+
+  /**
+   * @description
+   * @param testing
    * @param allowDescribe 
    * @param allowIt 
    * @param executable 
+   * @param descriptions
+   * @param expectations
+   * @param counter
    * @param testingDescribe
    * @param testingIt
+   * @param testingExpect
    */
   constructor(
+    testing: T,
     allowDescribe: boolean = true,
     allowIt: boolean = true,
     executable?: ExecutableTests,
+    descriptions: Descriptions[] = [],
+    expectations: Expectations[] = [],
     counter: CounterConfig = [true, false],
-    testingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
-    testingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpectation = new TestingExpectation()
+    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
+    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
+    testingExpect = new TestingExpect()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
     this.allowDescribe = allowDescribe;
     this.allowIt = allowIt;
+    this.$descriptions = descriptions;
     this.executable = executable;
+    this.$expectations = expectations;
+    // Tests.
+    this.$testing = new (mixin(...testing))(
+      allowDescribe,
+      allowIt,
+      executable,
+      counter,
+      testingDescribe,
+      testingIt,
+      testingExpect
+    );
+    // Class to handle core features.
     this.testingCore = new (class<
       Descriptions extends string = string,
       Expectations extends string = string
@@ -123,8 +166,15 @@ export class Testing<
       counter,
       testingDescribe,
       testingIt,
-      testingExpectation
     );
+
+    // Proxy to delegate method calls to $expectation
+    return new Proxy(this as this & InstanceTypes<T>, {
+      get(target: TestingProxy<T> & InstanceTypes<T>, prop: PropertyKey) {
+        return prop in target ? (target as any)[prop] : (target as any).$testing[prop];
+      },
+    }) as this & InstanceTypes<T>;
+
   }
 
   /**
@@ -147,7 +197,7 @@ export class Testing<
    * @param timeout 
    * @returns 
    */
-  public override afterAll(
+  public afterAll(
     action: jasmine.ImplementationCallback,
     timeout?: number,
     execute: boolean = true
@@ -162,7 +212,7 @@ export class Testing<
    * @param timeout 
    * @returns 
    */
-  public override afterEach(
+  public afterEach(
     action: jasmine.ImplementationCallback,
     timeout?: number,
     execute: boolean = true
@@ -177,7 +227,7 @@ export class Testing<
    * @param timeout 
    * @returns 
    */
-  public override beforeAll(
+  public beforeAll(
     action: jasmine.ImplementationCallback,
     timeout?: number,
     execute: boolean = true
@@ -192,7 +242,7 @@ export class Testing<
    * @param timeout 
    * @returns 
    */
-  public override beforeEach(
+  public beforeEach(
     action: jasmine.ImplementationCallback,
     timeout?: number,
     execute: boolean = true
@@ -209,7 +259,7 @@ export class Testing<
    * @param execute A `boolean` type value to decide whether or not execute defined `describe()` of jasmine function.
    * @returns The return value is an instance of a child class.
    */
-  public override describe<Description extends string>(
+  public describe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => any,
     execute?: boolean
@@ -218,7 +268,13 @@ export class Testing<
     return this;
   }
 
-  public override fdescribe<Description extends string>(
+  /**
+   * @description
+   * @param description 
+   * @param specDefinitions 
+   * @returns 
+   */
+  public fdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => any,
   ): this {
@@ -233,7 +289,7 @@ export class Testing<
    * @param execute A `boolean` type value to decide whether or not execute defined `it()` of jasmine function.
    * @returns The return value is an instance of a child class.
    */
-  public override it<Expectation extends string>(
+  public it<Expectation extends string>(
     expectation: Expectations | Expectation,
     assertion: jasmine.ImplementationCallback,
     execute?: boolean
@@ -248,7 +304,7 @@ export class Testing<
    * @param value 
    * @returns 
    */
-  public override setSpecProperty(key: string, value: unknown) {
+  public setSpecProperty(key: string, value: unknown) {
     this.testingCore.setSpecProperty(key, value);
     return this;
   }
@@ -259,7 +315,7 @@ export class Testing<
    * @param value 
    * @returns 
    */
-  public override setSuiteProperty(key: string, value: unknown) {
+  public setSuiteProperty(key: string, value: unknown) {
     this.testingCore.setSuiteProperty(key, value);
     return this;
   }
@@ -271,14 +327,14 @@ export class Testing<
    * @param execute 
    * @returns 
    */
-  public override spec<T>(
-    assertion: (expectation: TestingExpectation) => any,
-    description: string = '',
-    execute?: boolean,
-  ): this {
-    this.testingCore.spec(assertion, description, execute);
-    return this;
-  }
+  // public spec<T>(
+  //   assertion: (expectation: TestingExpectation) => any,
+  //   description: string = '',
+  //   execute?: boolean,
+  // ): this {
+  //   this.testingCore.spec(assertion, description, execute);
+  //   return this;
+  // }
 
   /**
    * @description
@@ -304,7 +360,7 @@ export class Testing<
    * @param specDefinitions 
    * @returns 
    */
-  public override xdescribe<Description extends string>(
+  public xdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => any,
   ): this {
@@ -312,3 +368,5 @@ export class Testing<
     return this;
   }
 }
+
+export const Testing = TestingProxy as unknown as TestingInterface;
