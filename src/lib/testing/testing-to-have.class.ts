@@ -1,9 +1,10 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
+import { TestingExpect } from '../testing-expect.class';
+import { TestingExpectToHave, TestingExpectToHaveBeenCalled } from '../expectation';
 import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
-import { TestingItToHave } from '../it';
 import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
@@ -19,6 +20,8 @@ export class TestingToHave<
   Descriptions,
   Expectations
 > {
+  #expectation;
+
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -38,9 +41,10 @@ export class TestingToHave<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpectation: TestingExpectation = new TestingExpectation()
+    testingExpect = new TestingExpect()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    this.#expectation = new TestingExpectation([TestingExpectToHave, TestingExpectToHaveBeenCalled], testingExpect);
   }
 
   //#region toHaveBeenCalled
@@ -67,7 +71,7 @@ export class TestingToHave<
       () => {
         let spies = spy();
         ((!Array.isArray(spies)) ? [spies] : spies).forEach(
-          spy => this.expect.invert(not).toHaveBeenCalled(spy, expectationFailOutput)
+          spy => this.#expectation.invert(not).toHaveBeenCalled(spy, expectationFailOutput)
         );
       },
       execute
@@ -93,7 +97,7 @@ export class TestingToHave<
   ): this {
     this.it(
       expectation,
-      () => this.expect.invert(not).toHaveBeenCalledBefore(spyExpected()[0], spyExpected()[1], expectationFailOutput),
+      () => this.#expectation.invert(not).toHaveBeenCalledBefore(spyExpected()[0], spyExpected()[1], expectationFailOutput),
       execute
     ); 
     return this;
@@ -117,7 +121,7 @@ export class TestingToHave<
     const { not, expectation = TextualExpectation.get('toHaveBeenCalledOnceWith'), expectationFailOutput, execute } = options;
     this.it(
       expectation,
-      () => this.expect.invert(not).withContext(expectationFailOutput).toHaveBeenCalledOnceWith(spy(), ...params),
+      () => this.#expectation.invert(not).withContext(expectationFailOutput).toHaveBeenCalledOnceWith(spy(), ...params),
       execute
     );
     return this;
@@ -144,7 +148,7 @@ export class TestingToHave<
   ): this {
     this.it(
       expectation,
-      () => this.expect.invert(not).toHaveBeenCalledTimes(spy(), expected, expectationFailOutput),
+      () => this.#expectation.invert(not).toHaveBeenCalledTimes(spy(), expected, expectationFailOutput),
       execute
     ); 
     return this;
@@ -168,15 +172,14 @@ export class TestingToHave<
     const { not, expectation = TextualExpectation.get('toHaveBeenCalledWith'), expectationFailOutput, execute } = options;
     this.it(
       expectation,
-      () => this.expect.invert(not).withContext(expectationFailOutput).toHaveBeenCalledWith(spy(), ...params),
+      () => this.#expectation.invert(not).withContext(expectationFailOutput).toHaveBeenCalledWith(spy(), ...params),
       execute
     ); 
     return this;
   }
   //#endregion
 
-
-  //#region _toHave
+  //#region toHave
   /**
    * 
    * @param actual 
@@ -198,7 +201,7 @@ export class TestingToHave<
   ): this {
     this.it(
       expectation,
-      () => this.expect.invert(not).toHaveClass(actual, expected, expectationFailOutput),
+      () => this.#expectation.invert(not).toHaveClass(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -225,7 +228,7 @@ export class TestingToHave<
   ): this {
     this.it(
       expectation,
-      () => this.expect.invert(not).toHaveSize(actual, expected, expectationFailOutput),
+      () => this.#expectation.invert(not).toHaveSize(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -254,7 +257,7 @@ export class TestingToHave<
       () => {
         let spies = spy();
         ((!Array.isArray(spies)) ? [spies] : spies).forEach(
-          spy => this.expect.invert(not).toHaveSpyInteractions(spy as ExpectType<T>, expectationFailOutput)
+          spy => this.#expectation.invert(not).toHaveSpyInteractions(spy as any, expectationFailOutput)
         );
       },
       execute

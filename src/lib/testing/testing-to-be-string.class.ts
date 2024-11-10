@@ -1,13 +1,15 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
+import { TestingExpect } from '../testing-expect.class';
+import { TestingExpectToBeString } from '../expectation';
 import { TestingExpectation } from '../testing-expectation.class';
-import { TextualExpectation } from '../textual-expectation.abstract';
 import { TestingIt } from '../testing-it.class';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
-import { ExecutableTests } from '../../interface/executable-tests.interface';
+import { ExecutableTests } from '../../interface';
 /**
  * Prepared simple tests.
  */
@@ -18,6 +20,8 @@ export class TestingToBeString<
   Descriptions,
   Expectations
 > {
+  #expectation;
+
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -37,9 +41,10 @@ export class TestingToBeString<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpectation: TestingExpectation = new TestingExpectation()
+    testingExpect = new TestingExpect()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    this.#expectation = new TestingExpectation([TestingExpectToBeString], testingExpect);
   }
 
   //#region toBeString
@@ -64,7 +69,7 @@ export class TestingToBeString<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeString(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeString(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -93,7 +98,7 @@ export class TestingToBeString<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeStringIncludes(actual, includes, expected, expectationFailOutput),
+      () => this.#expectation.toBeStringIncludes(actual, includes, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -122,7 +127,7 @@ export class TestingToBeString<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeStringIncludesSome(actual, includes, expected, expectationFailOutput),
+      () => this.#expectation.toBeStringIncludesSome(actual, includes, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -151,7 +156,7 @@ export class TestingToBeString<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeStringOfLength(actual, length, expected, expectationFailOutput),
+      () => this.#expectation.toBeStringOfLength(actual, length, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -180,7 +185,7 @@ export class TestingToBeString<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeStringOfLengthBetween(actual, min, max, expected, expectationFailOutput),
+      () => this.#expectation.toBeStringOfLengthBetween(actual, min, max, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -207,7 +212,7 @@ export class TestingToBeString<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeStringType(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeStringType(actual, expected, expectationFailOutput),
       execute
     );
     return this;

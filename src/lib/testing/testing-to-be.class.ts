@@ -1,14 +1,16 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
+import { TestingExpect } from '../testing-expect.class';
+import { TestingExpectToBe } from "../expectation";
 import { TestingExpectation } from '../testing-expectation.class';
-import { TextualExpectation } from '../textual-expectation.abstract';
 import { TestingIt } from '../testing-it.class';
+import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
 import { Constructor } from '@angular-package/type';
 import { CounterConfig, ExpectType } from '../../type';
 // Interface.
-import { ExecutableTests } from '../../interface/executable-tests.interface';
+import { ExecutableTests } from '../../interface';
 /**
  * Prepared simple tests.
  */
@@ -19,6 +21,11 @@ export class TestingToBe<
   Descriptions,
   Expectations
 > {
+  /**
+   * 
+   */
+  #expectation;
+
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -38,12 +45,13 @@ export class TestingToBe<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpectation: TestingExpectation = new TestingExpectation()
+    testingExpect = new TestingExpect()
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt, testingExpectation);
+    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
+    this.#expectation = new TestingExpectation([TestingExpectToBe], testingExpect);
   }
 
-  //#region _toBe
+  //#region toBe
   /**
    * @description Executes the spec on a state `true` from the `execute` expecting the provided `value` to be `array` type or an instance of `Array` on the `expected` of
    * `true`. The method uses `isArray()` function of `@angular-package/type`.
@@ -65,7 +73,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeArray(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeArray(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -92,7 +100,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeBigInt(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeBigInt(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -119,7 +127,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeClass(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeClass(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -147,7 +155,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.invert(not).toBeCloseTo(actual, expected, precision, expectationFailOutput),
+      () => this.#expectation.invert(not).toBeCloseTo(actual, expected, precision, expectationFailOutput),
       execute
     );
     return this;
@@ -174,7 +182,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeDate(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeDate(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -200,7 +208,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.invert(not).toBeDefined(actual, expected, expectationFailOutput),
+      () => this.#expectation.invert(not).toBeDefined(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -226,7 +234,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeFalse(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeFalse(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -251,7 +259,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeFalsy(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeFalsy(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -278,7 +286,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeFunction(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeFunction(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -308,7 +316,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeInstance(actual, constructor, expected, expectationFailOutput),
+      () => this.#expectation.toBeInstance(actual, constructor, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -334,7 +342,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.invert(not).toBeInstanceOf(actual, expected, expectationFailOutput),
+      () => this.#expectation.invert(not).toBeInstanceOf(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -361,7 +369,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeKey(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeKey(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -386,7 +394,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeNaN(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeNaN(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -411,7 +419,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeNegativeInfinity(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeNegativeInfinity(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -438,7 +446,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeNull(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeNull(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -454,7 +462,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      done => (this.expect.invert(not).toBePending(actual, expectationFailOutput), done()),
+      done => (this.#expectation.invert(not).toBePending(actual, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -479,7 +487,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBePositiveInfinity(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBePositiveInfinity(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -504,7 +512,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeRegexp(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeRegexp(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -529,7 +537,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      done => (this.expect.invert(not).toBeRejected(actual, expectationFailOutput), done()),
+      done => (this.#expectation.invert(not).toBeRejected(actual, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -554,7 +562,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      done => (this.expect.invert(not).toBeRejectedWith(actual, expected, expectationFailOutput), done()),
+      done => (this.#expectation.invert(not).toBeRejectedWith(actual, expected, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -582,7 +590,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      done => (this.expect.invert(not).toBeRejectedWithError(actual, expected, message, expectationFailOutput), done()),
+      done => (this.#expectation.invert(not).toBeRejectedWithError(actual, expected, message, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -608,7 +616,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      done => (this.expect.invert(not).toBeResolved(actual, expectationFailOutput), done()),
+      done => (this.#expectation.invert(not).toBeResolved(actual, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -633,7 +641,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      done => (this.expect.invert(not).toBeResolvedTo(actual, expected, expectationFailOutput), done()),
+      done => (this.#expectation.invert(not).toBeResolvedTo(actual, expected, expectationFailOutput), done()),
       execute
     );
     return this;
@@ -662,7 +670,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.invert(not).toBeSymbol(actual, expected, expectationFailOutput),
+      () => this.#expectation.invert(not).toBeSymbol(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -688,7 +696,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeTrue(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeTrue(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -713,7 +721,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeTruthy(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeTruthy(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -739,7 +747,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.invert(not).toBeTypeOf(actual, expected, expectationFailOutput),
+      () => this.#expectation.invert(not).toBeTypeOf(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -764,7 +772,7 @@ export class TestingToBe<
   ): this {
     this.it(
       expectation,
-      () => this.expect.toBeUndefined(actual, expected, expectationFailOutput),
+      () => this.#expectation.toBeUndefined(actual, expected, expectationFailOutput),
       execute
     );
     return this;
