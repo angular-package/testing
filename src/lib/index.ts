@@ -5,21 +5,9 @@ export {
   TestingExpectToBeArrayOf,
   TestingExpectToBeInstanceOf,
   TestingExpectToHave,
-  TestingExpectToHaveBeen,
   TestingExpectToHaveBeenCalled,
   TestingExpectToThrow,
 } from './expectation';
-export {
-  TestingItTo,
-  TestingItToBe,
-  TestingItToBeArrayOf,
-  TestingItToBeBoolean,
-  TestingItToBeInstanceOf,
-  TestingItToHave,
-  TestingItToHaveBeen,
-  TestingItToHaveBeenCalled,
-  TestingItToThrow,
-} from './it';
 export {
   TestingTo,
   TestingToBe,
@@ -38,7 +26,6 @@ export {
 // Testing purpose.
 export { Testing } from './testing.class';
 export { TestingActual  } from './testing-actual.class';
-export { TestingCustom } from './testing-custom.class';
 export { TestingExpectation } from './testing-expectation.class';
 
 // Describe and It.
