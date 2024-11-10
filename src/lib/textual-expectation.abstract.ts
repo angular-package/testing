@@ -1,3 +1,5 @@
+import { ExpectType } from "../type";
+
 /**
  * 
  */
@@ -15,7 +17,11 @@ export abstract class TextualExpectation {
     return `${this.expectationFailOutput} ${not === true ? `not` : ``}${TextualExpectation.message[method].fail}`;
   }
 
-  public static get(method: keyof typeof TextualExpectation.message) {
+  public static get<T>(
+    method: keyof typeof TextualExpectation.message,
+    actual?: ExpectType<T>,
+    expected?: any
+  ) {
     return TextualExpectation.message[method].ok;
   }
 
@@ -35,6 +41,7 @@ export abstract class TextualExpectation {
   
     // toBeArray
     toBeArray: { ok: "The `actual` value must be `array` type or an instance of `Array`.", fail: "be an `array`" },
+    toBeArrayOf: { ok: "The `actual` value must be `array` type or an instance of `Array` of `expected`.", fail: "be an `array` of `expected`" },
 
     //#region toBeArrayOf
     toBeArrayOfBigInt: { ok: "The `actual` value must be `array` type or an instance of `Array` of `bigint`.", fail: "be an `array` of `bigint`" },
