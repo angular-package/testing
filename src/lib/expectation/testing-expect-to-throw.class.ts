@@ -27,13 +27,4 @@ export class TestingExpectToThrow extends Expect {
     this.setNot(false);
     return this;
   }
-  public toThrow<T>(
-    actual: ExpectType<T>,
-    expected?: any,
-    expectationFailOutput: any = this.getExpectationFailOutput('toThrow')
-  ): this {
-    this.expect(actual, expectationFailOutput).toThrow(expected);
-    this.setNot(false);
-    return this;
-  }
 }

@@ -344,26 +344,6 @@ export class TestingExpectToBeInstanceOf extends Expect {
 
   // TODO: Description.
   /**
-   * @deprecated
-   * @description Expects provided value to be an instance of `Storage`. Tested by `toBeInstanceOf()` of jasmine.
-   * @param actual 
-   * @param expected 
-   * @param expectationFailOutput 
-   * @returns 
-   */
-  public storage<T>(
-    actual: ExpectType<T>,
-    expected: jasmine.Expected<boolean> = true,
-    expectationFailOutput: any
-  ): this {
-    // expected === false && (this.not);
-    // this.expect(actual, expectationFailOutput).toBeInstanceOf(Storage);
-    // this.setNot(false);
-    return this;
-  }
-
-  // TODO: Description.
-  /**
    * @description Expects provided value to be an instance of `TypeError`. Tested by `toBeInstanceOf()` of jasmine.
    * @param actual 
    * @param expected 

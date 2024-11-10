@@ -1,6 +1,5 @@
 // Class.
 import { Expect } from '../expect.class';
-import { TestingExpect } from '../testing-expect.class';
 // Type.
 import { ExpectType } from '../../type/expect-type.type';
 /**
