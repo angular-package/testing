@@ -20,7 +20,8 @@ export class TestingToBeObject<
   Descriptions,
   Expectations
 > {
-  #expectation;
+  public expectations = [TestingExpectToBeObject];
+  public expectation;
 
   /**
    * Simple `class` to support testing.
@@ -41,10 +42,10 @@ export class TestingToBeObject<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect()
+    testingExpect = new TestingExpect(),
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#expectation = new TestingExpectation([TestingExpectToBeObject], testingExpect);
+    this.expectation = new TestingExpectation([TestingExpectToBeObject], testingExpect);
 
   }
 
@@ -71,7 +72,7 @@ export class TestingToBeObject<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeObject(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeObject(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -100,7 +101,7 @@ export class TestingToBeObject<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeObjectKey(actual, key, expected, expectationFailOutput),
+      () => this.expectation.toBeObjectKey(actual, key, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -129,7 +130,7 @@ export class TestingToBeObject<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeObjectKeyIn(actual, key, expected, expectationFailOutput),
+      () => this.expectation.toBeObjectKeyIn(actual, key, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -158,7 +159,7 @@ export class TestingToBeObject<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeObjectKeys(actual, keys, expected, expectationFailOutput),
+      () => this.expectation.toBeObjectKeys(actual, keys, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -189,7 +190,7 @@ export class TestingToBeObject<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeObjectKeysIn(actual, keys, expected, expectationFailOutput),
+      () => this.expectation.toBeObjectKeysIn(actual, keys, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -219,7 +220,7 @@ export class TestingToBeObject<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeObjectSomeKeys(actual, keys, expected, expectationFailOutput),
+      () => this.expectation.toBeObjectSomeKeys(actual, keys, expected, expectationFailOutput),
       execute
     );
     return this;

@@ -20,7 +20,8 @@ export class TestingTo<
   Descriptions,
   Expectations
 > {
-  #expectation;
+  public expectations = [TestingExpectTo];
+  public expectation;
 
   /**
    * Simple `class` to support testing.
@@ -41,10 +42,10 @@ export class TestingTo<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect()
+    testingExpect = new TestingExpect(),
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#expectation = new TestingExpectation([TestingExpectTo], testingExpect);
+    this.expectation = new TestingExpectation([TestingExpectTo], testingExpect);
   }
 
   //#region to
@@ -70,7 +71,7 @@ export class TestingTo<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toBe(actual, expected, expectationFailOutput),
+      () => this.expectation.invert(not).toBe(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -97,7 +98,7 @@ export class TestingTo<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toContain(actual, expected, expectationFailOutput),
+      () => this.expectation.invert(not).toContain(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -126,7 +127,7 @@ export class TestingTo<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toEqual(actual, expected, expectationFailOutput),
+      () => this.expectation.invert(not).toEqual(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -153,7 +154,7 @@ export class TestingTo<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toMatch(actual, expected, expectationFailOutput),
+      () => this.expectation.invert(not).toMatch(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -180,7 +181,7 @@ export class TestingTo<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toThrow(actual, expected, expectationFailOutput),
+      () => this.expectation.invert(not).toThrow(actual, expected, expectationFailOutput),
       execute
     );
     return this;

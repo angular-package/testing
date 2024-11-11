@@ -20,7 +20,8 @@ export class TestingToBeBoolean<
   Descriptions,
   Expectations
 > {
-  #expectation;
+  public expectations = [TestingExpectToBeBoolean];
+  public expectation;
 
   /**
    * Simple `class` to support testing.
@@ -32,6 +33,7 @@ export class TestingToBeBoolean<
    * @param counter
    * @param testingDescribe
    * @param testingIt
+   * @param testingExpect
    */
   constructor(
     allowDescribe: boolean = true,
@@ -40,10 +42,10 @@ export class TestingToBeBoolean<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect()
+    testingExpect = new TestingExpect(),
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#expectation = new TestingExpectation([TestingExpectToBeBoolean], testingExpect);
+    this.expectation = new TestingExpectation([TestingExpectToBeBoolean], testingExpect);
   }
 
   /**
@@ -67,7 +69,7 @@ export class TestingToBeBoolean<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeBoolean(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeBoolean(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -94,7 +96,7 @@ export class TestingToBeBoolean<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeBooleanType(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeBooleanType(actual, expected, expectationFailOutput),
       execute
     );
     return this;

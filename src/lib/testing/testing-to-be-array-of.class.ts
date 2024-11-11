@@ -21,10 +21,8 @@ export class TestingToBeArrayOf<
   Descriptions,
   Expectations
 > {
-  /**
-   * 
-   */
-  #expectation;
+  public expectations = [TestingExpectToBeArrayOf];
+  public expectation;
 
   /**
    * @description Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
@@ -44,10 +42,10 @@ export class TestingToBeArrayOf<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect()
+    testingExpect = new TestingExpect(),
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#expectation = new TestingExpectation([TestingExpectToBeArrayOf], testingExpect);
+    this.expectation = new TestingExpectation([TestingExpectToBeArrayOf], testingExpect);
   }
 
   //#region TestingToBeArrayOf
@@ -60,7 +58,7 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfBigInt(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfBigInt(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -74,7 +72,7 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfBoolean(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfBoolean(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -88,7 +86,7 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfDate(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfDate(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -102,7 +100,7 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfDefined(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfDefined(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -116,7 +114,7 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfFalse(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfFalse(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -130,7 +128,21 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfNull(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfNull(actual, expected, expectationFailOutput),
+      execute
+    );
+    return this;
+  }
+  public toBeArrayOfNumber<T>(
+    actual: ExpectType<T>,
+    expected?: jasmine.Expected<boolean>,
+    expectation: string = TextualExpectation.get('toBeArrayOfNumber'),
+    expectationFailOutput?: any,
+    execute?: boolean,
+  ): this {
+    this.it(
+      expectation,
+      () => this.expectation.toBeArrayOfNumber(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -144,7 +156,7 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfRegExp(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfRegExp(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -158,7 +170,7 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfString(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfString(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -172,7 +184,7 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfSymbol(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfSymbol(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -186,7 +198,7 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfTrue(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfTrue(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -200,7 +212,7 @@ export class TestingToBeArrayOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeArrayOfUndefined(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeArrayOfUndefined(actual, expected, expectationFailOutput),
       execute
     );
     return this;

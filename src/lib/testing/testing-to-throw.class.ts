@@ -20,7 +20,8 @@ export class TestingToThrow<
   Descriptions,
   Expectations
 > {
-  #expectation;
+  public expectations = [TestingExpectToThrow];
+  public expectation;
 
   /**
    * Simple `class` to support testing.
@@ -41,10 +42,10 @@ export class TestingToThrow<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect()
+    testingExpect = new TestingExpect(),
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#expectation = new TestingExpectation([TestingExpectToThrow], testingExpect);
+    this.expectation = new TestingExpectation([TestingExpectToThrow], testingExpect);
   }
 
   //#region toThrow
@@ -69,7 +70,7 @@ export class TestingToThrow<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toThrowError(actual, message, expectationFailOutput),
+      () => this.expectation.invert(not).toThrowError(actual, message, expectationFailOutput),
       execute
     );
     return this;
@@ -96,7 +97,7 @@ export class TestingToThrow<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toThrowMatching(actual, predicate, expectationFailOutput),
+      () => this.expectation.invert(not).toThrowMatching(actual, predicate, expectationFailOutput),
       execute
     );
     return this;

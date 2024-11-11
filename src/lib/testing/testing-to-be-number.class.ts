@@ -20,7 +20,8 @@ export class TestingToBeNumber<
   Descriptions,
   Expectations
 > {
-  #expectation;
+  public expectations = [TestingExpectToBeNumber];
+  public expectation;
 
   /**
    * Simple `class` to support testing.
@@ -41,10 +42,10 @@ export class TestingToBeNumber<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect()
+    testingExpect = new TestingExpect(),
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#expectation = new TestingExpectation([TestingExpectToBeNumber], testingExpect);
+    this.expectation = new TestingExpectation([TestingExpectToBeNumber], testingExpect);
   }
 
   //#region toBeNumber
@@ -69,7 +70,7 @@ export class TestingToBeNumber<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeNumber(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeNumber(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -100,7 +101,7 @@ export class TestingToBeNumber<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeNumberBetween(actual, min, max, expected, expectationFailOutput),
+      () => this.expectation.toBeNumberBetween(actual, min, max, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -127,7 +128,7 @@ export class TestingToBeNumber<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeNumberType(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeNumberType(actual, expected, expectationFailOutput),
       execute
     );
     return this;

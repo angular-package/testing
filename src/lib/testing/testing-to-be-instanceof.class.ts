@@ -20,7 +20,8 @@ export class TestingToBeInstanceOf<
   Descriptions,
   Expectations
 > {
-  #expectation;
+  public expectations = [TestingExpectToBeInstanceOf];
+  public expectation;
 
   /**
    * Simple `class` to support testing.
@@ -41,10 +42,10 @@ export class TestingToBeInstanceOf<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect()
+    testingExpect = new TestingExpect(),
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#expectation = new TestingExpectation([TestingExpectToBeInstanceOf], testingExpect);
+    this.expectation = new TestingExpectation([TestingExpectToBeInstanceOf], testingExpect);
   }
 
   //#region _toBeInstanceOf
@@ -69,7 +70,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfArray(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfArray(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -96,7 +97,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfBoolean(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfBoolean(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -123,7 +124,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfDate(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfDate(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -161,7 +162,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfError(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfError(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -188,7 +189,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfFunction(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfFunction(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -215,7 +216,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfMap(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfMap(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -242,7 +243,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfNumber(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfNumber(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -269,7 +270,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfObject(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfObject(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -296,7 +297,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfPromise(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfPromise(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -323,7 +324,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfRangeError(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfRangeError(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -350,7 +351,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfReferenceError(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfReferenceError(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -377,7 +378,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfRegExp(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfRegExp(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -404,7 +405,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfSet(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfSet(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -431,7 +432,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfString(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfString(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -458,7 +459,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfSyntaxError(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfSyntaxError(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -485,7 +486,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfTypeError(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfTypeError(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -512,7 +513,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfURIError(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfURIError(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -527,7 +528,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfWeakMap(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfWeakMap(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -554,7 +555,7 @@ export class TestingToBeInstanceOf<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.toBeInstanceOfWeakSet(actual, expected, expectationFailOutput),
+      () => this.expectation.toBeInstanceOfWeakSet(actual, expected, expectationFailOutput),
       execute
     );
     return this;

@@ -20,7 +20,8 @@ export class TestingToHave<
   Descriptions,
   Expectations
 > {
-  #expectation;
+  public expectations = [TestingExpectToHave, TestingExpectToHaveBeenCalled];
+  public expectation;
 
   /**
    * Simple `class` to support testing.
@@ -41,10 +42,10 @@ export class TestingToHave<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect()
+    testingExpect = new TestingExpect(),
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#expectation = new TestingExpectation([TestingExpectToHave, TestingExpectToHaveBeenCalled], testingExpect);
+    this.expectation = new TestingExpectation([TestingExpectToHave, TestingExpectToHaveBeenCalled], testingExpect);
   }
 
   //#region toHaveBeenCalled
@@ -71,7 +72,7 @@ export class TestingToHave<
       () => {
         let spies = spy();
         ((!Array.isArray(spies)) ? [spies] : spies).forEach(
-          spy => this.#expectation.invert(not).toHaveBeenCalled(spy, expectationFailOutput)
+          spy => this.expectation.invert(not).toHaveBeenCalled(spy, expectationFailOutput)
         );
       },
       execute
@@ -97,7 +98,7 @@ export class TestingToHave<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toHaveBeenCalledBefore(spyExpected()[0], spyExpected()[1], expectationFailOutput),
+      () => this.expectation.invert(not).toHaveBeenCalledBefore(spyExpected()[0], spyExpected()[1], expectationFailOutput),
       execute
     ); 
     return this;
@@ -121,7 +122,7 @@ export class TestingToHave<
     const { not, expectation = TextualExpectation.get('toHaveBeenCalledOnceWith'), expectationFailOutput, execute } = options;
     this.it(
       expectation,
-      () => this.#expectation.invert(not).withContext(expectationFailOutput).toHaveBeenCalledOnceWith(spy(), ...params),
+      () => this.expectation.invert(not).withContext(expectationFailOutput).toHaveBeenCalledOnceWith(spy(), ...params),
       execute
     );
     return this;
@@ -148,7 +149,7 @@ export class TestingToHave<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toHaveBeenCalledTimes(spy(), expected, expectationFailOutput),
+      () => this.expectation.invert(not).toHaveBeenCalledTimes(spy(), expected, expectationFailOutput),
       execute
     ); 
     return this;
@@ -172,7 +173,7 @@ export class TestingToHave<
     const { not, expectation = TextualExpectation.get('toHaveBeenCalledWith'), expectationFailOutput, execute } = options;
     this.it(
       expectation,
-      () => this.#expectation.invert(not).withContext(expectationFailOutput).toHaveBeenCalledWith(spy(), ...params),
+      () => this.expectation.invert(not).withContext(expectationFailOutput).toHaveBeenCalledWith(spy(), ...params),
       execute
     ); 
     return this;
@@ -201,7 +202,7 @@ export class TestingToHave<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toHaveClass(actual, expected, expectationFailOutput),
+      () => this.expectation.invert(not).toHaveClass(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -228,7 +229,7 @@ export class TestingToHave<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toHaveSize(actual, expected, expectationFailOutput),
+      () => this.expectation.invert(not).toHaveSize(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -257,7 +258,7 @@ export class TestingToHave<
       () => {
         let spies = spy();
         ((!Array.isArray(spies)) ? [spies] : spies).forEach(
-          spy => this.#expectation.invert(not).toHaveSpyInteractions(spy as any, expectationFailOutput)
+          spy => this.expectation.invert(not).toHaveSpyInteractions(spy as any, expectationFailOutput)
         );
       },
       execute

@@ -20,7 +20,8 @@ export class TestingToBeLessThan<
   Descriptions,
   Expectations
 > {
-  #expectation;
+  public expectations = [TestingExpectToBeLessThan];
+  public expectation;
 
   /**
    * Simple `class` to support testing.
@@ -41,10 +42,10 @@ export class TestingToBeLessThan<
     counter: CounterConfig = [true, false],
     testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
     testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect()
+    testingExpect = new TestingExpect(),    
   ) {
     super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.#expectation = new TestingExpectation([TestingExpectToBeLessThan], testingExpect);
+    this.expectation = new TestingExpectation([TestingExpectToBeLessThan], testingExpect);
   }
 
   //#region toBeLessThan
@@ -68,7 +69,7 @@ export class TestingToBeLessThan<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toBeLessThan(actual, expected, expectationFailOutput),
+      () => this.expectation.invert(not).toBeLessThan(actual, expected, expectationFailOutput),
       execute
     );
     return this;
@@ -94,7 +95,7 @@ export class TestingToBeLessThan<
   ): this {
     this.it(
       expectation,
-      () => this.#expectation.invert(not).toBeLessThanOrEqual(actual, expected, expectationFailOutput),
+      () => this.expectation.invert(not).toBeLessThanOrEqual(actual, expected, expectationFailOutput),
       execute
     );
     return this;
