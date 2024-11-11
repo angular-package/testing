@@ -1,4 +1,7 @@
 // Class.
+import { TestingDescribe } from '../testing-describe.class';
+import { TestingExpect } from "../testing-expect.class";
+import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from "../testing-it.class";
 // Type.
 import { Constructor } from "@angular-package/type";
@@ -7,18 +10,49 @@ import { CounterConfig, InstanceOfConstructor, UnionToIntersection } from "../..
 import { ExecutableTests } from "../../interface/executable-tests.interface";
 // Mixin function: combining multiple class constructors into one
 export function mixinTesting<T extends Constructor<any>[]>(...classes: T) {
-  return classes.reduce((acc, currClass) => (
+  return classes.reduce((acc, currClass, currIndex) => (
     class extends acc {
+      public expectation;
+      private _expectations!: any[];
+
       constructor(
+        allowDescribe: boolean,
         allowIt: boolean,
         executable?: ExecutableTests,
-        counter: CounterConfig = [true, false],
+        counter?: CounterConfig,
+        testingDescribe?: TestingDescribe,
         testingIt?: TestingIt,
+        testingExpect?: TestingExpect,
       ) {
-        super(allowIt, executable, counter, testingIt);
+        super(
+          allowDescribe,
+          allowIt,
+          executable,
+          counter,
+          testingDescribe,
+          testingIt,
+          testingExpect,
+        );
 
         // Call the constructor of each class to initialize properties
-        Object.assign(this, new currClass(allowIt, executable, counter, testingIt));
+        const instance = new currClass(
+          allowDescribe,
+          allowIt,
+          executable,
+          counter,
+          testingDescribe,
+          testingIt,
+          testingExpect
+        );
+        Object.assign(this, instance);
+
+        // Merge expectations
+        this._expectations = [...this._expectations, ...instance.expectations];
+
+        // Create an `TestingExpectation` instance of merged `_expectations`
+        if (currIndex === classes.length - 1) {
+          this.expectation = new TestingExpectation(this._expectations, testingExpect);
+        }
 
         // Copy methods from the current class prototype
         Object
@@ -34,6 +68,7 @@ export function mixinTesting<T extends Constructor<any>[]>(...classes: T) {
           // .forEach(name => (name !== 'constructor') && ((this as any)[name] = currClass.prototype[name].bind(this)));
       }
     }
-  )/*, class {}*/) as Constructor<UnionToIntersection<InstanceOfConstructor<T[number]>>>;
+  ), class { private _expectations: Constructor<any>[] = []; }) as
+    Constructor<UnionToIntersection<InstanceOfConstructor<T[number]>>>;
   // as Constructor<UnionToIntersection<IntersectionOfInstances<T>>>;
 }
