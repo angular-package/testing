@@ -1,8 +1,5 @@
 // Class.
 import { TestingDescribe } from './testing-describe.class';
-import { TestingExpect } from './testing-expect.class';
-import { TestingExpectation } from './testing-expectation.class';
-import { TextualExpectation } from './textual-expectation.abstract';
 import { TestingIt } from './testing-it.class';
 // Interface.
 import { ExecutableTests } from '../interface/executable-tests.interface';
@@ -20,13 +17,6 @@ export abstract class TestingCore<
   /**
    * @description
    */
-  public get expect() {
-    return this.#expectation;
-  }
-
-  /**
-   * @description
-   */
   public get testingDescribe() {
     return this.#testingDescribe;
   }
@@ -37,11 +27,6 @@ export abstract class TestingCore<
   public get testingIt() {
     return this.#testingIt;
   }
-
-  /**
-   * @description
-   */
-  #expectation;
 
   /**
    * @description Privately stored instance of a `TestingDescribe`.
@@ -78,11 +63,9 @@ export abstract class TestingCore<
       executable?.it,
       counter
     ),
-    testingExpectation = new TestingExpectation() 
   ) {
     this.#testingDescribe = testingDescribe;
     this.#testingIt = testingIt;
-    this.#expectation = testingExpectation;
   }
 
   /**
@@ -220,35 +203,6 @@ export abstract class TestingCore<
    */
   public setSuiteProperty(key: string, value: unknown) {
     setSuiteProperty(key, value);
-    return this;
-  }
-
-  /**
-   * @description
-   * @param assertion 
-   * @param description 
-   * @param execute 
-   * @returns 
-   */
-  public spec<T>(
-    assertion: (expectation: TestingExpectation) => any,
-    description: string = '',
-    execute?: boolean,
-  ): this {
-    if (description.length === 0) {
-      Object
-        .entries(TextualExpectation)
-        .forEach(([name, message]) => assertion
-          .toString()
-          .includes(name) && (description += message + " and ")
-        );
-      description = description.slice(0, -5);
-    }
-    this.it(
-      description,
-      () => assertion(this.expect),
-      execute
-    );
     return this;
   }
 
