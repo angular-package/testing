@@ -9,18 +9,10 @@ import { ExpectType } from "../type";
  */
 export class Expect {
   /**
-   * @description
-   * @param method 
-   * @returns 
-   */
-  public getExpectationFailOutput(method: keyof typeof TextualExpectation.message) {
-    return TextualExpectation.getFail(method, this.getNot());
-  }
-  /**
    * @description Fail as soon as possible if the actual is pending. Otherwise evaluate the matcher.
    */
   public get already(): this {
-    this.#expect.already;
+    this._expect.already;
     return this;
   }
 
@@ -28,36 +20,36 @@ export class Expect {
    * @description Invert the matcher.
    */
   public get not(): this {
-    this.#expect.not;
+    this._expect.not;
     return this;
   }
 
   /**
    * @description
    */
-  #expect;
+  private _expect;
 
   /**
    * @description
    * @param expect 
    */
   constructor(expect: TestingExpect = new TestingExpect()) {
-    this.#expect = expect;
+    this._expect = expect;
   }
+
+  /**
+   * 
+   * @param actual 
+   * @param expectationFailOutput 
+   * @returns 
+   */
   public expect<T>(
     actual: ExpectType<T>,
     expectationFailOutput?: any,
   ): jasmine.Matchers<ExpectType<T>> {
-    return this.#expect.expect(actual, expectationFailOutput);
+    return this._expect.expect(actual, expectationFailOutput);
   }
-  protected expectation<T>(
-    actual: ExpectType<T>,
-    callbackfn: (matchers: jasmine.Matchers<ExpectType<T>>) => any,
-    expectationFailOutput?: any,
-  ): this {
-    callbackfn && callbackfn(this.expect(actual, expectationFailOutput));
-    return this;
-  }
+
   public expectAsync<T, U>(
     actual: T | PromiseLike<T>,
     expectationFailOutput?: any,
@@ -66,10 +58,24 @@ export class Expect {
   ): jasmine.AsyncMatchers<T, U> {
     already && this.already;
     not && this.not;
-    return this.#expect.expectAsync(actual, expectationFailOutput, not, already);
+    return this._expect.expectAsync(actual, expectationFailOutput, not, already);
   }
+
   public getAlready() {
-    return this.#expect.already;
+    return this._expect.already;
+  }
+
+  /**
+   * @description
+   * @param method 
+   * @returns 
+   */
+  public getExpectationFailOutput<T>(
+    method: keyof typeof TextualExpectation.message,
+    actual?: ExpectType<T>,
+    expected?: any
+  ) {
+    return TextualExpectation.getFail(method, this.getNot());
   }
 
   /**
@@ -77,7 +83,17 @@ export class Expect {
    * @returns The return value is a state of invert the matcher.
    */
   public getNot() {
-    return this.#expect.getNot();
+    return this._expect.getNot();
+  }
+
+  /**
+   * 
+   * @param invert 
+   * @returns 
+   */
+  public invert(invert: boolean = false) {
+    (invert ? this.not : this);
+    return this;
   }
 
   /**
@@ -86,7 +102,7 @@ export class Expect {
    * @returns 
    */
   public setAlready(already: boolean): this {
-    this.#expect.setAlready(already);
+    this._expect.setAlready(already);
     return this;
   }
 
@@ -96,7 +112,7 @@ export class Expect {
    * @returns The return value is an instance of a child class.
    */
   public setNot(not: boolean): this {
-    this.#expect.setNot(not);
+    this._expect.setNot(not);
     return this;
   }
 
@@ -104,7 +120,16 @@ export class Expect {
    * @param message 
    */
   public withContext(message: string) {
-    message && this.#expect.withContext(message);
+    message && this._expect.withContext(message);
+    return this;
+  }
+
+  protected expectation<T>(
+    actual: ExpectType<T>,
+    callbackfn: (matchers: jasmine.Matchers<ExpectType<T>>) => any,
+    expectationFailOutput?: any,
+  ): this {
+    callbackfn && callbackfn(this.expect(actual, expectationFailOutput));
     return this;
   }
 }
