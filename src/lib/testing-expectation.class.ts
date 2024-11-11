@@ -16,31 +16,55 @@ import { TestingExpectationInterface } from '../interface';
 export class TestingExpectationProxy<
   T extends Constructor<any>[] = [],
 > extends Expect {
-  /**
-   * 
-   */
-  private $expectation;
+  private _expectation;
+  private _proxy;
 
   /**
    * @description
    * @param testingExpect 
    */
   constructor(
-    expectation: T,
+    expectation: [...T],
     testingExpect: TestingExpect = new TestingExpect()
   ) {
     super(testingExpect);
 
     // Tests.
-    this.$expectation = new (mixin(...expectation))(testingExpect) as InstanceTypes<T>;
+    this._expectation = new (mixin(...expectation))(testingExpect) as InstanceTypes<T>;
 
-    // Proxy to delegate method calls to $expectation
-    return new Proxy(this as this & InstanceTypes<T>, {
+    // Proxy to delegate method calls to _expectation
+    this._proxy = new Proxy(this as this & InstanceTypes<T>, {
       get(target: TestingExpectationProxy<T> & InstanceTypes<T>, prop: PropertyKey) {
-        return prop in target ? (target as any)[prop] : (target as any).$expectation[prop];
+        // Check the prototype tree.
+        let descriptor: PropertyDescriptor | undefined;
+        let proto = Object.getPrototypeOf(target);
+        while (proto && !descriptor) {
+          descriptor = Object.getOwnPropertyDescriptor(proto, prop);
+          proto = Object.getPrototypeOf(proto);
+        }
+
+        if (descriptor?.get) {
+          const value = descriptor.get.call(target);
+          // If the getter returns the original instance, return the proxy instead
+          return value === target ? target._proxy : value;
+        }
+
+        const method = (target as any)[prop];
+        
+        // Handle methods
+        if (typeof method === 'function') {
+          return (...args: any[]) => {
+            const value = method.apply(target, args);
+            // If the method returns the original instance, return the proxy instead
+            return value === target ? target._proxy : value;
+          };
+        }
+
+        return prop in target ? (target as any)[prop] : (target as any)._expectation[prop];
       },
-    }) as this & InstanceTypes<T>;
+    }) as this & TestingExpectationProxy<T> & InstanceTypes<T>;
+    return this._proxy;
   }
 }
 
-export const TestingExpectation = TestingExpectationProxy as unknown as TestingExpectationInterface;
+export const TestingExpectation = TestingExpectationProxy as TestingExpectationInterface;
