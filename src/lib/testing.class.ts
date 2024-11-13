@@ -2,14 +2,16 @@
 import { TestingCore } from "./testing-core.abstract";
 // Class.
 import { TestingActual } from "./testing-actual.class";
-import { TestingDescribe } from "./testing-describe.class";
+import { TestingDescribe } from './testing-describe.class';
 import { TestingExpect } from "./testing-expect.class";
+import { TestingExpectationProxy } from "./testing-expectation.class";
 import { TestingIt } from "./testing-it.class";
+import { TextualExpectation } from "./textual-expectation.abstract";
 // Function.
-import { mixin } from "./function";
+import { mixinTesting } from "./function";
 // Type.
 import { Constructor } from "@angular-package/type";
-import { CounterConfig, ExpectType, InstanceTypes } from "../type";
+import { CounterConfig, InstanceTypes } from "../type";
 // Interface.
 import { ExecutableTests, TestingInterface } from "../interface";
 /**
@@ -21,6 +23,8 @@ export class TestingProxy<
   Descriptions extends string = string,
   Expectations extends string = string,
 > {
+  //#region static methods
+  //#region public
   /**
    * @description Defines the wrapper function of the `describe()` function of jasmine with the ability to decide its execution.
    * @param description "Textual description of the group"
@@ -48,110 +52,152 @@ export class TestingProxy<
   ): (execute: boolean) => void {
     return TestingIt.define(expectation, assertion, timeout);
   }
+  //#endregion
+  //#endregion
+
+  //#region public getter
+  public get allowDescribe() {
+    return this.testingCore.testingDescribe.allowed;
+  }
+
+  public get allowIt() {
+    return this.testingCore.testingIt.allowed;
+  }
 
   /**
    * @description
    */
   public get descriptions() {
-    return this.$descriptions;
+    return this._descriptions;
   }
 
   /**
    * @description
    */
   public get expect() {
-    return (this.$testing as any).expectation.e;
+    return (this._testing as any).expectation;
   }
 
   /**
    * @description
    */
   public get expectations() {
-    return this.$expectations;
+    return this._expectations;
   }
 
   /**
    * @description
    */
   public get test() {
-    return this.$testing;
+    return this._testing;
   }
+  //#endregion
+
+  //#region protected property
+  /**
+   * @protected
+   */
+  // protected allowDescribe: boolean;
 
   /**
    * @protected
    */
-  protected allowDescribe: boolean;
+  // protected allowIt: boolean;
 
   /**
    * @protected
    */
-  protected allowIt: boolean;
-
-  /**
-   * @protected
-   */
-  protected executable?: ExecutableTests;
+  // protected executable?: ExecutableTests;
 
   /**
    * @protected
    */
   protected testingCore;
+  //#endregion
 
+  //#region private property
   /**
-   * @protected
+   * @private
    */
-  private $testing;
+  private _descriptions;
 
   /**
    * @private
    */
-  private $descriptions: Descriptions[];
+  private _expectations;
 
   /**
    * @private
    */
-  private $expectations: Expectations[];
+  private _testing;
+  //#endregion
 
   /**
    * @description
-   * @param testing
-   * @param allowDescribe 
-   * @param allowIt 
+   * @param tests
+   * @param allow
    * @param executable 
    * @param descriptions
    * @param expectations
    * @param counter
-   * @param testingDescribe
-   * @param testingIt
-   * @param testingExpect
+   * @param testing
    */
   constructor(
-    testing: T,
-    allowDescribe: boolean = true,
-    allowIt: boolean = true,
+    tests: [...T],
+    allow: boolean | { describe?: boolean, it?: boolean } = true,
     executable?: ExecutableTests,
-    descriptions: Descriptions[] = [],
-    expectations: Expectations[] = [],
+
+    // Textual.
+    textual?: {
+      descriptions?: Descriptions | Descriptions[],
+      expectations?: Expectations | Expectations[],  
+    },
+  
+    // Counter.
     counter: CounterConfig = [true, false],
-    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
-    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect()
+
+    // Testing instances.
+    testing?: {
+      describe: TestingDescribe<Descriptions>,
+      it: TestingIt<Expectations>,
+      expect: TestingExpect
+    }
   ) {
-    this.allowDescribe = allowDescribe;
-    this.allowIt = allowIt;
-    this.$descriptions = descriptions;
-    this.executable = executable;
-    this.$expectations = expectations;
+    // Allow.
+    const { describe: allowDescribe, it: allowIt } = {
+      ...{describe: true, it: true},
+      ...(typeof allow === 'boolean' ? {describe: allow, it: allow} : allow)
+    };
+
+    // Textual.
+    const { descriptions: descriptions, expectations: expectations } = {
+      ...{descriptions: [], expectations: []},
+      ...textual
+    };
+
+    // Testing instances.
+    testing = {
+      ...{
+        describe: new TestingDescribe(allowDescribe, executable?.describe, counter),
+        it: new TestingIt(allowIt, executable?.it, counter),
+        expect: new TestingExpect()  
+      },
+      ...testing
+    };
+
+    //#region Assign.
+    // Textual.
+    this._descriptions = descriptions;
+    this._expectations = expectations;
+
     // Tests.
-    this.$testing = new (mixin(...testing))(
-      allowDescribe,
-      allowIt,
+    this._testing = new (mixinTesting(...tests))(
+      allow,
       executable,
       counter,
-      testingDescribe,
-      testingIt,
-      testingExpect
+      testing,
     );
+
     // Class to handle core features.
     this.testingCore = new (class<
       Descriptions extends string = string,
@@ -160,21 +206,21 @@ export class TestingProxy<
       Descriptions,
       Expectations
     > {})<Descriptions, Expectations>(
-      this.allowDescribe,
-      this.allowIt,
-      this.executable,
+      allow,
+      executable,
       counter,
-      testingDescribe,
-      testingIt,
+      testing
     );
+    //#endregion
 
-    // Proxy to delegate method calls to $expectation
+    //#region Proxy.
+    // Proxy to delegate method calls to _testing
     return new Proxy(this as this & InstanceTypes<T>, {
       get(target: TestingProxy<T> & InstanceTypes<T>, prop: PropertyKey) {
-        return prop in target ? (target as any)[prop] : (target as any).$testing[prop];
+        return prop in target ? (target as any)[prop] : (target as any)._testing[prop];
       },
-    }) as this & InstanceTypes<T>;
-
+    }) as this & TestingExpectationProxy<T> & InstanceTypes<T>;
+    //#endregion
   }
 
   /**
@@ -183,13 +229,13 @@ export class TestingProxy<
    * @param specDefinitions 
    * @returns 
    */
-  public actual<T>(
-    actual: ExpectType<T>,
-    specDefinitions: (test: TestingActual) => TestingActual
-  ): this {
-    specDefinitions(new TestingActual(this.allowDescribe, this.allowIt).actual(actual));
-    return this;
-  }
+  // public actual<T>(
+  //   actual: ExpectType<T>,
+  //   specDefinitions: (test: TestingActual) => TestingActual
+  // ): this {
+  //   specDefinitions(new TestingActual(this.allowDescribe, this.allowIt).actual(actual));
+  //   return this;
+  // }
 
   /**
    * @description
@@ -327,14 +373,27 @@ export class TestingProxy<
    * @param execute 
    * @returns 
    */
-  // public spec<T>(
-  //   assertion: (expectation: TestingExpectation) => any,
-  //   description: string = '',
-  //   execute?: boolean,
-  // ): this {
-  //   this.testingCore.spec(assertion, description, execute);
-  //   return this;
-  // }
+  public spec(
+    assertion: (expectation: TestingExpectationProxy<T> & InstanceTypes<T>) => any,
+    description: string = '',
+    execute?: boolean,
+  ): this {
+    if (description.length === 0) {
+      Object
+        .entries(TextualExpectation.message)
+        .forEach(([name, message]) => assertion
+          .toString()
+          .includes(name) && (description += message.ok + " and ")
+        );
+      description = description.slice(0, -5);
+    }
+    this.it(
+      description,
+      () => assertion(this.expect),
+      execute
+    );
+    return this;
+  }
 
   /**
    * @description
@@ -342,17 +401,17 @@ export class TestingProxy<
    * @param specDefinitions 
    * @returns 
    */
-  public spy<T extends jasmine.Func>(
-    spy: () => ExpectType<T>,
-    specDefinitions: (test: TestingActual) => TestingActual
-  ): this {
-    specDefinitions(new TestingActual(
-      this.allowDescribe,
-      this.allowIt,
-      this.executable
-    ).spy(spy));
-    return this;
-  }
+  // public spy<T extends jasmine.Func>(
+  //   spy: () => ExpectType<T>,
+  //   specDefinitions: (test: TestingActual) => TestingActual
+  // ): this {
+  //   specDefinitions(new TestingActual(
+  //     this.allowDescribe,
+  //     this.allowIt,
+  //     this.executable
+  //   ).spy(spy));
+  //   return this;
+  // }
 
   /**
    * @description
@@ -369,4 +428,4 @@ export class TestingProxy<
   }
 }
 
-export const Testing = TestingProxy as unknown as TestingInterface;
+export const Testing = TestingProxy as TestingInterface;

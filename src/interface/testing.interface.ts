@@ -15,15 +15,24 @@ export interface TestingInterface extends Omit<typeof TestingProxy, "prototype">
     Descriptions extends string = string,
     Expectations extends string = string,  
   >(
-    testing: [...T],
-    allowDescribe?: boolean,
-    allowIt?: boolean,
+    tests: [...T],
+    allow?: boolean | { describe?: boolean, it?: boolean },
     executable?: ExecutableTests,
-    descriptions?: Descriptions[],
-    expectations?: Expectations[],
+
+    // Textual.
+    textual?: {
+      descriptions?: Descriptions | Descriptions[],
+      expectations?: Expectations | Expectations[],  
+    },
+  
+    // Counter.
     counter?: CounterConfig,
-    testingDescribe?: TestingDescribe,
-    testingIt?: TestingIt,
-    testingExpect?: TestingExpect
+
+    // Instances.
+    testing?: {
+      describe: TestingDescribe,
+      it: TestingIt,
+      expect: TestingExpect
+    }
   ): TestingProxy<T> & InstanceTypes<T>;
 }

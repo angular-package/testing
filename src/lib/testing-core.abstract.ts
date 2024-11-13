@@ -1,9 +1,12 @@
 // Class.
 import { TestingDescribe } from './testing-describe.class';
+import { TestingExpect } from './testing-expect.class';
+import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
 // Interface.
 import { ExecutableTests } from '../interface/executable-tests.interface';
 // Type.
+import { Constructor } from '@angular-package/type';
 import { CounterConfig } from '../type/counter-config.type';
 /**
  * @abstract
@@ -14,6 +17,9 @@ export abstract class TestingCore<
   Descriptions extends string = string,
   Expectations extends string = string
 > {
+  public expectation;
+  public expectations?: any;
+
   /**
    * @description
    */
@@ -43,29 +49,40 @@ export abstract class TestingCore<
    * @param allowIt Allows executing `it()`  methods from a child instance.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    * @param counter
-   * @param testingDescribe
-   * @param testingIt
-   * @param testingExpect
+   * @param testing
    */
   constructor(
-    allowDescribe: boolean = true,
-    allowIt: boolean = true,
+    allow: boolean | { describe?: boolean, it?: boolean } = true,
     executable?: ExecutableTests,
     counter: CounterConfig = [true, false],
-    // Replaces instances.
-    testingDescribe: TestingDescribe<Descriptions> = new TestingDescribe<Descriptions>(
-      allowDescribe,
-      executable?.describe,
-      counter
-    ),
-    testingIt: TestingIt<Expectations> = new TestingIt<Expectations>(
-      allowIt,
-      executable?.it,
-      counter
-    ),
+    // Testing instances.
+    testing?: {
+      describe?: TestingDescribe<Descriptions>,
+      it?: TestingIt<Expectations>,
+      expect?: TestingExpect
+    }
   ) {
+    // Allow.
+    const { describe: allowDescribe, it: allowIt } = {
+      ...{describe: true, it: true},
+      ...(typeof allow === 'boolean' ? {describe: allow, it: allow} : allow)
+    };
+
+    // Testing instances.
+    const { describe: testingDescribe, it: testingIt, expect: testingExpect } = {
+      ...{
+        describe: new TestingDescribe<Descriptions>(allowDescribe, executable?.describe, counter),
+        it: new TestingIt<Expectations>(allowIt, executable?.it, counter),
+        expect: new TestingExpect()
+      },
+      ...testing
+    };
+
     this.#testingDescribe = testingDescribe;
     this.#testingIt = testingIt;
+    if (this.expectations) {
+      this.expectation = new TestingExpectation(this.expectations, testingExpect);
+    }
   }
 
   /**

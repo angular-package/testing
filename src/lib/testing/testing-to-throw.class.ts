@@ -3,11 +3,10 @@ import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpect } from '../testing-expect.class';
 import { TestingExpectToThrow } from '../expectation';
-import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
 import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
-import { CounterConfig, ExpectType } from '../../type';
+import { CounterConfig, ExpectType, TestingExpectationType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
@@ -20,32 +19,29 @@ export class TestingToThrow<
   Descriptions,
   Expectations
 > {
-  public expectations = [TestingExpectToThrow];
-  public expectation;
+  public override expectations = [TestingExpectToThrow] as const;
+  public override expectation!: TestingExpectationType<typeof this.expectations>;
 
   /**
    * Simple `class` to support testing.
    * Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
    * and optionally sets the list of allowed executable tests (those that execute even on the disallowed state).
-   * @param allowDescribe Allow executing `describe()` methods.
-   * @param allowIt Allow executing `it()` methods.
+   * @param allow Allow executing `describe()` and `it()` methods.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    * @param counter
-   * @param testingDescribe
-   * @param testingIt
-   * @param testingExpect
+   * @param testing
    */
   constructor(
-    allowDescribe: boolean = true,
-    allowIt: boolean = true,
+    allow?: boolean | { describe?: boolean, it?: boolean },
     executable?: ExecutableTests,
-    counter: CounterConfig = [true, false],
-    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
-    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect(),
+    counter?: CounterConfig,
+    testing?: {
+      describe?: TestingDescribe<Descriptions>,
+      it?: TestingIt<Expectations>,
+      expect?: TestingExpect
+    }
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.expectation = new TestingExpectation([TestingExpectToThrow], testingExpect);
+    super(allow, executable, counter, testing);
   }
 
   //#region toThrow

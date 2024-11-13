@@ -3,11 +3,10 @@ import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpect } from '../testing-expect.class';
 import { TestingExpectToBeString } from '../expectation';
-import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
 import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
-import { CounterConfig, ExpectType } from '../../type';
+import { CounterConfig, ExpectType, TestingExpectationType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface';
 /**
@@ -20,8 +19,8 @@ export class TestingToBeString<
   Descriptions,
   Expectations
 > {
-  public expectations = [TestingExpectToBeString];
-  public expectation;
+  public override expectations = [TestingExpectToBeString] as const;
+  public override expectation!: TestingExpectationType<typeof this.expectations>;
 
   /**
    * Simple `class` to support testing.
@@ -36,16 +35,16 @@ export class TestingToBeString<
    * @param testingExpect
    */
   constructor(
-    allowDescribe: boolean = true,
-    allowIt: boolean = true,
+    allow?: boolean | { describe?: boolean, it?: boolean },
     executable?: ExecutableTests,
-    counter: CounterConfig = [true, false],
-    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
-    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect(),
+    counter?: CounterConfig,
+    testing?: {
+      describe?: TestingDescribe<Descriptions>,
+      it?: TestingIt<Expectations>,
+      expect?: TestingExpect
+    }
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.expectation = new TestingExpectation([TestingExpectToBeString], testingExpect);
+    super(allow, executable, counter, testing);
   }
 
   //#region toBeString

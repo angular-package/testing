@@ -3,11 +3,10 @@ import { TestingCore } from '../testing-core.abstract';
 import { TestingDescribe } from '../testing-describe.class';
 import { TestingExpect } from '../testing-expect.class';
 import { TestingExpectTo } from '../expectation';
-import { TestingExpectation } from '../testing-expectation.class';
 import { TestingIt } from '../testing-it.class';
 import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
-import { CounterConfig, ExpectType } from '../../type';
+import { CounterConfig, ExpectType, TestingExpectationType } from '../../type';
 // Interface.
 import { ExecutableTests } from '../../interface/executable-tests.interface';
 /**
@@ -20,8 +19,8 @@ export class TestingTo<
   Descriptions,
   Expectations
 > {
-  public expectations = [TestingExpectTo];
-  public expectation;
+  public override expectations = [TestingExpectTo] as const;
+  public override expectation!: TestingExpectationType<typeof this.expectations>;
 
   /**
    * Simple `class` to support testing.
@@ -31,21 +30,19 @@ export class TestingTo<
    * @param allowIt Allow executing `it()` methods.
    * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
    * @param counter
-   * @param testingDescribe
-   * @param testingIt
-   * @param testingExpect
+   * @param testing
    */
   constructor(
-    allowDescribe: boolean = true,
-    allowIt: boolean = true,
+    allow?: boolean | { describe?: boolean, it?: boolean },
     executable?: ExecutableTests,
-    counter: CounterConfig = [true, false],
-    testingDescribe: TestingDescribe = new TestingDescribe(allowDescribe, executable?.describe, counter),
-    testingIt: TestingIt = new TestingIt(allowIt, executable?.it, counter),
-    testingExpect = new TestingExpect(),
+    counter?: CounterConfig,
+    testing?: {
+      describe?: TestingDescribe<Descriptions>,
+      it?: TestingIt<Expectations>,
+      expect?: TestingExpect
+    }
   ) {
-    super(allowDescribe, allowIt, executable, counter, testingDescribe, testingIt);
-    this.expectation = new TestingExpectation([TestingExpectTo], testingExpect);
+    super(allow, executable, counter, testing);
   }
 
   //#region to

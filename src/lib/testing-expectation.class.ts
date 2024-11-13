@@ -14,7 +14,7 @@ import { TestingExpectationInterface } from '../interface';
  * @classdesc Testing expectation.
  */
 export class TestingExpectationProxy<
-  T extends Constructor<any>[] = [],
+  T extends readonly Constructor<any>[] = [],
 > extends Expect {
   private _expectation;
   private _proxy;
