@@ -3,33 +3,33 @@
  * @class
  * @classdesc
  */
-export abstract class TestingCounter<
+export class TestingCounter<
   Active extends boolean = boolean,
   Description extends boolean = boolean
 > {
   /**
-   * @description Status of activated counter.
+   * @description Status of counter.
    */
-  public get counterActive() {
+  public get active() {
     return this.#active;
   }
 
   /**
-   * @description Status of automatically joined `[counter]` in description.
+   * @description Status of automatically joining `[counter]` in description.
    */
-  public get counterDescription() {
+  public get description() {
     return this.#description;
   }
 
   /**
    * 
    */
-  #active: Active;
+  #active: Active = true as Active;
 
   /**
    * 
    */
-  #description: Description;
+  #description: Description = false as Description;
 
   /**
    * @description Privately stored counter, which by default is set to `0`.
@@ -42,11 +42,11 @@ export abstract class TestingCounter<
    * @param description Whether to automatically join `[counter]` in description.
    */
   constructor(
-    active: Active = true as Active,
-    description: Description = false as Description
+    active?: Active,
+    description?: Description
   ) {
-    this.#active = active;
-    this.#description = description;
+    typeof active === 'boolean' && (this.#active = active);
+    typeof description === 'boolean' && (this.#description = description);
   }
 
   /**
@@ -59,18 +59,9 @@ export abstract class TestingCounter<
   }
 
   /**
-   * @description Resets counter to `0`.
-   * @returns The return value is an instance of a child class.
-   */
-  public resetCounter(): this {
-    this.#counter = 0;
-    return this;
-  }
-
-  /**
    * @description Gets the actual counter.
    */
-  public getCounter(): number {
+  public get(): number {
     return this.#counter;
   }
 
@@ -79,8 +70,17 @@ export abstract class TestingCounter<
    * @param description 
    * @returns 
    */
-  protected joinCounter<Description extends string>(description: Description): `[counter]. ${Description}` {
+  protected join<Description extends string>(description: Description): `[counter]. ${Description}` {
     return `[counter]. ${description}` as `[counter]. ${Description}`;
+  }
+
+  /**
+   * @description Resets counter to `0`.
+   * @returns The return value is an instance of a child class.
+   */
+  public reset(): this {
+    this.#counter = 0;
+    return this;
   }
 
   /**
@@ -88,9 +88,9 @@ export abstract class TestingCounter<
    * @param description A `string` type value.
    * @returns The return value is a `string` type description.
    */
-  protected replaceCounter(description: string): string {
+  protected replace(description: string): string {
     return (this.#description
-      ? this.joinCounter(description)
-      : description).replace('[counter]', `${this.getCounter()}`);
+      ? this.join(description)
+      : description).replace('[counter]', `${this.get()}`);
   }
 }
