@@ -1,13 +1,11 @@
 // @angular-package/type.
 import { is } from '@angular-package/type';
 // Class.
-import { TestingExecutable } from './testing-executable.abstract';
+import { TestingCommon } from './testing-common.abstract';
 // Type.
-import { CounterConfig } from '../type/counter-config.type';
-// Interface.
-import { ExecutableTests } from '../interface/executable-tests.interface';
+import { CounterConfig, Executable } from '../type';
 /**
- * Initialize executable storage.
+ * Initialize the`TestingDescribe` instance.
  * @class
  * @classdesc Manages `describe()` function of jasmine.
  */
@@ -15,7 +13,7 @@ export class TestingDescribe<
   Descriptions extends string = string,
   CounterActive extends boolean = boolean,
   CounterDescription extends boolean = boolean,
-> extends TestingExecutable<
+> extends TestingCommon<
   CounterActive,
   CounterDescription
 > {
@@ -34,16 +32,20 @@ export class TestingDescribe<
   }
 
   /**
-   * @allow An optional value of a `boolean` to initially allow executing `describe()` methods.
-   * @param executable An optional `array` of unique numbers type to initially set executable storage.
+   * @param execute An optional value of a `boolean` whether to execute `describe()` methods.
+   * @param executable An optional `array` of unique numbers type to initially set executable `describe()` methods of counter numbers.
    * @param counter
    */
   constructor(
-    allow?: boolean,
-    executable?: ExecutableTests['describe'],
-    counter: CounterConfig<CounterActive, CounterDescription> = [true, false] as any,
+    execute?: boolean,
+    executable?: Executable,
+    counter?: CounterConfig<CounterActive, CounterDescription>,
   ) {
-    super(allow, executable, counter);
+    super(
+      execute,
+      executable,
+      typeof counter === 'boolean' ? counter : counter?.active as any
+    );
   }
 
   /**
@@ -56,33 +58,31 @@ export class TestingDescribe<
   public describe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => void,
-    execute: boolean = is.false(super.allowed)
-      ? this.isExecutable(this.getCounter() + 1)
+    execute: boolean = super.executable.size > 0
+      ? is.true(this.allowed) && super.isExecutable(super.counter.current + 1)
       : true
   ): this {
-    this.count();
+    super.counter.increment();
     TestingDescribe.define(
-      this.replaceCounter(description),
+      super.description.replace(description, `${super.counter.current}`),
       specDefinitions
     )(execute);
     return this;
   }
-
   public fdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => void,
   ): this {
-    this.count();
-    fdescribe(this.replaceCounter(description), specDefinitions);
+    super.counter.increment();
+    fdescribe(super.description.replace(description, `${super.counter.current}`), specDefinitions);
     return this;
   }
-
   public xdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => void,
   ): this {
-    this.count();
-    xdescribe(this.replaceCounter(description), specDefinitions);
+    super.counter.increment();
+    xdescribe(super.description.replace(description, `${super.counter.current}`), specDefinitions);
     return this;
   }
 }

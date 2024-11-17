@@ -1,11 +1,9 @@
 // @angular-package/type.
 import { is } from '@angular-package/type';
 // Class.
-import { TestingExecutable } from './testing-executable.abstract';
+import { TestingCommon } from './testing-common.abstract';
 // Type.
-import { CounterConfig } from '../type/counter-config.type';
-// Interface.
-import { ExecutableTests } from '../interface/executable-tests.interface';
+import { CounterConfig, Executable } from '../type';
 /**
  * Creates an instance with optional allowed executing methods and executable storage.
  * @class
@@ -15,7 +13,7 @@ export class TestingIt<
   Expectations extends string = string,
   CounterActive extends boolean = boolean,
   CounterDescription extends boolean = boolean
-> extends TestingExecutable<
+> extends TestingCommon<
   CounterActive,
   CounterDescription
 > {
@@ -38,42 +36,21 @@ export class TestingIt<
   }
 
   /**
-   * @description Privately stored allow state of executing `it()` methods, which by default is set to `false`.
-   */
-  #allow = false;
-
-  /**
    * TODO: Add expectation to params.
-   * @param allow An optional value of a `boolean` to initially allow executing `it()` methods.
+   * @param execute An optional value of a `boolean` to initially allow executing `it()` methods.
    * @param executable An optional `array` of unique numbers type to initially set executable storage.
    * @param counter
    */
   constructor(
-    allow?: boolean,
-    executable?: ExecutableTests['it'],
-    counter: CounterConfig<CounterActive, CounterDescription> = [true, false] as any
+    execute?: boolean,
+    executable?: Executable,
+    counter?: CounterConfig<CounterActive, CounterDescription>
   ) {
-    super(allow, executable, counter);
-  }
-
-  /**
-   * @description Executes defined `it()` function of jasmine on provided state `true` from the `execute`.
-   * @param expectation "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]`.
-   * @param assertion "Function that contains the code of your test. If not provided the test will be pending."
-   * @param execute A `boolean` type value to decide whether or not execute defined `it()` of jasmine function.
-   * @returns The return value is an instance of `TestingIt`.
-   */
-  public it<Expectation extends string>(
-    expectation: Expectations | Expectation,
-    assertion: jasmine.ImplementationCallback,
-    execute: boolean = is.false(super.allowed)
-      ? super.isExecutable(this.getCounter() + 1)
-      : true,
-    timeout?: number
-  ): this {
-    this.count();
-    TestingIt.define(this.replaceCounter(expectation), assertion, timeout)(execute);
-    return this;
+    super(
+      execute,
+      executable,
+      typeof counter === 'boolean' ? counter : counter?.active as any
+    );
   }
 
   /**
@@ -88,8 +65,28 @@ export class TestingIt<
     assertion: jasmine.ImplementationCallback,
     timeout?: number
   ): this {
-    this.count();
-    fit(this.replaceCounter(expectation), assertion, timeout);
+    super.counter.increment();
+    fit(super.description.replace(expectation, `${super.counter.current}`), assertion, timeout);
+    return this;
+  }
+
+  /**
+   * @description Executes defined `it()` function of jasmine on provided state `true` from the `execute`.
+   * @param expectation "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]`.
+   * @param assertion "Function that contains the code of your test. If not provided the test will be pending."
+   * @param execute A `boolean` type value to decide whether or not execute defined `it()` of jasmine function.
+   * @returns The return value is an instance of `TestingIt`.
+   */
+  public it<Expectation extends string>(
+    expectation: Expectations | Expectation,
+    assertion: jasmine.ImplementationCallback,
+    execute: boolean = super.executable.size > 0
+      ? is.true(super.allowed) && super.isExecutable(super.counter.current + 1)
+      : true,
+    timeout?: number
+  ): this {
+    super.counter.increment();
+    TestingIt.define(super.description.replace(expectation, `${super.counter.current}`), assertion, timeout)(execute);
     return this;
   }
 
@@ -105,8 +102,8 @@ export class TestingIt<
     assertion: jasmine.ImplementationCallback,
     timeout?: number
   ): this {
-    this.count();
-    xit(this.replaceCounter(expectation), assertion, timeout);
+    super.counter.increment();
+    xit(super.description.replace(expectation, `${super.counter.current}`), assertion, timeout);
     return this;
   }
 }
