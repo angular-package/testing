@@ -7,7 +7,7 @@ export class TestingCounter<Active extends boolean = boolean> {
   /**
    * @description Status of counter.
    */
-  public get active(): boolean {
+  public get active(): Active {
     return this.#active;
   }
 
