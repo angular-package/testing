@@ -1,9 +1,15 @@
 export { Random } from "./random.class";
 export {
   TestingExpectTo,
+  TestingExpectToBGreaterThan,
   TestingExpectToBe,
   TestingExpectToBeArrayOf,
+  TestingExpectToBeBoolean,
   TestingExpectToBeInstanceOf,
+  TestingExpectToBeLessThan,
+  TestingExpectToBeNumber,
+  TestingExpectToBeObject,
+  TestingExpectToBeString,
   TestingExpectToHave,
   TestingExpectToHaveBeenCalled,
   TestingExpectToThrow,
@@ -34,6 +40,6 @@ export { TestingIt } from './testing-it.class';
 
 // Abstract.
 export { TestingCore } from './testing-core.abstract';
-export { TestingCounter } from './testing-counter.abstract';
+export { TestingCounter } from './testing-counter';
 export { TestingExecutable } from './testing-executable.abstract';
 export { TestingExpect } from './testing-expect.class';
