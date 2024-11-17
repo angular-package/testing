@@ -1,25 +1,22 @@
-// Abstract.
-import { TestingCore } from "./testing-core.abstract";
 // Class.
 import { TestingActual } from "./testing-actual.class";
 import { TestingDescribe } from './testing-describe.class';
 import { TestingExpect } from "./testing-expect.class";
-import { TestingExpectationProxy } from "./testing-expectation.class";
 import { TestingIt } from "./testing-it.class";
 import { TextualExpectation } from "./textual-expectation.abstract";
 // Function.
-import { mixinTesting } from "./function";
+import { mixinTests } from "./function";
 // Type.
 import { Constructor } from "@angular-package/type";
-import { CounterConfig, InstanceTypes } from "../type";
+import { CounterConfig, Execute, InstanceTypes, TestingExpectations } from "../type";
 // Interface.
-import { ExecutableTests, TestingInterface } from "../interface";
+import { TestingConfig, TestingInterface, Textual } from "../interface";
 /**
  * @class
  * @classdesc
  */
 export class TestingProxy<
-  T extends Constructor<any>[] = [],
+  Tests extends Constructor<any>[] = [],
   Descriptions extends string = string,
   Expectations extends string = string,
 > {
@@ -56,130 +53,99 @@ export class TestingProxy<
   //#endregion
 
   //#region public getter
-  public get allowDescribe() {
-    return this.testingCore.testingDescribe.allowed;
+  public get executeDescribe() {
+    return this._testing.describe.allowed;
   }
 
-  public get allowIt() {
-    return this.testingCore.testingIt.allowed;
-  }
-
-  /**
-   * @description
-   */
-  public get descriptions() {
-    return this._descriptions;
+  public get executeIt() {
+    return this._testing.it.allowed;
   }
 
   /**
    * @description
    */
   public get expect() {
-    return (this._testing as any).expectation;
+    return this._tests.expectation;
   }
 
   /**
    * @description
    */
-  public get expectations() {
-    return this._expectations;
+  public get tests() {
+    return this._tests;
   }
 
   /**
    * @description
    */
-  public get test() {
-    return this._testing;
+  public get textual() {
+    return this._textual;
   }
+
+
   //#endregion
 
   //#region protected property
   /**
+   * @description
    * @protected
    */
-  // protected allowDescribe: boolean;
+  protected _testing;
 
   /**
+   * @description
    * @protected
    */
-  // protected allowIt: boolean;
-
-  /**
-   * @protected
-   */
-  // protected executable?: ExecutableTests;
-
-  /**
-   * @protected
-   */
-  protected testingCore;
+  protected _tests;
   //#endregion
 
   //#region private property
   /**
    * @private
    */
-  private _descriptions;
-
-  /**
-   * @private
-   */
-  private _expectations;
-
-  /**
-   * @private
-   */
-  private _testing;
+  private _textual;
   //#endregion
 
   /**
    * @description
    * @param tests
-   * @param allow
-   * @param executable 
-   * @param descriptions
-   * @param expectations
+   * @param execute
+   * @param textual
    * @param counter
    * @param testing
    */
   constructor(
-    tests: [...T],
-    allow: boolean | { describe?: boolean, it?: boolean } = true,
-    executable?: ExecutableTests,
+    tests: [...Tests],
+    execute: Execute,
 
     // Textual.
-    textual?: {
-      descriptions?: Descriptions | Descriptions[],
-      expectations?: Expectations | Expectations[],  
-    },
+    textual?: Textual<Descriptions, Expectations>,
   
     // Counter.
-    counter: CounterConfig = [true, false],
+    counter?: CounterConfig,
 
     // Testing instances.
-    testing?: {
-      describe: TestingDescribe<Descriptions>,
-      it: TestingIt<Expectations>,
-      expect: TestingExpect
-    }
+    testing?: TestingConfig<Descriptions, Expectations>
   ) {
     // Allow.
-    const { describe: allowDescribe, it: allowIt } = {
+    const { describe: executeDescribe, it: executeIt } = {
       ...{describe: true, it: true},
-      ...(typeof allow === 'boolean' ? {describe: allow, it: allow} : allow)
-    };
-
-    // Textual.
-    const { descriptions: descriptions, expectations: expectations } = {
-      ...{descriptions: [], expectations: []},
-      ...textual
+      ...(typeof execute === 'boolean' ? {describe: execute, it: execute} : execute)
     };
 
     // Testing instances.
-    testing = {
+    this._testing = {
       ...{
-        describe: new TestingDescribe(allowDescribe, executable?.describe, counter),
-        it: new TestingIt(allowIt, executable?.it, counter),
+        describe: new TestingDescribe(
+          typeof executeDescribe === 'boolean' ? executeDescribe : true,
+          typeof executeDescribe === 'number' || Array.isArray(executeDescribe) ? executeDescribe : undefined,
+          counter
+        ),
+        it: new TestingIt(
+          typeof executeIt === 'boolean' ? executeIt : true,
+          typeof executeIt === 'number' || Array.isArray(executeIt) ? executeIt : undefined,
+          counter
+        ),
         expect: new TestingExpect()  
       },
       ...testing
@@ -187,39 +153,23 @@ export class TestingProxy<
 
     //#region Assign.
     // Textual.
-    this._descriptions = descriptions;
-    this._expectations = expectations;
-
+    this._textual = textual;
+    
     // Tests.
-    this._testing = new (mixinTesting(...tests))(
-      allow,
-      executable,
+    this._tests = new (mixinTests<Tests, Descriptions, Expectations>(...tests))(
+      execute,
       counter,
-      testing,
-    );
-
-    // Class to handle core features.
-    this.testingCore = new (class<
-      Descriptions extends string = string,
-      Expectations extends string = string
-    > extends TestingCore<
-      Descriptions,
-      Expectations
-    > {})<Descriptions, Expectations>(
-      allow,
-      executable,
-      counter,
-      testing
+      this._testing,
     );
     //#endregion
 
     //#region Proxy.
     // Proxy to delegate method calls to _testing
-    return new Proxy(this as this & InstanceTypes<T>, {
-      get(target: TestingProxy<T> & InstanceTypes<T>, prop: PropertyKey) {
-        return prop in target ? (target as any)[prop] : (target as any)._testing[prop];
+    return new Proxy(this as this & InstanceTypes<Tests>, {
+      get(target: TestingProxy<Tests> & InstanceTypes<Tests>, prop: PropertyKey) {
+        return prop in target ? (target as any)[prop] : (target as any)._tests[prop];
       },
-    }) as this & TestingExpectationProxy<T> & InstanceTypes<T>;
+    }) as this & TestingProxy<Tests> & InstanceTypes<Tests>;
     //#endregion
   }
 
@@ -310,7 +260,7 @@ export class TestingProxy<
     specDefinitions: () => any,
     execute?: boolean
   ): this {
-    this.testingCore.describe(description, specDefinitions, execute);
+    this._tests.describe(description, specDefinitions, execute);
     return this;
   }
 
@@ -324,7 +274,7 @@ export class TestingProxy<
     description: Descriptions | Description,
     specDefinitions: () => any,
   ): this {
-    this.testingCore.fdescribe(description, specDefinitions);
+    this._tests.fdescribe(description, specDefinitions);
     return this;
   }
 
@@ -340,7 +290,7 @@ export class TestingProxy<
     assertion: jasmine.ImplementationCallback,
     execute?: boolean
   ): this {
-    this.testingCore.it(expectation, assertion, execute);
+    this._tests.it(expectation, assertion, execute);
     return this;
   }
 
@@ -351,7 +301,7 @@ export class TestingProxy<
    * @returns 
    */
   public setSpecProperty(key: string, value: unknown) {
-    this.testingCore.setSpecProperty(key, value);
+    this._tests.setSpecProperty(key, value);
     return this;
   }
 
@@ -362,7 +312,7 @@ export class TestingProxy<
    * @returns 
    */
   public setSuiteProperty(key: string, value: unknown) {
-    this.testingCore.setSuiteProperty(key, value);
+    this._tests.setSuiteProperty(key, value);
     return this;
   }
 
@@ -374,7 +324,9 @@ export class TestingProxy<
    * @returns 
    */
   public spec(
-    assertion: (expectation: TestingExpectationProxy<T> & InstanceTypes<T>) => any,
+    assertion: (
+      // TestingExpectationType // UnionToIntersection<ExpectMethods<T[number]>> // GetExpectationsArray<InstanceType<T[number]>>
+      expectation: TestingExpectations<Tests[number]>) => any, 
     description: string = '',
     execute?: boolean,
   ): this {
@@ -389,7 +341,7 @@ export class TestingProxy<
     }
     this.it(
       description,
-      () => assertion(this.expect),
+      () => assertion(this._tests.expectation),
       execute
     );
     return this;
@@ -423,7 +375,7 @@ export class TestingProxy<
     description: Descriptions | Description,
     specDefinitions: () => any,
   ): this {
-    this.testingCore.xdescribe(description, specDefinitions);
+    this._tests.xdescribe(description, specDefinitions);
     return this;
   }
 }
