@@ -1,9 +1,15 @@
-export type { AllowItNumber } from "./allow-it-number.type";
 export type { ArrayToObject } from './array-to-object.type';
 export type { CounterConfig } from './counter-config.type';
+export type { Executable } from "./executable.type";
+export type { Execute } from "./execute.type";
 export type { ExpectType } from './expect-type.type';
 export type { InstanceOfConstructor } from './instance-of-constructor.type';
 export type { InstanceTypes } from "./instance-types.type";
 export type { IntersectionOfInstances } from './intersection-of-instances.type';
+export type { PickInstanceFromKey } from "./pick-instance-from-key.type";
 export type { PrototypeOf } from './prototype-of.type';
+export type { TestingExpectationType } from "./testing-expectation.type";
+export type { TestingExpectations } from './testing-expectations.type'
+export type { TupleExpectations } from './tuple-expectations.type';
 export type { UnionToIntersection } from './union-to-intersection.type';
+export type { UnionToTuple } from './union-to-tuple.type';
