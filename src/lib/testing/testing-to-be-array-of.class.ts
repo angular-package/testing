@@ -1,14 +1,12 @@
 // Class.
 import { TestingCore } from '../testing-core.abstract';
-import { TestingDescribe } from '../testing-describe.class';
-import { TestingExpect } from '../testing-expect.class';
 import { TestingExpectToBeArrayOf } from '../expectation';
-import { TestingIt } from '../testing-it.class';
+import { TestingExpectation } from '../testing-expectation.class';
 import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
-import { CounterConfig, ExpectType, TestingExpectationType } from '../../type';
+import { CounterConfig, Execute, ExpectType } from '../../type';
 // Interface.
-import { ExecutableTests } from '../../interface';
+import { TestingConfig } from '../../interface';
 /**
  * @class
  * @classdesc Prepared full named description array tests.
@@ -20,31 +18,23 @@ export class TestingToBeArrayOf<
   Descriptions,
   Expectations
 > {
-  public override expectations = [TestingExpectToBeArrayOf] as const;
-  public override expectation!: TestingExpectationType<typeof this.expectations>;
+  public expectations = [TestingExpectToBeArrayOf] as const;
+  public expectation;
 
   /**
    * @description Creates an instance with setting for global allow executing of the `describe()` and `it()` methods,
    * and optionally sets the list of allowed executable tests (those that execute even on the disallowed state).
-   * @param allowDescribe Allow executing `describe()` methods.
-   * @param allowIt Allow executing `it()` methods.
-   * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
+   * @param execute Execute `describe()` or `it()` methods or specific executable tests.
    * @param counter
-   * @param testingDescribe
-   * @param testingIt
-   * @param testingExpect
+   * @param testing
    */
   constructor(
-    allow?: boolean | { describe?: boolean, it?: boolean },
-    executable?: ExecutableTests,
+    execute: Execute,
     counter?: CounterConfig,
-    testing?: {
-      describe?: TestingDescribe<Descriptions>,
-      it?: TestingIt<Expectations>,
-      expect?: TestingExpect
-    }
+    testing?: TestingConfig<Descriptions, Expectations>
   ) {
-    super(allow, executable, counter, testing);
+    super(execute, counter, testing);
+    this.expectation = new TestingExpectation(this.expectations, testing?.expect);
   }
 
   //#region TestingToBeArrayOf
