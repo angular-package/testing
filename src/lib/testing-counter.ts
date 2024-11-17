@@ -3,22 +3,20 @@
  * @class
  * @classdesc
  */
-export class TestingCounter<
-  Active extends boolean = boolean,
-  Description extends boolean = boolean
-> {
+export class TestingCounter<Active extends boolean = boolean> {
   /**
    * @description Status of counter.
    */
-  public get active() {
+  public get active(): boolean {
     return this.#active;
   }
 
   /**
-   * @description Status of automatically joining `[counter]` in description.
+   * @description Current counter value.
+   * @readonly
    */
-  public get description() {
-    return this.#description;
+  public get current(): number {
+    return this.#value;
   }
 
   /**
@@ -27,51 +25,32 @@ export class TestingCounter<
   #active: Active = true as Active;
 
   /**
-   * 
-   */
-  #description: Description = false as Description;
-
-  /**
    * @description Privately stored counter, which by default is set to `0`.
    */
-  #counter = 0;
+  #value = 0;
 
   /**
-   *
+   * @constructor
    * @param active 
-   * @param description Whether to automatically join `[counter]` in description.
    */
-  constructor(
-    active?: Active,
-    description?: Description
-  ) {
+  constructor(active?: Active,) {
     typeof active === 'boolean' && (this.#active = active);
-    typeof description === 'boolean' && (this.#description = description);
-  }
-
-  /**
-   * @description Adds one number to the counter.
-   * @returns The return value is an instance of a child class.
-   */
-  protected count(): this {
-    this.#active && this.#counter++;
-    return this;
   }
 
   /**
    * @description Gets the actual counter.
    */
   public get(): number {
-    return this.#counter;
+    return this.#value;
   }
 
   /**
-   * @description
-   * @param description 
-   * @returns 
+   * @description Increase the counter by `1`.
+   * @returns The return value is an instance of a child class.
    */
-  protected join<Description extends string>(description: Description): `[counter]. ${Description}` {
-    return `[counter]. ${description}` as `[counter]. ${Description}`;
+  public increment(): this {
+    this.#active && this.#value++;
+    return this;
   }
 
   /**
@@ -79,18 +58,8 @@ export class TestingCounter<
    * @returns The return value is an instance of a child class.
    */
   public reset(): this {
-    this.#counter = 0;
+    this.#value = 0;
     return this;
   }
 
-  /**
-   * @description Replaces `[counter]` in description method.
-   * @param description A `string` type value.
-   * @returns The return value is a `string` type description.
-   */
-  protected replace(description: string): string {
-    return (this.#description
-      ? this.join(description)
-      : description).replace('[counter]', `${this.get()}`);
-  }
 }
