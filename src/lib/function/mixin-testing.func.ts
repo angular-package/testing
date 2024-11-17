@@ -1,48 +1,38 @@
 // Class.
-import { TestingDescribe } from '../testing-describe.class';
-import { TestingExpect } from "../testing-expect.class";
+import { TestingCore } from '../testing-core.abstract';
 import { TestingExpectation } from '../testing-expectation.class';
-import { TestingIt } from "../testing-it.class";
 // Type.
 import { Constructor } from "@angular-package/type";
-import { CounterConfig, InstanceOfConstructor, UnionToIntersection } from "../../type";
+import { CounterConfig, Execute, InstanceOfConstructor, TestingExpectations, UnionToIntersection } from "../../type";
 // Interface.
-import { ExecutableTests } from "../../interface/executable-tests.interface";
+import { TestingConfig } from '../../interface';
 // Mixin function: combining multiple class constructors into one
-export function mixinTesting<T extends Constructor<any>[]>(...classes: T) {
-  return classes.reduce((acc, currClass, currIndex) => (
+export function mixinTesting<
+  Tests extends Constructor<any>[],
+  Descriptions extends string = string,
+  Expectations extends string = string,
+>(...tests: Tests) {
+  return tests.reduce((acc, currTest, currIndex) => (
     class extends acc {
       public expectation;
       private _expectations!: any[];
 
       constructor(
-        allowDescribe: boolean,
-        allowIt: boolean,
-        executable?: ExecutableTests,
+        execute: Execute,
         counter?: CounterConfig,
-        testingDescribe?: TestingDescribe,
-        testingIt?: TestingIt,
-        testingExpect?: TestingExpect,
+        testing?: TestingConfig<Descriptions, Expectations>
       ) {
         super(
-          allowDescribe,
-          allowIt,
-          executable,
+          execute,
           counter,
-          testingDescribe,
-          testingIt,
-          testingExpect,
+          testing
         );
 
         // Call the constructor of each class to initialize properties
-        const instance = new currClass(
-          allowDescribe,
-          allowIt,
-          executable,
+        const instance = new currTest(
+          execute,
           counter,
-          testingDescribe,
-          testingIt,
-          testingExpect
+          testing
         );
         Object.assign(this, instance);
 
@@ -50,25 +40,35 @@ export function mixinTesting<T extends Constructor<any>[]>(...classes: T) {
         this._expectations = [...this._expectations, ...instance.expectations];
 
         // Create an `TestingExpectation` instance of merged `_expectations`
-        if (currIndex === classes.length - 1) {
-          this.expectation = new TestingExpectation(this._expectations, testingExpect);
+        if (currIndex === tests.length - 1) {
+          this.expectation = new TestingExpectation(this._expectations, testing?.expect);
         }
 
-        // Copy methods from the current class prototype
-        Object
-          .getOwnPropertyNames(currClass.prototype)
-          .forEach(name => {
-            Object.defineProperty(
-              acc.prototype,
-              name,
-              Object.getOwnPropertyDescriptor(currClass.prototype, name) ||
-                Object.create(null)
-            );
-          })
-          // .forEach(name => (name !== 'constructor') && ((this as any)[name] = currClass.prototype[name].bind(this)));
+        // Copy methods from the current class prototype and its chain
+        let currentPrototype = currTest.prototype;
+        while (currentPrototype !== Object.prototype) {
+          Object
+            .getOwnPropertyNames(currentPrototype)
+            .forEach(name => {
+              // Don't copy the constructor
+              if (name !== 'constructor') {
+                Object.defineProperty(
+                  acc.prototype,
+                  name,
+                  Object.getOwnPropertyDescriptor(currentPrototype, name) || Object.create(null)
+                );
+              }
+            });
+
+          // Move up the prototype chain
+          currentPrototype = Object.getPrototypeOf(currentPrototype);
+        }
       }
     }
-  ), class { private _expectations: Constructor<any>[] = []; }) as
-    Constructor<UnionToIntersection<InstanceOfConstructor<T[number]>>>;
+  ), class { private _expectations: Constructor<any>[] = []; }) as Constructor<
+    UnionToIntersection<InstanceOfConstructor<Tests[number]>>
+    & TestingCore<Descriptions, Expectations>
+    & {expectation: TestingExpectations<Tests[number]>}
+  >;
   // as Constructor<UnionToIntersection<IntersectionOfInstances<T>>>;
 }
