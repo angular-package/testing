@@ -13,18 +13,25 @@ export function mixin<T extends Constructor<any>[]>(...classes: T) {
         // Call the constructor of each class to initialize properties
         Object.assign(this, new currClass(...args));
 
-        // Copy methods from the current class prototype
-        Object
-          .getOwnPropertyNames(currClass.prototype)
-          .forEach(name => {
-            Object.defineProperty(
-              acc.prototype,
-              name,
-              Object.getOwnPropertyDescriptor(currClass.prototype, name) ||
-                Object.create(null)
-            );
-          })
-          // .forEach(name => (name !== 'constructor') && ((this as any)[name] = currClass.prototype[name].bind(this)));
+        // Copy methods from the current class prototype and its chain
+        let currentPrototype = currClass.prototype;
+        while (currentPrototype !== Object.prototype) {
+          Object
+            .getOwnPropertyNames(currentPrototype)
+            .forEach(name => {
+              // Don't copy the constructor
+              if (name !== 'constructor') {
+                Object.defineProperty(
+                  acc.prototype,
+                  name,
+                  Object.getOwnPropertyDescriptor(currentPrototype, name) || Object.create(null)
+                );
+              }
+            });
+
+          // Move up the prototype chain
+          currentPrototype = Object.getPrototypeOf(currentPrototype);
+        }
       }
     }
   )/*, class {}*/) as Constructor<UnionToIntersection<InstanceOfConstructor<T[number]>>>;
