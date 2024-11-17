@@ -6,8 +6,8 @@ import { Constructor } from '@angular-package/type';
 import { InstanceTypes } from '../type';
 
 export interface TestingExpectationInterface extends Omit<typeof TestingExpectationProxy, "prototype"> {
-  new <T extends Constructor<any>[]>(
-    expectation: [...T],
+  new <T extends readonly Constructor<any>[]>(
+    expectation: readonly [...T],
     testingExpect?: TestingExpect
   ): TestingExpectationProxy<T> & InstanceTypes<T>;
 }
