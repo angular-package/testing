@@ -1,13 +1,11 @@
 // Class.
 import { TestingDescribe } from './testing-describe.class';
 import { TestingExpect } from './testing-expect.class';
-import { TestingExpectation } from './testing-expectation.class';
 import { TestingIt } from './testing-it.class';
-// Interface.
-import { ExecutableTests } from '../interface/executable-tests.interface';
 // Type.
-import { Constructor } from '@angular-package/type';
-import { CounterConfig } from '../type/counter-config.type';
+import { CounterConfig, Execute } from '../type';
+// Interface.
+import { TestingConfig } from '../interface';
 /**
  * @abstract
  * @class
@@ -17,72 +15,85 @@ export abstract class TestingCore<
   Descriptions extends string = string,
   Expectations extends string = string
 > {
-  public expectation;
-  public expectations?: any;
+  /**
+   * 
+   */
+  public get counterConfig() {
+    return this._counterConfig;
+  }
 
   /**
    * @description
    */
   public get testingDescribe() {
-    return this.#testingDescribe;
+    return this._testingDescribe;
   }
 
   /**
    * @description
    */
   public get testingIt() {
-    return this.#testingIt;
+    return this._testingIt;
   }
+
+  /**
+   * @description Counter config.
+   */
+  private _counterConfig;
 
   /**
    * @description Privately stored instance of a `TestingDescribe`.
    */
-  #testingDescribe: TestingDescribe<Descriptions>;
+  private _testingDescribe: TestingDescribe<Descriptions>;
 
   /**
    * @description Privately stored instance of a `TestingIt`.
    */
-  #testingIt: TestingIt<Expectations>;
+  private _testingIt: TestingIt<Expectations>;
 
   /**
-   * @param allowDescribe Allows executing `describe()` methods from a child instance.
-   * @param allowIt Allows executing `it()`  methods from a child instance.
-   * @param executable An optional `object` of executable storage for `describe()` and `it()` methods.
+   * @param execute
    * @param counter
    * @param testing
    */
   constructor(
-    allow: boolean | { describe?: boolean, it?: boolean } = true,
-    executable?: ExecutableTests,
-    counter: CounterConfig = [true, false],
+    execute: Execute = true,
+
+    // Counter config.
+    counter: CounterConfig = { active: true, description: false },
+
     // Testing instances.
-    testing?: {
-      describe?: TestingDescribe<Descriptions>,
-      it?: TestingIt<Expectations>,
-      expect?: TestingExpect
-    }
+    testing?: TestingConfig<Descriptions, Expectations>
   ) {
-    // Allow.
-    const { describe: allowDescribe, it: allowIt } = {
+    // Counter.
+    this._counterConfig = counter;
+
+    // Execute.
+    const { describe: executeDescribe, it: executeIt } = {
       ...{describe: true, it: true},
-      ...(typeof allow === 'boolean' ? {describe: allow, it: allow} : allow)
+      ...(typeof execute === 'boolean' ? {describe: execute, it: execute} : execute)
     };
 
     // Testing instances.
     const { describe: testingDescribe, it: testingIt, expect: testingExpect } = {
       ...{
-        describe: new TestingDescribe<Descriptions>(allowDescribe, executable?.describe, counter),
-        it: new TestingIt<Expectations>(allowIt, executable?.it, counter),
+        describe: new TestingDescribe<Descriptions>(
+          typeof executeDescribe === 'boolean' ? executeDescribe : true,
+          typeof executeDescribe === 'number' || Array.isArray(executeDescribe) ? executeDescribe : undefined,
+          counter
+        ),
+        it: new TestingIt<Expectations>(
+          typeof executeIt === 'boolean' ? executeIt : true,
+          typeof executeIt === 'number' || Array.isArray(executeIt) ? executeIt : undefined,
+          counter
+        ),
         expect: new TestingExpect()
       },
       ...testing
     };
 
-    this.#testingDescribe = testingDescribe;
-    this.#testingIt = testingIt;
-    if (this.expectations) {
-      this.expectation = new TestingExpectation(this.expectations, testingExpect);
-    }
+    this._testingDescribe = testingDescribe;
+    this._testingIt = testingIt;
   }
 
   /**
