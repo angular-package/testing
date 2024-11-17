@@ -7,7 +7,7 @@ import { CounterConfig, Execute, InstanceOfConstructor, TestingExpectations, Uni
 // Interface.
 import { TestingConfig } from '../../interface';
 // Mixin function: combining multiple class constructors into one
-export function mixinTesting<
+export function mixinTests<
   Tests extends Constructor<any>[],
   Descriptions extends string = string,
   Expectations extends string = string,
