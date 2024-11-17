@@ -3,21 +3,18 @@ import { TestingDescribe, TestingExpect, TestingIt } from '../lib';
 import { TestingProxy } from '../lib/testing.class';
 // Type.
 import { Constructor } from '@angular-package/type';
-import { CounterConfig, InstanceTypes } from '../type';
-// Interface.
-import { ExecutableTests } from './executable-tests.interface';
+import { CounterConfig, Execute, InstanceTypes } from '../type';
 /**
  * 
  */
 export interface TestingInterface extends Omit<typeof TestingProxy, "prototype"> {
   new <
-    T extends Constructor<any>[],
+    Tests extends Constructor<any>[],
     Descriptions extends string = string,
     Expectations extends string = string,  
   >(
-    tests: [...T],
-    allow?: boolean | { describe?: boolean, it?: boolean },
-    executable?: ExecutableTests,
+    tests: [...Tests],
+    execute?: Execute,
 
     // Textual.
     textual?: {
@@ -28,11 +25,11 @@ export interface TestingInterface extends Omit<typeof TestingProxy, "prototype">
     // Counter.
     counter?: CounterConfig,
 
-    // Instances.
+    // Testing instances.
     testing?: {
-      describe: TestingDescribe,
-      it: TestingIt,
+      describe: TestingDescribe<Descriptions>,
+      it: TestingIt<Expectations>,
       expect: TestingExpect
     }
-  ): TestingProxy<T> & InstanceTypes<T>;
+  ): TestingProxy<Tests, Descriptions, Expectations> & InstanceTypes<Tests>;
 }
