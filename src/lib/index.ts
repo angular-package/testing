@@ -27,11 +27,11 @@ export {
   TestingToBeString,
   TestingToHave,
   TestingToThrow,
-} from './testing';
+} from './test';
 
 // Testing purpose.
 export { Testing } from './testing.class';
-export { TestingActual  } from './testing-actual.class';
+// export { TestingActual  } from './testing-actual.class';
 export { TestingExpectation } from './testing-expectation.class';
 
 // Describe and It.
