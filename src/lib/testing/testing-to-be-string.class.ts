@@ -4,7 +4,7 @@ import { TestingExpectToBeString } from '../expectation';
 import { TestingExpectation } from '../testing-expectation.class';
 import { TextualExpectation } from '../textual-expectation.abstract';
 // Type.
-import { CounterConfig, Execute, ExpectType, TestingExpectationType } from '../../type';
+import { CounterConfig, Execute, ExpectType } from '../../type';
 // Interface.
 import { TestingConfig } from '../../interface';
 /**
@@ -18,7 +18,7 @@ export class TestingToBeString<
   Expectations
 > {
   public expectations = [TestingExpectToBeString] as const;
-  public expectation!: TestingExpectationType<typeof this.expectations>;
+  public expectation;
 
   /**
    * Simple `class` to support testing.
