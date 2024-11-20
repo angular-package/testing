@@ -5,15 +5,16 @@ import { TestingCommon } from './testing-common.abstract';
 // Type.
 import { CounterConfig, Executable } from '../type';
 /**
- * Initialize the`TestingDescribe` instance.
+ * Creates an instance of TestingDescribe`.
  * @class
- * @classdesc Manages `describe()` function of jasmine.
+ * @classdesc Manages suite.
  */
 export class TestingDescribe<
   Descriptions extends string = string,
   CounterActive extends boolean = boolean,
   CounterDescription extends boolean = boolean,
 > extends TestingCommon<
+  Descriptions,
   CounterActive,
   CounterDescription
 > {
@@ -34,16 +35,19 @@ export class TestingDescribe<
   /**
    * @param execute An optional value of a `boolean` whether to execute `describe()` methods.
    * @param executable An optional `array` of unique numbers type to initially set executable `describe()` methods of counter numbers.
+   * @param descriptions
    * @param counter
    */
   constructor(
     execute?: boolean,
     executable?: Executable,
+    descriptions?: Descriptions | Descriptions[],
     counter?: CounterConfig<CounterActive, CounterDescription>,
   ) {
     super(
       execute,
       executable,
+      descriptions,
       typeof counter === 'boolean' ? counter : counter?.active as any
     );
   }
@@ -64,25 +68,45 @@ export class TestingDescribe<
   ): this {
     super.counter.increment();
     TestingDescribe.define(
-      super.description.replace(description, `${super.counter.current}`),
+      super.description.replace(description, `${super.counter.current}`, 'counter'),
       specDefinitions
     )(execute);
     return this;
   }
+
+  /**
+   * @description
+   * @param description 
+   * @param specDefinitions 
+   * @returns 
+   */
   public fdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => void,
   ): this {
     super.counter.increment();
-    fdescribe(super.description.replace(description, `${super.counter.current}`), specDefinitions);
+    fdescribe(
+      super.description.replace(description, `${super.counter.current}`, 'counter'),
+      specDefinitions
+    );
     return this;
   }
+
+  /**
+   * @description
+   * @param description 
+   * @param specDefinitions 
+   * @returns 
+   */
   public xdescribe<Description extends string>(
     description: Descriptions | Description,
     specDefinitions: () => void,
   ): this {
     super.counter.increment();
-    xdescribe(super.description.replace(description, `${super.counter.current}`), specDefinitions);
+    xdescribe(
+      super.description.replace(description, `${super.counter.current}`, 'counter'),
+      specDefinitions
+    );
     return this;
   }
 }
