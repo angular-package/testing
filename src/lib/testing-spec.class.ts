@@ -9,7 +9,7 @@ import { CounterConfig, Executable } from '../type';
  * @class
  * @classdesc Manages specs.
  */
-export class TestingIt<
+export class TestingSpec<
   Expectations extends string = string,
   CounterActive extends boolean = boolean,
   CounterDescription extends boolean = boolean
@@ -83,7 +83,7 @@ export class TestingIt<
    * @param expectation "Textual description of what this spec is checking" with an optional its unique number when adding `[counter]`.
    * @param assertion "Function that contains the code of your test. If not provided the test will be pending."
    * @param execute A `boolean` type value to decide whether or not execute defined `it()` of jasmine function.
-   * @returns The return value is an instance of `TestingIt`.
+   * @returns The return value is an instance of `TestingSpec`.
    */
   public it<Expectation extends string>(
     expectation: Expectations | Expectation,
@@ -94,7 +94,7 @@ export class TestingIt<
     timeout?: number
   ): this {
     super.counter.increment();
-    TestingIt.define(
+    TestingSpec.define(
       super.description.replace(expectation, `${super.counter.current}`, 'counter'),
       assertion,
       timeout
