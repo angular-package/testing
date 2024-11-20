@@ -7,13 +7,14 @@ import { CounterConfig, Executable } from '../type';
 /**
  * Creates an instance with optional allowed executing methods and executable storage.
  * @class
- * @classdesc Manages `it()` function of jasmine.
+ * @classdesc Manages specs.
  */
 export class TestingIt<
   Expectations extends string = string,
   CounterActive extends boolean = boolean,
   CounterDescription extends boolean = boolean
 > extends TestingCommon<
+  Expectations,
   CounterActive,
   CounterDescription
 > {
@@ -39,16 +40,19 @@ export class TestingIt<
    * TODO: Add expectation to params.
    * @param execute An optional value of a `boolean` to initially allow executing `it()` methods.
    * @param executable An optional `array` of unique numbers type to initially set executable storage.
+   * @param expectations
    * @param counter
    */
   constructor(
     execute?: boolean,
     executable?: Executable,
+    expectations?: Expectations | Expectations[],
     counter?: CounterConfig<CounterActive, CounterDescription>
   ) {
     super(
       execute,
       executable,
+      expectations,
       typeof counter === 'boolean' ? counter : counter?.active as any
     );
   }
@@ -66,7 +70,11 @@ export class TestingIt<
     timeout?: number
   ): this {
     super.counter.increment();
-    fit(super.description.replace(expectation, `${super.counter.current}`), assertion, timeout);
+    fit(
+      super.description.replace(expectation, `${super.counter.current}`, 'counter'),
+      assertion,
+      timeout
+    );
     return this;
   }
 
@@ -86,7 +94,11 @@ export class TestingIt<
     timeout?: number
   ): this {
     super.counter.increment();
-    TestingIt.define(super.description.replace(expectation, `${super.counter.current}`), assertion, timeout)(execute);
+    TestingIt.define(
+      super.description.replace(expectation, `${super.counter.current}`, 'counter'),
+      assertion,
+      timeout
+    )(execute);
     return this;
   }
 
@@ -103,7 +115,11 @@ export class TestingIt<
     timeout?: number
   ): this {
     super.counter.increment();
-    xit(super.description.replace(expectation, `${super.counter.current}`), assertion, timeout);
+    xit(
+      super.description.replace(expectation, `${super.counter.current}`, 'counter'),
+      assertion,
+      timeout
+    );
     return this;
   }
 }
