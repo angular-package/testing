@@ -9,7 +9,7 @@ import { CounterConfig, Executable } from '../type';
  * @class
  * @classdesc Manages suite.
  */
-export class TestingDescribe<
+export class TestingSuite<
   Descriptions extends string = string,
   CounterActive extends boolean = boolean,
   CounterDescription extends boolean = boolean,
@@ -67,7 +67,7 @@ export class TestingDescribe<
       : true
   ): this {
     super.counter.increment();
-    TestingDescribe.define(
+    TestingSuite.define(
       super.description.replace(description, `${super.counter.current}`, 'counter'),
       specDefinitions
     )(execute);
