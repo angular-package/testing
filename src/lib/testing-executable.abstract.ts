@@ -11,7 +11,7 @@ import { Executable } from '../type';
  */
 export abstract class TestingExecutable extends TestingExecute {
   /**
-   * @description Executables.
+   * @description Returns the `Set` of unique numbers allowed to execute.
    */
   public get executable() {
     return this.#executable;
@@ -23,9 +23,9 @@ export abstract class TestingExecutable extends TestingExecute {
   #executable: Set<number> = new Set();
 
   /**
-   * @description Initialize executable storage of numbers.
-   * @param execute
-   * @param executable An optional `array` of unique numbers or `number` to execute.
+   * @description Initializes the executable storage of unique numbers.
+   * @param execute An optional parameter to set the initial execute state.
+   * @param executable An optional `array` of unique numbers or `number` to populate the executable storage to execute.
    */
   constructor(
     execute?: boolean,
@@ -36,9 +36,9 @@ export abstract class TestingExecutable extends TestingExecute {
   }
 
   /**
-   * @description Returns the result of the check if the provided `num` or actual `counter` is in the executable storage.
-   * @returns The return value is a `boolean` type indicating whether or not the provided `num` or
-   * actual stored number from the `counter` exists in the executable storage.
+   * @description Checks whether the provided `uniqueNumber` exists in the executable storage.
+   * @param uniqueNumber The number to check in the executable storage.
+   * @returns The returned value is a `boolean` type indicating whether the provided `uniqueNumber` exists in the executable storage.
    */
   public isExecutable(uniqueNumber: number): boolean {
     return this.#executable.has(uniqueNumber);
